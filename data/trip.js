@@ -108,8 +108,8 @@ export const itinerary = [
   },
   {
     day: 8, date: '24 NOV', dow: 'TUE', location: 'DEPARTURE', title: 'Until Next Time, Japan', subtitle: 'วันสุดท้าย เก็บความทรงจำก่อนกลับบ้าน', image: 'osaka', type: 'confirmed',
-    summary: 'Check-out → Kansai Airport → XJ615 17:15', stay: 'กลับประเทศไทย',
-    highlight: 'XJ615 · 17:15', map: 'Kansai International Airport',
+    summary: 'Check-out → Kansai Airport → XJ611 19:45', stay: 'กลับประเทศไทย',
+    highlight: 'XJ611 · 19:45', map: 'Kansai International Airport',
     schedule: [
       { time: 'เช้า', title: 'อาหารเช้าที่ Centara', detail: 'รวมในคืนวันที่ 23–24 พ.ย.' },
       { time: '15:00 (แนะนำ)', title: 'ออกจากโรงแรมไป KIX', detail: 'เผื่อเวลาไป Nankai Namba ซื้อตั๋ว นั่งรถ และหาทางไป Terminal 1; เช็กตารางรถจริงก่อนออก' },
