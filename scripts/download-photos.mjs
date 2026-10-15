@@ -6,11 +6,11 @@ const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const dir=path.join(root,'public','photos');
 const sources=JSON.parse(await fs.readFile(path.join(root,'data','photo-sources.json'),'utf8'));
 await fs.mkdir(dir,{recursive:true});
-if(sources.length!==24)throw Error('Photo manifest must contain all 24 images');
+if(sources.length!==26)throw Error('Photo manifest must contain all 26 images');
 const failures=[];const successes=[];
 for(const x of sources){
  const filename=x.file;
- if(!/^day-[1-8]-[1-3]\.jpg$/.test(filename))throw Error('Invalid image file name: '+filename);
+ if(!/^day-[1-8]-[1-5]\.jpg$/.test(filename))throw Error('Invalid image file name: '+filename);
  const filepath=path.join(dir,filename);
  try {
   const stat=await fs.stat(filepath);
@@ -30,8 +30,8 @@ for(const x of sources){
  } catch(e) {failures.push(filename+' '+e.message);console.error('PHOTO ERROR',filename,e.message);}
 }
 await fs.writeFile(path.join(dir,'credits.json'),JSON.stringify(sources.map(x=>({file:x.file,license:x.license,creator:x.creator,source:x.source})),null,2));
-if(successes.length!==24||failures.length){
+if(successes.length!==26||failures.length){
  console.error('Photo validation failed. Successful:',successes.length,'Missing:',failures.join('; '));
  process.exit(1);
 }
-console.log('Photo validation succeeded: 24/24 self-hosted JPEG images.');
+console.log('Photo validation succeeded: 26/26 self-hosted JPEG images.');

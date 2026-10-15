@@ -20,13 +20,16 @@ export const beginnerDayGuide = {
  ['JR → Universal-City','ที่ Nishikujo เดินตามป้าย JR Yumesaki / Sakurajima Line ไป Universal-City แล้วเดินผ่าน CityWalk เข้าประตู USJ','ลง Universal-City ไม่ใช่ Sakurajima'],
  ['เวลาตั๋ว Express','เข้า Super Nintendo World ช่วง 13:50 และ Harry Potter 16:00 ตามรายการที่แจ้งไว้ เปิด QR ที่ซื้อจริงเพื่อยืนยันเวลาเครื่องเล่น','ช่วงจองยืนยันจากข้อมูลที่แจ้ง'],
 ],note:'เวลาเปิดสวนสนุก/เวลารอ/ชานชาลาอาจเปลี่ยน ตรวจใน USJ App ตอนเช้า'},
-4:{time:'07:15–19:30',label:'Kyoto East · 5 จุด',steps:[
- ['07:15 Yodoyabashi → Fushimi-Inari','จาก Daikokucho ไป Yodoyabashi โดย Osaka Metro (อาจเปลี่ยนสายตามเที่ยวจริง) จากนั้นตามป้าย Keihan Railway ขึ้นรถไป Fushimi-Inari; Metro ไม่รวม Keihan pass','Metro + Keihan คนละระบบ'],
- ['09:00 Fushimi Inari','เดินจาก Keihan Fushimi-Inari ไปศาลเจ้า ชมทางเสาโทริอิ','เดิน'],
- ['10:45 Tofukuji','กลับเข้าเส้นทาง Keihan/JR ตามจุดที่อยู่จริง ลง Tofukuji แล้วเดินไปชมใบไม้เปลี่ยนสี','ตรวจขบวน Local ที่จอดสถานี'],
- ['13:30 Kiyomizu + Ninenzaka','ใช้ Keihan ไป Kiyomizu-Gojo แล้วเดินขึ้นเนิน/ใช้รถบัสหรือแท็กซี่ตามความสะดวก ชม Kiyomizu-dera และถนน Ninenzaka / Sannenzaka','เดินขึ้นเนินค่อนข้างมาก'],
- ['17:00 Gion → Osaka','เดิน Gion แล้วขึ้น Keihan จาก Gion-Shijo/Yodoyabashi ตามขบวนจริง ต่อ Metro กลับ Daikokucho','Keihan + Metro / ICOCA'],
-],note:'ไฟล์ Final ใช้ Keihan เพื่อไปฝั่งตะวันออก Kyoto; อย่าฝืนใช้ JR Pass หากเส้นทางอ้อมและเดินมากกว่า'},
+4:{time:'06:15–19:30',label:'Arashiyama Bamboo Grove · Tenryu-ji · Kyoto East',steps:[
+ ['06:15 Centara → JR Osaka','เดินจากโรงแรมไป Daikokucho ขึ้น Midosuji Line ถึง Umeda แล้วตามป้าย JR Osaka','Metro / ICOCA'],
+ ['JR Osaka → Kyoto → Saga-Arashiyama','ขึ้น JR Special Rapid ไป Kyoto แล้วต่อ JR Sagano Line ไป Saga-Arashiyama','JR Pass ถ้าเปิดใช้แล้ว'],
+ ['08:15 ป่าไผ่อาราชิยามะ','เดินจากสถานีประมาณ 15–20 นาที ไปถ่ายรูปป่าไผ่ยามเช้าก่อนคนเยอะ','เข้าฟรี'],
+ ['09:00 วัดเทนริวจิ','เดินจากป่าไผ่ไป Tenryu-ji สวนวัดเปิดตามเวลาที่กำหนด ตรวจราคาค่าเข้า','ค่าเข้าจ่ายแยก'],
+ ['10:15 ไป Fushimi Inari','กลับ JR Saga-Arashiyama → Kyoto → JR Nara Line ขบวน Local ลง Inari พักทานอาหารกลางวัน','JR Pass'],
+ ['12:15 Fushimi Inari','ถ่ายรูปอุโมงค์โทริอิ ไม่เดินขึ้นภูเขาลึก','เดิน'],
+ ['14:15 Kiyomizu-dera','Keihan Fushimi-Inari → Kiyomizu-Gojo แล้วเดินขึ้นเนินหรือใช้แท็กซี่ ก่อนเดิน Sannenzaka/Ninenzaka','Keihan / ICOCA'],
+ ['16:30 Gion → Osaka','เดินเที่ยว Gion แล้วกลับด้วย Keihan Gion-Shijo ไป Yodoyabashi ต่อ Metro ไป Daikokucho','ICOCA'],
+],note:'วันนี้เที่ยวทั้ง Kyoto West และ East ค่อนข้างแน่น ถ้าเหนื่อยให้ตัดบางจุดฝั่งตะวันออก; Tofukuji เป็นทางเลือกไม่ใช่จุดหลัก'},
 5:{time:'07:40–18:00',label:'Nara Park · Todai-ji · Kasuga Taisha',steps:[
  ['07:40 ไป Osaka-Namba','จาก Centara ไป Daikokucho แล้วใช้ Midosuji ไป Namba เดินตามป้าย Kintetsu/Hanshin Osaka-Namba ไม่ใช่ JR Namba','Metro / ICOCA'],
  ['Kintetsu-Nara','ขึ้น Kintetsu Nara Line สู่ Kintetsu-Nara (บางขบวนเป็นแบบตรง ตรวจป้ายขบวน) สถานีนี้ใกล้สวนกวางกว่า JR Nara','Kintetsu / ICOCA'],

@@ -90,6 +90,8 @@ export const galleryByDay = {
     },
   ],
   4: [
+    { title: 'Arashiyama Bamboo Grove', subtitle: 'ป่าไผ่อาราชิยามะช่วงเช้า', vibe: 'ไฮไลต์ใหม่ / ถ่ายรูปสวย', why: 'อุโมงค์ไม้ไผ่ยอดนิยมของเกียวโต ควรไปเช้าเพื่อเดินชมและถ่ายรูปก่อนคนหนาแน่น', tags: ['ป่าไผ่', 'Kyoto West', 'ช่วงเช้า'], map: 'Arashiyama Bamboo Grove, Kyoto', image: localPhoto(4, 4) },
+    { title: 'Tenryu-ji Temple', subtitle: 'วัดเซนและสวนญี่ปุ่น', vibe: 'ไฮไลต์ใหม่ / ธรรมชาติ', why: 'สวนวัดเทนริวจิอยู่ใกล้ป่าไผ่ เหมาะเดินเที่ยวต่อกัน และสวยมากช่วงใบไม้เปลี่ยนสี', tags: ['วัดเซน', 'สวนญี่ปุ่น', 'Arashiyama'], map: 'Tenryu-ji Temple, Kyoto', image: localPhoto(4, 5) },
     {
       title: 'Fushimi Inari Taisha',
       subtitle: 'อุโมงค์เสาโทริอิสีแดง',
