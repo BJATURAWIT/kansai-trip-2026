@@ -27,3 +27,37 @@
 .beginner-note{margin-top:14px;border-radius:10px;background:#fff8e7;display:flex;gap:9px;padding:12px;color:#76521d;font-size:11px;line-height:1.75}
 .beginner-note svg{flex-shrink:0;margin-top:2px}
 @media(max-width:520px){.beginner-guide{padding:18px 14px}.beginner-step summary{padding:12px 10px}.beginner-step-detail{padding:4px 12px 15px 50px}}
+
+/* Gallery for each travel day */
+.gallery-card{
+  background:#fff;
+  border-radius:24px;
+  border:1px solid rgba(17,45,34,.08);
+  padding:20px;
+  box-shadow:0 18px 45px rgba(17,45,34,.06);
+}
+.gallery-copy{margin:6px 0 0;color:#6a7c76;font-size:13px;line-height:1.65}
+.gallery-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:16px}
+.gallery-spot{background:#f7faf8;border:1px solid rgba(17,45,34,.08);border-radius:18px;overflow:hidden;display:flex;flex-direction:column}
+.gallery-thumb{aspect-ratio:4/3;background:#e6ece8;overflow:hidden}
+.gallery-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.gallery-body{padding:14px;display:flex;flex-direction:column;gap:8px}
+.gallery-topline{display:flex;justify-content:space-between;gap:10px;align-items:center;font-size:11px}
+.gallery-index{color:#6d7f78;font-weight:700;letter-spacing:.06em}
+.gallery-vibe{background:#e8f4ec;color:#245b43;padding:4px 8px;border-radius:999px;font-weight:700}
+.gallery-body h4{margin:0;font-size:16px;line-height:1.35}
+.gallery-subtitle{margin:0;color:#245b43;font-weight:700;font-size:13px}
+.gallery-why{margin:0;color:#556862;font-size:13px;line-height:1.7}
+.gallery-tags{display:flex;flex-wrap:wrap;gap:8px}
+.gallery-tags span{background:#fff;color:#456257;border:1px solid rgba(17,45,34,.1);border-radius:999px;padding:5px 9px;font-size:11px}
+.honeypot{position:absolute!important;left:-9999px!important;opacity:0!important;pointer-events:none!important}
+
+@media (max-width: 900px){
+  .gallery-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+}
+@media (max-width: 640px){
+  .gallery-card{padding:16px;border-radius:20px}
+  .gallery-grid{display:flex;overflow-x:auto;gap:12px;scroll-snap-type:x proximity;margin:14px -4px 0;padding:0 4px 4px}
+  .gallery-spot{min-width:82vw;max-width:82vw;scroll-snap-align:start}
+  .gallery-copy{font-size:12px}
+}

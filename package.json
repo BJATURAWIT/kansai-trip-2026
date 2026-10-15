@@ -5,7 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "next dev",
+    "prebuild": "node scripts/download-photos.mjs",
     "build": "next build",
+    "photos": "node scripts/download-photos.mjs",
     "start": "next start",
     "verify": "node scripts/verify.mjs"
   },

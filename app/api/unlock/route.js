@@ -1,2 +1,67 @@
-import {NextResponse} from 'next/server';import {timingSafeEqual} from 'node:crypto';import {token,safeNext} from '../../../lib/access';export const runtime='nodejs';
-export async function POST(req){const f=await req.formData(),v=String(f.get('code')||''),expected=process.env.TRIP_ACCESS_KEY,next=safeNext(f.get('next'));if(!expected||!process.env.TRIP_SESSION_SECRET)return new Response('Access key not configured',{status:503});const a=Buffer.from(v),b=Buffer.from(expected);if(a.length!==b.length||!timingSafeEqual(a,b)){const u=new URL('/unlock?error=1',req.url);if(next!=='/')u.searchParams.set('next',next);return NextResponse.redirect(u,{status:303})}const out=NextResponse.redirect(new URL(next==='/unlock'?'/':next,req.url),{status:303});out.cookies.set('kansai_access',await token(),{httpOnly:true,secure:true,sameSite:'lax',path:'/',maxAge:30*86400});out.headers.set('Cache-Control','private, no-store');return out}
+import { NextResponse } from 'next/server';
+import { timingSafeEqual } from 'node:crypto';
+import { createSessionToken, safeNext } from '../../../lib/access';
+
+export const runtime = 'nodejs';
+
+function sameOrigin(request) {
+  const origin = request.headers.get('origin');
+  if (!origin) return true;
+  try {
+    const originUrl = new URL(origin);
+    const requestUrl = new URL(request.url);
+    return originUrl.host === requestUrl.host && originUrl.protocol === requestUrl.protocol;
+  } catch {
+    return false;
+  }
+}
+
+export async function POST(request) {
+  if (!sameOrigin(request)) {
+    return new Response('Invalid origin.', { status: 403, headers: { 'Cache-Control': 'no-store' } });
+  }
+
+  const form = await request.formData();
+  const trap = String(form.get('website') ?? '').trim();
+  if (trap) {
+    return new Response('Bad request.', { status: 400, headers: { 'Cache-Control': 'no-store' } });
+  }
+
+  const supplied = String(form.get('code') ?? '').trim();
+  const expected = process.env.TRIP_ACCESS_KEY;
+  const next = safeNext(form.get('next'));
+
+  if (!expected || !process.env.TRIP_SESSION_SECRET) {
+    return new Response('The access gate is not configured.', { status: 503, headers: { 'Cache-Control': 'no-store' } });
+  }
+
+  if (!/^\d{6}$/.test(supplied)) {
+    const failed = new URL('/unlock?error=1', request.url);
+    if (next !== '/') failed.searchParams.set('next', next);
+    return NextResponse.redirect(failed, { status: 303 });
+  }
+
+  const lhs = Buffer.from(supplied);
+  const rhs = Buffer.from(expected);
+  const valid = lhs.length === rhs.length && timingSafeEqual(lhs, rhs);
+
+  if (!valid) {
+    const failed = new URL('/unlock?error=1', request.url);
+    if (next !== '/') failed.searchParams.set('next', next);
+    const response = NextResponse.redirect(failed, { status: 303 });
+    response.headers.set('Cache-Control', 'no-store');
+    return response;
+  }
+
+  const response = NextResponse.redirect(new URL(next === '/unlock' ? '/' : next, request.url), { status: 303 });
+  response.cookies.set('kansai_access', await createSessionToken(), {
+    httpOnly: true,
+    secure: true,
+    sameSite: 'strict',
+    path: '/',
+    maxAge: 30 * 24 * 60 * 60,
+    priority: 'high',
+  });
+  response.headers.set('Cache-Control', 'no-store');
+  return response;
+}

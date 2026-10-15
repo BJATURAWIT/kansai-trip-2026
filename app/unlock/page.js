@@ -1,2 +1,24 @@
-export const metadata={title:'Access Key | Kansai Trip 2026',robots:{index:false,follow:false}};
-export default async function Unlock({searchParams}){const p=await searchParams;return <main style={{minHeight:'100dvh',display:'grid',placeItems:'center',padding:24,background:'linear-gradient(145deg,#13262d,#274851)',color:'#f6f3ed',fontFamily:'system-ui,sans-serif'}}><section style={{width:'min(100%,420px)',padding:'36px 28px',borderRadius:26,background:'#ffffff13',border:'1px solid #ffffff36'}}><p style={{letterSpacing:3,fontSize:12}}>PRIVATE JAPAN TRAVEL GUIDE</p><h1 style={{fontSize:40,lineHeight:1.12,margin:'20px 0'}}>Our Kansai<br/>Journey.</h1><p>17–24 November 2026 · 8 วัน 7 คืน</p><p>กรอกรหัส 6 หลักก่อนเข้าเว็บไซต์</p><form method="post" action="/api/unlock" style={{display:'grid',gap:14,marginTop:26}}><input type="hidden" name="next" value={typeof p?.next==='string'&&p.next.startsWith('/')&&!p.next.startsWith('//')?p.next:'/'} /><label htmlFor="code">ACCESS KEY</label><input id="code" type="password" name="code" pattern="[0-9]{6}" inputMode="numeric" maxLength={6} required autoFocus placeholder="••••••" style={{borderRadius:12,padding:17,fontSize:20,letterSpacing:5,color:'#13262d',background:'white',width:'100%'}}/>{p?.error==='1'&&<p role="alert" style={{color:'#ffb6a6'}}>รหัสไม่ถูกต้อง ลองอีกครั้ง</p>}<button type="submit" style={{padding:17,borderRadius:12,color:'#fff',background:'#bb673e',fontWeight:700}}>เข้าสู่แผนเที่ยว →</button></form><p style={{fontSize:12,marginTop:22,opacity:.7}}>ระบบจะจดจำการเข้าสู่ระบบบนอุปกรณ์นี้ 30 วัน</p></section></main>}
+import { safeNext } from '../../lib/access';
+export const metadata = { title: 'Enter your key · Kansai Trip 2026', robots: { index: false, follow: false } };
+export default async function UnlockPage({ searchParams }) {
+  const params = await searchParams;
+  const hasError = params?.error === '1';
+  return <main className="gate-page">
+    <div className="gate-visual" aria-hidden="true"><span className="gate-japanese">旅</span><span>OSAKA · KYOTO · KINOSAKI</span></div>
+    <section className="gate-card">
+      <div className="gate-sign">日本 • 2026</div>
+      <p className="eyebrow">PRIVATE TRAVEL GUIDE</p>
+      <h1>Our Kansai<br/><em>journey.</em></h1>
+      <p className="gate-copy">แผนเที่ยวญี่ปุ่น 17–24 พ.ย. 2026<br/>กรอกรหัส 6 หลักเพื่อเข้าสู่เว็บไซต์</p>
+      <form action="/api/unlock" method="post" className="gate-form">
+        <input type="hidden" name="next" value={safeNext(params?.next)} />
+        <input type="text" name="website" tabIndex={-1} autoComplete="off" className="honeypot" aria-hidden="true" />
+        <label htmlFor="code">ACCESS KEY</label>
+        <input id="code" type="password" name="code" placeholder="••••••" inputMode="numeric" pattern="[0-9]{6}" maxLength={6} minLength={6} autoComplete="off" required autoFocus aria-invalid={hasError} aria-describedby={hasError ? 'gate-error' : undefined}/>
+        {hasError && <p role="alert" id="gate-error" className="gate-error">รหัสไม่ถูกต้อง กรุณาลองอีกครั้ง</p>}
+        <button type="submit">เปิดคู่มือเที่ยว <span>→</span></button>
+      </form>
+      <p className="gate-footnote">บันทึกการเข้าสู่ระบบบนอุปกรณ์นี้เป็นเวลา 30 วัน · เว็บไซต์ใช้ cookie แบบ HttpOnly / Secure</p>
+    </section>
+  </main>;
+}
