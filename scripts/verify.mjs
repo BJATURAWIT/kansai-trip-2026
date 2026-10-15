@@ -1,0 +1,12 @@
+import assert from 'node:assert/strict';
+import { trip, itinerary, checklist } from '../data/trip.js';
+assert.equal(trip.days, 8);
+assert.equal(trip.nights, 7);
+assert.equal(itinerary.length, 8);
+assert.deepEqual(itinerary.map(x=>x.day), Array.from({length:8}, (_,i)=>i+1));
+assert.equal(new Set(checklist.map(x=>x.id)).size, checklist.length);
+assert.equal(checklist.find(x=>x.id==='pass-buy').done, false);
+assert.equal(checklist.find(x=>x.id==='seat-go').done, false);
+assert.equal(checklist.find(x=>x.id==='usj-ticket').done, true);
+assert.equal(trip.hotels.reduce((sum,x)=>sum+Number(x.date.match(/\d+ คืน/)[0].split(' ')[0]),0),7);
+console.log(`Verified ${itinerary.length} travel days, ${checklist.length} checklist items, confirmed/pending states and 7 hotel nights.`);
