@@ -7,8 +7,8 @@ export const trip = {
   days: 8,
   nights: 7,
   flights: [
-    { code: 'XJ610', route: 'DMK → KIX', date: '17 พ.ย.', time: '11:45 – 19:30', label: 'ขาไป' },
-    { code: 'XJ615', route: 'KIX → DMK', date: '24 พ.ย.', time: '17:15 – 21:45', label: 'ขากลับ' },
+    { code: 'XJ610', route: 'DMK T1 → KIX T1', date: '17 พ.ย.', time: '10:40 – 18:15', label: 'ขาไป' },
+    { code: 'XJ611', route: 'KIX T1 → DMK T1', date: '24–25 พ.ย.', time: '19:45 – 00:15 (+1 วัน)', label: 'ขากลับ' },
   ],
   hotels: [
     { id: 'centara1', name: 'Centara Life Namba Hotel Osaka', date: '17–22 พ.ย. · 5 คืน', plan: 'Room only', area: 'Osaka / Namba', map: 'Centara Life Namba Hotel Osaka', booked: true },
@@ -29,10 +29,10 @@ export const itinerary = [
   {
     day: 1, date: '17 NOV', dow: 'TUE', location: 'OSAKA', title: 'Touchdown in Osaka', subtitle: 'สวัสดีคันไซ ถึงญี่ปุ่นแล้ว', image: 'osaka', type: 'confirmed',
     summary: 'เดินทางจากดอนเมืองถึงคันไซ แล้วเข้าที่พักย่านนัมบะ', stay: 'Centara Life Namba · คืนที่ 1',
-    highlight: 'XJ610 · KIX 19:30', map: 'Centara Life Namba Hotel Osaka',
+    highlight: 'XJ610 · KIX 18:15', map: 'Centara Life Namba Hotel Osaka',
     schedule: [
-      { time: '11:45', title: 'บินออกจาก DMK', detail: 'เที่ยวบิน XJ610 (เวลาไทย)' },
-      { time: '19:30', title: 'ถึง Kansai International Airport', detail: 'ผ่านตรวจคนเข้าเมืองและรับกระเป๋า (เวลาญี่ปุ่น)' },
+      { time: '10:40', title: 'บินออกจาก DMK Terminal 1', detail: 'เที่ยวบิน XJ610 (เวลาไทย)' },
+      { time: '18:15', title: 'ถึง Kansai Airport Terminal 1', detail: 'ผ่านตรวจคนเข้าเมืองและรับกระเป๋า (เวลาญี่ปุ่น)' },
       { time: 'ค่ำ', title: 'เดินทางไปโรงแรม', detail: 'เช็กตัวเลือก Nankai / JR ตามเวลาและสัมภาระ' },
       { time: 'ดึก', title: 'Check-in + พักผ่อน', detail: 'Centara Life Namba Hotel Osaka' },
     ], note: 'เช็กเวลารถไฟเที่ยวสุดท้ายตามเวลาที่ออกจากสนามบินจริง',
@@ -111,15 +111,16 @@ export const itinerary = [
     highlight: 'XJ615 · 17:15', map: 'Kansai International Airport',
     schedule: [
       { time: 'เช้า', title: 'อาหารเช้าที่ Centara', detail: 'รวมในคืนวันที่ 23–24 พ.ย.' },
-      { time: 'ก่อนเที่ยง', title: 'Check-out + ไปสนามบิน', detail: 'เผื่อเวลารถไฟและเช็กอินระหว่างประเทศให้เพียงพอ' },
+      { time: '15:00 (แนะนำ)', title: 'ออกจากโรงแรมไป KIX', detail: 'เผื่อเวลาไป Nankai Namba ซื้อตั๋ว นั่งรถ และหาทางไป Terminal 1; เช็กตารางรถจริงก่อนออก' },
+      { time: '16:45 (เป้าหมาย)', title: 'ถึง KIX Terminal 1', detail: 'เผื่อเวลาเช็กอินระหว่างประเทศ 3 ชั่วโมง' },
       { time: '17:15', title: 'บินออก KIX', detail: 'XJ615 · เวลาญี่ปุ่น' },
-      { time: '21:45', title: 'ถึง DMK', detail: 'เวลาประเทศไทย' },
+      { time: '00:15 (25 พ.ย.)', title: 'ถึง DMK Terminal 1', detail: 'เวลาประเทศไทย · เดินทางถึงหลังเที่ยงคืน' },
     ], note: 'เช็กเวลาเช็กอิน ปิดเคาน์เตอร์ และกระเป๋ากับสายการบินก่อนเดินทาง',
   },
 ];
 
 export const checklist = [
-  { id: 'flight', group: 'การจอง', title: 'จองเที่ยวบินไป–กลับ XJ610 / XJ615', due: '2026-10-01', done: true, detail: '17 พ.ย. ไป · 24 พ.ย. กลับ' },
+  { id: 'flight', group: 'การจอง', title: 'จองเที่ยวบินไป–กลับ XJ610 / XJ615', due: '2026-10-01', done: true, detail: '17 พ.ย. DMK 10:40 → KIX 18:15 · 24 พ.ย. KIX 19:45 → DMK 25 พ.ย. 00:15' },
   { id: 'hotels', group: 'การจอง', title: 'ยืนยัน Centara ทั้งสองช่วงและ Nishimuraya', due: '2026-10-01', done: true, detail: 'ครบ 7 คืน' },
   { id: 'usj-ticket', group: 'การจอง', title: 'ซื้อ USJ Studio Pass + Express Pass (2 คน)', due: '2026-10-01', done: true, detail: 'ใช้ 19 พ.ย. 2026' },
   { id: 'passport', group: 'เอกสาร', title: 'ตรวจอายุหนังสือเดินทาง', due: '2026-10-01', done: true, detail: 'ตรวจเรียบร้อยแล้ว' },
