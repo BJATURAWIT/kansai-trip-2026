@@ -23,18 +23,18 @@ const mimeOK = (mime, filename) => mime === 'image/jpeg' && /\.jpe?g$/i.test(fil
 
 async function timedFetch(url, opts = {}) {
   const c = new AbortController();
-  const timer = setTimeout(() => c.abort(), 18000);
+  const timer = setTimeout(() => c.abort(), 4000);
   try {return await fetch(url, { ...opts, signal: c.signal, headers: { 'User-Agent': 'KansaiTripPlanner/1.0 (personal travel site, credits in public/photos/credits.json)', ...opts.headers }});}
   finally {clearTimeout(timer);}
 }
 async function getJSON(params) {
   const uri = `https://commons.wikimedia.org/w/api.php?${new URLSearchParams(params)}`;
-  for (let i = 0; i < 3; i++) {
+  for (let i = 0; i < 1; i++) {
     try {
       const response = await timedFetch(uri);
       if (!response.ok) throw new Error(`Commons API ${response.status}`);
       return await response.json();
-    } catch (e) {if (i === 2) throw e; await sleep(550 * (i + 1));}
+    } catch (e) {if (i === 0) throw e; await sleep(550 * (i + 1));}
   }
 }
 async function download(candidate, filepath) {
@@ -78,7 +78,7 @@ for (let day = 1; day <= 8; day++) {
     try {
       const candidates = await searchCandidates(query);
       let success = false;
-      for (const candidate of candidates.slice(0, 5)) {
+      for (const candidate of candidates.slice(0, 2)) {
         try {
           const bytes = await download(candidate, file);
           const lic = safeHtmlText(candidate.extmetadata?.LicenseShortName?.value || candidate.extmetadata?.License?.value);
