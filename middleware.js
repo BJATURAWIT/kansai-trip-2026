@@ -1,0 +1,3 @@
+import {NextResponse} from 'next/server';import {valid} from './lib/access';
+export async function middleware(req){const p=req.nextUrl.pathname;if(p==='/unlock'||p==='/api/unlock')return NextResponse.next();if(await valid(req.cookies.get('kansai_access')?.value))return NextResponse.next();const u=new URL('/unlock',req.url);if(p!=='/')u.searchParams.set('next',p+req.nextUrl.search);const response=NextResponse.redirect(u);response.headers.set('Cache-Control','private, no-store');return response}
+export const config={matcher:['/((?!_next/static|_next/image|favicon.ico|robots.txt).*)']};
