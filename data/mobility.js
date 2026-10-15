@@ -6,12 +6,12 @@ const centara = hotelAddress;
 
 export const travelGuide = [
   {
-    day: 1, kicker: 'สนามบิน → โรงแรม', leave: 'หลังรับกระเป๋า · เวลาประมาณ', confirmed: false,
+    day: 1, kicker: 'สนามบิน → โรงแรม', leave: 'KIX ถึง 18:15 น. (JST) · ผ่าน ตม./รับกระเป๋าแล้วค่อยเดินไปสถานี Nankai', confirmed: false,
     overview: 'เลือก Nankai Airport Express หรือ Rapi:t ไป Nankai Namba แล้วต่อไปโรงแรม',
     reminder: 'วันแรกยังไม่ใช้ JR Pass • Nankai จ่ายแยก • ตรวจเที่ยวรถสุดท้ายหลังผ่าน ตม.',
     legs: [
-      { from: 'Kansai International Airport (KIX)', to: 'Nankai Namba Station, Osaka', mode: 'รถไฟ Nankai', line: 'Airport Express / Rapi:t', how: 'ตามป้าย Nankai Railway ลงชั้นสถานีสนามบิน ซื้อตั๋วลง Namba; Rapi:t ต้องใช้ตั๋วเฉพาะ', duration: 'ประมาณ 40–50 นาที', pay: 'จ่ายแยก', icon: 'train' },
-      { from: 'Nankai Namba Station, Osaka', to: centara, mode: 'เดิน / แท็กซี่', line: 'ไป Centara Life Namba', how: 'เดินตามแผนที่ไปโรงแรมบริเวณ Shikitsuhigashi ถ้ากระเป๋าใหญ่หรือเหนื่อยให้เลือกแท็กซี่', duration: 'ระยะเดินขึ้นอยู่กับทางออก', pay: 'เดินฟรี', icon: 'walk' },
+      { from: 'Kansai International Airport (KIX)', to: 'Nankai Namba Station, Osaka', mode: 'รถไฟ Nankai', line: 'Airport Express / Rapi:t', how: 'หลังออก Arrivals ชั้น 1 Terminal 1 ตามป้าย Railway ขึ้นไปทางเชื่อมชั้น 2 ไป Kansai-airport Station; เลือกฝั่ง Nankai (ไม่ใช่ JR) แตะ ICOCA เพื่อขึ้น Airport Express ไป Nankai Namba หรือซื้อตั๋ว Rapi:t ที่มีที่นั่งกำหนด ตรวจขบวน/ชานชาลาจากจอจริง', duration: 'ประมาณ 40–50 นาที', pay: 'จ่ายแยก', icon: 'train' },
+      { from: 'Nankai Namba Station, Osaka', to: centara, mode: 'เดิน / แท็กซี่', line: 'ไป Centara Life Namba', how: 'ลง Nankai Namba (ไม่ใช่ JR Namba หรือ Osaka-Namba) เปิด Google Maps เดินไป Centara Life Namba ย่าน Shikitsuhigashi ถ้ากระเป๋าใหญ่ให้ใช้แท็กซี่จากจุดรับรถใกล้สถานี', duration: 'ระยะเดินขึ้นอยู่กับทางออก', pay: 'เดินฟรี', icon: 'walk' },
     ],
   },
   {
@@ -81,13 +81,13 @@ export const travelGuide = [
     ],
   },
   {
-    day: 8, kicker: 'กลับประเทศไทย', leave: 'แนะนำถึง KIX ก่อนบินราว 3 ชม.', confirmed: false,
-    overview: 'Centara → Nankai Namba → KIX → XJ615 17:15 → DMK 21:45',
-    reminder: 'เที่ยวบิน 17:15 น. (JST) • เป้าหมายถึงสนามบินประมาณ 14:15 หรือเร็วกว่านั้น • เวลารถไฟเป็นแผน ไม่ใช่ตั๋วที่จองแล้ว',
+    day: 8, kicker: 'กลับประเทศไทย', leave: 'เที่ยวบิน 19:45 น. · ตั้งเป้าถึง KIX T1 ประมาณ 16:45 น. และออกจากโรงแรมราว 15:00 น. (เวลาแนะนำ)', confirmed: false,
+    overview: 'Centara → Nankai Namba → KIX → XJ611 19:45 → DMK 00:15 (25 พ.ย.)',
+    reminder: 'เที่ยวบิน XJ611 19:45 น. (JST) • เป้าหมายถึงสนามบิน 16:45 น. • ถึงประเทศไทย 00:15 ของวันที่ 25 พ.ย. • เวลารถไฟเป็นแผน ไม่ใช่ตั๋วที่จองแล้ว',
     legs: [
       { from: centara, to: 'Nankai Namba Station, Osaka', mode: 'เดิน / แท็กซี่', line: 'Check-out → Nankai Namba', how: 'รับสัมภาระครบก่อนออก เดินไป Nankai Namba (ไม่ใช่ JR Namba) หรือเลือกแท็กซี่หากกระเป๋าหนัก', duration: 'เผื่อ 20–30 นาที', pay: 'เดินฟรี / แท็กซี่แยก', icon: 'walk' },
-      { from: 'Nankai Namba Station, Osaka', to: 'Kansai International Airport (KIX)', mode: 'Nankai Railway', line: 'Airport Express / Rapi:t', how: 'ซื้อตั๋วไป Kansai Airport ตรวจหมายเลข Terminal ของเที่ยวบินก่อนออก', duration: 'ประมาณ 40–50 นาที', pay: 'จ่ายแยก (Nankai ไม่รวม JR Pass)', icon: 'train' },
-      { from: 'Kansai International Airport (KIX)', to: 'Don Mueang International Airport, Bangkok', mode: 'เที่ยวบิน', line: 'XJ615 · 17:15 → 21:45', how: 'เช็กอิน โหลดสัมภาระ ผ่าน ตม. และไป Gate ตามบอร์ดสนามบิน เวลาถึงไทยเป็นเวลาไทย', duration: 'ยึดตามเอกสารสายการบิน', pay: 'จองแล้ว', icon: 'plane', fixed: true },
+      { from: 'Nankai Namba Station, Osaka', to: 'Kansai International Airport (KIX)', mode: 'Nankai Railway', line: 'Airport Express / Rapi:t', how: 'ตามป้าย Nankai Railway (ไม่ใช่ JR Namba หรือ Osaka-Namba) แตะ ICOCA เพื่อใช้ Airport Express ไป Kansai-airport หรือซื้อตั๋ว Rapi:t แบบมีที่นั่ง ลงสุดสายและตามป้าย Terminal 1 Departures', duration: 'ประมาณ 40–50 นาที', pay: 'จ่ายแยก (Nankai ไม่รวม JR Pass)', icon: 'train' },
+      { from: 'Kansai International Airport (KIX)', to: 'Don Mueang International Airport, Bangkok', mode: 'เที่ยวบิน', line: 'XJ615 · 17:15 → 21:45', how: 'เข้า KIX Terminal 1 Departures แล้วดูจอเที่ยวบิน XJ611 หาหมายเลขเคาน์เตอร์ Thai AirAsia X โหลดกระเป๋าได้คนละ 20 กก. ผ่าน Security และ Immigration ตรวจ Gate และเวลา Boarding บนจออีกครั้ง ถึง DMK Terminal 1 เวลา 00:15 วันที่ 25 พ.ย.', duration: 'ยึดตามเอกสารสายการบิน', pay: 'จองแล้ว', icon: 'plane', fixed: true },
     ],
   },
 ];
