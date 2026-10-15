@@ -9,6 +9,7 @@ import {
 } from 'lucide-react';
 import { trip, itinerary, checklist, resources } from '../data/trip';
 import { travelGuide, mapDirectionsUrl, mapSearchUrl } from '../data/mobility';
+import { beginnerDayGuide } from '../data/beginnerGuide';
 import { dayPhotos, tripImageCredits } from '../data/dayPhotos';
 
 const STORAGE_KEY = 'kansai-2026-checklist-v1';
@@ -49,6 +50,13 @@ function DayPlan({ day }) {
 
     <div className="headline-note"><Clock3 size={18}/><div><strong>ควรออกเดินทางเมื่อไร?</strong><p>{guide.leave}</p></div><LinkOut href={mapSearchUrl(day.map)} className="icon-link">แผนที่</LinkOut></div>
 
+    <section className="beginner-guide"><div className="section-title"><div><span className="kicker">FIRST TIME IN JAPAN</span><h3>มือใหม่เดินตามนี้</h3><p className="guide-subtitle">{beginnerDayGuide[day.day].label} · {beginnerDayGuide[day.day].time}</p></div></div>
+      <div className="beginner-steps">{beginnerDayGuide[day.day].steps.map(([name,how,pay],idx)=><details className="beginner-step" key={name} open={idx===0}>
+        <summary><span className="beginner-number">{idx+1}</span><span className="beginner-step-heading"><strong>{name}</strong><small>{pay}</small></span><ChevronDown size={16}/></summary>
+        <div className="beginner-step-detail">{how}</div>
+      </details>)}</div>
+      <div className="beginner-note"><Info size={17}/><span>{beginnerDayGuide[day.day].note}</span></div>
+    </section>
     <section className="travel-card"><div className="card-title"><div className="round-icon"><Navigation size={19}/></div><div><span className="kicker">STEP-BY-STEP ROUTE</span><h3>เดินทางอย่างไร</h3></div></div>
       <div className="route-overview">{guide.overview}</div>
       <div className="route-legs">{guide.legs.map((leg, index) => <div className="route-leg" key={`${day.day}-${index}`}>
