@@ -2,163 +2,147 @@
 
 import { useEffect, useMemo, useState } from 'react';
 import {
-  ArrowRight, ArrowUpRight, BedDouble, CalendarDays, Check,
-  CheckCircle2, ChevronRight, Circle, Clock3, ExternalLink,
-  FileCheck2, Heart, Luggage, MapPin, Menu, Plane, RotateCcw,
-  ShieldCheck, Sparkles, Ticket, TrainFront, X,
+  ArrowLeft, ArrowRight, ArrowUpRight, BedDouble, CalendarCheck2, Check, CheckCircle2,
+  ChevronDown, ChevronRight, Circle, Clock3, ExternalLink, Footprints, Home as HomeIcon,
+  Info, ListChecks, Luggage, MapPin, Navigation, Plane, RefreshCw, ShieldCheck,
+  Sparkles, Ticket, TrainFront, Bus, X,
 } from 'lucide-react';
-import { trip, images, itinerary, checklist, resources } from '../data/trip';
+import { trip, itinerary, checklist, resources } from '../data/trip';
+import { travelGuide, mapDirectionsUrl, mapSearchUrl } from '../data/mobility';
 
 const STORAGE_KEY = 'kansai-2026-checklist-v1';
-const initialState = Object.fromEntries(checklist.map(task => [task.id, task.done]));
+const initialChecklist = Object.fromEntries(checklist.map(item => [item.id, item.done]));
+const dateOptions = { timeZone: 'Asia/Tokyo', year: 'numeric', month: '2-digit', day: '2-digit' };
+const japanToday = () => new Intl.DateTimeFormat('en-CA', dateOptions).format(new Date());
+const dateForDay = day => `2026-11-${String(day + 16).padStart(2, '0')}`;
+const shortDate = value => new Date(`${value}T12:00:00+09:00`).toLocaleDateString('th-TH', { day: 'numeric', month: 'short', timeZone: 'Asia/Tokyo' });
+const getTodayDay = () => itinerary.find(x => dateForDay(x.day) === japanToday())?.day || (japanToday() > '2026-11-24' ? 8 : 1);
+const tabItems = [
+  { id: 'plan', text: 'ตารางเที่ยว', icon: HomeIcon },
+  { id: 'checklist', text: 'Checklist', icon: ListChecks },
+  { id: 'bookings', text: 'จอง / ตั๋ว', icon: Ticket },
+  { id: 'help', text: 'ข้อมูลสำคัญ', icon: Info },
+];
 
-function openMap(query) {
-  window.open(`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`, '_blank', 'noopener,noreferrer');
+function LinkOut({ href, children, className = '' }) {
+  return <a className={className} href={href} target="_blank" rel="noopener noreferrer">{children}<ArrowUpRight size={16}/></a>;
+}
+function Tag({ children, color = 'neutral' }) { return <span className={`tag tag-${color}`}>{children}</span>; }
+function Heading({ label, title, caption }) {
+  return <div className="pane-heading"><span className="kicker">{label}</span><h2>{title}</h2>{caption && <p>{caption}</p>}</div>;
+}
+function RouteIcon({ type }) {
+  return type === 'walk' ? <Footprints size={19}/> : type === 'bus' ? <Bus size={19}/> : type === 'plane' ? <Plane size={19}/> : <TrainFront size={19}/>;
 }
 
-const formatDate = value => new Date(value + 'T12:00:00+07:00').toLocaleDateString('th-TH', { day: 'numeric', month: 'short' });
-const daysUntil = value => Math.ceil((new Date(value + 'T00:00:00+07:00').getTime() - Date.now()) / 86400000);
+function DayPlan({ day }) {
+  const guide = travelGuide[day.day - 1];
+  const [showAll, setShowAll] = useState(false);
+  const [expanded, setExpanded] = useState({});
+  useEffect(() => { setExpanded({}); setShowAll(false); }, [day.day]);
+  return <>
+    <section className="today-head"><div className="today-head-image"><img src={day.image === 'kinosaki' ? 'https://media.timeout.com/images/106065006/750/562/image.jpg' : day.image === 'kyoto' ? 'https://www.keihan.co.jp/uji-fushimi/assets/img/fushimi/img_spot03_01_a.jpg' : 'https://a-us.storyblok.com/f/1018357/1920x1277/d37c3f5205/3141175_m.jpg'} alt="ภาพบรรยากาศญี่ปุ่น" onError={event => { event.currentTarget.style.display = 'none'; }} /></div><div className="today-head-content">
+      <div className="today-badges"><span>DAY {String(day.day).padStart(2, '0')} · {day.dow} {day.date}</span><Tag color={day.type === 'confirmed' ? 'light' : 'soft'}>{day.type === 'confirmed' ? 'มีรายการจองแล้ว' : 'แผนยืดหยุ่น'}</Tag></div>
+      <h2>{day.title}</h2><p>{day.subtitle}</p><span className="today-location"><MapPin size={14}/> {day.location}</span>
+    </div></section>
 
-function Picture({ name, className = '', alt = '' }) {
-  const [failed, setFailed] = useState(false);
-  return <div className={`picture picture-${name} ${className}`}>
-    {!failed && <img loading={name === 'hero' ? 'eager' : 'lazy'} src={images[name] || images.osaka} alt={alt} onError={() => setFailed(true)} />}
-    {failed && <div className="picture-fallback">JAPAN · 2026</div>}
-  </div>;
-}
+    <div className="headline-note"><Clock3 size={18}/><div><strong>ควรออกเดินทางเมื่อไร?</strong><p>{guide.leave}</p></div><LinkOut href={mapSearchUrl(day.map)} className="icon-link">แผนที่</LinkOut></div>
 
-function SectionHeading({ index, eyebrow, title, lead, inverted = false }) {
-  return <div className={`section-heading ${inverted ? 'inverted' : ''}`}>
-    <div className="heading-left"><span className="chapter-index">{index}</span><div><p className="eyebrow">{eyebrow}</p><h2>{title}</h2></div></div>
-    {lead && <p className="heading-lead">{lead}</p>}
-  </div>;
-}
-
-function Modal({ day, onClose }) {
-  useEffect(() => {
-    if (!day) return;
-    const handler = e => { if (e.key === 'Escape') onClose(); };
-    window.addEventListener('keydown', handler);
-    document.body.style.overflow = 'hidden';
-    return () => { window.removeEventListener('keydown', handler); document.body.style.overflow = ''; };
-  }, [day, onClose]);
-  if (!day) return null;
-  return <div className="modal-backdrop" onMouseDown={e => { if (e.target === e.currentTarget) onClose(); }} role="presentation">
-    <section className="modal" role="dialog" aria-modal="true" aria-label={`รายละเอียดวันที่ ${day.day}`}>
-      <div className="modal-photo"><Picture name={day.image} alt={day.location} /><button className="modal-close" aria-label="ปิดรายละเอียด" onClick={onClose}><X size={20}/></button><div className="modal-photo-title"><span>{day.date} · {day.location}</span><h2>{day.title}</h2></div></div>
-      <div className="modal-content">
-        <div className="modal-overline"><span>DAY {String(day.day).padStart(2, '0')}</span><span className={`status-tag ${day.type === 'confirmed' ? 'confirmed' : ''}`}>{day.type === 'confirmed' ? 'มีรายการที่ยืนยันแล้ว' : 'ร่างแผน · เปลี่ยนได้'}</span></div>
-        <h3>{day.subtitle}</h3>
-        <div className="timeline">{day.schedule.map((event, i) => <div className="timeline-row" key={i}><span className="timeline-time">{event.time}</span><span className="timeline-dot"/><div><strong>{event.title}</strong><p>{event.detail}</p></div></div>)}</div>
-        <p className="modal-note"><Sparkles size={16}/>{day.note}</p>
-        <div className="modal-footer"><span><BedDouble size={16}/> {day.stay}</span><button onClick={() => openMap(day.map)}>เปิด Google Maps <ArrowUpRight size={16}/></button></div>
-      </div>
+    <section className="travel-card"><div className="card-title"><div className="round-icon"><Navigation size={19}/></div><div><span className="kicker">STEP-BY-STEP ROUTE</span><h3>เดินทางอย่างไร</h3></div></div>
+      <div className="route-overview">{guide.overview}</div>
+      <div className="route-legs">{guide.legs.map((leg, index) => <div className="route-leg" key={`${day.day}-${index}`}>
+        <span className="route-axis"><span className="route-icon"><RouteIcon type={leg.icon}/></span>{index < guide.legs.length - 1 && <span className="route-line"/>}</span>
+        <div className="leg-main"><div className="leg-journey"><span className="leg-count">STEP {String(index + 1).padStart(2,'0')}</span><span className="leg-duration">{leg.duration}</span></div>
+          <h4>{leg.line}</h4><p className="leg-mode">{leg.mode} · {leg.pay}</p>
+          <button type="button" className="leg-toggle" aria-expanded={!!expanded[index]} onClick={() => setExpanded(old => ({ ...old, [index]: !old[index] }))}>{expanded[index] ? 'ซ่อนคำแนะนำ' : 'ดูวิธีขึ้น / จุดเปลี่ยนรถ'} <ChevronDown size={15} className={expanded[index] ? 'rotated' : ''}/></button>
+          {expanded[index] && <div className="leg-detail"><p>{leg.how}</p><div className="leg-stations"><span>จาก <strong>{leg.from}</strong></span><span>ไป <strong>{leg.to}</strong></span></div></div>}
+          <LinkOut className="map-button" href={mapDirectionsUrl(leg.from, leg.to, leg.icon === 'walk' ? 'walking' : leg.icon === 'plane' ? 'driving' : 'transit')}><Navigation size={15}/> นำทาง Google Maps</LinkOut>
+        </div>
+      </div>)}</div>
+      <div className="route-note"><Info size={17}/><span>{guide.reminder}</span></div>
     </section>
-  </div>;
+
+    <section className="schedule-card"><div className="section-title"><div><span className="kicker">THE DAY'S FLOW</span><h3>ตารางเวลาและกิจกรรม</h3></div><Tag color="neutral">เวลาญี่ปุ่น JST</Tag></div>
+      <div className="day-timeline">{day.schedule.map((slot,index) => <div className="time-entry" key={index}><div className="time-value">{slot.time}</div><div className="time-marker"/><div className="time-desc"><strong>{slot.title}</strong><p>{slot.detail}</p></div></div>)}</div>
+      <div className="schedule-foot"><Sparkles size={17}/><p>{day.note}</p></div>
+    </section>
+
+    <section className="stay-card"><div className="stay-icon"><BedDouble size={19}/></div><div><span className="kicker">TONIGHT'S STAY</span><h3>{day.stay}</h3></div>{day.day !== 8 && <a aria-label="นำทางไปโรงแรม" href={mapSearchUrl(day.day === 6 ? 'Nishimuraya Hotel Shogetsutei' : 'Centara Life Namba Hotel Osaka')} target="_blank" rel="noopener noreferrer"><MapPin size={18}/></a>}</section>
+    <p className="accuracy-note"><ShieldCheck size={16}/> เวลารถไฟที่ไม่ได้จองและช่วงเดินทางเป็นแผน/ค่าประมาณ ตรวจเส้นทาง รถไฟรอบจริง และชานชาลาจาก Google Maps หรือ JR-WEST ก่อนออกเดินทาง</p>
+  </>;
+}
+
+function ChecklistPanel({ checked, setChecked }) {
+  const [filter, setFilter] = useState('todo');
+  const completed = checklist.filter(x => checked[x.id]).length;
+  const pending = checklist.length - completed;
+  const shown = checklist.filter(x => filter === 'all' || (filter === 'todo' ? !checked[x.id] : checked[x.id])).sort((a, b) => a.due.localeCompare(b.due));
+  const groups = [...new Set(shown.map(x => x.group))];
+  const progress = Math.round(completed / checklist.length * 100);
+  return <section className="content-pane"><Heading label="READY TO GO" title="Checklist ก่อนเดินทาง" caption="สถานะบันทึกบนเบราว์เซอร์เครื่องนี้ ไม่ซิงก์ข้ามเครื่อง"/>
+    <div className="progress-card"><div className="progress-copy"><strong>{progress}%</strong><div><span>เตรียมพร้อมแล้ว</span><small>{completed} เสร็จแล้ว · {pending} ยังต้องทำ</small></div></div><div className="progress-track"><span style={{ width:`${progress}%` }}/></div></div>
+    <div className="filters"><button className={filter === 'todo' ? 'selected' : ''} onClick={() => setFilter('todo')}>ยังไม่ทำ ({pending})</button><button className={filter === 'done' ? 'selected' : ''} onClick={() => setFilter('done')}>เสร็จแล้ว</button><button className={filter === 'all' ? 'selected' : ''} onClick={() => setFilter('all')}>ทั้งหมด</button></div>
+    {groups.length ? groups.map(group => <div className="check-group" key={group}><div className="check-group-name"><span>{group}</span><span>{shown.filter(x => x.group === group).length}</span></div>{shown.filter(x => x.group === group).map(item => <label className={`check-item ${checked[item.id] ? 'done' : ''}`} key={item.id}>
+      <input type="checkbox" checked={!!checked[item.id]} onChange={() => setChecked(old => ({ ...old, [item.id]: !old[item.id] }))}/><span className="square-check">{checked[item.id] && <Check size={16}/>}</span>
+      <span className="check-info"><strong>{item.title}</strong><small>{item.detail}</small><span className="check-due">{checked[item.id] ? 'เรียบร้อยแล้ว' : `ควรเสร็จภายใน ${shortDate(item.due)}`}</span></span>
+    </label>)}</div>) : <div className="empty-state"><CheckCircle2 size={32}/><p>ไม่มีรายการในหมวดนี้</p></div>}
+    <button className="reset-link" onClick={() => { if (window.confirm('คืนสถานะ Checklist เป็นข้อมูลเริ่มต้นหรือไม่?')) setChecked(initialChecklist); }}><RefreshCw size={15}/> คืนค่า Checklist เริ่มต้น</button>
+  </section>;
+}
+
+function BookingsPanel() {
+  return <section className="content-pane"><Heading label="YOUR RESERVATIONS" title="ตั๋วและโรงแรม" caption="รวมข้อมูลที่ยืนยันแล้ว และรายการที่ยังรอซื้อ/จอง"/>
+    <div className="flight-board"><span className="kicker">FLIGHT INFORMATION · 2 TRAVELERS</span>{trip.flights.map(f => <div className="flight-row" key={f.code}><div><strong>{f.route}</strong><span>{f.date} 2026 · {f.time}</span></div><Tag color="light">{f.code}</Tag></div>)}</div>
+    <div className="section-title bookings-heading"><div><span className="kicker">CONFIRMED STAYS</span><h3>ที่พักทั้งหมด 7 คืน</h3></div></div>
+    {trip.hotels.map((hotel,index) => <div className="booking-row" key={hotel.id}><div className="booking-count">0{index+1}</div><div className="booking-body"><Tag color="green">ยืนยันการจองแล้ว</Tag><h3>{hotel.name}</h3><p>{hotel.date}</p><small>{hotel.plan} · {hotel.area}</small><LinkOut href={mapSearchUrl(hotel.map)} className="subtle-link">ดูที่ตั้งโรงแรม</LinkOut></div></div>)}
+    <div className="ticket-card"><Ticket size={24}/><div><Tag color="green">จ่ายแล้ว</Tag><h3>Universal Studios Japan · 19 พ.ย.</h3><p>Studio Pass + Express Pass · 2 คน</p><p>Nintendo 13:50 · Harry Potter 16:00 (ตรวจจาก QR อีกครั้ง)</p></div></div>
+    <div className="pass-card"><div><span className="kicker">JR-WEST RAIL PASS</span><h3>Kansai WIDE Area Pass · 5 วัน</h3><p>เลือกแล้ว แต่ยังไม่ได้ซื้อ · แผนเริ่มใช้ 20–24 พ.ย. · ¥12,000/คน</p></div><Tag color="amber">ยังต้องซื้อ</Tag><LinkOut href="https://www.westjr.co.jp/travel-information/en/tickets-passes/jrwest-rail-pass/kansai_wide/" className="action-link">รายละเอียด / ซื้อ JR Pass</LinkOut></div>
+    <div className="pass-card"><div><span className="kicker">LIMITED EXPRESS SEATS</span><h3>Kounotori 5 · 22 พ.ย.</h3><p>แผน Osaka 10:12 → Kinosaki 12:51 · ยังต้องจองที่นั่ง · ขากลับ 23 พ.ย. ยังไม่เลือกเที่ยว</p></div><Tag color="amber">ยังไม่จอง</Tag><LinkOut href="https://www.westjr.co.jp/global/en/ticket/pass/reservation_form/index.php?p=kansai-widepass" className="action-link">จอง JR-WEST</LinkOut></div>
+    <div className="info-card"><Info size={20}/><p>Nishimuraya ยืนยัน Dinner + Breakfast และได้รับแจ้งว่าแขกทั้งสองไม่ทานเนื้อวัว (ไม่ใช่การแพ้) ทานซาชิมิได้ และจะถึง Kinosaki 12:51</p></div>
+  </section>;
+}
+
+function HelpPanel() {
+  return <section className="content-pane"><Heading label="IN YOUR POCKET" title="ข้อมูลสำคัญระหว่างเที่ยว" caption="ลิงก์ฉุกเฉินและสิ่งที่ควรจำก่อนออกเดินทาง"/>
+    <div className="help-feature"><MapPin size={21}/><div><strong>ที่พักหลัก · Centara Life Namba Hotel Osaka</strong><p>3-4-21 Shikitsuhigashi, Naniwa, Osaka · ใกล้ Daikokucho / Imamiyaebisu</p><LinkOut className="subtle-link" href={mapSearchUrl('Centara Life Namba Hotel Osaka')}>นำทางไปโรงแรม</LinkOut></div></div>
+    <div className="help-feature"><TrainFront size={21}/><div><strong>การเดินทาง Kinosaki</strong><p>22 พ.ย. Kounotori 5 แผนออก 10:12 / ถึง 12:51 · สำรองที่นั่งก่อน • Check-in Shuttle จากสถานี</p><LinkOut className="subtle-link" href="https://www.nishimuraya.ne.jp/shogetsu/en/access/">วิธีรับส่ง Nishimuraya</LinkOut></div></div>
+    <div className="help-feature"><Luggage size={21}/><div><strong>ก่อนค้าง Kinosaki 1 คืน</strong><p>ขออนุญาต Centara ฝากกระเป๋าใหญ่ข้ามคืน 22–23 พ.ย. แล้วถือกระเป๋าใบเล็กไปเรียวกัง</p></div></div>
+    <div className="help-feature"><Plane size={21}/><div><strong>เที่ยวบินขากลับ 24 พ.ย.</strong><p>XJ615 ออกจาก KIX 17:15 · ควรเผื่อเวลาถึงสนามบินล่วงหน้าประมาณ 3 ชั่วโมงและตรวจ Terminal</p></div></div>
+    <div className="help-feature"><Ticket size={21}/><div><strong>USJ วันที่ 19 พ.ย.</strong><p>ตั๋วซื้อแล้ว · Nintendo 13:50 และ Harry Potter 16:00 ตามข้อมูลที่แจ้ง • QR จริงเป็นหลัก</p></div></div>
+    <div className="quick-links">{resources.map(link => <LinkOut className="resource-link" key={link.name} href={link.url}><span><strong>{link.name}</strong><small>{link.desc}</small></span></LinkOut>)}<LinkOut className="resource-link" href="https://www.usj.co.jp/web/en/us/access/train"><span><strong>USJ Access</strong><small>เส้นทางรถไฟไป Universal City</small></span></LinkOut></div>
+    <div className="info-card"><ShieldCheck size={20}/><p>แนะนำเก็บ Passport, QR, Booking Confirmation และประกันไว้ในโทรศัพท์แบบ Offline แยกจากเว็บไซต์นี้ เนื่องจากรหัส 6 หลักเป็นการป้องกันขั้นพื้นฐาน ไม่เหมาะกับเอกสารลับ</p></div>
+  </section>;
 }
 
 export default function Home() {
-  const [activeDay, setActiveDay] = useState(null);
-  const [checked, setChecked] = useState(initialState);
-  const [filter, setFilter] = useState('todo');
-  const [ready, setReady] = useState(false);
-  const [showAllGroups, setShowAllGroups] = useState(false);
-  const [mobileMenu, setMobileMenu] = useState(false);
-
+  const [activeTab, setActiveTab] = useState('plan');
+  const [currentDay, setCurrentDay] = useState(1);
+  const [checked, setChecked] = useState(initialChecklist);
+  const [hydrated, setHydrated] = useState(false);
+  const [goDaysOpen, setGoDaysOpen] = useState(false);
   useEffect(() => {
-    try { const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null'); if (stored && typeof stored === 'object') setChecked({ ...initialState, ...stored }); } catch { /* ignore corrupted browser storage */ }
-    setReady(true);
+    setCurrentDay(getTodayDay());
+    try { const saved = JSON.parse(window.localStorage.getItem(STORAGE_KEY) || 'null'); if (saved && typeof saved === 'object') setChecked({ ...initialChecklist, ...saved }); } catch {}
+    setHydrated(true);
   }, []);
-  useEffect(() => { if (ready) try { localStorage.setItem(STORAGE_KEY, JSON.stringify(checked)); } catch { /* storage unavailable */ } }, [checked, ready]);
-
-  const completed = checklist.filter(x => checked[x.id]).length;
-  const pending = checklist.length - completed;
-  const progress = Math.round(completed / checklist.length * 100);
-  const countdown = daysUntil('2026-11-17');
-  const nextTasks = checklist.filter(x => !checked[x.id]).sort((a, b) => a.due.localeCompare(b.due)).slice(0, 3);
-  const filtered = checklist.filter(x => filter === 'all' || (filter === 'done' ? checked[x.id] : !checked[x.id]));
-  const groups = [...new Set(filtered.map(x => x.group))];
-  const changeStatus = id => setChecked(x => ({ ...x, [id]: !x[id] }));
-  const visibleGroups = showAllGroups ? groups : groups.slice(0, 9);
-  const menus = [['#overview','ภาพรวม'],['#journey','แผน 8 วัน'],['#transport','การเดินทาง'],['#bookings','การจอง'],['#checklist','Checklist']];
-
-  return <main>
-    <header className="topbar"><div className="container topbar-inner">
-      <a href="#home" className="brand"><span className="brand-mark">日</span><span>KANSAI<span className="brand-dot">.</span><small>TRAVEL NOTES · 2026</small></span></a>
-      <nav className={`nav ${mobileMenu ? 'nav-open' : ''}`}>{menus.map(([href,text])=><a key={href} href={href} onClick={() => setMobileMenu(false)}>{text}</a>)}</nav>
-      <a className="topbar-cta" href="#checklist">MY CHECKLIST <ArrowUpRight size={15}/></a>
-      <button className="mobile-nav-toggle" onClick={()=>setMobileMenu(!mobileMenu)} aria-label="เปิดเมนู">{mobileMenu ? <X size={24}/> : <Menu size={24}/>}</button>
-    </div></header>
-
-    <section className="hero" id="home">
-      <Picture name="hero" className="hero-bg" alt="บรรยากาศย่านโดทงโบริ เมืองโอซาก้า" />
-      <div className="hero-shade"/>
-      <div className="container hero-inner">
-        <div className="hero-content"><div className="eyebrow hero-topline"><span className="tiny-line"/> OUR LITTLE JAPAN ESCAPE · 2026</div>
-          <h1>Lost in <em>Japan.</em><br/><span>Found in moments.</span></h1>
-          <p>8 วันของโอซาก้า เกียวโต คิโนซากิ และเรื่องราวที่เราจะเก็บกลับมา</p>
-          <div className="hero-actions"><a href="#journey" className="button primary">EXPLORE OUR JOURNEY <ArrowRight size={18}/></a><a href="#checklist" className="button outline">ดู Checklist <ChevronRight size={18}/></a></div>
-        </div>
-        <div className="hero-bottom"><span>OSAKA · KYOTO · KINOSAKI</span><span>17 — 24 NOV, 2026 <span className="star">✳</span> TWO TRAVELERS</span></div>
-      </div>
-      <div className="hero-stamp"><span>日本</span><small>AUTUMN<br/>GETAWAY</small></div>
-    </section>
-
-    <section className="statbar" id="overview"><div className="container stat-grid">
-      <div className="stat"><CalendarDays size={20}/><div><strong>17–24 NOV</strong><span>2026 · 8 DAYS / 7 NIGHTS</span></div></div>
-      <div className="stat"><Plane size={20}/><div><strong>DMK ↔ KIX</strong><span>THAI AIRASIA X · 2 PEOPLE</span></div></div>
-      <div className="stat"><TrainFront size={20}/><div><strong>OSAKA / KYOTO / KINOSAKI</strong><span>3 HIGHLIGHT DESTINATIONS</span></div></div>
-      <div className="stat countdown"><span className="stat-number">{countdown > 0 ? countdown : countdown === 0 ? 'GO!' : '✓'}</span><div><strong>{countdown > 0 ? 'DAYS TO GO' : countdown === 0 ? 'TRAVEL DAY!' : 'TRIP DATE PASSED'}</strong><span>{countdown > 0 ? 'UNTIL THE ADVENTURE BEGINS' : '17 NOVEMBER 2026'}</span></div></div>
-    </div></section>
-
-    <section className="section intro-section"><div className="container intro-grid"><div className="intro-text"><p className="eyebrow"><span className="coral-dot"/> THE STORY BEGINS</p><h2>Not just a trip.<br/><em>A collection of memories.</em></h2><p>คืนแสงสีที่โอซาก้า เช้าตรู่ในเกียวโต และวันที่ปล่อยใจให้ช้าลงที่คิโนซากิ ทุกอย่างถูกรวบรวมไว้ที่นี่ ตั้งแต่รายละเอียดการเดินทางไปจนถึง Checklist ก่อนออกบิน</p><div className="intro-tags"><span>♧ CITY WALKS</span><span>♨ ONSEN</span><span>✦ THEME PARK</span></div></div><div className="intro-image"><Picture name="kinosaki" alt="คลองในเมืองคิโนซากิ ออนเซ็น" /><div className="intro-image-tag">A SLOWER KIND OF MAGIC <span>♥</span></div></div></div></section>
-
-    <section className="section journey-section" id="journey"><div className="container">
-      <SectionHeading index="01" eyebrow="THE JOURNEY" title="Eight days, endless stories." lead="กดที่การ์ดแต่ละวันเพื่อดูตารางเที่ยว เวลาเดินทาง และแผนที่ เราแยกรายการที่ยืนยันแล้วกับร่างแผนไว้ให้"/>
-      <div className="journey-grid">{itinerary.map(day=><button key={day.day} className="day-card" onClick={()=>setActiveDay(day)} aria-label={`ดูรายละเอียดวัน ${day.day}: ${day.title}`}>
-        <div className="day-image"><Picture name={day.image} alt={day.location} /><div className="day-image-top"><span>DAY {String(day.day).padStart(2,'0')}</span><span>{day.dow} · {day.date}</span></div><span className="day-image-location"><MapPin size={12}/>{day.location}</span></div>
-        <div className="day-body"><span className={`day-label ${day.type === 'confirmed' ? 'confirmed' : ''}`}>{day.type === 'confirmed' ? 'BOOKING / FLIGHT INFO' : 'FLEXIBLE PLAN'}</span><h3>{day.title}</h3><p>{day.summary}</p><div className="day-bottom"><span>{day.highlight}</span><span className="circle-arrow"><ArrowUpRight size={17}/></span></div></div>
-      </button>)}</div>
-      <div className="journey-note"><Sparkles size={19}/><span><b>หมายเหตุ:</b> วันที่ 18, 20, 21 และ 23 พ.ย. เป็นร่างแผนที่ปรับเปลี่ยนได้ ส่วนเวลา USJ และรถไฟควรตรวจจากตั๋ว/ตารางล่าสุดก่อนวันเดินทาง</span></div>
-    </div></section>
-
-    <section className="section transport-section" id="transport"><div className="container">
-      <SectionHeading index="02" eyebrow="GETTING AROUND" title="Every journey needs a little planning." lead="JR Pass ที่เลือกไว้ใช้ติดต่อกัน 5 วัน โดยเน้นเส้นทางไปคิโนซากิ และใช้ ICOCA สำหรับการเดินทางที่ไม่ครอบคลุม" inverted/>
-      <div className="transport-layout"><div className="rail-card"><div className="rail-top"><span className="rail-badge">YOUR RAIL PLAN</span><TrainFront size={26}/></div><h3>Kansai WIDE<br/>Area Pass</h3><p>JR-WEST · 5 CONSECUTIVE DAYS</p><div className="rail-days">{['20','21','22','23','24'].map((x,i)=><div key={x}><b>{x}</b><span>NOV</span><small>DAY {i+1}</small></div>)}</div><div className="rail-price"><div><small>REFERENCE PRICE</small><strong>¥12,000 <span>/ person</span></strong></div><span>ยังไม่ได้ซื้อ</span></div><a href="https://www.westjr.co.jp/travel-information/en/tickets-passes/jrwest-rail-pass/kansai_wide/" target="_blank" rel="noreferrer">รายละเอียดจาก JR-WEST <ArrowUpRight size={17}/></a></div>
-      <div className="transport-steps">
-        <div className="transport-step"><div className="step-number">01</div><div><span>BEFORE 22 OCT</span><h4>ซื้อ Kansai WIDE Pass</h4><p>เลือกวันเริ่มใช้ 20 พ.ย. จำนวน 2 คน ตรวจชื่อและเงื่อนไขการรับบัตร</p></div><span className="step-pill pending">ต้องทำ</span></div>
-        <div className="transport-step"><div className="step-number">02</div><div><span>22 OCT · SEAT BOOKING</span><h4>จอง Kounotori 5 · ขาไป</h4><p>22 พ.ย. Osaka → Kinosaki Onsen วางแผนถึง 12:51 น. (JST) · สำรองที่นั่งก่อนเดินทาง</p></div><span className="step-pill pending">ต้องทำ</span></div>
-        <div className="transport-step"><div className="step-number">03</div><div><span>23 OCT · SEAT BOOKING</span><h4>จอง Limited Express · ขากลับ</h4><p>23 พ.ย. Kinosaki → Osaka เลือกเวลาที่ต้องการก่อนจอง</p></div><span className="step-pill pending">ต้องทำ</span></div>
-        <div className="transport-step"><div className="step-number">04</div><div><span>LOCAL RIDES</span><h4>ICOCA + รถไฟอื่น ๆ</h4><p>เตรียมสำหรับ Osaka Metro, รถไฟเอกชน และเส้นทางที่ JR Pass ไม่ครอบคลุม</p></div><span className="step-pill neutral">เตรียมไว้</span></div>
-      </div></div>
-      <p className="rail-disclaimer">ช่วงวัน 20–24 พ.ย. เป็นแผนการใช้ Pass ไม่ใช่บัตรที่ออกแล้ว · ราคาอ้างอิงจาก JR-WEST และอาจเปลี่ยนได้ · Pass ไม่ครอบคลุมรถไฟทุกบริษัท <a href="https://www.westjr.co.jp/travel-information/en/tickets-passes/jrwest-rail-pass/kansai_wide/" target="_blank" rel="noreferrer">ดูเงื่อนไขทางการ <ArrowUpRight size={13}/></a></p>
-    </div></section>
-
-    <section className="section bookings-section" id="bookings"><div className="container"><SectionHeading index="03" eyebrow="ALL SET TO STAY" title="The places we'll call home." lead="โรงแรม 3 ช่วง รวม 7 คืน ยืนยันการจองแล้ว พร้อมรายละเอียดมื้ออาหารที่ทราบ"/>
-      <div className="booking-grid">{trip.hotels.map((hotel,index)=><div key={hotel.id} className="booking-card"><div className="booking-card-top"><div className="booking-symbol"><BedDouble size={23}/></div><span><CheckCircle2 size={14}/> จองแล้ว</span></div><p className="booking-caption">STAY {String(index+1).padStart(2,'0')} · {hotel.area}</p><h3>{hotel.name}</h3><p className="booking-date"><CalendarDays size={16}/>{hotel.date}</p><div className="booking-bottom"><span>{hotel.plan}</span><button title="เปิด Google Maps" onClick={()=>openMap(hotel.map)}><MapPin size={15}/> แผนที่</button></div></div>)}</div>
-      <div className="booking-extras"><div><Ticket size={22}/><div><strong>USJ · 19 NOV</strong><span>Studio Pass + Express Pass 2 คน · จ่ายแล้ว</span></div></div><div><Heart size={22}/><div><strong>Nishimuraya meal preference</strong><span>แจ้งแล้ว: ไม่ทานเนื้อวัว (ไม่แพ้) · Sashimi ได้ · รวม Dinner & Breakfast</span></div></div></div>
-    </div></section>
-
-    <section className="section checklist-section" id="checklist"><div className="container"><SectionHeading index="04" eyebrow="READY, SET, JAPAN" title="A little prep, a lot of peace of mind." lead="Checklist อิงจากสิ่งที่คุยกันล่าสุด กดติ๊กเมื่อทำเสร็จ สถานะจะเก็บไว้ในเบราว์เซอร์เครื่องนี้" inverted/>
-      <div className="check-dashboard"><div className="check-progress"><div className="progress-title"><div><span>YOUR PREPARATION</span><strong>{progress}% <small>COMPLETE</small></strong></div><CheckCircle2 size={30}/></div><div className="progress-track"><div style={{width:`${progress}%`}}/></div><div className="progress-counters"><span><CheckCircle2 size={15}/>{completed} เสร็จแล้ว</span><span><Circle size={15}/>{pending} ยังต้องทำ</span></div></div>
-      <div className="next-up"><div className="next-up-title"><Clock3 size={18}/> UP NEXT <span>เรียงตามกำหนด</span></div>{nextTasks.length ? nextTasks.map(x=><div className="next-task" key={x.id}><div><strong>{x.title}</strong><small>{x.detail}</small></div><span className={daysUntil(x.due)<0?'due-past':''}>{daysUntil(x.due)<0 ? 'เลยกำหนด' : daysUntil(x.due)===0 ? 'วันนี้' : `อีก ${daysUntil(x.due)} วัน`}</span></div>):<div className="next-empty">ทำครบแล้ว! พร้อมออกเดินทาง 🎉</div>}</div></div>
-      <div className="checklist-panel"><div className="checklist-toolbar"><div><h3>Before we fly <span>{checklist.length} tasks</span></h3><p>ข้อมูลล่าสุดจากแผนเตรียมเดินทาง · จัดกลุ่มตามประเภทงาน</p></div><div className="toolbar-right"><div className="filter-group"><button className={filter==='todo'?'active':''} onClick={()=>setFilter('todo')}>ยังไม่เสร็จ ({pending})</button><button className={filter==='all'?'active':''} onClick={()=>setFilter('all')}>ทั้งหมด</button><button className={filter==='done'?'active':''} onClick={()=>setFilter('done')}>เสร็จแล้ว</button></div><button className="reset-button" onClick={()=>{ if (window.confirm('คืนค่า Checklist ตามข้อมูลเริ่มต้นใช่ไหม?')) setChecked(initialState); }} title="คืนค่าเริ่มต้น"><RotateCcw size={17}/></button></div></div>
-        {filtered.length ? visibleGroups.map(group=><div key={group} className="task-group"><div className="task-group-title"><span>{group}</span><span>{filtered.filter(x=>x.group===group).length} ITEMS</span></div>
-          {filtered.filter(x=>x.group===group).map(task=><label className={`task-item ${checked[task.id]?'is-done':''}`} key={task.id}>
-            <input type="checkbox" checked={!!checked[task.id]} onChange={()=>changeStatus(task.id)}/><span className="check-box">{checked[task.id] && <Check size={14}/>}</span>
-            <span className="task-copy"><strong>{task.title}</strong><small>{task.detail}</small></span>
-            <span className={`task-due ${!checked[task.id]&&daysUntil(task.due)<0?'past':''}`}>{checked[task.id]?'DONE':formatDate(task.due)}</span>
-          </label>)}</div>):<div className="empty-filter">ไม่มีรายการในหมวดนี้ 🎉</div>}
-        {groups.length>9 && <button className="show-more" onClick={()=>setShowAllGroups(x=>!x)}>{showAllGroups?'แสดงน้อยลง':'แสดงหมวดเพิ่มเติม'} <ChevronRight size={16}/></button>}
-        <p className="storage-note"><ShieldCheck size={16}/> สถานะการติ๊กบันทึกบนอุปกรณ์และเบราว์เซอร์นี้เท่านั้น ยังไม่ซิงก์ระหว่างโทรศัพท์และคอมพิวเตอร์ ไม่ควรใส่เลข Passport หรือรหัสจองที่เป็นความลับบนเว็บไซต์สาธารณะ</p>
-      </div>
-    </div></section>
-
-    <section className="section quick-section"><div className="container"><SectionHeading index="05" eyebrow="QUICK ACCESS" title="Useful links for the road." lead="ลิงก์ทางการที่ควรเปิดได้ง่ายก่อนออกเดินทาง"/>
-      <div className="links-grid">{resources.map(link=><a key={link.name} href={link.url} target="_blank" rel="noreferrer" className="resource-card"><div><p>{link.desc}</p><h3>{link.name}</h3></div><span><ArrowUpRight size={20}/></span></a>)}</div>
-    </div></section>
-
-    <footer className="footer"><div className="container footer-inner"><div><span className="footer-japan">旅の思い出</span><h2>See you in Japan.</h2><p>17 — 24 NOVEMBER 2026 · A TRIP MADE OF MOMENTS.</p></div><div className="footer-right"><a href="#home">BACK TO TOP ↑</a><p>ภาพประกอบ: Travel with Amnet, Keihan Railway และ Time Out<br/>ใช้เพื่อการวางแผนท่องเที่ยวส่วนบุคคล</p></div></div></footer>
-    <Modal day={activeDay} onClose={()=>setActiveDay(null)}/>
+  useEffect(() => { if (hydrated) try { window.localStorage.setItem(STORAGE_KEY, JSON.stringify(checked)); } catch {} }, [checked, hydrated]);
+  const day = itinerary[currentDay - 1];
+  const pending = checklist.filter(x => !checked[x.id]).length;
+  const nextTasks = useMemo(() => checklist.filter(x => !checked[x.id]).sort((a,b) => a.due.localeCompare(b.due)).slice(0,2), [checked]);
+  const selectTab = id => { setActiveTab(id); window.scrollTo({ top:0, behavior:'smooth' }); };
+  return <main className="travel-shell"><div className="travel-content">
+    <header className="mobile-header"><div className="header-logo"><span className="header-mark">日</span><div><strong>KANSAI <i>2026</i></strong><small>OUR JAPAN TRAVEL GUIDE</small></div></div><div className="header-date"><CalendarCheck2 size={16}/> 17—24 NOV</div></header>
+    {activeTab === 'plan' && <>
+      <div className="welcome"><div><span className="kicker">YOUR TRAVEL COMPANION</span><h1>ไปไหนวันนี้?<span> 🇯🇵</span></h1><p>8 วัน 7 คืน · Osaka / Kyoto / Kinosaki</p></div><button onClick={() => setCurrentDay(getTodayDay())} className="today-pill"><CalendarCheck2 size={15}/> ไปวันที่ปัจจุบัน</button></div>
+      <div className="day-strip" role="group" aria-label="เลือกวันที่เที่ยว">{itinerary.map(x => <button type="button" key={x.day} aria-pressed={currentDay === x.day} className={`day-chip ${currentDay===x.day?'active':''}`} onClick={() => setCurrentDay(x.day)}><small>{x.dow}</small><strong>{16+x.day}</strong><span>NOV</span></button>)}</div>
+      <DayPlan day={day}/>
+      <div className="day-pagination"><button disabled={currentDay===1} onClick={() => setCurrentDay(x=>Math.max(1,x-1))}><ArrowLeft size={16}/> ก่อนหน้า</button><span>{currentDay} / 8</span><button disabled={currentDay===8} onClick={() => setCurrentDay(x=>Math.min(8,x+1))}>วันถัดไป <ArrowRight size={16}/></button></div>
+    </>}
+    {activeTab === 'checklist' && <ChecklistPanel checked={checked} setChecked={setChecked}/>}
+    {activeTab === 'bookings' && <BookingsPanel/>}
+    {activeTab === 'help' && <HelpPanel/>}
+    <div className="site-foot">Kansai, With You · 2026 <span>✦</span> Made for the journey</div>
+  </div>
+  <nav className="bottom-nav" aria-label="เมนูหลัก">{tabItems.map(({id,text,icon:Icon}) => <button type="button" key={id} className={activeTab===id?'active':''} aria-current={activeTab===id ? 'page':undefined} onClick={() => selectTab(id)}><Icon size={21} strokeWidth={activeTab===id?2.5:1.75}/><span>{text}</span>{id==='checklist'&&pending>0&&<i>{pending}</i>}</button>)}</nav>
   </main>;
 }
