@@ -9,6 +9,7 @@ import {
 } from 'lucide-react';
 import { trip, itinerary, checklist, resources } from '../data/trip';
 import { travelGuide, mapDirectionsUrl, mapSearchUrl } from '../data/mobility';
+import { dayPhotos, tripImageCredits } from '../data/dayPhotos';
 
 const STORAGE_KEY = 'kansai-2026-checklist-v1';
 const initialChecklist = Object.fromEntries(checklist.map(item => [item.id, item.done]));
@@ -41,7 +42,7 @@ function DayPlan({ day }) {
   const [expanded, setExpanded] = useState({});
   useEffect(() => { setExpanded({}); setShowAll(false); }, [day.day]);
   return <>
-    <section className="today-head"><div className="today-head-image"><img src={day.image === 'kinosaki' ? 'https://media.timeout.com/images/106065006/750/562/image.jpg' : day.image === 'kyoto' ? 'https://www.keihan.co.jp/uji-fushimi/assets/img/fushimi/img_spot03_01_a.jpg' : 'https://a-us.storyblok.com/f/1018357/1920x1277/d37c3f5205/3141175_m.jpg'} alt="ภาพบรรยากาศญี่ปุ่น" onError={event => { event.currentTarget.style.display = 'none'; }} /></div><div className="today-head-content">
+    <section className="today-head"><div className="today-head-image"><img key={day.day} src={dayPhotos[day.day].src} alt={dayPhotos[day.day].alt} loading={day.day === 1 ? 'eager' : 'lazy'} decoding="async" style={{objectPosition: dayPhotos[day.day].position}} onError={event => { event.currentTarget.style.display = 'none'; }}/><span className="photo-caption">{dayPhotos[day.day].caption}</span></div><div className="today-head-content">
       <div className="today-badges"><span>DAY {String(day.day).padStart(2, '0')} · {day.dow} {day.date}</span><Tag color={day.type === 'confirmed' ? 'light' : 'soft'}>{day.type === 'confirmed' ? 'มีรายการจองแล้ว' : 'แผนยืดหยุ่น'}</Tag></div>
       <h2>{day.title}</h2><p>{day.subtitle}</p><span className="today-location"><MapPin size={14}/> {day.location}</span>
     </div></section>
