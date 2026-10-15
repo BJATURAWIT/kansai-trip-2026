@@ -8,3 +8,22 @@
 .today-head-image .photo-caption{position:absolute;bottom:12px;right:14px;z-index:1;color:#fff;font-size:9px;font-weight:800;letter-spacing:.08em;background:#153d36b8;border:1px solid #ffffff39;padding:5px 9px;border-radius:999px;max-width:calc(100% - 28px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;pointer-events:none}
 .today-head-image img{display:block;object-fit:cover;object-position:center;aspect-ratio:16/9}
 @media(max-width:520px){.today-head{min-height:250px}.today-head-image img{object-fit:cover}.today-head:after{background:linear-gradient(90deg,#112b29d9,#17382caa 60%,#182f2754)}.today-head-content{padding:24px 20px 39px}.today-head-image .photo-caption{bottom:10px;right:10px;font-size:8px}}
+
+/* First-time visitor route guide: thumb-friendly expandable journey */
+.beginner-guide{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px 20px;margin:15px 0;box-shadow:0 5px 18px #16392706}
+.beginner-guide .section-title{margin-bottom:12px}
+.guide-subtitle{color:#667a74;font-size:12px;margin-top:6px}
+.beginner-steps{display:flex;flex-direction:column;gap:9px}
+.beginner-step{border:1px solid #dce7df;border-radius:13px;background:#f9fbf9;overflow:hidden}
+.beginner-step summary{display:flex;align-items:center;gap:12px;cursor:pointer;list-style:none;padding:13px 12px;min-height:65px}
+.beginner-step summary::-webkit-details-marker{display:none}
+.beginner-step summary>svg{flex-shrink:0;color:#5b736a;transition:transform .2s}
+.beginner-step[open] summary>svg{transform:rotate(180deg)}
+.beginner-number{background:#dcefe3;color:#1b5f49;min-width:30px;height:30px;border-radius:11px;display:grid;place-items:center;font-weight:800}
+.beginner-step-heading{display:flex;flex:1;min-width:0;flex-direction:column;gap:2px}
+.beginner-step-heading strong{font-size:13px;line-height:1.55}
+.beginner-step-heading small{font-size:10px;color:#688078}
+.beginner-step-detail{padding:4px 15px 15px 54px;font-size:12px;line-height:1.85;color:#3f6256}
+.beginner-note{margin-top:14px;border-radius:10px;background:#fff8e7;display:flex;gap:9px;padding:12px;color:#76521d;font-size:11px;line-height:1.75}
+.beginner-note svg{flex-shrink:0;margin-top:2px}
+@media(max-width:520px){.beginner-guide{padding:18px 14px}.beginner-step summary{padding:12px 10px}.beginner-step-detail{padding:4px 12px 15px 50px}}
