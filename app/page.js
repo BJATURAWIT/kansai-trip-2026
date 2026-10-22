@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import {
   ArrowLeft, ArrowRight, ArrowUpRight, BedDouble, CalendarCheck2, Check, CheckCircle2,
   ChevronDown, ChevronRight, Circle, Clock3, ExternalLink, Footprints, Home as HomeIcon,
@@ -96,14 +96,15 @@ function DayPlan({ day }) {
   </>;
 }
 
-function ChecklistPanel({ checked, setChecked }) {
+function ChecklistPanel({ checked, setChecked, syncStatus }) {
   const [filter, setFilter] = useState('todo');
   const completed = checklist.filter(x => checked[x.id]).length;
   const pending = checklist.length - completed;
   const shown = checklist.filter(x => filter === 'all' || (filter === 'todo' ? !checked[x.id] : checked[x.id])).sort((a, b) => a.due.localeCompare(b.due));
   const groups = [...new Set(shown.map(x => x.group))];
   const progress = Math.round(completed / checklist.length * 100);
-  return <section className="content-pane"><Heading label="READY TO GO" title="Checklist ก่อนเดินทาง" caption="สถานะบันทึกบนเบราว์เซอร์เครื่องนี้ ไม่ซิงก์ข้ามเครื่อง"/>
+  return <section className="content-pane"><Heading label="READY TO GO" title="Checklist ก่อนเดินทาง" caption="บันทึกสถานะออนไลน์ ซิงก์ข้ามอุปกรณ์"/>
+    <p role="status" style={{fontSize:13,color:syncStatus==="error"?"#b42318":"#39765c"}}>{syncStatus==="saving"?"กำลังบันทึกออนไลน์…":syncStatus==="saved"?"✓ บันทึกแล้ว":syncStatus==="error"?"⚠ บันทึกออนไลน์ไม่สำเร็จ":"กำลังโหลดข้อมูล…"}</p>
     <div className="progress-card"><div className="progress-copy"><strong>{progress}%</strong><div><span>เตรียมพร้อมแล้ว</span><small>{completed} เสร็จแล้ว · {pending} ยังต้องทำ</small></div></div><div className="progress-track"><span style={{ width:`${progress}%` }}/></div></div>
     <div className="filters"><button className={filter === 'todo' ? 'selected' : ''} onClick={() => setFilter('todo')}>ยังไม่ทำ ({pending})</button><button className={filter === 'done' ? 'selected' : ''} onClick={() => setFilter('done')}>เสร็จแล้ว</button><button className={filter === 'all' ? 'selected' : ''} onClick={() => setFilter('all')}>ทั้งหมด</button></div>
     {groups.length ? groups.map(group => <div className="check-group" key={group}><div className="check-group-name"><span>{group}</span><span>{shown.filter(x => x.group === group).length}</span></div>{shown.filter(x => x.group === group).map(item => <label className={`check-item ${checked[item.id] ? 'done' : ''}`} key={item.id}>
@@ -142,14 +143,46 @@ export default function Home() {
   const [activeTab, setActiveTab] = useState('plan');
   const [currentDay, setCurrentDay] = useState(1);
   const [checked, setChecked] = useState(initialChecklist);
-  const [hydrated, setHydrated] = useState(false);
-  const [goDaysOpen, setGoDaysOpen] = useState(false);
-  useEffect(() => {
+  const [syncStatus,setSyncStatus] = useState('loading');
+  const checkedRef = useRef(initialChecklist);
+  const queue = useRef(Promise.resolve());
+  const saveChecked = state => {
+    setSyncStatus('saving');
+    queue.current = queue.current.catch(()=>{}).then(async()=>{
+      const response = await fetch('/api/checklist',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({checked:state}),cache:'no-store'});
+      if(!response.ok)throw Error('save failed');
+      setSyncStatus('saved');
+    }).catch(()=>setSyncStatus('error'));
+  };
+  const changeChecked = value => {
+    const next = typeof value === 'function' ? value(checkedRef.current) : value;
+    checkedRef.current=next;setChecked(next);
+    try{localStorage.setItem(STORAGE_KEY,JSON.stringify(next));}catch{}
+    saveChecked(next);
+  };
+  const [goDaysOpen,setGoDaysOpen] = useState(false);
+  useEffect(()=>{
     setCurrentDay(getTodayDay());
-    try { const saved = JSON.parse(window.localStorage.getItem(STORAGE_KEY) || 'null'); if (saved && typeof saved === 'object') setChecked({ ...initialChecklist, ...saved }); } catch {}
-    setHydrated(true);
-  }, []);
-  useEffect(() => { if (hydrated) try { window.localStorage.setItem(STORAGE_KEY, JSON.stringify(checked)); } catch {} }, [checked, hydrated]);
+    let cached={};
+    try{const value=JSON.parse(localStorage.getItem(STORAGE_KEY)||'null');if(value&&typeof value==='object'&&!Array.isArray(value))cached=value;}catch{}
+    let cancelled=false;
+    (async()=>{
+      try{
+        const response=await fetch('/api/checklist',{cache:'no-store'});
+        if(!response.ok)throw Error('load failed');
+        const remote=await response.json();if(cancelled)return;
+        const next={...initialChecklist,...(remote.exists?remote.checked:cached)};
+        checkedRef.current=next;setChecked(next);
+        try{localStorage.setItem(STORAGE_KEY,JSON.stringify(next));}catch{}
+        if(!remote.exists)saveChecked(next);else setSyncStatus('saved');
+      }catch{
+        if(cancelled)return;
+        const next={...initialChecklist,...cached};
+        checkedRef.current=next;setChecked(next);setSyncStatus('error');
+      }
+    })();
+    return()=>{cancelled=true};
+  },[]);
   const day = itinerary[currentDay - 1];
   const pending = checklist.filter(x => !checked[x.id]).length;
   const nextTasks = useMemo(() => checklist.filter(x => !checked[x.id]).sort((a,b) => a.due.localeCompare(b.due)).slice(0,2), [checked]);
@@ -162,7 +195,7 @@ export default function Home() {
       <DayPlan day={day}/>
       <div className="day-pagination"><button disabled={currentDay===1} onClick={() => setCurrentDay(x=>Math.max(1,x-1))}><ArrowLeft size={16}/> ก่อนหน้า</button><span>{currentDay} / 8</span><button disabled={currentDay===8} onClick={() => setCurrentDay(x=>Math.min(8,x+1))}>วันถัดไป <ArrowRight size={16}/></button></div>
     </>}
-    {activeTab === 'checklist' && <ChecklistPanel checked={checked} setChecked={setChecked}/>}
+    {activeTab === 'checklist' && <ChecklistPanel checked={checked} setChecked={changeChecked} syncStatus={syncStatus}/>}
     {activeTab === 'bookings' && <BookingsPanel/>}
     {activeTab === 'help' && <HelpPanel/>}
     <div className="site-foot">Kansai, With You · 2026 <span>✦</span> Made for the journey</div>
