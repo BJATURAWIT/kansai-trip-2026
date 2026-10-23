@@ -1,3 +1,4 @@
+import {foodScheduleEvents} from './foodExperience.js';
 import {travelBookings,localClock} from './centralTravel.js';
 import {itinerary} from './trip.js';
 import {travelGuide} from './mobility.js';
@@ -110,8 +111,22 @@ function buildKyoto(choice,mode){
 export function resolvedSchedule(day,prefs){
  const original=itinerary[day-1]?.schedule||[];
  const mode=prefs?.dayPlans?.[day]||'original';
- if(day===4)return buildKyoto(prefs?.kyoto,mode);
- return alternatives[day]?.[mode]||original;
+ let base=day===4?buildKyoto(prefs?.kyoto,mode):(alternatives[day]?.[mode]||original);
+ if(day===2){
+   const late=[
+    slot('15:45–16:15','Umeda Sky Building','ไปจุดชมวิวก่อนช่วงพระอาทิตย์ตก','Umeda Sky Building Osaka'),
+    slot('16:20–17:20','Sunset Special Moment','ชมแสงเย็นและถ่ายภาพ','Umeda Sky Building Osaka'),
+    slot('18:15–20:00','Special Dinner','STARDUST / XEX WEST · Not Booked; เลือกคอร์สที่ไม่มี Beef หรือขอเปลี่ยน','Sky Lounge STARDUST Osaka')
+   ];
+   base=[...base.filter(x=>!/(Umeda Sky|Grand Front|Sunset|Special Dinner)/i.test(x.title)),...late];
+ }
+ const titles=base.map(x=>x.title.toLowerCase()).join(' | ');
+ const meals=foodScheduleEvents(day,prefs).filter(x=>day!==4&&
+  !(day===2&&x.foodKind==='dinner')&&!titles.includes(x.title.toLowerCase()));
+ return [...base,...meals].sort((a,b)=>{
+   const m=x=>{const r=String(x.time).match(/^(\d{1,2}):(\d{2})/);return r?+r[1]*60 + +r[2]:9999};
+   return m(a)-m(b);
+ });
 }
 export function resolveDay(day,prefs){
  const base=itinerary[day-1];
