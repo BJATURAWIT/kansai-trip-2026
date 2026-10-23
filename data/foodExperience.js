@@ -25,6 +25,7 @@ const f=(time,id,role,kind,note)=>({time,id,role,kind,note:note||''});
 export function foodStopsForDay(day,prefs={}){
  const kyoto=prefs.kyoto==='east'?'east':'west';
  const mode=prefs.dayPlans?.[day]||'original';
+ if(day===4&&mode==='rainy')return [f('12:00',null,'primary','lunch','ร้านอาหารในอาคารใกล้แผน Rainy · ตรวจเวลาเปิดและเลือกตามเส้นทางจริง')];
  switch(day){
  case 1:return [f('21:00','sushiNamba','optional','late-dinner','ไปเฉพาะหากเช็กอินทัน; ถ้าเหนื่อยพักได้ ไม่มีการจอง')];
  case 2:return [f('11:45',null,'primary','lunch','Kuromon Market · ทานอาหารทะเลตามร้านที่เปิดจริง'),f('18:15','stardust','primary','dinner','Special Dinner · Not Booked'),f('18:15','xex','backup','dinner','Backup เฉพาะเมื่อได้โต๊ะ; Not Booked')];
