@@ -3,12 +3,13 @@
 import { useState } from 'react';
 import { CalendarDays, Clock3, ExternalLink, MapPin, TrainFront, ArrowRight } from 'lucide-react';
 import { itinerary } from '../../data/trip';
+import {resolveDay,resolvedGuide} from '../../data/experience';
 import { travelGuide, mapSearchUrl } from '../../data/mobility';
 
 const thaiDay = { MON: 'จ.', TUE: 'อ.', WED: 'พ.', THU: 'พฤ.', FRI: 'ศ.', SAT: 'ส.', SUN: 'อา.' };
 
-function DayTable({ day, onOpenDay }) {
-  const route = travelGuide[day.day - 1];
+function DayTable({ day, onOpenDay, prefs }) {
+  const route = resolvedGuide(day.day,prefs);
   return (
     <section className="trip-table-day" aria-labelledby={`table-day-${day.day}`}>
       <div className="trip-table-day-heading">
@@ -50,7 +51,7 @@ function DayTable({ day, onOpenDay }) {
   );
 }
 
-export default function TripTable({ onOpenDay }) {
+export default function TripTable({ onOpenDay,prefs }) {
   const [filter, setFilter] = useState('all');
   const days = filter === 'all' ? itinerary : itinerary.filter(day => String(day.day) === filter);
   const events = days.reduce((sum, day) => sum + day.schedule.length, 0);
@@ -70,7 +71,7 @@ export default function TripTable({ onOpenDay }) {
         ))}
       </div>
       <div className="trip-table-summary"><span>{days.length} วัน</span><span>{events} กิจกรรม</span><span>เวลาไทยระบุแยก · เวลาอื่นตามญี่ปุ่น (JST)</span></div>
-      {days.map(day => <DayTable key={day.day} day={day} onOpenDay={onOpenDay}/>)}
+      {days.map(day => <DayTable key={day.day} day={resolveDay(day.day,prefs)} prefs={prefs} onOpenDay={onOpenDay}/>)}
       <p className="trip-table-disclaimer">* เวลาและเส้นทางที่ไม่ได้จองเป็นแผนประมาณการ ควรตรวจรถไฟ/ชานชาลาจริงก่อนเดินทาง โดยเฉพาะวันที่ 20 พ.ย. ที่เที่ยว Kyoto หลายจุด</p>
     </section>
   );
