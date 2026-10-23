@@ -12,6 +12,7 @@ import { travelGuide, mapDirectionsUrl, mapSearchUrl } from '../data/mobility';
 import { beginnerDayGuide } from '../data/beginnerGuide';
 import { dayPhotos, tripImageCredits } from '../data/dayPhotos';
 import { galleryByDay } from '../data/gallery';
+import TripTable from './components/TripTable';
 
 const STORAGE_KEY = 'kansai-2026-checklist-v1';
 const initialChecklist = Object.fromEntries(checklist.map(item => [item.id, item.done]));
@@ -21,7 +22,8 @@ const dateForDay = day => `2026-11-${String(day + 16).padStart(2, '0')}`;
 const shortDate = value => new Date(`${value}T12:00:00+09:00`).toLocaleDateString('th-TH', { day: 'numeric', month: 'short', timeZone: 'Asia/Tokyo' });
 const getTodayDay = () => itinerary.find(x => dateForDay(x.day) === japanToday())?.day || (japanToday() > '2026-11-24' ? 8 : 1);
 const tabItems = [
-  { id: 'plan', text: 'ตารางเที่ยว', icon: HomeIcon },
+  { id: 'plan', text: 'รายวัน', icon: HomeIcon },
+  { id: 'table', text: 'ตารางเที่ยว', icon: CalendarCheck2 },
   { id: 'checklist', text: 'Checklist', icon: ListChecks },
   { id: 'bookings', text: 'จอง / ตั๋ว', icon: Ticket },
   { id: 'help', text: 'ข้อมูลสำคัญ', icon: Info },
@@ -195,6 +197,7 @@ export default function Home() {
       <DayPlan day={day}/>
       <div className="day-pagination"><button disabled={currentDay===1} onClick={() => setCurrentDay(x=>Math.max(1,x-1))}><ArrowLeft size={16}/> ก่อนหน้า</button><span>{currentDay} / 8</span><button disabled={currentDay===8} onClick={() => setCurrentDay(x=>Math.min(8,x+1))}>วันถัดไป <ArrowRight size={16}/></button></div>
     </>}
+    {activeTab === 'table' && <TripTable onOpenDay={day => { setCurrentDay(day); selectTab('plan'); }}/>}
     {activeTab === 'checklist' && <ChecklistPanel checked={checked} setChecked={changeChecked} syncStatus={syncStatus}/>}
     {activeTab === 'bookings' && <BookingsPanel/>}
     {activeTab === 'help' && <HelpPanel/>}
