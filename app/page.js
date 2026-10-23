@@ -16,6 +16,7 @@ import { galleryByDay } from '../data/gallery';
 import TripTable from './components/TripTable';
 import {normalizePreferences,resolveDay,resolvedGuide,resolvedBeginner} from '../data/experience';
 import {restaurantGuide} from '../data/restaurantGuide';
+import {foodStopsForDay,foodVenues,foodName} from '../data/foodExperience';
 import {PassGuide,TicketPanel,TodayMode,KyotoSwitcher} from './components/TravelTools';
 import {defaultTickets} from '../data/travelTools';
 
@@ -46,6 +47,23 @@ function Heading({ label, title, caption }) {
 }
 function RouteIcon({ type }) {
   return type === 'walk' ? <Footprints size={19}/> : type === 'bus' ? <Bus size={19}/> : type === 'plane' ? <Plane size={19}/> : <TrainFront size={19}/>;
+}
+
+function FoodDining({day,prefs}){
+ const stops=foodStopsForDay(day,prefs);
+ if(!stops.length)return null;
+ return <section className="food-section"><div className="section-title"><div><span className="kicker">FOOD EXPERIENCE</span><h3>Food & Dining</h3><p>เลือกตามเส้นทางจริง · ผู้เดินทางไม่ทานเนื้อวัว (ไม่ใช่แพ้อาหาร)</p></div></div>
+ <div className="food-list">{stops.map((stop,i)=>{
+   const v=stop.id?foodVenues[stop.id]:null;
+   return <article className="food-item" key={stop.id||'flex-'+i}>
+     <div className="food-item-top"><span>{stop.time}</span><span>{stop.role==='primary'?'Primary':stop.role==='backup'?'Backup':'Optional'}</span><span>{v?.status==='verified'?'Verified':'Unverified'}</span></div>
+     <h4>{v?.name||foodName(stop)}</h4>
+     {v?.image?.src&&<div className="food-thumb"><img src={v.image.src} alt={v.image.caption} loading="lazy" onError={event=>{event.currentTarget.style.display='none'}}/><small>{v.image.caption} · {v.image.license} · {v.image.credit}</small></div>}
+     <p>{v?.type||stop.kind} · {stop.note}</p>
+     {v&&<><p><strong>เมนู:</strong> {v.menu}</p><p><strong>ราคา/คน:</strong> {v.priceYen?'¥'+v.priceYen.toLocaleString('en-US'):'ยังไม่ยืนยัน'} · {v.priceNote}</p><p><strong>เวลาเปิด:</strong> {v.hours} · {v.closures}</p><p><strong>จากจุดก่อนหน้า:</strong> {v.from}</p><p><strong>Dietary Note · No Beef:</strong> {v.diet}</p>{v.window&&<p><strong>เงื่อนไขโต๊ะ:</strong> {v.window}</p>}<span className="food-booking">Not Booked</span></>}
+     <div className="food-actions">{v?.map&&<a href={mapSearchUrl(v.map)} target="_blank" rel="noopener noreferrer">Google Maps</a>}{v?.site&&<a href={v.site} target="_blank" rel="noopener noreferrer">Official Website</a>}{v?.booking&&<a href={v.booking} target="_blank" rel="noopener noreferrer">Booking Link</a>}{v?.menuSource&&<a href={v.menuSource} target="_blank" rel="noopener noreferrer">Menu / Price</a>}</div>
+   </article>;
+ })}</div></section>;
 }
 
 function DayPlan({ day, prefs }) {
@@ -88,6 +106,7 @@ function DayPlan({ day, prefs }) {
       <div className="schedule-foot"><Sparkles size={17}/><p>{day.note}</p></div>
     </section>
 
+<FoodDining day={day.day} prefs={prefs}/>
 <section className="gallery-card"><div className="section-title"><div><span className="kicker">TODAY'S GALLERY</span><h3>วันนี้จะเจออะไรบ้าง</h3><p className="gallery-copy">รวมจุดไฮไลต์ จุดกระแส และมุมถ่ายรูปสวยของวันนั้น ๆ สำหรับเปิดดูจากมือถือระหว่างเที่ยว</p></div><Tag color="soft">{gallery.length} จุดแนะนำ</Tag></div>
   <div className="gallery-grid">{gallery.map((spot, index) => <article className="gallery-spot" key={`${day.day}-${index}`}>
     <div className="gallery-thumb"><img src={spot.image} alt={`${spot.title} — ${spot.subtitle}`} loading="lazy" onError={event => { event.currentTarget.onerror = null; event.currentTarget.src = '/photos/placeholder.svg'; }} /></div>
@@ -227,7 +246,7 @@ export default function Home() {
     {activeTab === 'costs' && <PassGuide tickets={tickets} prefs={prefs}/>}
     {activeTab === 'checklist' && <ChecklistPanel checked={checked} setChecked={changeChecked} syncStatus={syncStatus}/>}
     {activeTab === 'bookings' && <><TicketPanel tickets={tickets} onOpenChecklist={()=>selectTab('checklist')}/><BookingsPanel/></>}
-    {activeTab === 'dining' && <section className="content-pane"><Heading label="OSAKA LOCAL FOOD" title="ร้านอาหารใกล้ Namba" caption="ตัวเลือกนั่งทาน ไม่เน้นเนื้อวัว · ราคาและเวลาเปิดควรตรวจอีกครั้งก่อนเดินทาง"/>{restaurantGuide.map(x=><article className="tool-card" key={x.id}><span className="kicker">{x.role}</span><h3>{x.name}</h3><p>{x.category} · {x.travel}</p><p><strong>ราคา:</strong> {x.price}</p><p><strong>เวลาเปิด:</strong> {x.hours}</p><p>{x.comfort}</p><p>{x.diet}</p><a className="action-link" href={mapSearchUrl(x.map)} target="_blank" rel="noopener noreferrer"><MapPin size={15}/> Google Maps</a>{x.priceSource&&<a className="subtle-link" href={x.priceSource} target="_blank" rel="noopener noreferrer">ดูเมนู / ราคา</a>}</article>)}</section>}
+    {activeTab === 'dining' && <section className="content-pane"><Heading label="FOOD & DINING" title="Food Experiences" caption="เลือกตามวันและแผน Kyoto/Backup · สถานะร้านไม่ใช่การยืนยันจอง"/>{itinerary.map(d=><div key={d.day}><h3>{d.day+16} พ.ย. · {d.day===4?(prefs.kyoto==='east'?'Kyoto East':'Kyoto West'):d.location}</h3><FoodDining day={d.day} prefs={prefs}/></div>)}</section>}
     {activeTab === 'help' && <HelpPanel/>}
     <div className="site-foot">Kansai, With You · 2026 <span>✦</span> Made for the journey</div>
   </div>
