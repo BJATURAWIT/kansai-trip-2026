@@ -18,9 +18,10 @@ export function PassGuide({tickets,prefs}){
  const all=itinerary.flatMap(d=>resolvedSegments(d.day,prefs).map((leg,i)=>{
    const state=fareLabel(leg,d.day,tickets),verified=knownPrice(leg);
    const waived=leg.type==='jr'&&(state.status==='included');
+   const prepaid=leg.prepaid===true;
    const free=leg.type==='walk'||leg.type==='shuttle';
-   const fare=waived||free?0:verified.fare;
-   return {...leg,day:d.day,id:d.day+'-'+i,state,fare,source:verified.source,waived,free};
+   const fare=waived||free||prepaid?0:verified.fare;
+   return {...leg,day:d.day,id:d.day+'-'+i,state,fare,source:verified.source,waived,free,prepaid};
  }));
  const grouped=itinerary.map(d=>{
    const list=all.filter(x=>x.day===d.day);
@@ -37,7 +38,7 @@ export function PassGuide({tickets,prefs}){
  <div className="pass-alert"><strong>{travelBookings.jrPass.name} · {travelBookings.jrPass.startDate} ถึง {travelBookings.jrPass.endDate} · ซื้อแล้ว ¥{travelBookings.jrPass.totalPriceYen.toLocaleString('en-US')} สำหรับ {travelBookings.jrPass.travelers} คน</strong><span>แสดงค่า JR ที่อยู่ในช่วงพาสว่า “รวมเมื่อรับพาส” จนกว่าจะยืนยันรับบัตรที่ Checklist · ค่า Metro, Nankai และ Kintetsu จ่ายเพิ่ม</span></div>
  <div className="tool-card"><h3>ค่าโดยสารเพิ่มเติมที่ตรวจยืนยันได้ (2 คน)</h3><strong style={{fontSize:28}}>¥{total.toLocaleString('en-US')} + ส่วนที่ยังไม่ทราบ</strong><p>มี {unknown} ช่วงที่ยังไม่สามารถระบุราคาปลายทางจริงได้ · ไม่ใช่ยอดรวมทั้งทริป</p><p>JR Pass ¥24,000 จ่ายแล้ว แสดงแยกจากค่าเดินทางเพิ่มเติม</p></div>
  <div className="tool-day-picker"><button className={filter==='all'?'active':''} onClick={()=>setFilter('all')}>ทุกวัน</button>{itinerary.map(d=><button key={d.day} className={filter===String(d.day)?'active':''} onClick={()=>setFilter(String(d.day))}>{d.day+16} พ.ย.</button>)}</div>
- <div className="fare-table-wrap"><table className="fare-table"><thead><tr><th>เส้นทาง</th><th>บัตร</th><th>ค่าโดยสาร · 2 คน</th></tr></thead><tbody>{visible.map(x=><tr key={x.id}><td><small>{x.day+16} พ.ย.</small><strong>{x.route}</strong><p>{x.note}</p></td><td>{x.card}</td><td><span className={'fare-pill '+x.state.status}>{x.state.label}</span><p>{x.fare===null?'ยังไม่ตรวจราคา':x.waived?'รวมใน Pass (ต้องรับบัตรก่อน)':x.free?'ฟรีเมื่อเดิน/ใช้ Shuttle':'¥'+(x.fare*2).toLocaleString('en-US')}</p>{x.source&&<a href={x.source} target="_blank" rel="noopener noreferrer">แหล่งราคา</a>}</td></tr>)}</tbody></table></div>
+ <div className="fare-table-wrap"><table className="fare-table"><thead><tr><th>เส้นทาง</th><th>บัตร</th><th>ค่าโดยสาร · 2 คน</th></tr></thead><tbody>{visible.map(x=><tr key={x.id}><td><small>{x.day+16} พ.ย.</small><strong>{x.route}</strong><p>{x.note}</p></td><td>{x.card}</td><td><span className={'fare-pill '+x.state.status}>{x.state.label}</span><p>{x.fare===null?'ยังไม่ตรวจราคา':x.waived?'รวมใน Pass (ต้องรับบัตรก่อน)':x.prepaid?'จ่ายล่วงหน้าแล้ว ¥'+(x.fareYenPerAdult*2).toLocaleString('en-US')+' · ไม่ต้องจ่ายซ้ำ':x.free?'ฟรีเมื่อเดิน/ใช้ Shuttle':'¥'+(x.fare*2).toLocaleString('en-US')}</p>{x.source&&<a href={x.source} target="_blank" rel="noopener noreferrer">แหล่งราคา</a>}</td></tr>)}</tbody></table></div>
  <h3 className="tool-subtitle">สรุปรายวัน / Osaka Metro Day Pass</h3>
  {grouped.map(x=><div key={x.day} className="tool-card" style={{display:'flex',justifyContent:'space-between',alignItems:'start',gap:12}}><div><strong>{x.day+16} พ.ย. · ตรวจยืนยันแล้ว ¥{x.known.toLocaleString('en-US')} / 2 คน</strong><p>ไม่ทราบราคาอีก {x.missing} ช่วง</p><p>Osaka Metro Day Pass: ¥{x.pass.toLocaleString('en-US')}/คน (2 คน ¥{(x.pass*2).toLocaleString('en-US')})</p><p>Metro ที่คาดว่าจะใช้ {x.eligibleMetro} ช่วง · ควรเปรียบเทียบกับค่าโดยสารจริงก่อนซื้อ</p></div></div>)}
  <p className="tool-footnote">ราคา Kintetsu Osaka-Namba–Kintetsu-Nara ¥680 ต่อเที่ยวต่อคน อ้างอิงข้อมูลค่าโดยสารที่ค้นได้ · Day Pass ราคาเป็นบัตร Osaka Metro เท่านั้น ไม่รวม JR/Keihan/Kintetsu/Nankai · ราคารถไฟ/เส้นทางอื่นยังรอหลักฐาน ไม่ใช้ค่าประมาณ</p></section>;
@@ -58,6 +59,12 @@ export function TicketPanel({tickets,onOpenChecklist}){
        <div><small>ยอดชำระแล้ว</small><strong>¥{travelBookings.jrPass.totalPriceYen.toLocaleString('en-US')}</strong></div>
      </div>
      <p className="ticket-proof">{collected?'Checklist ระบุว่ารับตั๋วแล้ว · ตรวจวันที่และเงื่อนไขบนบัตรจริงอีกครั้ง':'ยังต้องไปรับ JR Pass และตั๋ว Reserved Seat จริงตามขั้นตอน JR-WEST ภายในวันที่ 20 พ.ย.'}</p>
+   </article>
+   <article className="tool-card ticket-confirmed-card">
+     <div className="ticket-card-heading"><div><span className="kicker">17 NOV · NANKAI DIGITAL TICKET</span><h3>Rapi:t Super Seat · Kansai Airport → Namba</h3></div><span className="ticket-status">ซื้อแล้ว · รอเลือกที่นั่ง</span></div>
+     <div className="ticket-facts"><div><small>ผู้โดยสาร</small><strong>{travelBookings.nankaiArrival.travelers} ผู้ใหญ่</strong></div><div><small>จ่ายแล้ว</small><strong>¥{travelBookings.nankaiArrival.totalPaidYen.toLocaleString('en-US')}</strong></div><div><small>ค่าโดยสาร</small><strong>รวม Base Fare + Limited Express</strong></div><div><small>กำหนดเริ่มใช้</small><strong>ก่อน 18 พ.ย. 02:59 JST</strong></div></div>
+     <p className="ticket-proof">ยังไม่ได้เลือกขบวนและที่นั่ง หลังผ่าน ตม. และรับกระเป๋า ให้เปิด Purchased Ticket → เลือกวัน 17 พ.ย. ขบวนและ Super Seat ของทั้งสองคน เลือกก่อนเวลาออกอย่างน้อย 5 นาที แล้วเปิด QR จริงที่ประตู Nankai · อีเมลไม่ใช่ตั๋ว</p>
+     <a href={travelBookings.nankaiArrival.walletUrl} target="_blank" rel="noopener noreferrer" className="today-link">เปิด Nankai Ticket Wallet <ArrowRight size={16}/></a>
    </article>
    {trains.map(train=><article className="tool-card ticket-confirmed-card" key={train.day}>
      <div className="ticket-card-heading"><div><span className="kicker">{train.day}</span><h3>{train.title}</h3></div><span className="ticket-status">Reserved Seat จองแล้ว</span></div>
