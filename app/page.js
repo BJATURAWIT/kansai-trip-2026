@@ -13,6 +13,7 @@ import { beginnerDayGuide } from '../data/beginnerGuide';
 import { dayPhotos, tripImageCredits } from '../data/dayPhotos';
 import { galleryByDay } from '../data/gallery';
 import TripTable from './components/TripTable';
+import {PassGuide,TicketPanel,TodayMode,KyotoSwitcher,useTicketData} from './components/TravelTools';
 
 const STORAGE_KEY = 'kansai-2026-checklist-v1';
 const initialChecklist = Object.fromEntries(checklist.map(item => [item.id, item.done]));
@@ -22,10 +23,12 @@ const dateForDay = day => `2026-11-${String(day + 16).padStart(2, '0')}`;
 const shortDate = value => new Date(`${value}T12:00:00+09:00`).toLocaleDateString('th-TH', { day: 'numeric', month: 'short', timeZone: 'Asia/Tokyo' });
 const getTodayDay = () => itinerary.find(x => dateForDay(x.day) === japanToday())?.day || (japanToday() > '2026-11-24' ? 8 : 1);
 const tabItems = [
+  { id: 'today', text: 'Today', icon: Navigation },
   { id: 'plan', text: 'รายวัน', icon: HomeIcon },
-  { id: 'table', text: 'ตารางเที่ยว', icon: CalendarCheck2 },
+  { id: 'table', text: 'ตาราง', icon: CalendarCheck2 },
+  { id: 'costs', text: 'ค่าเดินทาง', icon: TrainFront },
   { id: 'checklist', text: 'Checklist', icon: ListChecks },
-  { id: 'bookings', text: 'จอง / ตั๋ว', icon: Ticket },
+  { id: 'bookings', text: 'ตั๋ว', icon: Ticket },
   { id: 'help', text: 'ข้อมูลสำคัญ', icon: Info },
 ];
 
@@ -142,7 +145,8 @@ function HelpPanel() {
 }
 
 export default function Home() {
-  const [activeTab, setActiveTab] = useState('plan');
+  const [activeTab, setActiveTab] = useState('today');
+  const [tickets,updateTickets] = useTicketData();
   const [currentDay, setCurrentDay] = useState(1);
   const [checked, setChecked] = useState(initialChecklist);
   const [syncStatus,setSyncStatus] = useState('loading');
@@ -191,15 +195,18 @@ export default function Home() {
   const selectTab = id => { setActiveTab(id); window.scrollTo({ top:0, behavior:'smooth' }); };
   return <main className="travel-shell"><div className="travel-content">
     <header className="mobile-header"><div className="header-logo"><span className="header-mark">日</span><div><strong>KANSAI <i>2026</i></strong><small>OUR JAPAN TRAVEL GUIDE</small></div></div><div className="header-date"><CalendarCheck2 size={16}/> 17—24 NOV</div></header>
+    {activeTab === 'today' && <TodayMode tickets={tickets} onOpenDay={n=>{setCurrentDay(n);selectTab('plan')}}/>}
     {activeTab === 'plan' && <>
       <div className="welcome"><div><span className="kicker">YOUR TRAVEL COMPANION</span><h1>ไปไหนวันนี้?<span> 🇯🇵</span></h1><p>8 วัน 7 คืน · Osaka / Kyoto / Kinosaki</p></div><button onClick={() => setCurrentDay(getTodayDay())} className="today-pill"><CalendarCheck2 size={15}/> ไปวันที่ปัจจุบัน</button></div>
       <div className="day-strip" role="group" aria-label="เลือกวันที่เที่ยว">{itinerary.map(x => <button type="button" key={x.day} aria-pressed={currentDay === x.day} className={`day-chip ${currentDay===x.day?'active':''}`} onClick={() => setCurrentDay(x.day)}><small>{x.dow}</small><strong>{16+x.day}</strong><span>NOV</span></button>)}</div>
       <DayPlan day={day}/>
+      {day.day === 4 && <KyotoSwitcher/>}
       <div className="day-pagination"><button disabled={currentDay===1} onClick={() => setCurrentDay(x=>Math.max(1,x-1))}><ArrowLeft size={16}/> ก่อนหน้า</button><span>{currentDay} / 8</span><button disabled={currentDay===8} onClick={() => setCurrentDay(x=>Math.min(8,x+1))}>วันถัดไป <ArrowRight size={16}/></button></div>
     </>}
     {activeTab === 'table' && <TripTable onOpenDay={day => { setCurrentDay(day); selectTab('plan'); }}/>}
+    {activeTab === 'costs' && <PassGuide tickets={tickets}/>}
     {activeTab === 'checklist' && <ChecklistPanel checked={checked} setChecked={changeChecked} syncStatus={syncStatus}/>}
-    {activeTab === 'bookings' && <BookingsPanel/>}
+    {activeTab === 'bookings' && <><TicketPanel tickets={tickets} update={updateTickets}/><BookingsPanel/></>}
     {activeTab === 'help' && <HelpPanel/>}
     <div className="site-foot">Kansai, With You · 2026 <span>✦</span> Made for the journey</div>
   </div>
