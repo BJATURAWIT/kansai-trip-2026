@@ -193,9 +193,16 @@ export function dayForDate(date){
  return day?.day||null;
 }
 export function nextScheduleEntry(day,prefs,minutes){
- const entries=resolvedSchedule(day,prefs);
- const timed=entries.filter(s=>/^\d{1,2}:\d{2}/.test(s.time));
- return timed.find(s=>{
-  const [h,m]=s.time.split(':').map(Number);return h*60+m>=minutes;
- })||null;
+ const date='2026-11-'+String(day+16).padStart(2,'0');
+ const timed=resolvedSchedule(day,prefs).flatMap((slot,index)=>{
+  const m=String(slot.time).match(/^(\\d{1,2}):(\\d{2})/);
+  if(!m)return [];
+  // The inbound flight arrives on 25 Nov and must not appear as a
+  // 00:15 "next" event for the Japan-time calendar day of 24 Nov.
+  if(slot.date&&slot.date!==date)return [];
+  const t=Number(m[1])*60+Number(m[2]);
+  const jst=t+(slot.timeZone==='Asia/Bangkok'?120:0);
+  return [{slot,at:jst,index}];
+ }).sort((a,b)=>a.at-b.at||a.index-b.index);
+ return timed.find(item=>item.at>=minutes)?.slot||null;
 }

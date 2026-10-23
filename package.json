@@ -5,11 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "next dev",
-    "prebuild": "node scripts/download-photos.mjs",
+    "prebuild": "npm run verify && node scripts/download-photos.mjs",
     "build": "next build",
     "photos": "node scripts/download-photos.mjs",
     "start": "next start",
-    "verify": "node scripts/verify.mjs"
+    "verify": "node scripts/verify.mjs && node --test tests/*.test.mjs"
   },
   "dependencies": {
     "next": "15.5.9",

@@ -25,8 +25,8 @@ export const itinerary = [
     summary: 'เดินทางจากดอนเมืองถึงคันไซ แล้วเข้าที่พักย่านนัมบะ', stay: 'Centara Life Namba · คืนที่ 1',
     highlight: 'XJ610 · KIX '+localClock(travelBookings.flights.outbound.arrival), map: 'Centara Life Namba Hotel Osaka',
     schedule: [
-      { time: localClock(travelBookings.flights.outbound.departure), title: 'บินออกจาก DMK Terminal 1', detail: 'เที่ยวบิน '+flightNumberLabel(travelBookings.flights.outbound)+' (เวลาไทย)' },
-      { time: localClock(travelBookings.flights.outbound.arrival), title: 'ถึง Kansai Airport Terminal 1', detail: 'ผ่านตรวจคนเข้าเมืองและรับกระเป๋า (เวลาญี่ปุ่น)' },
+      { time: localClock(travelBookings.flights.outbound.departure), date:'2026-11-17',timeZone:'Asia/Bangkok', title: 'บินออกจาก DMK Terminal 1', detail: 'เที่ยวบิน '+flightNumberLabel(travelBookings.flights.outbound)+' (เวลาไทย)' },
+      { time: localClock(travelBookings.flights.outbound.arrival), date:'2026-11-17',timeZone:'Asia/Tokyo', title: 'ถึง Kansai Airport Terminal 1', detail: 'ผ่านตรวจคนเข้าเมืองและรับกระเป๋า (เวลาญี่ปุ่น)' },
       { time: 'ค่ำ', title: 'เดินทางไปโรงแรม', detail: 'เช็กตัวเลือก Nankai / JR ตามเวลาและสัมภาระ' },
       { time: 'ดึก', title: 'Check-in + พักผ่อน', detail: 'Centara Life Namba Hotel Osaka' },
     ], note: 'เช็กเวลารถไฟเที่ยวสุดท้ายตามเวลาที่ออกจากสนามบินจริง',
@@ -110,8 +110,8 @@ export const itinerary = [
       { time: 'เช้า', title: 'อาหารเช้าที่ Centara', detail: 'รวมในคืนวันที่ 23–24 พ.ย.' },
       { time: '15:00 (แนะนำ)', title: 'ออกจากโรงแรมไป KIX', detail: 'เผื่อเวลาไป Nankai Namba ซื้อตั๋ว นั่งรถ และหาทางไป Terminal 1; เช็กตารางรถจริงก่อนออก' },
       { time: '16:45 (เป้าหมาย)', title: 'ถึง KIX Terminal 1', detail: 'เผื่อเวลาเช็กอินระหว่างประเทศ 3 ชั่วโมง' },
-      { time: localClock(travelBookings.flights.inbound.departure), title: 'บินออก KIX Terminal 1', detail: flightNumberLabel(travelBookings.flights.inbound)+' · เวลาญี่ปุ่น' },
-      { time: localClock(travelBookings.flights.inbound.arrival)+' (25 พ.ย.)', title: 'ถึง DMK Terminal 1', detail: 'เวลาประเทศไทย · เดินทางถึงหลังเที่ยงคืน' },
+      { time: localClock(travelBookings.flights.inbound.departure), date:'2026-11-24',timeZone:'Asia/Tokyo', title: 'บินออก KIX Terminal 1', detail: flightNumberLabel(travelBookings.flights.inbound)+' · เวลาญี่ปุ่น' },
+      { time: localClock(travelBookings.flights.inbound.arrival)+' (25 พ.ย.)', date:'2026-11-25',timeZone:'Asia/Bangkok', title: 'ถึง DMK Terminal 1', detail: 'เวลาประเทศไทย · เดินทางถึงหลังเที่ยงคืน' },
     ], note: 'เช็กเวลาเช็กอิน ปิดเคาน์เตอร์ และกระเป๋ากับสายการบินก่อนเดินทาง',
   },
 ];
