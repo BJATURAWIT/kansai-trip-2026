@@ -1,8 +1,8 @@
 // Travel operations data. Suggested times/paths are NOT live transit reservations.
 export const defaultTickets = {
-  passStatus:'selected', passStart:'2026-11-20',
-  outward:{status:'reserved',train:'Kounotori 5',from:'Osaka',to:'Kinosaki Onsen',depart:'10:12',arrive:'12:51',car:'',seats:''},
-  return:{status:'unverified',train:'',from:'Kinosaki Onsen',to:'Osaka',depart:'',arrive:'',car:'',seats:''},
+  passStatus:'purchased', passStart:'2026-11-20',
+  outward:{status:'reserved',train:'Kounotori 5',from:'Osaka',to:'Kinosaki Onsen',depart:'10:12',arrive:'12:51',car:'4',seats:'9C / 9D'},
+  return:{status:'reserved',train:'Kounotori 22',from:'Kinosaki Onsen',to:'Osaka',depart:'15:30',arrive:'18:21',car:'7',seats:'8C / 8D'},
 };
 export const ticketStatus = {selected:'เลือกแล้ว · รอซื้อ',purchased:'ซื้อแล้ว · รอรับ',collected:'รับบัตรแล้ว',unverified:'ยังไม่ยืนยัน',reserved:'จองที่นั่งแล้ว'};
 export const passEndDate = start => {
@@ -50,12 +50,12 @@ export const transportByDay={
   ],
   6:[
     mk('Centara → Daikokucho → Umeda','metro','ICOCA · Osaka Metro','Metro จ่ายแยก'),
-    mk('JR Osaka → Kinosaki Onsen · Kounotori 5','jr','Kansai WIDE Pass + Reserved Seat','รวม Ordinary Reserved Seat เมื่อพาสมีผลและจองที่นั่งล่วงหน้าแล้ว'),
+    mk('JR Osaka → Kinosaki Onsen · Kounotori 5','jr','Kansai WIDE Pass + Reserved Seat','ยืนยันแล้ว 10:12–12:51 · Car 4 · Seats 9C, 9D'),
     mk('Kinosaki Station → Nishimuraya','shuttle','Check-in Shuttle Bus','รถรับส่งร่วมของเมือง ฟรีตามรอบที่กำหนด แจ้งชื่อเรียวกัง'),
   ],
   7:[
     mk('Nishimuraya → Kinosaki Onsen Station','shuttle','Shogetsutei Shuttle','รถรับส่งของโรงแรมตามเวลาที่ Reception ยืนยัน'),
-    mk('Kinosaki Onsen → JR Osaka · Limited Express','jr','Kansai WIDE Pass + Reserved Seat','ใช้เลขขบวน ตู้ และที่นั่งที่บันทึกจากใบจองจริง'),
+    mk('Kinosaki Onsen → JR Osaka · Kounotori 22','jr','Kansai WIDE Pass + Reserved Seat','ยืนยันแล้ว 15:30–18:21 · Car 7 · Seats 8C, 8D'),
     mk('JR Osaka → Daikokucho → Centara','metro','ICOCA · Osaka Metro','รถไฟ Metro จ่ายแยก'),
   ],
   8:[
@@ -68,8 +68,11 @@ export function fareLabel(segment,day,tickets){
   if(segment.type==='walk')return {label:'เดินฟรี / แท็กซี่จ่ายแยก',status:'free'};
   if(segment.type==='shuttle')return {label:'รถรับส่งฟรีตามเงื่อนไข',status:'free'};
   if(segment.type==='jr'){
-    return passCoversDay(day,tickets)?{label:'รวมในพาส',status:'included'}:
-      {label:day<4?'จ่ายแยก (พาสยังไม่เริ่ม)':'ต้องมี Pass ที่รับแล้ว/วันใช้งานตรง หรือจ่ายแยก',status:'extra'};
+    const date='2026-11-'+String(day+16).padStart(2,'0');
+    const inDateRange=date>=tickets.passStart&&date<=passEndDate(tickets.passStart);
+    if(passCoversDay(day,tickets))return {label:'รวมในพาส',status:'included'};
+    if(inDateRange&&tickets.passStatus==='purchased')return {label:'รวมในพาสเมื่อรับบัตร',status:'included'};
+    return {label:day<4?'จ่ายแยก (พาสยังไม่เริ่ม)':'ต้องมีพาสที่ใช้ได้ หรือจ่ายแยก',status:'extra'};
   }
   return {label:segment.type==='nankai'?'จ่ายแยก / Rapi:t เพิ่มค่า Express':segment.type==='metro'?'แตะ ICOCA = หักเงิน':'จ่ายแยก (ICOCA/ตั๋ว)',status:'extra'};
 }

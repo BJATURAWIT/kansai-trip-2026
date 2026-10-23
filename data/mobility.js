@@ -65,21 +65,21 @@ export const travelGuide = [
   {
     day: 6, kicker: 'วันสำคัญ · Kinosaki', leave: '08:15 ออกจากโรงแรม (แผน)', confirmed: false,
     overview: 'Centara → Daikokucho → JR Osaka → Kounotori 5 → Kinosaki Onsen → Shuttle → Ryokan',
-    reminder: 'Kounotori 5 ออก JR Osaka 10:12 ถึง Kinosaki 12:51 (ตารางอ้างอิง JR) • ยังต้องจอง Reserved Seat • เรียวกังทราบเวลา 12:51 แล้ว',
+    reminder: 'Kounotori 5 จองแล้ว · Osaka 10:12 → Kinosaki 12:51 · Car 4 Seats 9C/9D · รับพาสและตั๋ว Reserved Seat ก่อนขึ้นรถ',
     legs: [
       { from: centara, to: 'Daikokucho Station, Osaka', mode: 'เดิน', line: 'ออกจาก Centara ~08:15', how: 'ฝากกระเป๋าใหญ่กับ Centara ก่อนออก หากโรงแรมยืนยันรับฝากข้ามคืน แล้วนำกระเป๋าใบเล็กติดตัว', duration: 'ประมาณ 5–10 นาที', pay: 'ฟรี', icon: 'walk' },
       { from: 'Daikokucho Station, Osaka', to: jrOsaka, mode: 'Osaka Metro', line: 'Daikokucho → Umeda → JR Osaka', how: 'ขึ้น Midosuji ไป Umeda แล้วเดินตามป้าย JR Osaka; เผื่อเวลาสถานีใหญ่และหาชานชาลา', duration: 'เผื่อ 35–45 นาทีรวมเดิน', pay: 'ICOCA (Metro ไม่รวมใน JR Pass)', icon: 'train' },
-      { from: jrOsaka, to: kinosaki, mode: 'JR Limited Express', line: 'Kounotori 5 · 10:12 → 12:51', how: 'ยืนยัน Reserved Seat และหมายเลขตู้/ที่นั่งบนตั๋ว; ตาราง JR อ้างอิง Osaka platform 4 (ตรวจอีกครั้งวันเดินทาง)', duration: '2 ชม. 39 นาที', pay: 'JR Kansai WIDE Pass + Reserved Seat', icon: 'train', fixed: true },
+      { from: jrOsaka, to: kinosaki, mode: 'JR Limited Express', line: 'Kounotori 5 · 10:12 → 12:51', how: 'จองที่นั่งแล้ว · Ordinary Non-smoking Car 4 · Seats 9C และ 9D · ตรวจชานชาลาจากจอสถานีวันจริง', duration: '2 ชม. 39 นาที', pay: 'JR Kansai WIDE Pass + Reserved Seat', icon: 'train', fixed: true },
       { from: kinosaki, to: 'Nishimuraya Hotel Shogetsutei, Kinosaki', mode: 'ฟรี Shuttle', line: 'Check-in Shuttle Bus', how: 'ออกมาหน้าสถานี แจ้งเจ้าหน้าที่ว่าพัก Nishimuraya Hotel Shogetsutei มีรถรับส่งของสมาคมเรียวกังตั้งแต่ 12:51–18:00 ตามเงื่อนไข', duration: 'รอรถตามรอบ', pay: 'ฟรี (ตามเงื่อนไข)', icon: 'bus' },
     ],
   },
   {
-    day: 7, kicker: 'Kinosaki → Osaka', leave: 'เช็กเอาต์ตามเวลาที่โรงแรมยืนยัน', confirmed: false,
+    day: 7, kicker: 'Kinosaki → Osaka · Kounotori 22', leave: 'จองรถ Kounotori 22 ออก 15:30; ควรถึงสถานีราว 15:00 (ยืนยันรอบ Shuttle กับโรงแรม)', confirmed: true,
     overview: 'Breakfast → Ryokan shuttle → Kinosaki Station → JR Limited Express → Osaka → Centara',
-    reminder: 'ยังไม่ได้เลือกและจองเที่ยวรถขากลับ • เช็กเวลา Check-out และรอบ shuttle ที่ Reception',
+    reminder: 'Reserved Seat ยืนยันแล้ว · Kounotori 22 15:30–18:21 · Car 7 Seats 8C/8D · ตรวจ Shuttle และเผื่อคนเยอะวันหยุด',
     legs: [
-      { from: 'Nishimuraya Hotel Shogetsutei, Kinosaki', to: kinosaki, mode: 'Shuttle', line: 'รถโรงแรมช่วงเช้า', how: 'แจ้งเจ้าหน้าที่รับรอบ Shuttle ไปสถานีล่วงหน้า รถมีตามรอบและอาจไม่วิ่งถ้าไม่มีผู้โดยสาร', duration: 'ขึ้นกับรอบรถ', pay: 'สอบถามโรงแรม', icon: 'bus' },
-      { from: kinosaki, to: jrOsaka, mode: 'JR Limited Express', line: 'Kounotori ขากลับ (ยังไม่เลือกขบวน)', how: 'จอง Reserved Seat สำหรับวันที่ 23 พ.ย. เลือกเวลารถให้เข้ากับอาหารเช้าและการ Check-out', duration: 'ประมาณ 2 ชม. 40 นาที', pay: 'JR Pass เมื่อเปิดใช้แล้ว', icon: 'train' },
+      { from: 'Nishimuraya Hotel Shogetsutei, Kinosaki', to: kinosaki, mode: 'Shuttle', line: 'Shuttle ไปสถานีให้ทัน 15:30', how: 'แจ้งเจ้าหน้าที่รับรอบ Shuttle ไปสถานีล่วงหน้า รถมีตามรอบและอาจไม่วิ่งถ้าไม่มีผู้โดยสาร', duration: 'ขึ้นกับรอบรถ', pay: 'สอบถามโรงแรม', icon: 'bus' },
+      { from: kinosaki, to: jrOsaka, mode: 'JR Limited Express', line: 'Kounotori 22 · 15:30 → 18:21', how: 'Reserved Seat จองแล้ว · Ordinary Non-smoking Car 7 Seats 8C และ 8D · ควรมาถึงสถานีก่อนเวลาออก 20–30 นาที', duration: '2 ชม. 51 นาที', pay: 'JR Kansai WIDE Pass + Reserved Seat (เมื่อรับบัตรแล้ว)', icon: 'train' },
       { from: jrOsaka, to: centara, mode: 'Osaka Metro', line: 'Umeda → Daikokucho → โรงแรม', how: 'ลง JR Osaka เดินไป Metro Umeda นั่ง Midosuji ลง Daikokucho แล้วเดินกลับ Centara เพื่อเช็กอินคืนสุดท้าย', duration: 'เผื่อ 35–45 นาที', pay: 'ICOCA', icon: 'train' },
     ],
   },

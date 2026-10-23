@@ -126,8 +126,8 @@ function BookingsPanel() {
     <div className="section-title bookings-heading"><div><span className="kicker">CONFIRMED STAYS</span><h3>ที่พักทั้งหมด 7 คืน</h3></div></div>
     {trip.hotels.map((hotel,index) => <div className="booking-row" key={hotel.id}><div className="booking-count">0{index+1}</div><div className="booking-body"><Tag color="green">ยืนยันการจองแล้ว</Tag><h3>{hotel.name}</h3><p>{hotel.date}</p><small>{hotel.plan} · {hotel.area}</small><LinkOut href={mapSearchUrl(hotel.map)} className="subtle-link">ดูที่ตั้งโรงแรม</LinkOut></div></div>)}
     <div className="ticket-card"><Ticket size={24}/><div><Tag color="green">จ่ายแล้ว</Tag><h3>Universal Studios Japan · 19 พ.ย.</h3><p>Studio Pass + Express Pass · 2 คน</p><p>Nintendo 13:50 · Harry Potter 16:00 (ตรวจจาก QR อีกครั้ง)</p></div></div>
-    <div className="pass-card"><div><span className="kicker">JR-WEST RAIL PASS</span><h3>Kansai WIDE Area Pass · 5 วัน</h3><p>เลือกแล้ว แต่ยังไม่ได้ซื้อ · แผนเริ่มใช้ 20–24 พ.ย. · ¥12,000/คน</p></div><Tag color="amber">ยังต้องซื้อ</Tag><LinkOut href="https://www.westjr.co.jp/travel-information/en/tickets-passes/jrwest-rail-pass/kansai_wide/" className="action-link">รายละเอียด / ซื้อ JR Pass</LinkOut></div>
-    <div className="pass-card"><div><span className="kicker">LIMITED EXPRESS SEATS</span><h3>Kounotori 5 · 22 พ.ย.</h3><p>แผน Osaka 10:12 → Kinosaki 12:51 · ยังต้องจองที่นั่ง · ขากลับ 23 พ.ย. ยังไม่เลือกเที่ยว</p></div><Tag color="amber">ยังไม่จอง</Tag><LinkOut href="https://www.westjr.co.jp/global/en/ticket/pass/reservation_form/index.php?p=kansai-widepass" className="action-link">จอง JR-WEST</LinkOut></div>
+    <div className="pass-card"><div><span className="kicker">JR-WEST RAIL PASS</span><h3>Kansai WIDE Area Pass · 5 วัน</h3><p>ซื้อแล้ว 2 คน รวม ¥24,000 · ใช้ 20–24 พ.ย. · ต้องไปรับบัตร/ตั๋วที่จองก่อนขึ้นรถ</p></div><Tag color="green">ซื้อแล้ว · รอรับ</Tag><LinkOut href="https://www.westjr.co.jp/travel-information/en/tickets-passes/jrwest-rail-pass/kansai_wide/" className="action-link">รายละเอียด / ซื้อ JR Pass</LinkOut></div>
+    <div className="pass-card"><div><span className="kicker">LIMITED EXPRESS SEATS</span><h3>Kounotori 5 และ 22 · จองทั้งสองขาแล้ว</h3><p>22 พ.ย. Osaka 10:12 → Kinosaki 12:51 · Car 4 · Seats 9C/9D</p><p>23 พ.ย. Kinosaki 15:30 → Osaka 18:21 · Car 7 · Seats 8C/8D</p></div><Tag color="green">Reserved Seat ยืนยันแล้ว</Tag><LinkOut href="https://www.westjr.co.jp/global/en/ticket/pass/reservation_form/index.php?p=kansai-widepass" className="action-link">จอง JR-WEST</LinkOut></div>
     <div className="info-card"><Info size={20}/><p>Nishimuraya ยืนยัน Dinner + Breakfast และได้รับแจ้งว่าแขกทั้งสองไม่ทานเนื้อวัว (ไม่ใช่การแพ้) ทานซาชิมิได้ และจะถึง Kinosaki 12:51</p></div>
   </section>;
 }
@@ -135,7 +135,7 @@ function BookingsPanel() {
 function HelpPanel() {
   return <section className="content-pane"><Heading label="IN YOUR POCKET" title="ข้อมูลสำคัญระหว่างเที่ยว" caption="ลิงก์ฉุกเฉินและสิ่งที่ควรจำก่อนออกเดินทาง"/>
     <div className="help-feature"><MapPin size={21}/><div><strong>ที่พักหลัก · Centara Life Namba Hotel Osaka</strong><p>3-4-21 Shikitsuhigashi, Naniwa, Osaka · ใกล้ Daikokucho / Imamiyaebisu</p><LinkOut className="subtle-link" href={mapSearchUrl('Centara Life Namba Hotel Osaka')}>นำทางไปโรงแรม</LinkOut></div></div>
-    <div className="help-feature"><TrainFront size={21}/><div><strong>การเดินทาง Kinosaki</strong><p>22 พ.ย. Kounotori 5 แผนออก 10:12 / ถึง 12:51 · สำรองที่นั่งก่อน • Check-in Shuttle จากสถานี</p><LinkOut className="subtle-link" href="https://www.nishimuraya.ne.jp/shogetsu/en/access/">วิธีรับส่ง Nishimuraya</LinkOut></div></div>
+    <div className="help-feature"><TrainFront size={21}/><div><strong>การเดินทาง Kinosaki</strong><p>22 พ.ย. Kounotori 5 10:12–12:51 · Car 4 Seats 9C/9D · 23 พ.ย. Kounotori 22 15:30–18:21 · Car 7 Seats 8C/8D · รับพาส/ตั๋วก่อนขึ้นรถ</p><LinkOut className="subtle-link" href="https://www.nishimuraya.ne.jp/shogetsu/en/access/">วิธีรับส่ง Nishimuraya</LinkOut></div></div>
     <div className="help-feature"><Luggage size={21}/><div><strong>ก่อนค้าง Kinosaki 1 คืน</strong><p>ขออนุญาต Centara ฝากกระเป๋าใหญ่ข้ามคืน 22–23 พ.ย. แล้วถือกระเป๋าใบเล็กไปเรียวกัง</p></div></div>
     <div className="help-feature"><Plane size={21}/><div><strong>เที่ยวบินขากลับ 24 พ.ย.</strong><p>XJ611 ออกจาก KIX Terminal 1 วันที่ 24 พ.ย. 19:45 (ญี่ปุ่น) · ถึง DMK Terminal 1 วันที่ 25 พ.ย. 00:15 (ไทย) · เป้าหมายถึง KIX ประมาณ 16:45</p></div></div>
     <div className="help-feature"><Ticket size={21}/><div><strong>USJ วันที่ 19 พ.ย.</strong><p>ตั๋วซื้อแล้ว · Nintendo 13:50 และ Harry Potter 16:00 ตามข้อมูลที่แจ้ง • QR จริงเป็นหลัก</p></div></div>
@@ -178,9 +178,19 @@ export default function Home() {
         if(!response.ok)throw Error('load failed');
         const remote=await response.json();if(cancelled)return;
         const next={...initialChecklist,...(remote.exists?remote.checked:cached)};
+        // One-time migration for the booking tasks already confirmed by JR-WEST.
+        let bookingMigration=false;
+        try{
+          if(localStorage.getItem('kansai-2026-booked-rail-checklist-v1')!=='done'){
+            for(const id of ['pass-buy','seat-go','seat-back']){
+              if(next[id]!==true){next[id]=true;bookingMigration=true;}
+            }
+            localStorage.setItem('kansai-2026-booked-rail-checklist-v1','done');
+          }
+        }catch{}
         checkedRef.current=next;setChecked(next);
         try{localStorage.setItem(STORAGE_KEY,JSON.stringify(next));}catch{}
-        if(!remote.exists)saveChecked(next);else setSyncStatus('saved');
+        if(!remote.exists||bookingMigration)saveChecked(next);else setSyncStatus('saved');
       }catch{
         if(cancelled)return;
         const next={...initialChecklist,...cached};

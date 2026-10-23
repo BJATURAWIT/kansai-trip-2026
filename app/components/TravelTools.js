@@ -6,7 +6,23 @@ import {transportByDay,defaultTickets,passEndDate,fareLabel,kyotoOptions,importa
 import {mapSearchUrl,mapDirectionsUrl} from '../../data/mobility';
 
 const key='kansai2026-ticket-details';
-function load(){if(typeof window==='undefined')return defaultTickets;try{return {...defaultTickets,...JSON.parse(localStorage.getItem(key)||'{}')}}catch{return defaultTickets}}
+const migrationKey='kansai2026-confirmed-kinosaki-booking-v1';
+function load(){
+ if(typeof window==='undefined')return defaultTickets;
+ try{
+  const old=JSON.parse(localStorage.getItem(key)||'{}')||{};
+  if(localStorage.getItem(migrationKey)!=='done'){
+   // Upgrade older saved "not booked" states, but preserve an already collected pass.
+   const next={...defaultTickets,...old,passStatus:old.passStatus==='collected'?'collected':'purchased',
+     passStart:'2026-11-20',outward:{...defaultTickets.outward},return:{...defaultTickets.return}};
+   localStorage.setItem(key,JSON.stringify(next));
+   localStorage.setItem(migrationKey,'done');
+   return next;
+  }
+  return {...defaultTickets,...old,outward:{...defaultTickets.outward,...(old.outward||{})},
+     return:{...defaultTickets.return,...(old.return||{})}};
+ }catch{return defaultTickets}
+}
 export function useTicketData(){
  const [tickets,setTickets]=useState(defaultTickets);
  useEffect(()=>{setTickets(load())},[]);
@@ -30,9 +46,9 @@ export function TicketPanel({tickets,update}){
  const setField=(field,value)=>{setDraft(s=>({...s,[field]:value}));setSaved(false)};
  const train=(dir,field,value)=>{setDraft(s=>({...s,[dir]:{...s[dir],[field]:value}}));setSaved(false)};
  const save=()=>{update(draft);setSaved(true)};
- return <section className="tool-pane"><header className="tool-head"><span>MY TICKETS & PASSES</span><h2><Ticket/> บัตรโดยสารและการจอง</h2><p>กรอกเลขขบวน ตู้และที่นั่งตามเอกสารจริง ข้อมูลที่ไม่ทราบจะเว้นว่าง ไม่เดาให้</p></header>
- <article className="tool-card"><h3>JR Kansai WIDE Area Pass (5 วัน)</h3><div className="ticket-grid"><label className="ticket-field"><span>สถานะพาส</span><select value={draft.passStatus} onChange={e=>setField('passStatus',e.target.value)}><option value="selected">เลือกแล้ว · รอซื้อ</option><option value="purchased">ซื้อแล้ว · รอรับบัตร</option><option value="collected">รับบัตรและเปิดใช้แล้ว</option></select></label><label className="ticket-field"><span>วันเริ่มใช้</span><input type="date" value={draft.passStart} onChange={e=>setField('passStart',e.target.value)}/></label></div><p>วันหมดอายุ (รวมวันแรก 5 วัน): <strong>{passEndDate(draft.passStart)||'ยังไม่ระบุ'}</strong></p><p>หมายเหตุ: หากเลือก “รับบัตรแล้ว” จะใช้ในการคำนวณความครอบคลุมรถไฟ JR เท่านั้น กรุณายึดวันที่พิมพ์บนพาสจริง</p></article>
- {['outward','return'].map(dir=><article className="tool-card" key={dir}><h3>{dir==='outward'?'22 พ.ย. · Osaka → Kinosaki':'23 พ.ย. · Kinosaki → Osaka (วันหยุดญี่ปุ่น)'}</h3><div className="ticket-grid"><label className="ticket-field"><span>การจอง</span><select value={draft[dir]?.status||'unverified'} onChange={e=>train(dir,'status',e.target.value)}><option value="unverified">ยังไม่ได้ยืนยันจากใบจอง</option><option value="reserved">จองที่นั่งแล้ว</option></select></label><Input label="ขบวนรถไฟ" value={draft[dir]?.train} onChange={v=>train(dir,'train',v)} placeholder="เช่น Kounotori 5"/><Input label="เวลาออก (JST)" value={draft[dir]?.depart} onChange={v=>train(dir,'depart',v)} placeholder="HH:MM"/><Input label="เวลาถึง (JST)" value={draft[dir]?.arrive} onChange={v=>train(dir,'arrive',v)} placeholder="HH:MM"/><Input label="ตู้โดยสาร (Car)" value={draft[dir]?.car} onChange={v=>train(dir,'car',v)} placeholder="ดูบน Reserved Seat Ticket"/><Input label="เลขที่นั่ง 2 คน" value={draft[dir]?.seats} onChange={v=>train(dir,'seats',v)} placeholder="เช่น 10A / 10B"/></div><p>ตรวจตั๋วกระดาษ/อีเมลก่อนเดินทาง และขึ้นตู้ให้ตรงเลข Car · วันที่ 23 พ.ย. เผื่อคนหนาแน่นเป็นพิเศษ</p></article>)}
+ return <section className="tool-pane"><header className="tool-head"><span>MY TICKETS & PASSES</span><h2><Ticket/> บัตรโดยสารและการจอง</h2><p>กรอกเลขขบวน ตู้และที่นั่งตามเอกสารจริง ข้อมูลขบวนและที่นั่งทั้งสองขาเติมจากการยืนยันจริงแล้ว ส่วนเลข Reservation / Receipt ID และข้อมูลบัตรเครดิตควรเก็บในอีเมล ไม่แสดงบนเว็บ</p></header>
+ <article className="tool-card"><h3>JR Kansai WIDE Area Pass (5 วัน)</h3><p><strong>จอง/ชำระแล้ว 2 คน · ¥24,000 (¥12,000 ต่อคน)</strong> · วันที่ 20–24 พ.ย. 2026 · ยังไม่ยืนยันว่ารับบัตรจริงแล้ว</p><div className="ticket-grid"><label className="ticket-field"><span>สถานะพาส</span><select value={draft.passStatus} onChange={e=>setField('passStatus',e.target.value)}><option value="selected">เลือกแล้ว · รอซื้อ</option><option value="purchased">ซื้อแล้ว · รอรับบัตร</option><option value="collected">รับบัตรและเปิดใช้แล้ว</option></select></label><label className="ticket-field"><span>วันเริ่มใช้</span><input type="date" value={draft.passStart} onChange={e=>setField('passStart',e.target.value)}/></label></div><p>วันหมดอายุ (รวมวันแรก 5 วัน): <strong>{passEndDate(draft.passStart)||'ยังไม่ระบุ'}</strong></p><p>หมายเหตุ: หากเลือก “รับบัตรแล้ว” จะใช้ในการคำนวณความครอบคลุมรถไฟ JR เท่านั้น กรุณายึดวันที่พิมพ์บนพาสจริง</p></article>
+ {['outward','return'].map(dir=><article className="tool-card" key={dir}><h3>{dir==='outward'?'22 พ.ย. · Osaka → Kinosaki':'23 พ.ย. · Kinosaki → Osaka (วันหยุดญี่ปุ่น)'}</h3><div className="ticket-grid"><label className="ticket-field"><span>การจอง</span><select value={draft[dir]?.status||'unverified'} onChange={e=>train(dir,'status',e.target.value)}><option value="unverified">ยังไม่ได้ยืนยันจากใบจอง</option><option value="reserved">จองที่นั่งแล้ว</option></select></label><Input label="ขบวนรถไฟ" value={draft[dir]?.train} onChange={v=>train(dir,'train',v)} placeholder="เช่น Kounotori 5"/><Input label="เวลาออก (JST)" value={draft[dir]?.depart} onChange={v=>train(dir,'depart',v)} placeholder="HH:MM"/><Input label="เวลาถึง (JST)" value={draft[dir]?.arrive} onChange={v=>train(dir,'arrive',v)} placeholder="HH:MM"/><Input label="ตู้โดยสาร (Car)" value={draft[dir]?.car} onChange={v=>train(dir,'car',v)} placeholder="ดูบน Reserved Seat Ticket"/><Input label="เลขที่นั่ง 2 คน" value={draft[dir]?.seats} onChange={v=>train(dir,'seats',v)} placeholder="เช่น 10A / 10B"/></div><p>จอง Ordinary Reserved Seat / Non-smoking สำหรับ 2 คนแล้ว · ตรวจตั๋วกระดาษ/อีเมลก่อนเดินทาง และขึ้นตู้ให้ตรงเลข Car · วันที่ 23 พ.ย. เผื่อคนหนาแน่นเป็นพิเศษ</p></article>)}
  <button className="tool-save" onClick={save}><Save size={17}/> บันทึกข้อมูลบัตรบนอุปกรณ์นี้</button>{saved&&<p className="ticket-saved"><CheckCircle2 size={15}/> บันทึกแล้วบน Browser นี้ · ไม่ซิงก์ข้ามอุปกรณ์ (ต่างจาก Checklist)</p>}
  </section>;
 }
