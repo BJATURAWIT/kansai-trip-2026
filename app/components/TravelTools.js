@@ -34,7 +34,7 @@ export function PassGuide({tickets,prefs}){
  const total=grouped.reduce((sum,x)=>sum+x.known,0);
  const unknown=grouped.reduce((sum,x)=>sum+x.missing,0);
  return <section className="tool-pane"><header className="tool-head"><span>TRANSPORT CALCULATOR · 2 ADULTS</span><h2><TrainFront/> ค่าเดินทางและบัตรโดยสาร</h2><p>ใช้เฉพาะราคาที่ตรวจยืนยันได้ · ราคาที่ไม่ทราบจะไม่ถูกนำมาบวกเป็นศูนย์แบบหลอกว่าเป็นยอดรวมจริง</p></header>
- <div className="pass-alert"><strong>JR Kansai WIDE Pass 20–24 พ.ย. · ซื้อแล้ว ¥24,000 สำหรับ 2 คน</strong><span>แสดงค่า JR ที่อยู่ในช่วงพาสว่า “รวมเมื่อรับพาส” จนกว่าจะยืนยันรับบัตรที่ Checklist · ค่า Metro, Nankai และ Kintetsu จ่ายเพิ่ม</span></div>
+ <div className="pass-alert"><strong>{travelBookings.jrPass.name} · {travelBookings.jrPass.startDate} ถึง {travelBookings.jrPass.endDate} · ซื้อแล้ว ¥{travelBookings.jrPass.totalPriceYen.toLocaleString('en-US')} สำหรับ {travelBookings.jrPass.travelers} คน</strong><span>แสดงค่า JR ที่อยู่ในช่วงพาสว่า “รวมเมื่อรับพาส” จนกว่าจะยืนยันรับบัตรที่ Checklist · ค่า Metro, Nankai และ Kintetsu จ่ายเพิ่ม</span></div>
  <div className="tool-card"><h3>ค่าโดยสารเพิ่มเติมที่ตรวจยืนยันได้ (2 คน)</h3><strong style={{fontSize:28}}>¥{total.toLocaleString('en-US')} + ส่วนที่ยังไม่ทราบ</strong><p>มี {unknown} ช่วงที่ยังไม่สามารถระบุราคาปลายทางจริงได้ · ไม่ใช่ยอดรวมทั้งทริป</p><p>JR Pass ¥24,000 จ่ายแล้ว แสดงแยกจากค่าเดินทางเพิ่มเติม</p></div>
  <div className="tool-day-picker"><button className={filter==='all'?'active':''} onClick={()=>setFilter('all')}>ทุกวัน</button>{itinerary.map(d=><button key={d.day} className={filter===String(d.day)?'active':''} onClick={()=>setFilter(String(d.day))}>{d.day+16} พ.ย.</button>)}</div>
  <div className="fare-table-wrap"><table className="fare-table"><thead><tr><th>เส้นทาง</th><th>บัตร</th><th>ค่าโดยสาร · 2 คน</th></tr></thead><tbody>{visible.map(x=><tr key={x.id}><td><small>{x.day+16} พ.ย.</small><strong>{x.route}</strong><p>{x.note}</p></td><td>{x.card}</td><td><span className={'fare-pill '+x.state.status}>{x.state.label}</span><p>{x.fare===null?'ยังไม่ตรวจราคา':x.waived?'รวมใน Pass (ต้องรับบัตรก่อน)':x.free?'ฟรีเมื่อเดิน/ใช้ Shuttle':'¥'+(x.fare*2).toLocaleString('en-US')}</p>{x.source&&<a href={x.source} target="_blank" rel="noopener noreferrer">แหล่งราคา</a>}</td></tr>)}</tbody></table></div>
@@ -52,8 +52,8 @@ export function TicketPanel({tickets,onOpenChecklist}){
    <article className="tool-card ticket-confirmed-card">
      <div className="ticket-card-heading"><div><span className="kicker">CONFIRMED PURCHASE</span><h3>JR Kansai WIDE Area Pass · 5 วัน</h3></div><span className="ticket-status">{collected?'รับบัตรแล้ว':'ซื้อแล้ว · รอรับบัตร'}</span></div>
      <div className="ticket-facts">
-       <div><small>เริ่มใช้</small><strong>20 พ.ย. 2026</strong></div>
-       <div><small>วันสุดท้าย</small><strong>{passEndDate(defaultTickets.passStart).split('-').reverse().join('/')} </strong></div>
+       <div><small>เริ่มใช้</small><strong>{travelBookings.jrPass.startDate}</strong></div>
+       <div><small>วันสุดท้าย</small><strong>{travelBookings.jrPass.endDate}</strong></div>
        <div><small>จำนวน</small><strong>{travelBookings.jrPass.travelers} ผู้ใหญ่</strong></div>
        <div><small>ยอดชำระแล้ว</small><strong>¥{travelBookings.jrPass.totalPriceYen.toLocaleString('en-US')}</strong></div>
      </div>
