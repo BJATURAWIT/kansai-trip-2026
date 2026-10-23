@@ -4,11 +4,12 @@ import { Ticket,TrainFront,MapPin,Clock3,CheckCircle2,Navigation,ArrowRight } fr
 import {itinerary} from '../../data/trip';
 import {transportByDay,defaultTickets,passEndDate,fareLabel,kyotoOptions,importantStops} from '../../data/travelTools';
 import {mapSearchUrl,mapDirectionsUrl} from '../../data/mobility';
+import {getJapanClock,tripPhase,dayForDate,nextScheduleEntry,resolveDay,resolvedStops,resolvedSegments} from '../../data/experience';
 
 const labelDay=n=>`${n+16} พ.ย.`;
-export function PassGuide({tickets,compact=false}){
+export function PassGuide({tickets,prefs}){
  const [dayFilter,setDayFilter]=useState('all');
- const rows=Object.entries(transportByDay).flatMap(([day,legs])=>legs.map((leg,i)=>({...leg,day:Number(day),key:day+'-'+i}))).filter(row=>dayFilter==='all'||row.day===Number(dayFilter));
+ const rows=itinerary.flatMap(d=>resolvedSegments(d.day,prefs).map((leg,i)=>({...leg,day:d.day,key:d.day+'-'+i}))).filter(row=>dayFilter==='all'||row.day===Number(dayFilter));
  return <section className="tool-pane"><header className="tool-head"><span>TRANSPORT COST & PASS GUIDE</span><h2><TrainFront/> ค่าเดินทางและบัตรโดยสาร</h2><p>แสดงว่าช่วงใดรวมใน JR Pass และช่วงใดต้องจ่ายเพิ่ม · ICOCA เป็นบัตรเติมเงิน ไม่ใช่พาสเหมาจ่าย</p></header>
  <div className="pass-alert"><strong>JR-WEST Kansai WIDE Area Pass · {tickets.passStart?.slice(8)}–{passEndDate(tickets.passStart)?.slice(8)} พ.ย.</strong><span>สถานะ: {tickets.passStatus==='collected'?'รับบัตรแล้ว':tickets.passStatus==='purchased'?'ซื้อแล้ว รอรับ':'เลือกแล้ว ยังไม่ยืนยันการซื้อ'} · ใช้ได้เมื่อรับบัตร เปิดใช้ และอยู่ในช่วงวันตามพาส</span></div>
  <div className="tool-day-picker"><button onClick={()=>setDayFilter('all')} className={dayFilter==='all'?'active':''}>ทุกวัน</button>{itinerary.map(d=><button key={d.day} onClick={()=>setDayFilter(String(d.day))} className={dayFilter===String(d.day)?'active':''}>{labelDay(d.day)}</button>)}</div>
@@ -42,15 +43,22 @@ export function TicketPanel({tickets,onOpenChecklist}){
  </section>;
 }
 const hhmm=t=>{const m=String(t).match(/^(\d{1,2}):(\d{2})/);return m?Number(m[1])*60+Number(m[2]):null};
-export function TodayMode({tickets,onOpenDay}){
- const [day,setDay]=useState(1),[now,setNow]=useState('');
- useEffect(()=>{const j=new Date().toLocaleString('sv-SE',{timeZone:'Asia/Tokyo',hour12:false});const date=j.slice(0,10);const found=itinerary.find(d=>'2026-11-'+String(d.day+16).padStart(2,'0')===date);setDay(found?.day||1);setNow(j.slice(11,16))},[]);
- const current=itinerary[day-1],stops=importantStops[day]||[];
- const minute=hhmm(now),next=current.schedule.find(s=>hhmm(s.time)!==null&&(minute===null||hhmm(s.time)>=minute))||current.schedule[0];
- return <section className="tool-pane"><header className="tool-head"><span>YOUR TRAVEL COMPANION · JAPAN TIME</span><h2><Navigation/> Today Mode</h2><p>เปิดดูว่าต้องไปไหนต่อ โดยเลือกวันท่องเที่ยวได้ตลอดเวลา ไม่ใช่ระบบติดตามตำแหน่งจริง</p></header>
- <div className="tool-day-picker">{itinerary.map(d=><button className={day===d.day?'active':''} onClick={()=>setDay(d.day)} key={d.day}>{labelDay(d.day)}</button>)}</div>
- <article className="today-now"><span>DAY {day} · {current.location}</span><h3>{current.title}</h3><p>{current.summary}</p><div className="today-next"><Clock3 size={22}/><div><small>{day===itinerary.find(d=>'2026-11-'+String(d.day+16).padStart(2,'0')===new Date().toLocaleString('sv-SE',{timeZone:'Asia/Tokyo'}).slice(0,10))?.day?'รายการถัดไปตามเวลาประมาณ':'รายการแรกของวันที่เลือก'}</small><strong>{next.time} · {next.title}</strong><p>{next.detail}</p></div></div><button className="today-link" onClick={()=>onOpenDay(day)}>เปิดรายละเอียดวันนี้ <ArrowRight size={17}/></button></article>
- <h3 className="tool-subtitle">ลำดับสถานที่ / นำทาง</h3><div className="today-stops">{stops.map((name,i)=><div className="today-stop" key={name+i}><span>{i+1}</span><div><strong>{name}</strong>{i>0&&<a href={mapDirectionsUrl(stops[i-1],name)} target="_blank" rel="noopener noreferrer"><MapPin size={15}/> นำทางจากจุดก่อนหน้า</a>}</div></div>)}</div>
- <p className="tool-footnote">เวลาทั้งหมดเป็นแผน ไม่ใช่สถานะรถไฟ Real-time ตรวจแอป JR / Google Maps และตั๋วก่อนขึ้นรถ</p></section>;
+export function TodayMode({tickets,prefs,onOpenDay}){
+ const [clock,setClock]=useState(null);
+ const [selected,setSelected]=useState(null);
+ useEffect(()=>{const tick=()=>setClock(getJapanClock());tick();const id=setInterval(tick,1000);return()=>clearInterval(id)},[]);
+ const phase=tripPhase(clock?.date||'2026-10-23'),actual=dayForDate(clock?.date);
+ const day=selected||actual||1;
+ const current=resolveDay(day,prefs),stops=resolvedStops(day,prefs);
+ const upcoming=nextScheduleEntry(day,prefs,actual===day?(clock?.minutes??0):0);
+ return <section className="tool-pane">
+ <header className="tool-head"><span>JAPAN TIME · ASIA/TOKYO</span><h2><Navigation/> Today Mode</h2><p>เวลาญี่ปุ่นอัปเดตทุกวินาที · แสดงกิจกรรมถัดไปจากแผนที่เลือก</p></header>
+ <div className="jst-clock"><span>ญี่ปุ่น · JST</span><strong>{clock?.time||'--:--:--'}</strong><small>{clock?.date||'กำลังโหลดเวลา'}</small></div>
+ {phase==='pre'&&<div className="pass-alert"><strong>Pre-Trip Mode · ก่อนออกเดินทาง 17 พ.ย.</strong><span>ตรวจ Passport, ตั๋วเครื่องบิน และ Checklist เตรียมเดินทางให้ครบ</span></div>}
+ {phase==='post'&&<div className="pass-alert"><strong>Post-Trip Mode · จบทริปแล้ว</strong><span>เก็บภาพและบันทึกความทรงจำ · ตารางยังเปิดย้อนดูได้ครบ</span></div>}
+ <div className="tool-day-picker">{itinerary.map(d=><button key={d.day} className={day===d.day?'active':''} onClick={()=>setSelected(d.day)}>{d.day+16} พ.ย.</button>)}</div>
+ <article className="today-now"><span>DAY {day} · {current.location}</span><h3>{current.title}</h3><p>{current.summary}</p><div className="today-next"><Clock3 size={22}/><div><small>{actual===day?'รายการถัดไปตามเวลาญี่ปุ่น':'แผนวันที่เลือก'}</small><strong>{upcoming?upcoming.time+' · '+upcoming.title:'สิ้นสุดรายการที่มีเวลาระบุแล้ว'}</strong><p>{upcoming?.detail||'เปิดตารางรายวันเพื่อดูรายละเอียดเพิ่มเติม'}</p></div></div><button className="today-link" onClick={()=>onOpenDay(day)}>เปิดรายละเอียดวันนี้ <ArrowRight size={17}/></button></article>
+ <h3 className="tool-subtitle">จุดที่ต้องไป / Google Maps</h3><div className="today-stops">{stops.map((name,i)=><div className="today-stop" key={i}><span>{i+1}</span><div><strong>{name}</strong>{i>0&&<a href={mapDirectionsUrl(stops[i-1],name)} target="_blank" rel="noopener noreferrer"><MapPin size={15}/> นำทางจากจุดก่อนหน้า</a>}</div></div>)}</div>
+ <p className="tool-footnote">อิงกิจกรรมในแผน ไม่ใช่ GPS หรือข้อมูลรถไฟ Live · เวลา USJ / Kounotori ที่จองไว้ไม่เปลี่ยน</p></section>
 }
-export function KyotoSwitcher(){const [choice,setChoice]=useState('west');const o=kyotoOptions[choice];return <section className="tool-card kyoto-choice"><h3>20 พ.ย. · เลือก Kyoto ได้ 2 แบบ</h3><div className="tool-day-picker">{Object.entries(kyotoOptions).map(([id,x])=><button key={id} className={choice===id?'active':''} onClick={()=>setChoice(id)}>{x.name}</button>)}</div><p><strong>{o.label}</strong> · {o.summary}</p><div className="kyoto-list">{o.schedule.map((s,i)=><div key={i}><time>{s.time}</time><div><strong>{s.title}</strong><p>{s.detail}</p><a href={mapSearchUrl(s.map)} target="_blank" rel="noopener noreferrer"><MapPin size={14}/> Maps</a></div></div>)}</div><p>{o.note}</p></section>}
+export function KyotoSwitcher({prefs,onChange}){return <section className="tool-card kyoto-choice"><h3>20 พ.ย. · เลือกแผน Kyoto</h3><div className="tool-day-picker">{Object.entries(kyotoOptions).map(([id,o])=><button key={id} className={prefs.kyoto===id?'active':''} onClick={()=>onChange({kyoto:id})}>{o.name}</button>)}</div><p>เลือกครั้งเดียว จะเปลี่ยนหน้า Today, ตาราง, รายวัน และค่าเดินทางพร้อมกัน และจำตัวเลือกหลัง Refresh</p></section>}
