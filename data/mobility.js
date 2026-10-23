@@ -8,10 +8,10 @@ const centara = hotelAddress;
 export const travelGuide = [
   {
     day: 1, kicker: 'สนามบิน → โรงแรม', leave: 'KIX ถึง 18:15 น. (JST) · ผ่าน ตม./รับกระเป๋าแล้วค่อยเดินไปสถานี Nankai', confirmed: false,
-    overview: 'เลือก Nankai Airport Express หรือ Rapi:t ไป Nankai Namba แล้วต่อไปโรงแรม',
-    reminder: 'วันแรกยังไม่ใช้ JR Pass • Nankai จ่ายแยก • ตรวจเที่ยวรถสุดท้ายหลังผ่าน ตม.',
+    overview: 'Rapi:t Super Seat (ซื้อแล้ว · รอเลือกขบวน/ที่นั่ง) → Nankai Namba → โรงแรม',
+    reminder: 'Nankai Rapi:t Super Seat ชำระแล้ว ¥3,180 / 2 คน · รวมค่าโดยสารและค่ารถด่วน · ต้องเลือกขบวนและที่นั่งในมือถือหลังผ่าน ตม. ก่อนรถออกอย่างน้อย 5 นาที',
     legs: [
-      { from: 'Kansai International Airport (KIX)', to: 'Nankai Namba Station, Osaka', mode: 'รถไฟ Nankai', line: 'Airport Express / Rapi:t', how: 'หลังออก Arrivals ชั้น 1 Terminal 1 ตามป้าย Railway ขึ้นไปทางเชื่อมชั้น 2 ไป Kansai-airport Station; เลือกฝั่ง Nankai (ไม่ใช่ JR) แตะ ICOCA เพื่อขึ้น Airport Express ไป Nankai Namba หรือซื้อตั๋ว Rapi:t ที่มีที่นั่งกำหนด ตรวจขบวน/ชานชาลาจากจอจริง', duration: 'ประมาณ 40–50 นาที', pay: 'จ่ายแยก', icon: 'train' },
+      { from: 'Kansai International Airport (KIX)', to: 'Nankai Namba Station, Osaka', mode: 'Nankai Rapi:t · Super Seat', line: 'Kansai-airport → Nankai Namba · เลือกขบวนหลัง ตม.', how: 'หลัง ตม./รับกระเป๋า/ศุลกากร เปิด Nankai Digital Ticket → Purchased Ticket / Wallet → เลือกวัน ขบวน และ Super Seat ทั้ง 2 คนให้ตรงกัน ก่อนรถออก ≥5 นาที; เปิด QR สดบนโทรศัพท์เพื่อผ่านประตู Nankai Digital Ticket (อีเมลยืนยันไม่ใช่ตั๋ว) แล้วขึ้นตู้ที่จอง · ไม่ต้องซื้อค่าโดยสารซ้ำ', duration: 'ตามขบวน Rapi:t ที่เลือกจริง (ยังไม่กำหนด)', pay: 'ชำระแล้ว ¥3,180 สำหรับ 2 คน · รวมค่าโดยสารปกติ + Limited Express', icon: 'train' },
       { from: 'Nankai Namba Station, Osaka', to: centara, mode: 'เดิน / แท็กซี่', line: 'ไป Centara Life Namba', how: 'ลง Nankai Namba (ไม่ใช่ JR Namba หรือ Osaka-Namba) เปิด Google Maps เดินไป Centara Life Namba ย่าน Shikitsuhigashi ถ้ากระเป๋าใหญ่ให้ใช้แท็กซี่จากจุดรับรถใกล้สถานี', duration: 'ระยะเดินขึ้นอยู่กับทางออก', pay: 'เดินฟรี', icon: 'walk' },
     ],
   },

@@ -27,9 +27,10 @@ export const itinerary = [
     schedule: [
       { time: localClock(travelBookings.flights.outbound.departure), date:'2026-11-17',timeZone:'Asia/Bangkok', title: 'บินออกจาก DMK Terminal 1', detail: 'เที่ยวบิน '+flightNumberLabel(travelBookings.flights.outbound)+' (เวลาไทย)' },
       { time: localClock(travelBookings.flights.outbound.arrival), date:'2026-11-17',timeZone:'Asia/Tokyo', title: 'ถึง Kansai Airport Terminal 1', detail: 'ผ่านตรวจคนเข้าเมืองและรับกระเป๋า (เวลาญี่ปุ่น)' },
-      { time: 'ค่ำ', title: 'เดินทางไปโรงแรม', detail: 'เช็กตัวเลือก Nankai / JR ตามเวลาและสัมภาระ' },
+      { time: 'หลังผ่าน ตม.', title: 'เลือกที่นั่ง Nankai Rapi:t Super Seat', detail: 'ตั๋ว 2 คนชำระแล้ว ¥'+travelBookings.nankaiArrival.totalPaidYen.toLocaleString('en-US')+' · เปิด Purchased Ticket ที่ Nankai Digital Ticket เลือกวัน/ขบวน/ที่นั่งหลังรับกระเป๋า ต้องก่อนรถออกอย่างน้อย 5 นาที; ยังไม่ได้เลือกที่นั่ง' },
+      { time: 'ช่วงค่ำ', title: 'Rapi:t Super Seat → Nankai Namba', detail: 'เปิด QR ตั๋วจริงบนมือถือที่ช่องประตู Nankai สำหรับ Digital Ticket แล้วขึ้นขบวน/ตู้/ที่นั่งที่เลือก ไม่ต้องจ่ายค่าโดยสารซ้ำ; รถจริงยังไม่ได้เลือก' },
       { time: 'ดึก', title: 'Check-in + พักผ่อน', detail: 'Centara Life Namba Hotel Osaka' },
-    ], note: 'เช็กเวลารถไฟเที่ยวสุดท้ายตามเวลาที่ออกจากสนามบินจริง',
+    ], note: 'ซื้อตั๋ว Nankai Rapi:t Super Seat ไป Namba แล้ว 2 คน ¥3,180 แต่ต้องเลือกขบวนและที่นั่งผ่าน Ticket Wallet หลังผ่าน ตม. · อีเมลยืนยันไม่ใช่ QR ตั๋วจริง · ตรวจรถเที่ยวสุดท้าย',
   },
   {
     day: 2, date: '18 NOV', dow: 'WED', location: 'OSAKA', title: 'A Day in Osaka', subtitle: 'สำรวจเมือง ของกิน และแสงนีออน', image: 'osaka', type: 'draft',
@@ -129,6 +130,9 @@ export const checklist = [
   { id: 'pass-buy', group: 'รถไฟ', title: 'ซื้อ JR-WEST Kansai WIDE Area Pass 5 วัน (2 คน)', due: '2026-10-22', done: true, detail: 'ซื้อสำเร็จ ¥'+travelBookings.jrPass.totalPriceYen.toLocaleString('en-US')+' · ใช้ 20–24 พ.ย. 2026 · ยังต้องรับพาส/ตั๋วก่อนเดินทาง' },
   { id: 'seat-go', group: 'รถไฟ', title: 'จองที่นั่ง Kounotori 5 ไป Kinosaki (22 พ.ย.)', due: '2026-10-22', done: true, detail: 'Osaka '+travelBookings.kounotori.outward.depart+' → Kinosaki '+travelBookings.kounotori.outward.arrive+' · Car '+travelBookings.kounotori.outward.car+' · '+travelBookings.kounotori.outward.seats },
   { id: 'seat-back', group: 'รถไฟ', title: 'จองที่นั่ง Kounotori 22 กลับ Osaka (23 พ.ย.)', due: '2026-10-23', done: true, detail: 'Kinosaki '+travelBookings.kounotori.return.depart+' → Osaka '+travelBookings.kounotori.return.arrive+' · Car '+travelBookings.kounotori.return.car+' · '+travelBookings.kounotori.return.seats },
+  { id: 'rapit-buy', group: 'รถไฟ', title: 'ซื้อ Nankai Rapi:t Digital Ticket Super Seat ขาเข้า Osaka (2 คน)', due: '2026-10-23', done: true, detail: 'จ่ายแล้ว ¥'+travelBookings.nankaiArrival.totalPaidYen.toLocaleString('en-US')+' · รวมค่าโดยสารพื้นฐาน + Limited Express · ใช้ KIX → Nankai Namba วันที่ 17 พ.ย.' },
+  { id: 'rapit-select-seat', group: 'รถไฟ', title: 'หลังผ่าน ตม. เลือกวัน/ขบวน/ที่นั่ง Rapi:t ทั้ง 2 คน', due: '2026-11-17', done: false, detail: 'เปิด Purchased Ticket ใน Nankai Digital Ticket → เลือกขบวนและ Super Seat ของทั้ง 2 คนขบวนเดียวกัน · เลือกก่อนรถออกอย่างน้อย 5 นาที · ต้องเริ่มใช้ก่อน 18 พ.ย. 02:59 JST' },
+  { id: 'rapit-show-qr', group: 'รถไฟ', title: 'เปิด QR Rapi:t Digital Ticket ที่ประตูรถไฟ Nankai', due: '2026-11-17', done: false, detail: 'ใช้งาน QR ที่แสดงในมือถือผ่าน Nankai Ticket Wallet · อีเมลยืนยันการซื้อ/ใบเสร็จไม่ใช่ตั๋ว' },
   { id: 'pass-pickup', group: 'รถไฟ', title: 'รับ JR Pass และตั๋ว Reserved Seat ทั้งสองขา', due: '2026-11-20', done: false, detail: 'รับบัตรตามขั้นตอน JR-WEST ภายในวันเริ่มใช้งาน 20 พ.ย.; ตรวจ Passport/บัตรเครดิตที่ใช้ซื้อและเอกสารรับบัตรตามข้อกำหนด' },
   { id: 'hotel-luggage', group: 'ที่พัก', title: 'เช็กการฝากกระเป๋าที่ Centara ช่วงไป Kinosaki', due: '2026-11-05', done: false, detail: 'ถามเงื่อนไขฝากข้ามคืน 22–23 พ.ย.' },
   { id: 'icoca', group: 'รถไฟ', title: 'เตรียม ICOCA สำหรับรถไฟ/รถประจำทางที่ Pass ไม่ครอบคลุม', due: '2026-11-10', done: false, detail: 'ดูการใช้งาน ICOCA บนมือถือหรือซื้อบัตรเมื่อถึงญี่ปุ่น' },

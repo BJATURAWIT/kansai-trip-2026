@@ -6,9 +6,10 @@ export const beginnerDayGuide = {
 1:{time:'10:40 ไทย / 18:15 ญี่ปุ่น',label:'ลงเครื่องแล้วเข้าตัวเมือง',steps:[
  ['DMK Terminal 1','ถึงสนามบินประมาณ 07:40 ตามเวลาไทย (เผื่อ 3 ชั่วโมง) ไปเคาน์เตอร์ Thai AirAsia X เที่ยวบิน XJ610 โหลดกระเป๋าไม่เกิน 20 กก./คน แล้วผ่าน ตม.','เที่ยวบินยืนยัน'],
  ['KIX Terminal 1 · 18:15','ลงเครื่องตามป้าย Arrivals → Immigration → Baggage Claim → Customs เตรียมหนังสือเดินทางและเอกสารเข้าเมือง','เวลาจองยืนยัน'],
- ['Kansai-airport Station','ออก T1 ขึ้นทางเชื่อมชั้น 2 ตามป้าย Railway เลือก Nankai ไม่ใช่ JR ซื้อตั๋ว Rapi:t แบบ Reserved Seat หรือใช้ ICOCA กับ Airport Express','รถไฟจ่ายแยก JR Pass'],
+ ['หลังผ่าน ตม. / รับกระเป๋า','เปิด https://nk-digital-ticket.nankai.co.jp/ → Purchased Ticket / Ticket Wallet → เลือกวันที่ 17 พ.ย. ขบวน Rapi:t และ Super Seat ทั้ง 2 คนขบวนเดียวกัน ไม่ต้องจ่ายเพิ่ม · ต้องเลือกก่อนรถออก 5 นาที','ตั๋ว Rapi:t Super Seat ซื้อแล้ว ¥3,180 / 2 คน · ยังไม่ได้เลือกที่นั่ง'],
+ ['Kansai-airport Station → Nankai Namba','ออก T1 ตามป้าย Railway ไป Nankai (ไม่ใช่ JR) → เปิด Use the Seat/QR ตั๋วจริงในมือถือ สแกนประตูเฉพาะ Digital Ticket และขึ้นตู้/ที่นั่งที่จอง · อีเมลยืนยัน/ใบเสร็จใช้แทน QR ไม่ได้','รวมค่าโดยสารพื้นฐานและค่ารถด่วนแล้ว'],
  ['Nankai Namba → โรงแรม','ลง Nankai Namba เปิด Google Maps ไป Centara Life Namba; ถ้ามีกระเป๋าใหญ่แนะนำแท็กซี่ระยะสั้นจากสถานี ไม่ต้องลากกระเป๋าไกล','เส้นทางแนะนำ'],
-],note:'Excel เดิมใช้เวลาเครื่องถึง 19:30 แต่ PDF ยืนยัน 18:15 เวลารถไฟหลัง ตม. ต้องเลือกหน้างาน'},
+],note:'หลังเครื่องถึง KIX 18:15 ค่อยเลือก Rapi:t Super Seat หลังผ่าน ตม. และรับกระเป๋า · ต้องเริ่มใช้ก่อน 18 พ.ย. 02:59 JST ตามอีเมล · QR อยู่ใน Ticket Wallet ไม่ใช่อีเมล'},
 2:{time:'08:30–19:00',label:'Osaka Castle · Kuromon · Umeda',steps:[
  ['08:30 Osaka Castle','เดินจาก Centara ไป Daikokucho (Osaka Metro) นั่ง Midosuji Line มุ่ง Umeda ลง Hommachi เปลี่ยน Chuo Line ไป Morinomiya แล้วเดินเข้าปราสาท','Metro / ICOCA หรือ Enjoy Eco Card'],
  ['12:00 Kuromon Market','จากย่าน Osaka Castle ใช้ Metro มาย่าน Nippombashi แล้วเดินไป Kuromon Market สำหรับมื้อกลางวัน','Metro / เดิน'],

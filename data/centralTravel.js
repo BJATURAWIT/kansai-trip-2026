@@ -27,6 +27,16 @@ export const travelBookings = Object.freeze({
     {id:'nishimuraya',name:'Nishimuraya Hotel Shogetsutei',date:'22–23 พ.ย. · 1 คืน',plan:'Dinner + Breakfast',area:'Kinosaki Onsen',map:'Nishimuraya Hotel Shogetsutei',booked:true},
     {id:'centara2',name:'Centara Life Namba Hotel Osaka',date:'23–24 พ.ย. · 1 คืน',plan:'Breakfast included',area:'Osaka / Namba',map:'Centara Life Namba Hotel Osaka',booked:true},
   ],
+  nankaiArrival:{
+    product:'Rapi:t Digital Ticket',seatClass:'Super Seat',direction:'Kansai Airport → Nankai Namba',date:'2026-11-17',
+    travelers:2,pricePerAdultYen:1590,totalPaidYen:3180,purchased:true,seatSelectionConfirmed:false,
+    status:'purchased_pending_seat_selection',includesBaseFare:true,includesLimitedExpress:true,
+    firstUseDeadlineLocal:'2026-11-18T02:59:00+09:00',validAfterFirstUse:'only_on_first_use_date',
+    walletUrl:'https://nk-digital-ticket.nankai.co.jp/',
+    officialInfoUrl:'https://www.nankai.co.jp/en_railway/ticket/rapit/',
+    selectByMinutesBeforeDeparture:5,maxTrainChanges:2,
+    remark:'Select boarding date, train and Super Seat for both people AFTER immigration and baggage claim. The purchase email is NOT a ticket; use live smartphone QR at designated gates.'
+  },
   jrPass:{name:'JR-WEST Kansai WIDE Area Pass',durationDays:5,startDate:'2026-11-20',endDate:'2026-11-24',travelers:2,pricePerAdultYen:12000,totalPriceYen:24000,status:'purchased_pending_collection'},
   usj:{date:'2026-11-19',travelers:2,studioPassPurchased:true,expressPassPurchased:true,nintendoEntry:'13:50',harryPotterEntry:'16:00'},
   kounotori:{

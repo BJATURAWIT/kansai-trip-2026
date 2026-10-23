@@ -19,7 +19,7 @@ export const passCoversDay = (day,tickets) => {
 const mk=(route,type,card,note='',amount='')=>({route,type,card,note,amount});
 export const transportByDay={
   1:[
-    mk('KIX → Nankai Namba','nankai','ICOCA (Airport Express) หรือ Rapi:t ticket','Nankai ไม่รวม JR Pass; Rapi:t ต้องใช้ตั๋ว Limited Express เพิ่มจากค่าโดยสารพื้นฐาน'),
+    {...mk('KIX → Nankai Namba','nankai','Nankai Rapi:t Super Seat (Digital Ticket)','ซื้อแล้ว ¥3,180 / 2 คน รวมค่าโดยสารพื้นฐานและ Limited Express · รอเลือกขบวน/ที่นั่งหลังผ่าน ตม.'),prepaid:true,fareYenPerAdult:travelBookings.nankaiArrival.pricePerAdultYen,fareSource:travelBookings.nankaiArrival.officialInfoUrl},
     mk('Nankai Namba → Centara','walk','เดิน / แท็กซี่','เดินฟรี หรือแท็กซี่จ่ายแยก'),
   ],
   2:[
@@ -68,6 +68,7 @@ export const transportByDay={
 export function fareLabel(segment,day,tickets){
   if(segment.type==='walk')return {label:'เดินฟรี / แท็กซี่จ่ายแยก',status:'free'};
   if(segment.type==='shuttle')return {label:'รถรับส่งฟรีตามเงื่อนไข',status:'free'};
+  if(segment.prepaid===true)return {label:'ซื้อแล้ว · ไม่ต้องจ่ายซ้ำ (รอเลือกที่นั่ง)',status:'included'};
   if(segment.type==='jr'){
     const date='2026-11-'+String(day+16).padStart(2,'0');
     const inDateRange=date>=tickets.passStart&&date<=passEndDate(tickets.passStart);
