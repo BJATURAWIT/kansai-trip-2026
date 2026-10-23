@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import { trip, itinerary, checklist } from '../data/trip.js';
+import {travelBookings,flightDurationMinutes} from '../data/centralTravel.js';
 assert.equal(trip.days, 8);
 assert.equal(trip.nights, 7);
 assert.equal(itinerary.length, 8);

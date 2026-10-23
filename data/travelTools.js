@@ -1,8 +1,9 @@
+import {travelBookings} from './centralTravel.js';
 // Travel operations data. Suggested times/paths are NOT live transit reservations.
 export const defaultTickets = {
-  passStatus:'purchased', passStart:'2026-11-20',
-  outward:{status:'reserved',train:'Kounotori 5',from:'Osaka',to:'Kinosaki Onsen',depart:'10:12',arrive:'12:51',car:'4',seats:'9C / 9D'},
-  return:{status:'reserved',train:'Kounotori 22',from:'Kinosaki Onsen',to:'Osaka',depart:'15:30',arrive:'18:21',car:'7',seats:'8C / 8D'},
+  passStatus:'purchased', passStart:travelBookings.jrPass.startDate,
+  outward:travelBookings.kounotori.outward,
+  return:travelBookings.kounotori.return,
 };
 export const ticketStatus = {selected:'เลือกแล้ว · รอซื้อ',purchased:'ซื้อแล้ว · รอรับ',collected:'รับบัตรแล้ว',unverified:'ยังไม่ยืนยัน',reserved:'จองที่นั่งแล้ว'};
 export const passEndDate = start => {

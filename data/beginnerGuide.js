@@ -1,3 +1,4 @@
+import {travelBookings,flightNumberLabel,localClock} from './centralTravel.js';
 // Based on user-provided 'Osaka Final(1).xlsx' itinerary and transit detail tabs,
 // with user airline confirmation PDF superseding the older flight times in the workbook.
 // Timed sightseeing entries are planning windows, not reserved slots.
@@ -56,8 +57,8 @@ export const beginnerDayGuide = {
  ['เช้า / เที่ยง Namba','ทาน Breakfast ที่ Centara เช็กเอาต์ตามเวลาโรงแรม ฝากกระเป๋าไว้หากออกไปเดินเล่นใกล้ ๆ','อย่าออกเที่ยวไกล'],
  ['14:30–15:00 กลับมารับกระเป๋า','ตั้งเป้าออกจากโรงแรมประมาณ 15:00 เพื่อเผื่อเวลารถไฟและสนามบิน','เวลาแนะนำที่ปรับตาม PDF'],
  ['Nankai Namba → Kansai-airport','จากโรงแรมเดินหรือแท็กซี่ไป Nankai Namba ไปฝั่ง Nankai ไม่ใช่ JR Namba ใช้ Airport Express หรือ Rapi:t แบบจองที่นั่ง','Nankai จ่ายแยกจาก JR Pass'],
- ['16:45 เป้าหมายถึง KIX T1','ออกสถานีสนามบินตามป้าย Terminal 1 Departures เช็กจอ AirAsia X XJ611 เช็กอิน โหลด 20 กก./คน ผ่าน Security และ Immigration','ควรถึงก่อนบิน ~3 ชั่วโมง'],
- ['19:45 KIX T1 → DMK T1','เที่ยวบิน XJ611 ขาออกจากญี่ปุ่นเวลา 19:45','ยืนยันจาก PDF'],
+ ['16:45 เป้าหมายถึง KIX T1','ออกสถานีสนามบินตามป้าย Terminal 1 Departures เช็กจอ AirAsia X รอยืนยันหมายเลขเที่ยวบิน เช็กอิน โหลด 20 กก./คน ผ่าน Security และ Immigration','ควรถึงก่อนบิน ~3 ชั่วโมง'],
+ ['19:45 KIX T1 → DMK T1','เที่ยวบิน รอยืนยันหมายเลขเที่ยวบิน ขาออกจากญี่ปุ่นเวลา 19:45','เวลาจากข้อมูลล่าสุดของผู้เดินทาง'],
  ['00:15 วันที่ 25 พ.ย.','ถึงดอนเมือง Terminal 1 เวลาไทยหลังเที่ยงคืน เตรียมรถกลับบ้านสำหรับวันที่ 25','ยืนยันจาก PDF'],
-],note:'ไฟล์ Excel ยังอ้าง XJ615 17:15; ใช้ PDF AirAsia ที่แนบล่าสุดเป็นหลัก'},
+],note:'ไฟล์ Excel ยังอ้าง รอยืนยันหมายเลขเที่ยวบิน 17:15; ใช้ ข้อมูลเวลา AirAsia ล่าสุดจากผู้เดินทางเป็นหลัก; หมายเลขเที่ยวบินขากลับต้องตรวจเอกสารต้นฉบับ'},
 };

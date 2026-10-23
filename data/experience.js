@@ -1,3 +1,4 @@
+import {travelBookings,localClock} from './centralTravel.js';
 import {itinerary} from './trip.js';
 import {travelGuide} from './mobility.js';
 import {kyotoOptions,transportByDay,importantStops} from './travelTools.js';
@@ -23,7 +24,7 @@ const fixedTime=new Map([
  [3,['13:50','16:00']],
  [6,['10:12','12:51']],
  [7,['15:30']],
- [8,['17:15']]
+ [8,[localClock(travelBookings.flights.inbound.departure)]]
 ]);
 const alternatives={
   2:{
