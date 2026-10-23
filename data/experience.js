@@ -195,7 +195,7 @@ export function dayForDate(date){
 export function nextScheduleEntry(day,prefs,minutes){
  const date='2026-11-'+String(day+16).padStart(2,'0');
  const timed=resolvedSchedule(day,prefs).flatMap((slot,index)=>{
-  const m=String(slot.time).match(/^(\\d{1,2}):(\\d{2})/);
+  const m=String(slot.time).match(/^(\d{1,2}):(\d{2})/);
   if(!m)return [];
   // The inbound flight arrives on 25 Nov and must not appear as a
   // 00:15 "next" event for the Japan-time calendar day of 24 Nov.
