@@ -79,32 +79,27 @@ export function fareLabel(segment,day,tickets){
 }
 const spot=(time,title,detail,map)=>({time,title,detail,map});
 export const kyotoOptions={
-  west:{
-    name:'Arashiyama + Tenryu-ji',label:'Kyoto West · ธรรมชาติ / ป่าไผ่',summary:'เช้าป่าไผ่และสวนวัดเซน บ่ายเดินเมืองเกียวโตแบบไม่เร่ง',
-    schedule:[
-      spot('06:15','Centara → Daikokucho → JR Osaka','Metro ต่อ JR Special Rapid ไป Kyoto และ JR Sagano Line ไป Saga-Arashiyama','Saga-Arashiyama Station Kyoto'),
-      spot('08:15','Arashiyama Bamboo Grove','เดินจากสถานี 15–20 นาที เพื่อถ่ายรูปป่าไผ่ก่อนคนเยอะ','Arashiyama Bamboo Grove Kyoto'),
-      spot('09:00–10:00','Tenryu-ji Temple','เดินชมสวน Sogenchi และสถาปัตยกรรมวัดเซน ค่าเข้าแยก','Tenryu-ji Temple Kyoto'),
-      spot('10:15–11:45','Togetsukyo Bridge + มื้อกลางวัน','เดินชมแม่น้ำและสะพานโทเก็ตสึเคียว พักทานอาหารตามสะดวก','Togetsukyo Bridge Kyoto'),
-      spot('13:15–15:00','Nishiki Market / ใจกลาง Kyoto (ตัวเลือก)','JR ไป Kyoto แล้ว Metro หรือรถบัสตามสถานการณ์ เลือกเดินสบาย ๆ','Nishiki Market Kyoto'),
-      spot('15:30–17:00','Gion (ตัวเลือก) → Osaka','แวะ Gion ถ้ามีแรง มิฉะนั้นเดินทางกลับ Osaka เลย','Gion Kyoto'),
-    ],
-    legs:['Osaka Metro → JR Osaka (ICOCA)','JR Osaka → Kyoto → Saga-Arashiyama (JR Pass)','เดินป่าไผ่ → Tenryu-ji (เดินฟรี)','กลับ Kyoto / Gion ตามที่เลือก (JR + ICOCA)'],
-    note:'เหมาะเมื่ออยากเที่ยว Arashiyama + Tenryu-ji แบบไม่รีบ ไม่จำเป็นต้องข้ามไป Fushimi Inari วันนี้',
-  },
-  east:{
-    name:'Higashiyama + Fushimi Inari',label:'Kyoto East · วัด / ถนนเมืองเก่า',summary:'โทริอิแดง วัด Kiyomizu และย่าน Gion แบบเดินสบายกว่า',
-    schedule:[
-      spot('07:15','Daikokucho → Yodoyabashi → Keihan','เปลี่ยน Osaka Metro ไป Keihan ที่ Yodoyabashi แล้วไปสถานี Fushimi-Inari','Fushimi Inari Station Kyoto'),
-      spot('09:00–10:20','Fushimi Inari Taisha','เดินอุโมงค์เสาโทริอิแดง ไปแต่เช้าเพื่อเลี่ยงคนเยอะ','Fushimi Inari Taisha Kyoto'),
-      spot('10:45–11:45','Tofukuji (จุดเสริม)','เลือกแวะชมใบไม้เปลี่ยนสี หรือไปกินกลางวันเลยเพื่อไม่เหนื่อย','Tofukuji Temple Kyoto'),
-      spot('12:00–13:00','อาหารกลางวัน / เดินทางไป Higashiyama','Keihan ไป Kiyomizu-Gojo แล้วเดิน/แท็กซี่ขึ้นเนิน','Kiyomizu Gojo Station Kyoto'),
-      spot('13:00–15:30','Kiyomizu-dera + Sannenzaka / Ninenzaka','เดินเมืองเก่า เก็บภาพวัดและถนนสองข้างทาง','Kiyomizu-dera Kyoto'),
-      spot('16:00–17:30','Gion → Osaka','เดินย่าน Gion ต่อ Keihan กลับ Yodoyabashi และ Osaka Metro','Gion Kyoto'),
-    ],
-    legs:['Daikokucho → Yodoyabashi (ICOCA Metro)','Yodoyabashi → Fushimi-Inari (ICOCA Keihan)','Fushimi-Inari → Kiyomizu-Gojo (ICOCA Keihan)','Gion-Shijo → Osaka (Keihan + Metro จ่ายแยก)'],
-    note:'เหมาะเมื่ออยากเก็บ Kyoto เมืองเก่ากับวัดหลายแห่ง ใบไม้เปลี่ยนสีสวย แต่มีทางเดินขึ้นเนิน',
-  }
+ west:{name:'Arashiyama + Tenryu-ji',label:'Kyoto West · ป่าไผ่และเต้าหู้',summary:'ป่าไผ่ วัดเซน มื้อเต้าหู้ และสะพานริมแม่น้ำ',
+ schedule:[
+ spot('06:15','Centara → JR Osaka → Saga-Arashiyama','Metro + JR Kyoto Line + Sagano Line','Saga-Arashiyama Station Kyoto'),
+ spot('08:15','Arashiyama Bamboo Grove','ถ่ายภาพป่าไผ่ก่อนคนเยอะ','Arashiyama Bamboo Grove Kyoto'),
+ spot('09:00','Tenryu-ji Temple','ชมวัดและสวนเซน','Tenryu-ji Kyoto'),
+ spot('10:30','eX cafe Kyoto Arashiyama (Optional)','Dango / Matcha ถ้าคิวไม่ยาว','eX cafe Kyoto Arashiyama'),
+ spot('11:30','Yudofu Sagano · Lunch','Walk-in ฤดูใบไม้แดง; Yoshimura/Shoraian เป็นร้านสำรอง','Yudofu Sagano Kyoto'),
+ spot('13:00','Togetsukyo Bridge','ชมสะพานและแม่น้ำ','Togetsukyo Bridge Kyoto'),
+ spot('14:00','% Arabica Kyoto Arashiyama (Optional)','เลือกแวะตามคิว','Arabica Kyoto Arashiyama'),
+ spot('14:30–16:30','เดินเล่นหรือกลับ Osaka','เดินกลับ Saga-Arashiyama ต่อ JR ไป Osaka','Saga-Arashiyama Station Kyoto')
+ ],note:'Shoraian เดินอ้อมริมแม่น้ำ ควรจองล่วงหน้า'},
+ east:{name:'Higashiyama + Fushimi Inari',label:'Kyoto East · วัดเก่าและ Gion',summary:'Fushimi Inari → Tofukuji → Kiyomizu-dera → Gion ไม่ย้อนทาง',
+ schedule:[
+ spot('07:15','Daikokucho → Yodoyabashi → Fushimi-Inari','Metro + Keihan (ICOCA)','Fushimi Inari Station Kyoto'),
+ spot('09:00','Fushimi Inari Taisha','เดินเสาโทริอิแดง','Fushimi Inari Taisha Kyoto'),
+ spot('10:30','Tofukuji','จุดใบไม้แดงตามแนวรถไฟไปทางเหนือ','Tofukuji Temple Kyoto'),
+ spot('12:30','Kiyomizu-dera + Sannenzaka / Ninenzaka','เดินลงจากวัดไป Gion','Kiyomizu-dera Kyoto'),
+ spot('13:45','Gion Izuju Sushi · Lunch','Saba-zushi ใกล้ Yasaka; ไม่รับจองโต๊ะ','Gion Izuju Sushi Kyoto'),
+ spot('15:30','Saryo Tsujiri Gion Honten','Matcha parfait','Saryo Tsujiri Gion Honten Kyoto'),
+ spot('16:30','Gion-Shijo → Osaka','Keihan + Osaka Metro','Gion Shijo Station Kyoto')
+ ],note:'Sushi และ Matcha อยู่ในย่าน Gion ต่อจาก Kiyomizu-dera'}
 };
 export const importantStops={
   1:['Don Mueang International Airport','Kansai International Airport Terminal 1','Nankai Namba Station','Centara Life Namba Hotel Osaka'],
