@@ -13,7 +13,8 @@ import { beginnerDayGuide } from '../data/beginnerGuide';
 import { dayPhotos, tripImageCredits } from '../data/dayPhotos';
 import { galleryByDay } from '../data/gallery';
 import TripTable from './components/TripTable';
-import {PassGuide,TicketPanel,TodayMode,KyotoSwitcher,useTicketData} from './components/TravelTools';
+import {PassGuide,TicketPanel,TodayMode,KyotoSwitcher} from './components/TravelTools';
+import {defaultTickets} from '../data/travelTools';
 
 const STORAGE_KEY = 'kansai-2026-checklist-v1';
 const initialChecklist = Object.fromEntries(checklist.map(item => [item.id, item.done]));
@@ -146,7 +147,7 @@ function HelpPanel() {
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState('today');
-  const [tickets,updateTickets] = useTicketData();
+
   const [currentDay, setCurrentDay] = useState(1);
   const [checked, setChecked] = useState(initialChecklist);
   const [syncStatus,setSyncStatus] = useState('loading');
@@ -199,6 +200,7 @@ export default function Home() {
     })();
     return()=>{cancelled=true};
   },[]);
+  const tickets = {...defaultTickets,passStatus:checked['pass-pickup'] ? 'collected' : 'purchased'};
   const day = itinerary[currentDay - 1];
   const pending = checklist.filter(x => !checked[x.id]).length;
   const nextTasks = useMemo(() => checklist.filter(x => !checked[x.id]).sort((a,b) => a.due.localeCompare(b.due)).slice(0,2), [checked]);
@@ -216,7 +218,7 @@ export default function Home() {
     {activeTab === 'table' && <TripTable onOpenDay={day => { setCurrentDay(day); selectTab('plan'); }}/>}
     {activeTab === 'costs' && <PassGuide tickets={tickets}/>}
     {activeTab === 'checklist' && <ChecklistPanel checked={checked} setChecked={changeChecked} syncStatus={syncStatus}/>}
-    {activeTab === 'bookings' && <><TicketPanel tickets={tickets} update={updateTickets}/><BookingsPanel/></>}
+    {activeTab === 'bookings' && <><TicketPanel tickets={tickets} onOpenChecklist={()=>selectTab('checklist')}/><BookingsPanel/></>}
     {activeTab === 'help' && <HelpPanel/>}
     <div className="site-foot">Kansai, With You · 2026 <span>✦</span> Made for the journey</div>
   </div>
