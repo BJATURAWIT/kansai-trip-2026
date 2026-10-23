@@ -121,8 +121,12 @@ export function resolvedSchedule(day,prefs){
    base=[...base.filter(x=>!/(Umeda Sky|Grand Front|Sunset|Special Dinner)/i.test(x.title)),...late];
  }
  const titles=base.map(x=>x.title.toLowerCase()).join(' | ');
- const meals=foodScheduleEvents(day,prefs).filter(x=>day!==4&&
-  !(day===2&&x.foodKind==='dinner')&&!titles.includes(x.title.toLowerCase()));
+ const meals=foodScheduleEvents(day,prefs).filter(x=>{
+  if(day===2&&(x.foodKind==='dinner'||x.foodKind==='lunch'))return false;
+  if(day===4&&(mode==='original'))return false;
+  if(day===4&&mode==='relaxed'&&x.foodKind==='snack')return false;
+  return !titles.includes(x.title.toLowerCase());
+ });
  return [...base,...meals].sort((a,b)=>{
    const m=x=>{const r=String(x.time).match(/^(\d{1,2}):(\d{2})/);return r?+r[1]*60 + +r[2]:9999};
    return m(a)-m(b);
