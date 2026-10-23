@@ -21,9 +21,9 @@ export function normalizePreferences(value){
 }
 const slot=(time,title,detail,map)=>({time,title,detail,map});
 const fixedTime=new Map([
- [3,['13:50','16:00']],
- [6,['10:12','12:51']],
- [7,['15:30']],
+ [3,[travelBookings.usj.nintendoEntry,travelBookings.usj.harryPotterEntry]],
+ [6,[travelBookings.kounotori.outward.depart,travelBookings.kounotori.outward.arrive]],
+ [7,[travelBookings.kounotori.return.depart]],
  [8,[localClock(travelBookings.flights.inbound.departure)]]
 ]);
 const alternatives={
@@ -44,8 +44,8 @@ const alternatives={
     rainy:[
       slot('ก่อนเปิด','เข้าสวน USJ และตรวจโชว์ในร่ม','เลือกชมโชว์/เครื่องเล่นในอาคาร และตรวจเวลารอผ่านแอป','Universal Studios Japan'),
       slot('10:00','Minion Mayhem / indoor attractions','ตามคิวและสภาพอากาศจริง; ยังไม่ใช้ Express ผิดเวลา','Universal Studios Japan Minion Park'),
-      slot('13:50','Super Nintendo World (จองเวลาแล้ว)','ต้องรักษาเวลาเข้าโซนตาม Express Pass','Super Nintendo World Osaka'),
-      slot('16:00','The Wizarding World of Harry Potter (จองเวลาแล้ว)','ต้องรักษาเวลาเข้าโซนตาม Express Pass','Wizarding World of Harry Potter Osaka'),
+      slot(travelBookings.usj.nintendoEntry,'Super Nintendo World (จองเวลาแล้ว)','ต้องรักษาเวลาเข้าโซนตาม Express Pass','Super Nintendo World Osaka'),
+      slot(travelBookings.usj.harryPotterEntry,'The Wizarding World of Harry Potter (จองเวลาแล้ว)','ต้องรักษาเวลาเข้าโซนตาม Express Pass','Wizarding World of Harry Potter Osaka'),
       slot('เย็น','ของฝากในร้าน / พักตามสภาพฝน','ระวังพื้นลื่นและร่มในโซนเครื่องเล่น','Universal Studios Japan')
     ],
     relaxed:[
@@ -74,7 +74,7 @@ const alternatives={
     rainy:[
       slot('เช้า','อาหารเช้าที่ Nishimuraya และเช็กเอาต์','แจ้งรอบรถ Shuttle ที่ Reception','Nishimuraya Hotel Shogetsutei'),
       slot('13:45','พักในร้านกาแฟใกล้สถานี / รถ Shuttle','วันฝนตกหลีกเลี่ยงเดินริมคลองมาก; ควรถึงสถานีก่อนเวลา','Kinosaki Onsen Station'),
-      slot('15:30','Kounotori 22 · Car 7 · Seats 8C / 8D','จองแล้ว Kinosaki → Osaka 15:30–18:21 ห้ามเปลี่ยนเวลา','Kinosaki Onsen Station'),
+      slot(travelBookings.kounotori.return.depart,travelBookings.kounotori.return.train+' · Car '+travelBookings.kounotori.return.car+' · Seats '+travelBookings.kounotori.return.seats,'จองแล้ว Kinosaki → Osaka 15:30–18:21 ห้ามเปลี่ยนเวลา','Kinosaki Onsen Station'),
       slot('19:00','กลับ Centara','Osaka → Umeda Metro → Daikokucho','Centara Life Namba Hotel Osaka'),
     ],
     relaxed:[
