@@ -8,13 +8,38 @@ import {getJapanClock,tripPhase,dayForDate,nextScheduleEntry,resolveDay,resolved
 
 const labelDay=n=>`${n+16} พ.ย.`;
 export function PassGuide({tickets,prefs}){
- const [dayFilter,setDayFilter]=useState('all');
- const rows=itinerary.flatMap(d=>resolvedSegments(d.day,prefs).map((leg,i)=>({...leg,day:d.day,key:d.day+'-'+i}))).filter(row=>dayFilter==='all'||row.day===Number(dayFilter));
- return <section className="tool-pane"><header className="tool-head"><span>TRANSPORT COST & PASS GUIDE</span><h2><TrainFront/> ค่าเดินทางและบัตรโดยสาร</h2><p>แสดงว่าช่วงใดรวมใน JR Pass และช่วงใดต้องจ่ายเพิ่ม · ICOCA เป็นบัตรเติมเงิน ไม่ใช่พาสเหมาจ่าย</p></header>
- <div className="pass-alert"><strong>JR-WEST Kansai WIDE Area Pass · {tickets.passStart?.slice(8)}–{passEndDate(tickets.passStart)?.slice(8)} พ.ย.</strong><span>สถานะ: {tickets.passStatus==='collected'?'รับบัตรแล้ว':tickets.passStatus==='purchased'?'ซื้อแล้ว รอรับ':'เลือกแล้ว ยังไม่ยืนยันการซื้อ'} · ใช้ได้เมื่อรับบัตร เปิดใช้ และอยู่ในช่วงวันตามพาส</span></div>
- <div className="tool-day-picker"><button onClick={()=>setDayFilter('all')} className={dayFilter==='all'?'active':''}>ทุกวัน</button>{itinerary.map(d=><button key={d.day} onClick={()=>setDayFilter(String(d.day))} className={dayFilter===String(d.day)?'active':''}>{labelDay(d.day)}</button>)}</div>
- <div className="fare-table-wrap"><table className="fare-table"><thead><tr><th>วัน / เส้นทาง</th><th>บัตรที่ใช้</th><th>ค่าใช้จ่าย</th></tr></thead><tbody>{rows.map(row=>{const fare=fareLabel(row,row.day,tickets);return <tr key={row.key}><td><small>DAY {row.day} · {labelDay(row.day)}</small><strong>{row.route}</strong><p>{row.note}</p></td><td>{row.card}</td><td><span className={'fare-pill '+fare.status}>{fare.label}</span>{row.amount&&<p>{row.amount}</p>}</td></tr>})}</tbody></table></div>
- <p className="tool-footnote">* ค่าใช้จ่ายเป็นประเภทการชำระ ไม่ใช่ยอดรวมจริง ตรวจราคาและเวลาจากผู้ให้บริการอีกครั้ง ห้ามใช้ ICOCA แทน Reserved Seat Ticket ของ Kounotori</p></section>
+ const [filter,setFilter]=useState('all');
+ const dayPassPrice=day=>[6,7].includes(new Date('2026-11-'+String(day+16).padStart(2,'0')+'T12:00:00+09:00').getDay())?620:820;
+ const knownPrice=segment=>{
+   if(segment.type==='kintetsu'&&segment.route.includes('Kintetsu-Nara'))return {fare:680,source:'https://www.kintetsu.co.jp/foreign/english/'};
+   return {fare:null,source:null};
+ };
+ const all=itinerary.flatMap(d=>resolvedSegments(d.day,prefs).map((leg,i)=>{
+   const state=fareLabel(leg,d.day,tickets),verified=knownPrice(leg);
+   const waived=leg.type==='jr'&&(state.status==='included');
+   const free=leg.type==='walk'||leg.type==='shuttle';
+   const fare=waived||free?0:verified.fare;
+   return {...leg,day:d.day,id:d.day+'-'+i,state,fare,source:verified.source,waived,free};
+ }));
+ const grouped=itinerary.map(d=>{
+   const list=all.filter(x=>x.day===d.day);
+   const known=list.reduce((sum,x)=>sum+(x.fare??0),0);
+   const missing=list.filter(x=>x.fare===null).length;
+   const eligibleMetro=list.filter(x=>x.type==='metro').length;
+   const pass=dayPassPrice(d.day);
+   return {day:d.day,known:known*2,missing,eligibleMetro,pass,saved:prefs.metroPassDays?.[d.day]===true};
+ });
+ const visible=filter==='all'?all:all.filter(x=>String(x.day)===filter);
+ const total=grouped.reduce((sum,x)=>sum+x.known,0);
+ const unknown=grouped.reduce((sum,x)=>sum+x.missing,0);
+ return <section className="tool-pane"><header className="tool-head"><span>TRANSPORT CALCULATOR · 2 ADULTS</span><h2><TrainFront/> ค่าเดินทางและบัตรโดยสาร</h2><p>ใช้เฉพาะราคาที่ตรวจยืนยันได้ · ราคาที่ไม่ทราบจะไม่ถูกนำมาบวกเป็นศูนย์แบบหลอกว่าเป็นยอดรวมจริง</p></header>
+ <div className="pass-alert"><strong>JR Kansai WIDE Pass 20–24 พ.ย. · ซื้อแล้ว ¥24,000 สำหรับ 2 คน</strong><span>แสดงค่า JR ที่อยู่ในช่วงพาสว่า “รวมเมื่อรับพาส” จนกว่าจะยืนยันรับบัตรที่ Checklist · ค่า Metro, Nankai และ Kintetsu จ่ายเพิ่ม</span></div>
+ <div className="tool-card"><h3>ค่าโดยสารเพิ่มเติมที่ตรวจยืนยันได้ (2 คน)</h3><strong style={{fontSize:28}}>¥{total.toLocaleString('en-US')} + ส่วนที่ยังไม่ทราบ</strong><p>มี {unknown} ช่วงที่ยังไม่สามารถระบุราคาปลายทางจริงได้ · ไม่ใช่ยอดรวมทั้งทริป</p><p>JR Pass ¥24,000 จ่ายแล้ว แสดงแยกจากค่าเดินทางเพิ่มเติม</p></div>
+ <div className="tool-day-picker"><button className={filter==='all'?'active':''} onClick={()=>setFilter('all')}>ทุกวัน</button>{itinerary.map(d=><button key={d.day} className={filter===String(d.day)?'active':''} onClick={()=>setFilter(String(d.day))}>{d.day+16} พ.ย.</button>)}</div>
+ <div className="fare-table-wrap"><table className="fare-table"><thead><tr><th>เส้นทาง</th><th>บัตร</th><th>ค่าโดยสาร · 2 คน</th></tr></thead><tbody>{visible.map(x=><tr key={x.id}><td><small>{x.day+16} พ.ย.</small><strong>{x.route}</strong><p>{x.note}</p></td><td>{x.card}</td><td><span className={'fare-pill '+x.state.status}>{x.state.label}</span><p>{x.fare===null?'ยังไม่ตรวจราคา':x.waived?'รวมใน Pass (ต้องรับบัตรก่อน)':x.free?'ฟรีเมื่อเดิน/ใช้ Shuttle':'¥'+(x.fare*2).toLocaleString('en-US')}</p>{x.source&&<a href={x.source} target="_blank" rel="noopener noreferrer">แหล่งราคา</a>}</td></tr>)}</tbody></table></div>
+ <h3 className="tool-subtitle">สรุปรายวัน / Osaka Metro Day Pass</h3>
+ {grouped.map(x=><div key={x.day} className="tool-card" style={{display:'flex',justifyContent:'space-between',alignItems:'start',gap:12}}><div><strong>{x.day+16} พ.ย. · ตรวจยืนยันแล้ว ¥{x.known.toLocaleString('en-US')} / 2 คน</strong><p>ไม่ทราบราคาอีก {x.missing} ช่วง</p><p>Osaka Metro Day Pass: ¥{x.pass.toLocaleString('en-US')}/คน (2 คน ¥{(x.pass*2).toLocaleString('en-US')})</p><p>Metro ที่คาดว่าจะใช้ {x.eligibleMetro} ช่วง · ควรเปรียบเทียบกับค่าโดยสารจริงก่อนซื้อ</p></div></div>)}
+ <p className="tool-footnote">ราคา Kintetsu Osaka-Namba–Kintetsu-Nara ¥680 ต่อเที่ยวต่อคน อ้างอิงข้อมูลค่าโดยสารที่ค้นได้ · Day Pass ราคาเป็นบัตร Osaka Metro เท่านั้น ไม่รวม JR/Keihan/Kintetsu/Nankai · ราคารถไฟ/เส้นทางอื่นยังรอหลักฐาน ไม่ใช้ค่าประมาณ</p></section>;
 }
 export function TicketPanel({tickets,onOpenChecklist}){
  const collected = tickets.passStatus === 'collected';
