@@ -31,7 +31,7 @@ npm run dev
 - `app/layout.js` — metadata
 
 ## Important notes
-- Pass `Kansai WIDE Area Pass` และรถไฟ Kounotori ยัง **ไม่ถือว่าจองแล้ว**
+- JR-WEST Kansai WIDE Area Pass ซื้อแล้ว 2 คน ใช้ 20–24 พ.ย. 2026; Reserved Seat Kounotori 5 และ Kounotori 22 จองแล้ว
 - เส้นทางและเวลารถไฟต้องเช็กตาม timetable ล่าสุดก่อนเดินทาง
 - Checklist ยืนยันเสร็จเฉพาะรายการที่ผู้ใช้เคยบอกว่าเสร็จจริง
 - การเดินทางบางวันยังเป็น 'ร่างแผน' ไม่ใช่การจอง
@@ -43,3 +43,9 @@ npm run dev
 - JR West: https://www.westjr.co.jp/travel-information/en/tickets-passes/jrwest-rail-pass/kansai_wide/
 - USJ: https://www.usj.co.jp/web/en/us/enjoy/app
 - Visit Japan Web: https://www.vjw.digital.go.jp/
+
+## Travel data consistency (23 Oct 2026)
+
+`data/centralTravel.js` is the public-safe authoritative source for flights, hotels, USJ, JR Pass, and Kounotori reservations. The return flight number is **unverified**, so do not infer a code from an old itinerary. Verified-by-user departure KIX 24 Nov 2026 19:45 JST; arrival DMK 25 Nov 2026 00:15 ICT. Confirm the number from the original AirAsia e-ticket before adding it.
+
+`npm run verify` audits booking facts, timezone logic, daily itinerary, and stale flight markers. The production `prebuild` runs these regression tests before the image/download and Next.js build stages.
