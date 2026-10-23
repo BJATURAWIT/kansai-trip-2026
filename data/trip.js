@@ -44,13 +44,13 @@ export const itinerary = [
   },
   {
     day: 3, date: '19 NOV', dow: 'THU', location: 'USJ', title: 'A Little Bit of Magic', subtitle: 'หนึ่งวันเต็มที่ Universal Studios Japan', image: 'osaka', type: 'confirmed',
-    summary: 'Studio Pass + Express Pass ซื้อเรียบร้อย · Nintendo 13:50 · Harry Potter 16:00', stay: 'Centara Life Namba · คืนที่ 3',
+    summary: 'Studio Pass + Express Pass ซื้อเรียบร้อย · Nintendo '+travelBookings.usj.nintendoEntry+' · Harry Potter '+travelBookings.usj.harryPotterEntry, stay: 'Centara Life Namba · คืนที่ 3',
     highlight: 'USJ · 19 NOV', map: 'Universal Studios Japan',
     schedule: [
       { time: 'ก่อนเปิด', title: 'ออกจากโรงแรมและไปถึง USJ', detail: 'ตรวจเวลาเปิดสวนสนุกจริงในแอปก่อนวันเดินทาง' },
       { time: '10:00', title: 'USJ ก่อนเวลา Nintendo', detail: 'เลือก Hollywood Dream / JAWS / Minions ตามคิวจริง แล้วพักกินก่อน 13:50; อย่าใช้ Express สำหรับเครื่องเล่นผิดช่วงเวลา' },
-      { time: '13:50', title: 'Super Nintendo World', detail: 'ช่วงเวลาที่ได้จากการซื้อ Express · ตรวจ QR และรายการเครื่องเล่นอีกครั้ง' },
-      { time: '16:00', title: 'The Wizarding World of Harry Potter', detail: 'ช่วงเวลาตาม Express Pass · ตรวจรายละเอียดบนตั๋ว' },
+      { time: travelBookings.usj.nintendoEntry, title: 'Super Nintendo World', detail: 'ช่วงเวลาที่ได้จากการซื้อ Express · ตรวจ QR และรายการเครื่องเล่นอีกครั้ง' },
+      { time: travelBookings.usj.harryPotterEntry, title: 'The Wizarding World of Harry Potter', detail: 'ช่วงเวลาตาม Express Pass · ตรวจรายละเอียดบนตั๋ว' },
       { time: 'เย็น', title: 'ของฝาก + โซนอื่นตามเวลา', detail: 'พัก กิน และเก็บบรรยากาศก่อนกลับ' },
     ], note: 'เวลาโซนยึดตามข้อมูลที่แจ้งไว้ แต่เวลาของแต่ละเครื่องเล่นต้องตรวจ QR อีกครั้ง',
   },
@@ -84,7 +84,7 @@ export const itinerary = [
     highlight: 'Kounotori 5 · 12:51', map: 'Kinosaki Onsen Station',
     schedule: [
       { time: '08:15', title: 'ออกจากโรงแรมไปสถานี Osaka', detail: 'เผื่อเวลาขนสัมภาระและหาชานชาลา' },
-      { time: '10:12', title: 'Limited Express Kounotori 5 · Car 4', detail: 'Reserved Seat ยืนยันแล้วสำหรับ 2 คน · Seats 9C และ 9D · ออกจาก Osaka 10:12 ถึง Kinosaki 12:51; ดูชานชาลาจากจอจริง' },
+      { time: travelBookings.kounotori.outward.depart, title: 'Limited Express '+travelBookings.kounotori.outward.train+' · Car '+travelBookings.kounotori.outward.car, detail: 'Reserved Seat ยืนยันแล้วสำหรับ 2 คน · Seats '+travelBookings.kounotori.outward.seats+' · Osaka '+travelBookings.kounotori.outward.depart+' → Kinosaki '+travelBookings.kounotori.outward.arrive+'; ตรวจชานชาลาจริง' },
       { time: '12:51', title: 'ถึง Kinosaki Onsen', detail: 'ได้แจ้งเวลาไปยังเรียวกังแล้ว' },
       { time: '13:00–15:00', title: 'Kinosaki Station → Shuttle → Nishimuraya', detail: 'หลังลง Kounotori 5 เวลา 12:51 ถามเจ้าหน้าที่ Sozoro Check-in Center / รถ Shuttle ไป Nishimuraya Hotel Shogetsutei; โทรโรงแรมหากไม่พบจุดขึ้นรถ ฝากกระเป๋าแล้วเดินชมคลอง' },
       { time: 'เย็น', title: 'Kaiseki Dinner', detail: 'รวมในห้องพัก · แจ้งแล้วว่าไม่ทานเนื้อวัว ไม่ใช่อาการแพ้' },
@@ -97,7 +97,7 @@ export const itinerary = [
     schedule: [
       { time: 'เช้า', title: 'อาหารเช้า + เดินเล่น Kinosaki', detail: 'อาหารเช้าในเรียวกัง ตรวจเวลาเช็กเอาต์และรถ Shuttle ที่ Reception' },
       { time: '14:30 (แนะนำ)', title: 'รถรับส่งไปสถานี Kinosaki-Onsen', detail: 'แจ้ง Reception ให้จัด Shuttle ตามเวลารถจองจริง Kounotori 22 เวลา 15:30 · เผื่อถึงสถานีล่วงหน้า 20–30 นาที (วันหยุดญี่ปุ่น)' },
-      { time: '15:30', title: 'Kounotori 22 · Car 7 · Seats 8C / 8D', detail: 'Reserved Seat ยืนยันแล้วสำหรับ 2 คน · ออกจาก Kinosaki-Onsen 15:30 ถึง Osaka 18:21 · ตรวจชานชาลาหน้างาน' },
+      { time: travelBookings.kounotori.return.depart, title: travelBookings.kounotori.return.train+' · Car '+travelBookings.kounotori.return.car+' · Seats '+travelBookings.kounotori.return.seats, detail: 'Reserved Seat ยืนยันแล้วสำหรับ 2 คน · Kinosaki '+travelBookings.kounotori.return.depart+' → Osaka '+travelBookings.kounotori.return.arrive+' · ตรวจชานชาลาจริง' },
       { time: '19:00 (โดยประมาณ)', title: 'กลับ Centara / Check-in', detail: 'หลัง Kounotori 22 ถึง Osaka 18:21 เดินไป Metro Umeda → Daikokucho → โรงแรม; เผื่อเวลาเดินและหาทางออก' },
       { time: 'เย็น', title: 'Namba / Shinsaibashi', detail: 'ชอปปิงและพักผ่อนคืนสุดท้ายที่ Osaka' },
     ], note: 'จอง Kounotori 22 Car 7 Seats 8C/8D แล้ว · 23 พ.ย. เป็นวันหยุดญี่ปุ่น เผื่อเวลารถรับส่งและสถานี',
@@ -130,7 +130,7 @@ export const checklist = [
   { id: 'pass-pickup', group: 'รถไฟ', title: 'รับ JR Pass และตั๋ว Reserved Seat ทั้งสองขา', due: '2026-11-20', done: false, detail: 'รับบัตรตามขั้นตอน JR-WEST ภายในวันเริ่มใช้งาน 20 พ.ย.; ตรวจ Passport/บัตรเครดิตที่ใช้ซื้อและเอกสารรับบัตรตามข้อกำหนด' },
   { id: 'hotel-luggage', group: 'ที่พัก', title: 'เช็กการฝากกระเป๋าที่ Centara ช่วงไป Kinosaki', due: '2026-11-05', done: false, detail: 'ถามเงื่อนไขฝากข้ามคืน 22–23 พ.ย.' },
   { id: 'icoca', group: 'รถไฟ', title: 'เตรียม ICOCA สำหรับรถไฟ/รถประจำทางที่ Pass ไม่ครอบคลุม', due: '2026-11-10', done: false, detail: 'ดูการใช้งาน ICOCA บนมือถือหรือซื้อบัตรเมื่อถึงญี่ปุ่น' },
-  { id: 'usj-app', group: 'กิจกรรม', title: 'ลงแอป USJ และเตรียม QR ของตั๋ว', due: '2026-11-10', done: false, detail: 'ตรวจรอบ Nintendo 13:50 และ Harry Potter 16:00 บนตั๋วจริง' },
+  { id: 'usj-app', group: 'กิจกรรม', title: 'ลงแอป USJ และเตรียม QR ของตั๋ว', due: '2026-11-10', done: false, detail: 'ตรวจรอบ Nintendo '+travelBookings.usj.nintendoEntry+' และ Harry Potter '+travelBookings.usj.harryPotterEntry+' บนตั๋วจริง' },
   { id: 'esim', group: 'อินเทอร์เน็ต', title: 'ซื้อ eSIM / เตรียมอินเทอร์เน็ตในญี่ปุ่น', due: '2026-11-10', done: false, detail: 'ตรวจโทรศัพท์รองรับ eSIM และทดสอบขั้นตอนติดตั้ง' },
   { id: 'insurance', group: 'เอกสาร', title: 'ซื้อประกันการเดินทางสำหรับ 2 คน', due: '2026-11-10', done: false, detail: 'ยืนยันความคุ้มครองครบวันที่ 17–24 พ.ย.' },
   { id: 'v-japan', group: 'เอกสาร', title: 'กรอก Visit Japan Web', due: '2026-11-12', done: false, detail: 'เตรียมข้อมูลเที่ยวบินและที่พัก' },

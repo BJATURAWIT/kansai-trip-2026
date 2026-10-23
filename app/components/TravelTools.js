@@ -2,6 +2,7 @@
 import { useEffect,useState } from 'react';
 import { Ticket,TrainFront,MapPin,Clock3,CheckCircle2,Navigation,ArrowRight } from 'lucide-react';
 import {itinerary} from '../../data/trip';
+import {travelBookings} from '../../data/centralTravel';
 import {transportByDay,defaultTickets,passEndDate,fareLabel,kyotoOptions,importantStops} from '../../data/travelTools';
 import {mapSearchUrl,mapDirectionsUrl} from '../../data/mobility';
 import {getJapanClock,tripPhase,dayForDate,nextScheduleEntry,resolveDay,resolvedStops,resolvedSegments} from '../../data/experience';
@@ -44,8 +45,8 @@ export function PassGuide({tickets,prefs}){
 export function TicketPanel({tickets,onOpenChecklist}){
  const collected = tickets.passStatus === 'collected';
  const trains = [
-   {day:'อาทิตย์ 22 พ.ย. 2026',title:'Osaka → Kinosaki-Onsen',...defaultTickets.outward},
-   {day:'จันทร์ 23 พ.ย. 2026 · วันหยุดญี่ปุ่น',title:'Kinosaki-Onsen → Osaka',...defaultTickets.return},
+   {day:'อาทิตย์ 22 พ.ย. 2026',title:'Osaka → Kinosaki-Onsen',...travelBookings.kounotori.outward},
+   {day:'จันทร์ 23 พ.ย. 2026 · วันหยุดญี่ปุ่น',title:'Kinosaki-Onsen → Osaka',...travelBookings.kounotori.return},
  ];
  return <section className="tool-pane"><header className="tool-head"><span>MY TICKETS & PASSES</span><h2><Ticket/> บัตรโดยสารและการจอง</h2><p>ข้อมูลที่ยืนยันกับ JR-WEST แล้ว แสดงสำหรับดูระหว่างเดินทาง ไม่ต้องกรอกหรือกดบันทึกซ้ำ</p></header>
    <article className="tool-card ticket-confirmed-card">
@@ -53,8 +54,8 @@ export function TicketPanel({tickets,onOpenChecklist}){
      <div className="ticket-facts">
        <div><small>เริ่มใช้</small><strong>20 พ.ย. 2026</strong></div>
        <div><small>วันสุดท้าย</small><strong>{passEndDate(defaultTickets.passStart).split('-').reverse().join('/')} </strong></div>
-       <div><small>จำนวน</small><strong>2 ผู้ใหญ่</strong></div>
-       <div><small>ยอดชำระแล้ว</small><strong>¥24,000</strong></div>
+       <div><small>จำนวน</small><strong>{travelBookings.jrPass.travelers} ผู้ใหญ่</strong></div>
+       <div><small>ยอดชำระแล้ว</small><strong>¥{travelBookings.jrPass.totalPriceYen.toLocaleString('en-US')}</strong></div>
      </div>
      <p className="ticket-proof">{collected?'Checklist ระบุว่ารับตั๋วแล้ว · ตรวจวันที่และเงื่อนไขบนบัตรจริงอีกครั้ง':'ยังต้องไปรับ JR Pass และตั๋ว Reserved Seat จริงตามขั้นตอน JR-WEST ภายในวันที่ 20 พ.ย.'}</p>
    </article>
