@@ -147,3 +147,5 @@
 .ticket-info-note p{font-size:11px;line-height:1.75;margin:6px 0}
 .ticket-info-note button{display:inline-flex;align-items:center;gap:5px;background:#245c44;color:white;border:0;border-radius:9px;padding:9px 12px;font-weight:800;font-size:11px}
 @media(max-width:540px){.ticket-confirmed-card{padding:16px}.ticket-journey>div strong{font-size:21px}.ticket-seat-details{grid-template-columns:repeat(2,minmax(0,1fr))}.ticket-card-heading h3{font-size:15px}}
+
+.jst-clock{display:flex;flex-direction:column;gap:2px;padding:18px 22px;background:#eaf3ec;border-radius:17px;margin:12px 0 16px;color:#184839}.jst-clock>span{font-weight:800;font-size:11px;letter-spacing:.13em}.jst-clock>strong{font-size:clamp(35px,7vw,54px);font-variant-numeric:tabular-nums;letter-spacing:.035em;line-height:1.3}.jst-clock>small{font-size:11px;color:#567367}

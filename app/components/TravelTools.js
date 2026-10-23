@@ -9,9 +9,9 @@ import {getJapanClock,tripPhase,dayForDate,nextScheduleEntry,resolveDay,resolved
 const labelDay=n=>`${n+16} พ.ย.`;
 export function PassGuide({tickets,prefs}){
  const [filter,setFilter]=useState('all');
- const dayPassPrice=day=>[6,7].includes(new Date('2026-11-'+String(day+16).padStart(2,'0')+'T12:00:00+09:00').getDay())?620:820;
+ const dayPassPrice=day=>[5,6,7].includes(day)?620:820;
  const knownPrice=segment=>{
-   if(segment.type==='kintetsu'&&segment.route.includes('Kintetsu-Nara'))return {fare:680,source:'https://www.kintetsu.co.jp/foreign/english/'};
+   if(segment.type==='kintetsu'&&segment.route.includes('Kintetsu-Nara'))return {fare:680,source:'https://www.kintetsu.co.jp/foreign/english/aoniyoshi/'};
    return {fare:null,source:null};
  };
  const all=itinerary.flatMap(d=>resolvedSegments(d.day,prefs).map((leg,i)=>{
