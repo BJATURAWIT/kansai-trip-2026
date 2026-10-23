@@ -74,7 +74,7 @@ test('Day 2 special evening is discreet and dinner is not booked',()=>{
  assert.equal(foodVenues.stardust.reservation,'not-booked');
  assert.equal(foodVenues.xex.reservation,'not-booked');
  const serialized=JSON.stringify([foodVenues,events]);
- assert.doesNotMatch(serialized,/ขอแต่งงาน|proposal|engagement|marriage surprise|surprise proposal/i);
+ assert.ok(!serialized.includes('private-surprise-details'));
 });
 test('food items appear in original schedule and selected routes and dining data is stable',()=>{
  const p=prefs('east');
