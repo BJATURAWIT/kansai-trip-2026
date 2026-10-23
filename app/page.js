@@ -13,6 +13,8 @@ import { beginnerDayGuide } from '../data/beginnerGuide';
 import { dayPhotos, tripImageCredits } from '../data/dayPhotos';
 import { galleryByDay } from '../data/gallery';
 import TripTable from './components/TripTable';
+import {normalizePreferences,resolveDay,resolvedGuide,resolvedBeginner} from '../data/experience';
+import {restaurantGuide} from '../data/restaurantGuide';
 import {PassGuide,TicketPanel,TodayMode,KyotoSwitcher} from './components/TravelTools';
 import {defaultTickets} from '../data/travelTools';
 
@@ -30,7 +32,8 @@ const tabItems = [
   { id: 'costs', text: 'ค่าเดินทาง', icon: TrainFront },
   { id: 'checklist', text: 'Checklist', icon: ListChecks },
   { id: 'bookings', text: 'ตั๋ว', icon: Ticket },
-  { id: 'help', text: 'ข้อมูลสำคัญ', icon: Info },
+  { id: 'dining', text: 'ร้านอาหาร', icon: BedDouble },
+  { id: 'help', text: 'ข้อมูล', icon: Info },
 ];
 
 function LinkOut({ href, children, className = '' }) {
@@ -44,8 +47,8 @@ function RouteIcon({ type }) {
   return type === 'walk' ? <Footprints size={19}/> : type === 'bus' ? <Bus size={19}/> : type === 'plane' ? <Plane size={19}/> : <TrainFront size={19}/>;
 }
 
-function DayPlan({ day }) {
-  const guide = travelGuide[day.day - 1];
+function DayPlan({ day, prefs }) {
+  const guide = resolvedGuide(day.day,prefs);
   const gallery = galleryByDay[day.day] || [];
   const [showAll, setShowAll] = useState(false);
   const [expanded, setExpanded] = useState({});
@@ -58,12 +61,12 @@ function DayPlan({ day }) {
 
     <div className="headline-note"><Clock3 size={18}/><div><strong>ควรออกเดินทางเมื่อไร?</strong><p>{guide.leave}</p></div><LinkOut href={mapSearchUrl(day.map)} className="icon-link">แผนที่</LinkOut></div>
 
-    <section className="beginner-guide"><div className="section-title"><div><span className="kicker">FIRST TIME IN JAPAN</span><h3>มือใหม่เดินตามนี้</h3><p className="guide-subtitle">{beginnerDayGuide[day.day].label} · {beginnerDayGuide[day.day].time}</p></div></div>
-      <div className="beginner-steps">{beginnerDayGuide[day.day].steps.map(([name,how,pay],idx)=><details className="beginner-step" key={name} open={idx===0}>
+    <section className="beginner-guide"><div className="section-title"><div><span className="kicker">FIRST TIME IN JAPAN</span><h3>มือใหม่เดินตามนี้</h3><p className="guide-subtitle">{resolvedBeginner(day.day,prefs).label} · {resolvedBeginner(day.day,prefs).time}</p></div></div>
+      <div className="beginner-steps">{resolvedBeginner(day.day,prefs).steps.map(([name,how,pay],idx)=><details className="beginner-step" key={name} open={idx===0}>
         <summary><span className="beginner-number">{idx+1}</span><span className="beginner-step-heading"><strong>{name}</strong><small>{pay}</small></span><ChevronDown size={16}/></summary>
         <div className="beginner-step-detail">{how}</div>
       </details>)}</div>
-      <div className="beginner-note"><Info size={17}/><span>{beginnerDayGuide[day.day].note}</span></div>
+      <div className="beginner-note"><Info size={17}/><span>{resolvedBeginner(day.day,prefs).note}</span></div>
     </section>
     <section className="travel-card"><div className="card-title"><div className="round-icon"><Navigation size={19}/></div><div><span className="kicker">STEP-BY-STEP ROUTE</span><h3>เดินทางอย่างไร</h3></div></div>
       <div className="route-overview">{guide.overview}</div>
@@ -147,6 +150,9 @@ function HelpPanel() {
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState('today');
+  const [prefs,setPrefs] = useState(normalizePreferences());
+  useEffect(()=>{try{setPrefs(normalizePreferences(JSON.parse(localStorage.getItem('kansai-2026-itinerary-options')||'{}')))}catch{}},[]);
+  const updatePrefs=patch=>setPrefs(old=>{const next=normalizePreferences({...old,...patch,dayPlans:{...old.dayPlans,...(patch.dayPlans||{})}});try{localStorage.setItem('kansai-2026-itinerary-options',JSON.stringify(next))}catch{}return next});
 
   const [currentDay, setCurrentDay] = useState(1);
   const [checked, setChecked] = useState(initialChecklist);
@@ -201,24 +207,26 @@ export default function Home() {
     return()=>{cancelled=true};
   },[]);
   const tickets = {...defaultTickets,passStatus:checked['pass-pickup'] ? 'collected' : 'purchased'};
-  const day = itinerary[currentDay - 1];
+  const day = resolveDay(currentDay,prefs);
   const pending = checklist.filter(x => !checked[x.id]).length;
   const nextTasks = useMemo(() => checklist.filter(x => !checked[x.id]).sort((a,b) => a.due.localeCompare(b.due)).slice(0,2), [checked]);
   const selectTab = id => { setActiveTab(id); window.scrollTo({ top:0, behavior:'smooth' }); };
   return <main className="travel-shell"><div className="travel-content">
     <header className="mobile-header"><div className="header-logo"><span className="header-mark">日</span><div><strong>KANSAI <i>2026</i></strong><small>OUR JAPAN TRAVEL GUIDE</small></div></div><div className="header-date"><CalendarCheck2 size={16}/> 17—24 NOV</div></header>
-    {activeTab === 'today' && <TodayMode tickets={tickets} onOpenDay={n=>{setCurrentDay(n);selectTab('plan')}}/>}
+    {activeTab === 'today' && <TodayMode tickets={tickets} prefs={prefs} onOpenDay={n=>{setCurrentDay(n);selectTab('plan')}}/>}
     {activeTab === 'plan' && <>
       <div className="welcome"><div><span className="kicker">YOUR TRAVEL COMPANION</span><h1>ไปไหนวันนี้?<span> 🇯🇵</span></h1><p>8 วัน 7 คืน · Osaka / Kyoto / Kinosaki</p></div><button onClick={() => setCurrentDay(getTodayDay())} className="today-pill"><CalendarCheck2 size={15}/> ไปวันที่ปัจจุบัน</button></div>
       <div className="day-strip" role="group" aria-label="เลือกวันที่เที่ยว">{itinerary.map(x => <button type="button" key={x.day} aria-pressed={currentDay === x.day} className={`day-chip ${currentDay===x.day?'active':''}`} onClick={() => setCurrentDay(x.day)}><small>{x.dow}</small><strong>{16+x.day}</strong><span>NOV</span></button>)}</div>
-      <DayPlan day={day}/>
-      {day.day === 4 && <KyotoSwitcher/>}
+      <div className="tool-day-picker" aria-label="เลือกแผนสำรอง">{[['original','Original'],['rainy','Rainy Day'],['relaxed','Relaxed Plan']].map(([id,label])=><button key={id} className={(prefs.dayPlans[currentDay]||'original')===id?'active':''} onClick={()=>updatePrefs({dayPlans:{[currentDay]:id}})}>{label}</button>)}</div>
+      {day.day === 4 && <KyotoSwitcher prefs={prefs} onChange={updatePrefs}/>}
+      <DayPlan day={day} prefs={prefs}/>
       <div className="day-pagination"><button disabled={currentDay===1} onClick={() => setCurrentDay(x=>Math.max(1,x-1))}><ArrowLeft size={16}/> ก่อนหน้า</button><span>{currentDay} / 8</span><button disabled={currentDay===8} onClick={() => setCurrentDay(x=>Math.min(8,x+1))}>วันถัดไป <ArrowRight size={16}/></button></div>
     </>}
-    {activeTab === 'table' && <TripTable onOpenDay={day => { setCurrentDay(day); selectTab('plan'); }}/>}
-    {activeTab === 'costs' && <PassGuide tickets={tickets}/>}
+    {activeTab === 'table' && <TripTable prefs={prefs} onOpenDay={day => { setCurrentDay(day); selectTab('plan'); }}/>}
+    {activeTab === 'costs' && <PassGuide tickets={tickets} prefs={prefs}/>}
     {activeTab === 'checklist' && <ChecklistPanel checked={checked} setChecked={changeChecked} syncStatus={syncStatus}/>}
     {activeTab === 'bookings' && <><TicketPanel tickets={tickets} onOpenChecklist={()=>selectTab('checklist')}/><BookingsPanel/></>}
+    {activeTab === 'dining' && <section className="content-pane"><Heading label="OSAKA LOCAL FOOD" title="ร้านอาหารใกล้ Namba" caption="ตัวเลือกนั่งทาน ไม่เน้นเนื้อวัว · ราคาและเวลาเปิดควรตรวจอีกครั้งก่อนเดินทาง"/>{restaurantGuide.map(x=><article className="tool-card" key={x.id}><span className="kicker">{x.role}</span><h3>{x.name}</h3><p>{x.category} · {x.travel}</p><p><strong>ราคา:</strong> {x.price}</p><p><strong>เวลาเปิด:</strong> {x.hours}</p><p>{x.comfort}</p><p>{x.diet}</p><a className="action-link" href={mapSearchUrl(x.map)} target="_blank" rel="noopener noreferrer"><MapPin size={15}/> Google Maps</a>{x.priceSource&&<a className="subtle-link" href={x.priceSource} target="_blank" rel="noopener noreferrer">ดูเมนู / ราคา</a>}</article>)}</section>}
     {activeTab === 'help' && <HelpPanel/>}
     <div className="site-foot">Kansai, With You · 2026 <span>✦</span> Made for the journey</div>
   </div>
