@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { CalendarDays, Clock3, ExternalLink, MapPin, TrainFront, ArrowRight } from 'lucide-react';
 import { itinerary } from '../../data/trip';
+import {foodStopsForDay,foodVenues,foodName} from '../../data/foodExperience';
 import {resolveDay,resolvedGuide} from '../../data/experience';
 import { travelGuide, mapSearchUrl } from '../../data/mobility';
 
@@ -39,6 +40,7 @@ function DayTable({ day, onOpenDay, prefs }) {
           </tbody>
         </table>
       </div>
+      <p className="trip-table-food"><strong>Food & Dining:</strong> {foodStopsForDay(day.day,prefs).filter(x=>x.role!=='backup').map(x=>x.time+' '+(x.id?foodVenues[x.id].name:foodName(x))).join(' · ')}</p>
       <div className="trip-table-footer">
         <div><strong>เส้นทางหลัก:</strong> {route?.overview || day.summary}</div>
         <div className="trip-table-day-actions">
@@ -54,7 +56,7 @@ function DayTable({ day, onOpenDay, prefs }) {
 export default function TripTable({ onOpenDay,prefs }) {
   const [filter, setFilter] = useState('all');
   const days = filter === 'all' ? itinerary : itinerary.filter(day => String(day.day) === filter);
-  const events = days.reduce((sum, day) => sum + day.schedule.length, 0);
+  const events = days.reduce((sum, day) => sum + resolveDay(day.day,prefs).schedule.length, 0);
   return (
     <section className="content-pane trip-table-page">
       <div className="trip-table-page-heading">
