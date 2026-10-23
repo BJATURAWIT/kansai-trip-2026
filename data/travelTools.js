@@ -51,12 +51,12 @@ export const transportByDay={
   ],
   6:[
     mk('Centara → Daikokucho → Umeda','metro','ICOCA · Osaka Metro','Metro จ่ายแยก'),
-    mk('JR Osaka → Kinosaki Onsen · Kounotori 5','jr','Kansai WIDE Pass + Reserved Seat','ยืนยันแล้ว 10:12–12:51 · Car 4 · Seats 9C, 9D'),
+    mk('JR Osaka → Kinosaki Onsen · '+travelBookings.kounotori.outward.train,'jr','Kansai WIDE Pass + Reserved Seat','ยืนยันแล้ว '+travelBookings.kounotori.outward.depart+'–'+travelBookings.kounotori.outward.arrive+' · Car '+travelBookings.kounotori.outward.car+' · Seats '+travelBookings.kounotori.outward.seats),
     mk('Kinosaki Station → Nishimuraya','shuttle','Check-in Shuttle Bus','รถรับส่งร่วมของเมือง ฟรีตามรอบที่กำหนด แจ้งชื่อเรียวกัง'),
   ],
   7:[
     mk('Nishimuraya → Kinosaki Onsen Station','shuttle','Shogetsutei Shuttle','รถรับส่งของโรงแรมตามเวลาที่ Reception ยืนยัน'),
-    mk('Kinosaki Onsen → JR Osaka · Kounotori 22','jr','Kansai WIDE Pass + Reserved Seat','ยืนยันแล้ว 15:30–18:21 · Car 7 · Seats 8C, 8D'),
+    mk('Kinosaki Onsen → JR Osaka · '+travelBookings.kounotori.return.train,'jr','Kansai WIDE Pass + Reserved Seat','ยืนยันแล้ว '+travelBookings.kounotori.return.depart+'–'+travelBookings.kounotori.return.arrive+' · Car '+travelBookings.kounotori.return.car+' · Seats '+travelBookings.kounotori.return.seats),
     mk('JR Osaka → Daikokucho → Centara','metro','ICOCA · Osaka Metro','รถไฟ Metro จ่ายแยก'),
   ],
   8:[
