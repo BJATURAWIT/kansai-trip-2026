@@ -51,17 +51,20 @@ function RouteIcon({ type }) {
 
 function FoodDining({day,prefs}){
  const stops=foodStopsForDay(day,prefs);
+ const schedule=resolveDay(day,prefs).schedule;
  if(!stops.length)return null;
  return <section className="food-section"><div className="section-title"><div><span className="kicker">FOOD EXPERIENCE</span><h3>Food & Dining</h3><p>เลือกตามเส้นทางจริง · ผู้เดินทางไม่ทานเนื้อวัว (ไม่ใช่แพ้อาหาร)</p></div></div>
  <div className="food-list">{stops.map((stop,i)=>{
    const v=stop.id?foodVenues[stop.id]:null;
+   const timeValue=x=>{const m=String(x).match(/^(\d{1,2}):(\d{2})/);return m?Number(m[1])*60+Number(m[2]):-1};
+   const prior=schedule.filter(x=>x.map&&x.map!==v?.map&&timeValue(x.time)>=0&&timeValue(x.time)<=timeValue(stop.time)).at(-1);
    return <article className="food-item" key={stop.id||'flex-'+i}>
      <div className="food-item-top"><span>{stop.time}</span><span>{stop.role==='primary'?'Primary':stop.role==='backup'?'Backup':'Optional'}</span><span>{v?.status==='verified'?'Verified':'Unverified'}</span></div>
      <h4>{v?.name||foodName(stop)}</h4>
-     {v?.image?.src&&<div className="food-thumb"><img src={v.image.src} alt={v.image.caption} loading="lazy" onError={event=>{event.currentTarget.style.display='none'}}/><small>{v.image.caption} · {v.image.license} · {v.image.credit}</small></div>}
+     {v?.image?.src&&<div className="food-thumb"><img src={v.image.src} alt={v.image.caption} loading="lazy" onError={event=>{event.currentTarget.style.display='none'}}/><small>{v.image.caption} · <a href={v.image.source} target="_blank" rel="noopener noreferrer">{v.image.license} · {v.image.credit}</a></small></div>}
      <p>{v?.type||stop.kind} · {stop.note}</p>
      {v&&<><p><strong>เมนู:</strong> {v.menu}</p><p><strong>ราคา/คน:</strong> {v.priceYen?'¥'+v.priceYen.toLocaleString('en-US'):'ยังไม่ยืนยัน'} · {v.priceNote}</p><p><strong>เวลาเปิด:</strong> {v.hours} · {v.closures}</p><p><strong>จากจุดก่อนหน้า:</strong> {v.from}</p><p><strong>Dietary Note · No Beef:</strong> {v.diet}</p>{v.window&&<p><strong>เงื่อนไขโต๊ะ:</strong> {v.window}</p>}<span className="food-booking">Not Booked</span></>}
-     <div className="food-actions">{v?.map&&<a href={mapSearchUrl(v.map)} target="_blank" rel="noopener noreferrer">Google Maps</a>}{v?.site&&<a href={v.site} target="_blank" rel="noopener noreferrer">Official Website</a>}{v?.booking&&<a href={v.booking} target="_blank" rel="noopener noreferrer">Booking Link</a>}{v?.menuSource&&<a href={v.menuSource} target="_blank" rel="noopener noreferrer">Menu / Price</a>}</div>
+     <div className="food-actions">{v?.map&&<a href={mapSearchUrl(v.map)} target="_blank" rel="noopener noreferrer">Google Maps</a>}{v?.map&&prior?.map&&<a href={mapDirectionsUrl(prior.map,v.map,'walking')} target="_blank" rel="noopener noreferrer">Walking Directions</a>}{v?.site&&<a href={v.site} target="_blank" rel="noopener noreferrer">Official Website</a>}{v?.booking&&<a href={v.booking} target="_blank" rel="noopener noreferrer">Booking Link</a>}{v?.menuSource&&<a href={v.menuSource} target="_blank" rel="noopener noreferrer">Menu / Price</a>}</div>
    </article>;
  })}</div></section>;
 }
