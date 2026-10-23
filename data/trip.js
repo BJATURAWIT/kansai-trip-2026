@@ -43,9 +43,9 @@ export const itinerary = [
     highlight: 'เดินเล่น / ของกิน', map: 'Dotonbori Osaka',
     schedule: [
       { time: '09:00', title: 'Osaka Castle Park', detail: 'จาก Daikokucho เปลี่ยนสายที่ Hommachi ไป Morinomiya ใช้เวลารวมเดินประมาณ 30–40 นาที' },
-      { time: '12:00', title: 'Kuromon Market', detail: 'ย้ายไปย่าน Nippombashi แวะทานอาหารทะเลและอาหารกลางวัน' },
+      { time: '12:00', title: 'Kuromon Market + ร้านซูชิ (ตัวเลือก)', detail: 'ย้ายไปย่าน Nippombashi อาหารทะเล/ซาชิมิ เลือก Endo Sushi (Central Market เดินทางอ้อม) หรือร้านซูชิใกล้ Namba ตามเวลา ไม่ทานเนื้อวัว' },
       { time: '14:00', title: 'Shinsaibashi / Namba', detail: 'เดินเที่ยวและชอปปิงย่าน Namba–Shinsaibashi' },
-      { time: '16:30', title: 'Umeda Sky Building', detail: 'ขึ้น Midosuji Line ไป Umeda เดินไปจุดชมวิวช่วงก่อนพระอาทิตย์ตก กลับโรงแรมช่วงค่ำ' },
+      { time: '16:15', title: 'Umeda Sky Building · ช่วง Sunset', detail: 'นั่ง Osaka Metro ไป Umeda เดินไปจุดชมวิว 10–20 นาที; พระอาทิตย์ตกช่วงกลางเดือน พ.ย. ราว 16:50 JST (โดยประมาณ) ควรถึงก่อน 16:30 และตรวจวันจริง' },
     ], note: 'ร่างแผน · ปรับเปลี่ยนได้ตามสภาพอากาศและพลังงาน',
   },
   {
@@ -54,7 +54,7 @@ export const itinerary = [
     highlight: 'USJ · 19 NOV', map: 'Universal Studios Japan',
     schedule: [
       { time: 'ก่อนเปิด', title: 'ออกจากโรงแรมและไปถึง USJ', detail: 'ตรวจเวลาเปิดสวนสนุกจริงในแอปก่อนวันเดินทาง' },
-      { time: '10:00', title: 'เล่นโซนที่ยังไม่มีเวลาจอง', detail: 'เครื่องเล่นและโชว์ทั่วไปตามเวลารอจริง (ยังไม่มี Express เวลา 10:00)' },
+      { time: '10:00', title: 'USJ ก่อนเวลา Nintendo', detail: 'เลือก Hollywood Dream / JAWS / Minions ตามคิวจริง แล้วพักกินก่อน 13:50; อย่าใช้ Express สำหรับเครื่องเล่นผิดช่วงเวลา' },
       { time: '13:50', title: 'Super Nintendo World', detail: 'ช่วงเวลาที่ได้จากการซื้อ Express · ตรวจ QR และรายการเครื่องเล่นอีกครั้ง' },
       { time: '16:00', title: 'The Wizarding World of Harry Potter', detail: 'ช่วงเวลาตาม Express Pass · ตรวจรายละเอียดบนตั๋ว' },
       { time: 'เย็น', title: 'ของฝาก + โซนอื่นตามเวลา', detail: 'พัก กิน และเก็บบรรยากาศก่อนกลับ' },
@@ -92,7 +92,7 @@ export const itinerary = [
       { time: '08:15', title: 'ออกจากโรงแรมไปสถานี Osaka', detail: 'เผื่อเวลาขนสัมภาระและหาชานชาลา' },
       { time: '10:12', title: 'Limited Express Kounotori 5', detail: 'แผนออกจาก JR Osaka · ต้องจอง Reserved Seat และยืนยันตารางจริง' },
       { time: '12:51', title: 'ถึง Kinosaki Onsen', detail: 'ได้แจ้งเวลาไปยังเรียวกังแล้ว' },
-      { time: 'บ่าย', title: 'เดินเล่นคลอง + แช่ออนเซ็น', detail: 'เช็กขั้นตอนรับส่ง/ฝากกระเป๋ากับโรงแรม' },
+      { time: '13:00–15:00', title: 'Kinosaki Station → Shuttle → Nishimuraya', detail: 'หลังลง Kounotori 5 เวลา 12:51 ถามเจ้าหน้าที่ Sozoro Check-in Center / รถ Shuttle ไป Nishimuraya Hotel Shogetsutei; โทรโรงแรมหากไม่พบจุดขึ้นรถ ฝากกระเป๋าแล้วเดินชมคลอง' },
       { time: 'เย็น', title: 'Kaiseki Dinner', detail: 'รวมในห้องพัก · แจ้งแล้วว่าไม่ทานเนื้อวัว ไม่ใช่อาการแพ้' },
     ], note: 'โรงแรมยืนยันมื้อเย็นและเช้าแล้ว · เวลารถไฟและการจองที่นั่งยังต้องตรวจ',
   },
@@ -102,7 +102,7 @@ export const itinerary = [
     highlight: 'กลับ Osaka · Reserved Seat ยังไม่จอง', map: 'Centara Life Namba Hotel Osaka',
     schedule: [
       { time: 'เช้า', title: 'อาหารเช้า + เดินเล่น Kinosaki', detail: 'อาหารเช้าในเรียวกัง ตรวจเวลาเช็กเอาต์และรถ Shuttle ที่ Reception' },
-      { time: '11:30–15:30 (แผน)', title: 'Shuttle → Kinosaki Station → Osaka', detail: 'รถรับส่งโรงแรมและ Limited Express ขากลับ ยังไม่ยืนยันเที่ยวรถหรือ Reserved Seat' },
+      { time: '14:00–16:00 (ช่วงที่ต้องตรวจตั๋ว)', title: 'Shuttle → Kinosaki Station → Osaka', detail: 'วันหยุด Labor Thanksgiving Day รถอาจเต็ม; ใช้เลขขบวน เวลา ตู้ และเลขที่นั่งจากใบจองจริงที่กรอกใน My Tickets · เผื่อ 30–45 นาทีที่สถานี' },
       { time: '16:30', title: 'กลับ Centara / Check-in', detail: 'JR Osaka → Metro Umeda → Daikokucho' },
       { time: 'เย็น', title: 'Namba / Shinsaibashi', detail: 'ชอปปิงและพักผ่อนคืนสุดท้ายที่ Osaka' },
     ], note: 'ต้องจองรถไฟขากลับต่างหาก',
