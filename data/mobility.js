@@ -29,7 +29,7 @@ export const travelGuide = [
   {
     day: 3, kicker: 'ไป Universal Studios Japan', leave: 'แนะนำออกก่อนเวลาเปิดสวนสนุก', confirmed: false,
     overview: 'Osaka-Namba → Nishikujo → Universal City → เดินเข้า USJ',
-    reminder: 'ซื้อตั๋ว Studio + Express แล้ว • เวลา Nintendo 13:50 / Harry Potter 16:00 ตามที่แจ้ง • ให้ยึด QR เป็นหลัก',
+    reminder: 'ซื้อตั๋ว Studio + Express แล้ว • เวลา Nintendo '+travelBookings.usj.nintendoEntry+' / Harry Potter '+travelBookings.usj.harryPotterEntry+' ตามที่แจ้ง • ให้ยึด QR เป็นหลัก',
     legs: [
       { from: centara, to: 'Osaka-Namba Station, Osaka', mode: 'เดิน / Metro', line: 'ไปสถานี Osaka-Namba', how: 'จากโรงแรมเดินไป Osaka-Namba หรือใช้ Osaka Metro ผ่าน Namba ตามความสะดวก', duration: 'เผื่อประมาณ 20–30 นาที', pay: 'ICOCA ถ้าขึ้นรถ', icon: 'walk' },
       { from: 'Osaka-Namba Station, Osaka', to: 'Nishikujo Station, Osaka', mode: 'Hanshin Railway', line: 'Hanshin Namba Line', how: 'ขึ้นขบวนฝั่ง Nishikujo / Amagasaki ตรวจป้ายปลายทาง', duration: 'ประมาณ 10–15 นาที', pay: 'ICOCA', icon: 'train' },
@@ -70,7 +70,7 @@ export const travelGuide = [
     legs: [
       { from: centara, to: 'Daikokucho Station, Osaka', mode: 'เดิน', line: 'ออกจาก Centara ~08:15', how: 'ฝากกระเป๋าใหญ่กับ Centara ก่อนออก หากโรงแรมยืนยันรับฝากข้ามคืน แล้วนำกระเป๋าใบเล็กติดตัว', duration: 'ประมาณ 5–10 นาที', pay: 'ฟรี', icon: 'walk' },
       { from: 'Daikokucho Station, Osaka', to: jrOsaka, mode: 'Osaka Metro', line: 'Daikokucho → Umeda → JR Osaka', how: 'ขึ้น Midosuji ไป Umeda แล้วเดินตามป้าย JR Osaka; เผื่อเวลาสถานีใหญ่และหาชานชาลา', duration: 'เผื่อ 35–45 นาทีรวมเดิน', pay: 'ICOCA (Metro ไม่รวมใน JR Pass)', icon: 'train' },
-      { from: jrOsaka, to: kinosaki, mode: 'JR Limited Express', line: 'Kounotori 5 · 10:12 → 12:51', how: 'จองที่นั่งแล้ว · Ordinary Non-smoking Car 4 · Seats 9C และ 9D · ตรวจชานชาลาจากจอสถานีวันจริง', duration: '2 ชม. 39 นาที', pay: 'JR Kansai WIDE Pass + Reserved Seat', icon: 'train', fixed: true },
+      { from: jrOsaka, to: kinosaki, mode: 'JR Limited Express', line: travelBookings.kounotori.outward.train+' · '+travelBookings.kounotori.outward.depart+' → '+travelBookings.kounotori.outward.arrive, how: 'จองที่นั่งแล้ว · Ordinary Non-smoking Car 4 · Seats 9C และ 9D · ตรวจชานชาลาจากจอสถานีวันจริง', duration: '2 ชม. 39 นาที', pay: 'JR Kansai WIDE Pass + Reserved Seat', icon: 'train', fixed: true },
       { from: kinosaki, to: 'Nishimuraya Hotel Shogetsutei, Kinosaki', mode: 'ฟรี Shuttle', line: 'Check-in Shuttle Bus', how: 'ออกมาหน้าสถานี แจ้งเจ้าหน้าที่ว่าพัก Nishimuraya Hotel Shogetsutei มีรถรับส่งของสมาคมเรียวกังตั้งแต่ 12:51–18:00 ตามเงื่อนไข', duration: 'รอรถตามรอบ', pay: 'ฟรี (ตามเงื่อนไข)', icon: 'bus' },
     ],
   },
@@ -80,7 +80,7 @@ export const travelGuide = [
     reminder: 'Reserved Seat ยืนยันแล้ว · Kounotori 22 15:30–18:21 · Car 7 Seats 8C/8D · ตรวจ Shuttle และเผื่อคนเยอะวันหยุด',
     legs: [
       { from: 'Nishimuraya Hotel Shogetsutei, Kinosaki', to: kinosaki, mode: 'Shuttle', line: 'Shuttle ไปสถานีให้ทัน 15:30', how: 'แจ้งเจ้าหน้าที่รับรอบ Shuttle ไปสถานีล่วงหน้า รถมีตามรอบและอาจไม่วิ่งถ้าไม่มีผู้โดยสาร', duration: 'ขึ้นกับรอบรถ', pay: 'สอบถามโรงแรม', icon: 'bus' },
-      { from: kinosaki, to: jrOsaka, mode: 'JR Limited Express', line: 'Kounotori 22 · 15:30 → 18:21', how: 'Reserved Seat จองแล้ว · Ordinary Non-smoking Car 7 Seats 8C และ 8D · ควรมาถึงสถานีก่อนเวลาออก 20–30 นาที', duration: '2 ชม. 51 นาที', pay: 'JR Kansai WIDE Pass + Reserved Seat (เมื่อรับบัตรแล้ว)', icon: 'train' },
+      { from: kinosaki, to: jrOsaka, mode: 'JR Limited Express', line: travelBookings.kounotori.return.train+' · '+travelBookings.kounotori.return.depart+' → '+travelBookings.kounotori.return.arrive, how: 'Reserved Seat จองแล้ว · Ordinary Non-smoking Car 7 Seats 8C และ 8D · ควรมาถึงสถานีก่อนเวลาออก 20–30 นาที', duration: '2 ชม. 51 นาที', pay: 'JR Kansai WIDE Pass + Reserved Seat (เมื่อรับบัตรแล้ว)', icon: 'train' },
       { from: jrOsaka, to: centara, mode: 'Osaka Metro', line: 'Umeda → Daikokucho → โรงแรม', how: 'ลง JR Osaka เดินไป Metro Umeda นั่ง Midosuji ลง Daikokucho แล้วเดินกลับ Centara เพื่อเช็กอินคืนสุดท้าย', duration: 'เผื่อ 35–45 นาที', pay: 'ICOCA', icon: 'train' },
     ],
   },
