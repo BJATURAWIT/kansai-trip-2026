@@ -37,9 +37,11 @@ export const itinerary = [
     highlight: 'เดินเล่น / ของกิน', map: 'Dotonbori Osaka',
     schedule: [
       { time: '09:00', title: 'Osaka Castle Park', detail: 'จาก Daikokucho เปลี่ยนสายที่ Hommachi ไป Morinomiya ใช้เวลารวมเดินประมาณ 30–40 นาที' },
-      { time: '12:00', title: 'Kuromon Market + ร้านซูชิ (ตัวเลือก)', detail: 'ย้ายไปย่าน Nippombashi อาหารทะเล/ซาชิมิ เลือก Endo Sushi (Central Market เดินทางอ้อม) หรือร้านซูชิใกล้ Namba ตามเวลา ไม่ทานเนื้อวัว' },
-      { time: '14:00', title: 'Shinsaibashi / Namba', detail: 'เดินเที่ยวและชอปปิงย่าน Namba–Shinsaibashi' },
-      { time: '16:15', title: 'Umeda Sky Building · ช่วง Sunset', detail: 'นั่ง Osaka Metro ไป Umeda เดินไปจุดชมวิว 10–20 นาที; พระอาทิตย์ตกช่วงกลางเดือน พ.ย. ราว 16:50 JST (โดยประมาณ) ควรถึงก่อน 16:30 และตรวจวันจริง' },
+      { time: '11:45', title: 'Kuromon Market / Lunch', detail: 'เลือกอาหารทะเล/ซูชิในตลาดตามคิวและร้านที่เปิดจริง' },
+      { time: '13:00', title: 'Shinsaibashi / Namba', detail: 'เดินเล่น ช้อปปิง แล้วเดินทางไป Umeda' },
+      { time: '15:45–16:15', title: 'Umeda Sky Building', detail: 'เช็กคิว Sky Building และเตรียมขึ้นจุดชมวิว' },
+      { time: '16:20–17:20', title: 'Sunset Special Moment', detail: 'ชมพระอาทิตย์ตกประมาณ 16:52 JST และถ่ายภาพ' },
+      { time: '18:15–20:00', title: 'Special Dinner', detail: 'STARDUST 39F เป็นตัวเลือกหลัก / XEX WEST สำรอง · Not Booked · ทั้งสองคนไม่ทานเนื้อวัว' },
     ], note: 'ร่างแผน · ปรับเปลี่ยนได้ตามสภาพอากาศและพลังงาน',
   },
   {
