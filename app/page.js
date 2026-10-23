@@ -1,5 +1,5 @@
-import {travelBookings,flightNumberLabel,localClock} from '../data/centralTravel';
 'use client';
+import {travelBookings,flightNumberLabel,localClock} from '../data/centralTravel';
 
 import { useEffect, useMemo, useRef, useState } from 'react';
 import {
