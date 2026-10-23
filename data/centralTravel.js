@@ -4,7 +4,7 @@
  * All timestamps use the LOCAL TIME ZONE OF THE STATED AIRPORT (ISO with offset).
  * Flight details last communicated by traveler on 2026-10-23:
  * 17 Nov DMK 10:40 -> KIX 18:15; 24 Nov KIX 19:45 -> DMK 00:15 25 Nov.
- * The RETURN FLIGHT NUMBER remains UNVERIFIED; do not infer XJ611 / XJ615.
+ * The RETURN FLIGHT NUMBER remains UNVERIFIED; do not infer a number.
  */
 export const travelBookings = Object.freeze({
   trip: {startDate:'2026-11-17',endDate:'2026-11-24',travelers:2,days:8,nights:7},

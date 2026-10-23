@@ -22,3 +22,24 @@ assert.deepEqual([defaultTickets.return.depart,defaultTickets.return.arrive,defa
 assert.equal(transportByDay[7].some(x=>x.route.includes('Kounotori 22')),true);
 assert.equal(itinerary[6].schedule.some(x=>x.title.includes('Kounotori 22')),true);
 console.log(`Verified ${itinerary.length} travel days, ${checklist.length} checklist items, confirmed/pending states and 7 hotel nights.`);
+
+assert.equal(trip.flights.length,2);
+assert.equal(trip.flights[0].code,travelBookings.flights.outbound.number);
+assert.equal(trip.flights[1].code,null);
+assert.equal(trip.flights[1].time,'19:45 – 00:15 (+1 วัน)');
+assert.equal(travelBookings.flights.inbound.departure.timeZone,'Asia/Tokyo');
+assert.equal(travelBookings.flights.inbound.arrival.timeZone,'Asia/Bangkok');
+assert.equal(travelBookings.flights.inbound.departure.local,'2026-11-24T19:45:00+09:00');
+assert.equal(travelBookings.flights.inbound.arrival.local,'2026-11-25T00:15:00+07:00');
+assert.equal(flightDurationMinutes(travelBookings.flights.outbound),275);
+assert.equal(flightDurationMinutes(travelBookings.flights.inbound),330);
+assert.equal(trip.hotels,travelBookings.hotels);
+assert.equal(trip.japanRail.pass,travelBookings.jrPass.name);
+assert.equal(trip.flights[1].numberVerified,false);
+const fs=await import('node:fs/promises');
+
+for (const name of ['data/trip.js','data/mobility.js','data/beginnerGuide.js','data/experience.js','app/page.js','app/components/TravelTools.js']) {
+ const code=await fs.readFile(new URL('../'+name,import.meta.url),'utf8');
+ assert.doesNotMatch(code,/\\bXJ611\\b|\\bXJ615\\b|17:15|21:45/, 'Stale flight marker in '+name);
+}
+console.log('Flight times and timezones, booking source, and stale-flight audit passed.');
