@@ -152,7 +152,7 @@ export function resolvedSegments(day,prefs){
     {route:'JR Imamiya → Tennoji → Kansai Airport',card:'Kansai WIDE Pass · JR Kansai Airport Rapid',type:'jr',note:'นั่ง JR ที่อยู่ในเขตพาส ถ้าเริ่ม/รับพาสแล้วจะไม่มีค่า JR เพิ่ม'},
    ];
    return [
-    {route:'Centara → Nankai Namba','walk',card:'เดิน',type:'walk',note:'เดินถึงสถานี Nankai Namba'},
+    {route:'Centara → Nankai Namba',card:'เดิน',type:'walk',note:'เดินถึงสถานี Nankai Namba'},
     choice==='rapit'?{route:'Nankai Namba → Kansai Airport · Rapi:t Regular Seat',type:'nankai',card:'Nankai Rapi:t Reserved Seat',note:'ค่าโดยสาร ¥970 + Express Regular Seat ¥700; ยังไม่ได้ซื้อตั๋วขากลับ'}:
      {route:'Nankai Namba → Kansai Airport · Airport Express',type:'nankai',card:'ICOCA · Nankai Airport Express',note:'¥970/คน ไม่มีค่ารถด่วนเพิ่มเติม'},
    ];
