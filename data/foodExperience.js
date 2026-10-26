@@ -19,13 +19,13 @@ const commons=(filename,credit,license,alt,type='food')=>({
 const SUSHI=commons('Sushi Nigiri01.JPG','Alessandro Scotti','CC BY-SA 3.0','ภาพตัวอย่างนิกิริซูชิ');
 const UDON=commons('Udon.jpg','Adriano','CC BY-SA 3.0','ภาพตัวอย่างชามอุด้งญี่ปุ่น');
 const MATCHA=commons('Matcha chawan and wagashi at teahouse in Japanese garden.jpg','Laitche','CC BY-SA 4.0','ภาพตัวอย่างชาเขียวมัทฉะกับขนมญี่ปุ่น');
-const TOFU=commons('Yudofu meal set in Kyoto.jpg','ZhengZhou','CC BY-SA 4.0','ภาพตัวอย่างชุดอาหารเต้าหู้ญี่ปุ่น');
-const OKONOMIYAKI=commons('FOOD Okonomiyaki.jpg','Grueslayer','CC BY-SA 4.0','ภาพตัวอย่างโอโคโนมิยากิโอซาก้า');
+const TOFU=placeholder('ยังไม่มีรูปชุดอาหารเต้าหู้ที่ตรวจสิทธิ์และแหล่งที่มาได้');
+const OKONOMIYAKI=placeholder('ยังไม่มีภาพเมนู Saizeriya ที่ตรวจสิทธิ์และแหล่งที่มาได้');
 const placeholder=(alt)=>({src:'/food-image-placeholder.svg',alt,
  caption:'Image not yet verified · ยังไม่มีภาพร้านหรือเมนูที่ยืนยันสิทธิ์ใช้',source:null,
  credit:null,license:'Original website placeholder',type:'placeholder',label:'Image not yet verified',verified:false});
 const licensedPhotos={
- stardust:[placeholder('ภาพบรรยากาศร้าน STARDUST ยังรอตรวจสิทธิ์'),SUSHI],
+ stardust:[placeholder('ภาพบรรยากาศภายใน STARDUST ยังรอตรวจสิทธิ์'),SUSHI],
  xex:[SUSHI,placeholder('ยังไม่มีภาพภายใน XEX WEST ที่ตรวจสิทธิ์แล้ว')],
  kura:[SUSHI],
  tsurutontan:[UDON],
