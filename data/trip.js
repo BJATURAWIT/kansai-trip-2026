@@ -42,7 +42,7 @@ export const itinerary = [
       { time: '13:00', title: 'Shinsaibashi / Namba', detail: 'เดินเล่น ช้อปปิง แล้วเดินทางไป Umeda' },
       { time: '15:45–16:15', title: 'Umeda Sky Building', detail: 'เช็กคิว Sky Building และเตรียมขึ้นจุดชมวิว' },
       { time: '16:20–17:20', title: 'Sunset Special Moment', detail: 'ชมพระอาทิตย์ตกประมาณ 16:52 JST และถ่ายภาพ' },
-      { time: '18:15–20:00', title: 'Special Dinner', detail: 'STARDUST 39F เป็นตัวเลือกหลัก / XEX WEST สำรอง · Not Booked · ทั้งสองคนไม่ทานเนื้อวัว' },
+      { time: '18:15–20:00', title: 'Special Dinner', detail: 'STARDUST 39F · Confirmed booking (เวลานัดจริงรอยืนยันจากอีเมล) · XEX WEST เป็นสำรองฉุกเฉิน · ไม่ทานเนื้อวัว' },
     ], note: 'ร่างแผน · ปรับเปลี่ยนได้ตามสภาพอากาศและพลังงาน',
   },
   {
