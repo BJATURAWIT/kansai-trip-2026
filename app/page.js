@@ -49,6 +49,21 @@ function RouteIcon({ type }) {
   return type === 'walk' ? <Footprints size={19}/> : type === 'bus' ? <Bus size={19}/> : type === 'plane' ? <Plane size={19}/> : <TrainFront size={19}/>;
 }
 
+const foodSampleUrls={
+ sushi:'https://images.unsplash.com/photo-1579871494447-9811cf80d66c?w=900&auto=format&fit=crop&q=78',
+ noodle:'https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=900&auto=format&fit=crop&q=78',
+ dinner:'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=900&auto=format&fit=crop&q=78',
+ seafood:'https://images.unsplash.com/photo-1547592180-85f173990554?w=900&auto=format&fit=crop&q=78',
+ dessert:'https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=900&auto=format&fit=crop&q=78',
+ coffee:'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=900&auto=format&fit=crop&q=78',
+ japanese:'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=900&auto=format&fit=crop&q=78',
+ italian:'https://images.unsplash.com/photo-1473093295043-cdd812d0e601?w=900&auto=format&fit=crop&q=78'
+};
+function foodSamplePhoto(id){
+ const type={stardust:'dinner',xex:'sushi',kura:'sushi',sushiro:'sushi',izuju:'sushi',tsurutontan:'noodle',ozuru:'noodle',saganoya:'noodle',kamaiki:'noodle',masyua:'noodle',shirokitsune:'noodle',inaba:'seafood',yayoiken:'japanese',saizeriya:'italian',nakatanidou:'dessert',tsujiri:'dessert',excafe:'dessert',arabica:'coffee'}[id]||'japanese';
+ return foodSampleUrls[type];
+}
+
 function FoodDining({day,prefs}){
  const stops=foodStopsForDay(day,prefs);
  const schedule=resolveDay(day,prefs).schedule;
@@ -61,14 +76,9 @@ function FoodDining({day,prefs}){
    return <article className="food-item" key={stop.id||'flex-'+i}>
      <div className="food-item-top"><span>{stop.time}</span><span>{stop.role==='primary'?'Primary':stop.role==='backup'?'Backup':'Optional'}</span><span>{v?.status==='verified'?'Verified':'Unverified'}</span></div>
      <h4>{v?.name||foodName(stop)}</h4>
-     {v&&<div className="food-visual-guide" style={{display:'flex',gap:13,alignItems:'center',padding:'13px 14px',margin:'12px 0',borderRadius:13,background:'#eff5f0',border:'1px solid #d8e6dc'}}>
-       {v.image?.src?<div className="food-thumb" style={{flex:'0 0 120px',maxWidth:'40%'}}><img src={v.image.src} alt={v.image.caption||v.name} loading="lazy" onError={event=>{event.currentTarget.style.display='none';event.currentTarget.parentElement.querySelector('.food-image-error').hidden=false}}/><span className="food-image-error" hidden>รูปโหลดไม่สำเร็จ — เปิดภาพร้านจริงด้านข้าง</span>{v.image.source&&<small><a href={v.image.source} target="_blank" rel="noopener noreferrer">ที่มาของภาพ</a></small>}</div>:<span aria-hidden="true" style={{fontSize:34,flex:'0 0 44px',textAlign:'center'}}>{/sushi|seafood|sashimi|crab|fish/i.test(v.type)?'🍣':/udon|soba|noodle/i.test(v.type)?'🍜':/mochi|dango|matcha|parfait/i.test(v.type)?'🍡':/coffee/i.test(v.type)?'☕':/italian|pasta|pizza/i.test(v.type)?'🍕':/lounge|dinner/i.test(v.type)?'🍽️':'🍱'}</span>}
-       <div style={{minWidth:0}}>
-         <strong style={{display:'block',fontSize:13}}>{v.type}</strong>
-         <span style={{display:'block',fontSize:12,lineHeight:1.7}}>เมนูแนะนำ: {v.menu}</span>
-         <a style={{display:'inline-block',marginTop:6,color:'#176b55',fontWeight:800,fontSize:12}} href={'https://www.google.com/search?tbm=isch&q='+encodeURIComponent(v.name+' '+v.type+' restaurant food')} target="_blank" rel="noopener noreferrer">ดูรูปจริงของร้านและอาหาร ↗</a>
-         <small style={{display:'block',fontSize:10,opacity:.75}}>ภาพตัวอย่างประเภทอาหารไม่ใช่ภาพยืนยันของร้าน · ตรวจชื่อร้านในผลค้นหา</small>
-       </div>
+     {v&&<div className="food-photo-card" style={{overflow:'hidden',borderRadius:14,margin:'12px 0',background:'#f4f5f2',border:'1px solid #dbe6de'}}>
+       <img src={v.image?.src||foodSamplePhoto(stop.id)} alt={'ภาพอาหารตัวอย่างประเภท '+v.type} loading="lazy" decoding="async" style={{display:'block',width:'100%',height:'clamp(180px,32vw,300px)',objectFit:'cover'}} onError={e=>{const img=e.currentTarget;if(!img.dataset.fallback){img.dataset.fallback='1';img.src='https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=900&auto=format&fit=crop&q=78';}else img.style.display='none';}}/>
+       <div style={{padding:'12px 14px'}}><strong style={{display:'block',fontSize:13}}>{v.type}</strong><span style={{display:'block',fontSize:12,lineHeight:1.7,marginTop:4}}>เมนูตัวอย่าง: {v.menu}</span><small style={{display:'block',fontSize:10,color:'#63736c',marginTop:6}}>ภาพประกอบใกล้เคียง ไม่ใช่ภาพอาหารหรือบรรยากาศที่ยืนยันว่าเป็นของร้านนี้</small><a href={'https://www.google.com/search?tbm=isch&q='+encodeURIComponent(v.name+' '+v.type)} target="_blank" rel="noopener noreferrer" style={{fontSize:12,color:'#176b55',display:'inline-block',marginTop:7,fontWeight:800}}>ดูภาพจริงของร้าน ↗</a></div>
      </div>}
      <p>{v?.type||stop.kind} · {stop.note}</p>{v?.review&&<p><strong>ข้อดี / ข้อควรทราบ:</strong> {v.review}</p>}
      {v&&<><p><strong>เมนู:</strong> {v.menu}</p><p><strong>{['kura','sushiro'].includes(stop.id)?'ราคาเริ่มต้น/จาน:':v.special?'ราคาคอร์สตัวอย่าง/คน:':'ราคาเมนูตัวอย่าง:'}</strong> {v.priceYen?'¥'+v.priceYen.toLocaleString('en-US'):'ยังไม่ยืนยัน'} · {v.priceNote}</p><p><strong>เวลาเปิด:</strong> {v.hours} · {v.closures}</p><p><strong>จากจุดก่อนหน้า:</strong> {v.from}</p><p><strong>Dietary Note · No Beef:</strong> {v.diet}</p>{v.window&&<p><strong>เงื่อนไขโต๊ะ:</strong> {v.window}</p>}{v.special&&<span className="food-booking">{v.reservation==='confirmed'?'Confirmed / Booked':'Not Booked'}</span>}{!v.special&&<span className="food-booking">Walk-in · ถ้ารอเกิน 10–15 นาที ใช้ร้านสำรอง</span>}</>}
