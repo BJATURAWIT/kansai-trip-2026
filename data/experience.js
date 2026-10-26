@@ -116,7 +116,7 @@ export function resolvedSchedule(day,prefs){
    const late=[
     slot('15:45–16:15','Umeda Sky Building','ไปจุดชมวิวก่อนช่วงพระอาทิตย์ตก','Umeda Sky Building Osaka'),
     slot('16:20–17:20','Sunset Special Moment','ชมแสงเย็นและถ่ายภาพ','Umeda Sky Building Osaka'),
-    slot('18:15–20:00','Special Dinner','STARDUST / XEX WEST · Not Booked; เลือกคอร์สที่ไม่มี Beef หรือขอเปลี่ยน','Sky Lounge STARDUST Osaka')
+    slot('18:15–20:00','Special Dinner','STARDUST · Confirmed booking (เวลาในแผนยังไม่ยืนยันจากใบจอง); XEX WEST เป็นสำรองฉุกเฉิน','Sky Lounge STARDUST Osaka')
    ];
    base=[...base.filter(x=>!/(Umeda Sky|Grand Front|Sunset|Special Dinner)/i.test(x.title)),...late];
  }
