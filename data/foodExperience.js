@@ -24,7 +24,10 @@ const photosByVenue={
   realCommons('Sushi restaurant in front of Yasaka-jinja by carendt242.jpg',{alt:'หน้าร้าน Gion Izuju ตรงทางเข้าศาลเจ้า Yasaka',caption:'หน้าร้านจริง Gion Izuju ใกล้ Yasaka-jinja',credit:'carendt242',license:'CC BY 2.0',relationship:'same-venue'})
  ],
  tsujiri:[],excafe:[],
- arabica:[realCommons('% Arabica Kyoto Arashiyama.jpg',{alt:'ร้าน % Arabica Kyoto Arashiyama ข้างแม่น้ำ',caption:'ภาพถ่ายร้าน % Arabica สาขา Kyoto Arashiyama',credit:'Lenoopen1',license:'CC BY-SA 4.0',relationship:'same-venue'})]
+ arabica:[
+ realCommons('% Arabica Kyoto Arashiyama.jpg',{alt:'ร้าน % Arabica Kyoto Arashiyama ข้างแม่น้ำ',caption:'ภาพถ่ายร้าน % Arabica สาขา Kyoto Arashiyama',credit:'Lenoopen1',license:'CC BY-SA 4.0',relationship:'same-venue'}),
+ realCommons('% Arabica Kyoto Arashiyama by Takumi Ota.jpg',{alt:'บรรยากาศร้าน % Arabica Kyoto Arashiyama',caption:'บรรยากาศจริงร้าน % Arabica Kyoto Arashiyama',credit:'Takumi Ota',license:'CC BY-SA 2.0',relationship:'same-venue'})
+]
 };
 export const restaurantImagesFor=id=>photosByVenue[id]||[];
 
