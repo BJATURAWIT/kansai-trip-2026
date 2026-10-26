@@ -6,8 +6,46 @@ const food=(name,area,type,menu,priceYen,priceNote,hours,closed,site,menuSource,
  name,area,type,menu,priceYen,priceNote,hours,closures:closed,site,menuSource,
  hoursSource:site,from,review,reviewSource,
  status:'verified',reservation:'not-booked',diet:'ไม่ทานเนื้อวัว (ความชอบ ไม่ใช่แพ้อาหาร); ตรวจน้ำซุปและเครื่องเคียงก่อนสั่ง',
- days:[0,1,2,3,4,5,6],booking:null,window:null,image:null,...more
+ days:[0,1,2,3,4,5,6],booking:null,window:null,image:null,images:[],...more
 });
+// Curated reusable Commons photos; never labeled as photos of a specific restaurant.
+// All CC licenses and photographers were checked against the linked Commons file pages.
+// Wikimedia serves width-capped thumbnails; local placeholder is always available.
+const commons=(filename,credit,license,alt,type='food')=>({
+ src:'https://commons.wikimedia.org/wiki/Special:FilePath/'+encodeURIComponent(filename)+'?width=640',
+ alt,caption:'Sample image · อาหารตัวอย่าง ไม่ใช่ภาพจากร้านนี้',source:'https://commons.wikimedia.org/wiki/File:'+encodeURIComponent(filename),
+ license,credit,type,label:'Sample image',verified:true
+});
+const SUSHI=commons('Sushi Nigiri01.JPG','Alessandro Scotti','CC BY-SA 3.0','ภาพตัวอย่างนิกิริซูชิ');
+const UDON=commons('Udon.jpg','Adriano','CC BY-SA 3.0','ภาพตัวอย่างชามอุด้งญี่ปุ่น');
+const MATCHA=commons('Matcha chawan and wagashi at teahouse in Japanese garden.jpg','Laitche','CC BY-SA 4.0','ภาพตัวอย่างชาเขียวมัทฉะกับขนมญี่ปุ่น');
+const TOFU=commons('Yudofu meal set in Kyoto.jpg','ZhengZhou','CC BY-SA 4.0','ภาพตัวอย่างชุดอาหารเต้าหู้ญี่ปุ่น');
+const OKONOMIYAKI=commons('FOOD Okonomiyaki.jpg','Grueslayer','CC BY-SA 4.0','ภาพตัวอย่างโอโคโนมิยากิโอซาก้า');
+const placeholder=(alt)=>({src:'/food-image-placeholder.svg',alt,
+ caption:'Image not yet verified · ยังไม่มีภาพร้านหรือเมนูที่ยืนยันสิทธิ์ใช้',source:null,
+ credit:null,license:'Original website placeholder',type:'placeholder',label:'Image not yet verified',verified:false});
+const licensedPhotos={
+ stardust:[placeholder('ภาพบรรยากาศร้าน STARDUST ยังรอตรวจสิทธิ์'),SUSHI],
+ xex:[SUSHI,placeholder('ยังไม่มีภาพภายใน XEX WEST ที่ตรวจสิทธิ์แล้ว')],
+ kura:[SUSHI],
+ tsurutontan:[UDON],
+ sushiro:[SUSHI],
+ yayoiken:[TOFU,placeholder('ยังไม่มีรูปอาหารเซ็ต Yayoiken ที่ยืนยันสิทธิ์แล้ว')],
+ ozuru:[UDON],
+ saganoya:[UDON,TOFU],
+ kamaiki:[UDON],
+ saizeriya:[OKONOMIYAKI,placeholder('ยังไม่มีรูปอาหารของสาขา Saizeriya ที่ตรวจสิทธิ์แล้ว')],
+ masyua:[UDON],
+ inaba:[SUSHI],
+ shirokitsune:[UDON],
+ nakatanidou:[MATCHA],
+ izuju:[SUSHI],
+ tsujiri:[MATCHA],
+ excafe:[MATCHA],
+ arabica:[MATCHA]
+};
+export const restaurantImagesFor=(id)=>licensedPhotos[id]||[placeholder('ยังไม่มีภาพร้านหรืออาหารที่ตรวจสิทธิ์แล้ว')];
+
 const allDays=[0,1,2,3,4,5,6];
 export const foodVenues={
  stardust:food('Sky Lounge STARDUST','umeda','Sky lounge / International dinner','Window Seat Guaranteed “Venus” course · menu includes premium beef fillet',12000,'¥12,000/คนรวมภาษี + service charge 10% (¥1,200 หากคิดเต็มราคา) + เครื่องดื่มอย่างน้อยคนละ 1 แก้วแยก · รวม 2 คนเริ่มราว ¥26,400 ก่อนเครื่องดื่ม เมื่อเงื่อนไขคอร์สยืนยันแล้ว','17:00–22:00, Food L.O. 21:00','ปกติเปิดทุกวัน / ตรวจประกาศวันจริง','https://www.skybldg.co.jp/cafeshop/stardust/','https://www.tablecheck.com/en/sky-lounge-stardust','Umeda Sky Building Tower East 39F อาคารเดียวกับจุดชมวิว','วิวสูง/ที่นั่งริมหน้าต่างเหมาะกับมื้อพิเศษ; ข้อจำกัด: แพ็กเกจอาจมีราคาแพง ต้องเลือก Window Seat Guaranteed และเครื่องดื่มแยก','https://www.tablecheck.com/en/sky-lounge-stardust',{
@@ -39,6 +77,12 @@ export const foodVenues={
  excafe:food('eX cafe Kyoto Arashiyama','kyoto-west','Matcha / Dango','Dango grilled / matcha',null,'ราคาเมนูยังไม่ยืนยัน','ประมาณ 09:00–18:00 (ตรวจวันจริง)','วันหยุดไม่แน่นอน',null,null,'อยู่ใน Arashiyama; แวะได้หากไม่ต้องต่อคิว','จุดเด่น: ดั้งโกะย่าง; ข้อจำกัด: นักท่องเที่ยวมากและอาจรอนาน','https://tabelog.com/en/kyoto/A2601/A260403/26005251/',{map:'eX cafe Kyoto Arashiyama',status:'unverified',walkIn:true}),
  arabica:food('% Arabica Kyoto Arashiyama','kyoto-west','Coffee','Latte / espresso (ราคาเมนูยังไม่ยืนยัน)',null,'เมนูหน้าร้าน','ตรวจเวลาวันจริง','ตรวจวันจริง','https://arabica.coffee/',null,'อยู่ใกล้สะพาน Togetsukyo; เลือกแวะตามคิว','จุดเด่น: กาแฟคุณภาพ; ข้อจำกัด: อาจมีคิวใกล้สะพาน','https://arabica.coffee/',{map:'Arabica Kyoto Arashiyama',status:'unverified',walkIn:true}),
 };
+// Populate the existing card model without changing reservation or travel data.
+for(const [key,venue] of Object.entries(foodVenues)){
+ const images=restaurantImagesFor(key);
+ venue.images=images;
+ venue.image=images[0];
+}
 export const foodPlanDate=day=>'2026-11-'+String(day+16).padStart(2,'0');
 const f=(time,id,role,kind,note='')=>({time,id,role,kind,note});
 export function foodStopsForDay(day,prefs={}){
