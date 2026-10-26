@@ -149,7 +149,7 @@ export function resolvedSegments(day,prefs){
    const choice=prefs?.airportTrain||'express';
    if(choice==='jr')return [
     {route:'Centara → JR Imamiya',card:'เดิน',type:'walk',note:'เดินไปสถานี JR Imamiya ก่อนใช้พาส'},
-    {route:'JR Imamiya → Tennoji → Kansai Airport','jr',card:'Kansai WIDE Pass · JR Kansai Airport Rapid',type:'jr',note:'นั่ง JR ที่อยู่ในเขตพาส ถ้าเริ่ม/รับพาสแล้วจะไม่มีค่า JR เพิ่ม'},
+    {route:'JR Imamiya → Tennoji → Kansai Airport',card:'Kansai WIDE Pass · JR Kansai Airport Rapid',type:'jr',note:'นั่ง JR ที่อยู่ในเขตพาส ถ้าเริ่ม/รับพาสแล้วจะไม่มีค่า JR เพิ่ม'},
    ];
    return [
     {route:'Centara → Nankai Namba','walk',card:'เดิน',type:'walk',note:'เดินถึงสถานี Nankai Namba'},
