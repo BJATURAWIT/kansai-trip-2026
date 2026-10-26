@@ -9,9 +9,8 @@ import {mapSearchUrl,mapDirectionsUrl} from '../../data/mobility';
 import {getJapanClock,tripPhase,dayForDate,nextScheduleEntry,resolveDay,resolvedStops,resolvedSegments} from '../../data/experience';
 
 const labelDay=n=>`${n+16} พ.ย.`;
-export function PassGuide({tickets,prefs}){
+export function PassGuide({tickets,prefs,onChange}){
  const [filter,setFilter]=useState('all');
- const [walk,setWalk]=useState(false);
  const days=itinerary.map(d=>{
   const routes=resolvedSegments(d.day,prefs);
   const priced=fareSummary(d.day,routes,tickets,{metroPass:prefs?.metroPassDays?.[d.day]===true});
@@ -23,6 +22,7 @@ export function PassGuide({tickets,prefs}){
  return <section className="tool-pane"><header className="tool-head"><span>TRANSPORT CALCULATOR · 2 ADULTS</span><h2><TrainFront/> ค่าเดินทางและบัตรโดยสาร</h2><p>รายการรถไฟที่เลือกตามแผน Kyoto และสนามบินจริง · ไม่คิดเงิน JR ที่อยู่ในพาสและตั๋ว Rapi:t ขาเข้าที่จ่ายแล้วซ้ำ</p></header>
  <div className="pass-alert"><strong>Kansai WIDE Pass ¥24,000 / 2 คน จ่ายแล้ว · 20–24 พ.ย.</strong><span>คำนวณค่าโดยสารเพิ่มจากพาส และแสดงค่า Metro Day Pass ให้เปรียบเทียบ · ตัวเลือกวันกลับเป็นเส้นทางใดเส้นทางหนึ่งเท่านั้น</span></div>
  <div className="tool-card"><h3>ค่าเดินทางเพิ่มเติมตามแผนที่เลือก · 2 คน</h3><strong style={{fontSize:28}}>¥{grand.toLocaleString('en-US')}{unknown?' + รายการที่ยังเลือกเส้นทางไม่ได้':''}</strong><p>รายการที่ยังระบุราคาตายตัวไม่ได้: {unknown} รายการ · ค่าเดิน/รถรับส่งฟรีไม่เพิ่มยอด</p><p>ไม่รวม JR Pass และ Rapi:t ขาเข้าที่จ่ายแล้ว · ไม่รวมแท็กซี่และค่าเข้าชมสถานที่</p></div>
+ <div className="tool-card"><h3>24 พ.ย. · เลือกเส้นทางกลับสนามบิน</h3><div className="tool-day-picker">{[['express','Nankai Airport Express · ¥970/คน'],['rapit','Nankai Rapi:t · ¥1,670/คน'],['jr','JR ผ่าน Imamiya · รวมในพาส']].map(([key,label])=><button key={key} className={(prefs?.airportTrain||'express')===key?'active':''} onClick={()=>onChange?.({airportTrain:key})}>{label}</button>)}</div><p>เลือกเพียงเส้นทางเดียว · JR ต้องรับ Kansai WIDE Pass จริงและขึ้นขบวนในเครือข่าย JR ที่ครอบคลุม ส่วน Nankai ต้องจ่ายแยก</p></div>
  <div className="tool-day-picker"><button className={filter==='all'?'active':''} onClick={()=>setFilter('all')}>ทุกวัน</button>{itinerary.map(d=><button key={d.day} className={filter===String(d.day)?'active':''} onClick={()=>setFilter(String(d.day))}>{d.day+16} พ.ย.</button>)}</div>
  {visible.map(d=><article className="tool-card" key={d.day}>
  <h3>{d.day+16} พ.ย. · ค่าเดินทางเพิ่ม ¥{d.twoPeopleYen.toLocaleString('en-US')} / 2 คน</h3>

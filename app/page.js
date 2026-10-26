@@ -247,7 +247,7 @@ export default function Home() {
       <div className="day-pagination"><button disabled={currentDay===1} onClick={() => setCurrentDay(x=>Math.max(1,x-1))}><ArrowLeft size={16}/> ก่อนหน้า</button><span>{currentDay} / 8</span><button disabled={currentDay===8} onClick={() => setCurrentDay(x=>Math.min(8,x+1))}>วันถัดไป <ArrowRight size={16}/></button></div>
     </>}
     {activeTab === 'table' && <TripTable prefs={prefs} onOpenDay={day => { setCurrentDay(day); selectTab('plan'); }}/>}
-    {activeTab === 'costs' && <PassGuide tickets={tickets} prefs={prefs}/>}
+    {activeTab === 'costs' && <PassGuide tickets={tickets} prefs={prefs} onChange={updatePrefs}/>}
     {activeTab === 'checklist' && <ChecklistPanel checked={checked} setChecked={changeChecked} syncStatus={syncStatus}/>}
     {activeTab === 'bookings' && <><TicketPanel tickets={tickets} onOpenChecklist={()=>selectTab('checklist')}/><BookingsPanel/></>}
     {activeTab === 'dining' && <section className="content-pane"><Heading label="FOOD & DINING" title="Food Experiences" caption="เลือกตามวันและแผน Kyoto/Backup · สถานะร้านไม่ใช่การยืนยันจอง"/>{itinerary.map(d=><div key={d.day}><h3>{d.day+16} พ.ย. · {d.day===4?(prefs.kyoto==='east'?'Kyoto East':'Kyoto West'):d.location}</h3><FoodDining day={d.day} prefs={prefs}/></div>)}</section>}
