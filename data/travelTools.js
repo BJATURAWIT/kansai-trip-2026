@@ -33,7 +33,9 @@ export const transportByDay={
   3:[
     mk('Osaka-Namba → Nishikujo','other','ICOCA · Hanshin','รถไฟ Hanshin ไม่ใช่ JR'),
     mk('Nishikujo → Universal-City','jr','ICOCA · JR ก่อนวันเริ่มพาส','JR Pass แผนเริ่ม 20 พ.ย. จึงยังไม่ครอบคลุมวันที่ 19'),
-    mk('Universal-City → โรงแรม','mixed','ICOCA · JR + Hanshin/Metro','จ่ายตามระยะทางที่ใช้จริง'),
+    mk('Universal-City → Nishikujo','jr','ICOCA · JR Yumesaki','JR Pass ยังไม่เริ่ม · ¥180/คน'),
+    mk('Nishikujo → Osaka-Namba','other','ICOCA · Hanshin','Hanshin ¥220/คน'),
+    mk('Osaka-Namba → Centara','walk','เดิน','เดินกลับ Centara ฟรี'),
   ],
   4:[
     mk('Daikokucho → Umeda','metro','ICOCA · Osaka Metro','ไม่รวมใน Kansai WIDE'),
@@ -48,6 +50,7 @@ export const transportByDay={
     mk('Osaka-Namba → Kintetsu-Nara','kintetsu','ICOCA · Kintetsu','เลือก Kintetsu เพราะใกล้ Nara Park กว่า JR Nara'),
     mk('Nara Park → Todai-ji → Kasuga Taisha','walk','เดิน','ค่าเข้าวัด/สวนจ่ายแยก'),
     mk('Kintetsu-Nara → Osaka-Namba','kintetsu','ICOCA · Kintetsu','JR Pass ไม่ครอบคลุม Kintetsu'),
+    mk('Namba → Daikokucho','metro','ICOCA · Osaka Metro','กลับโรงแรมด้วย Midosuji Line ¥190/คน'),
   ],
   6:[
     mk('Centara → Daikokucho → Umeda','metro','ICOCA · Osaka Metro','Metro จ่ายแยก'),

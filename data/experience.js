@@ -145,10 +145,22 @@ export function resolveDay(day,prefs){
 }
 export function resolvedSegments(day,prefs){
  const base=transportByDay[day]||[];
+ if(day===8){
+   const choice=prefs?.airportTrain||'express';
+   if(choice==='jr')return [
+    {route:'Centara → JR Imamiya','walk',card:'เดิน',type:'walk',note:'เดินไปสถานี JR Imamiya ก่อนใช้พาส'},
+    {route:'JR Imamiya → Tennoji → Kansai Airport','jr',card:'Kansai WIDE Pass · JR Kansai Airport Rapid',type:'jr',note:'นั่ง JR ที่อยู่ในเขตพาส ถ้าเริ่ม/รับพาสแล้วจะไม่มีค่า JR เพิ่ม'},
+   ];
+   return [
+    {route:'Centara → Nankai Namba','walk',card:'เดิน',type:'walk',note:'เดินถึงสถานี Nankai Namba'},
+    choice==='rapit'?{route:'Nankai Namba → Kansai Airport · Rapi:t Regular Seat',type:'nankai',card:'Nankai Rapi:t Reserved Seat',note:'ค่าโดยสาร ¥970 + Express Regular Seat ¥700; ยังไม่ได้ซื้อตั๋วขากลับ'}:
+     {route:'Nankai Namba → Kansai Airport · Airport Express',type:'nankai',card:'ICOCA · Nankai Airport Express',note:'¥970/คน ไม่มีค่ารถด่วนเพิ่มเติม'},
+   ];
+ }
  if(day!==4){
   if(day===5&&prefs?.dayPlans?.[5]==='rainy')return [
-   {route:'Centara → Namba / Nippombashi (Osaka Metro ถ้าเลือกนั่ง)',type:'metro',card:'ICOCA / Metro',note:'ใช้ภายใน Osaka; ไม่ไป Kintetsu-Nara'},
-   {route:'Namba / Nippombashi → Centara',type:'metro',card:'ICOCA / Metro',note:'เดินฟรีหรือ Metro จ่ายแยก'}
+   {route:'Daikokucho → Namba',type:'metro',card:'ICOCA / Metro',note:'Metro ¥190/คน; หรือเดินฟรีได้'},
+   {route:'Namba → Daikokucho',type:'metro',card:'ICOCA / Metro',note:'Metro ¥190/คน; หรือเดินกลับฟรีได้'}
   ];
   return base;
  }

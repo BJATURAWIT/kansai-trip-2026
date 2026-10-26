@@ -8,6 +8,13 @@ export const osakaMetroFareTable=Object.freeze({
  'Nippombashi → Shinsaibashi / Namba':{yen:190,zone:1,kmBand:'0–3 km',origin:'Nippombashi',destination:'Shinsaibashi',source:'https://global.yometro.com/route-from-nippombashi-osaka-to-shinsaibashi-osaka',optionalWalk:true},
  'Shinsaibashi → Umeda Sky':{yen:240,zone:2,kmBand:'3–7 km',origin:'Shinsaibashi',destination:'Umeda',source:'https://global.yometro.com/route-from-shinsaibashi-osaka-to-umeda-osaka'},
  'Umeda → Daikokucho':{yen:240,zone:2,kmBand:'3–7 km',origin:'Umeda',destination:'Daikokucho',source:'https://global.yometro.com/route-from-umeda-osaka-to-daikokucho-osaka'},
+ 'Daikokucho → Umeda':{yen:240,origin:'Daikokucho',destination:'Umeda',source:'https://ekitan.com/transit/fare/sf-5590/st-4960'},
+ 'Centara → Daikokucho → Umeda':{yen:240,origin:'Daikokucho',destination:'Umeda',source:'https://ekitan.com/transit/fare/sf-5590/st-4960'},
+ 'JR Osaka → Daikokucho → Centara':{yen:240,origin:'Umeda',destination:'Daikokucho',source:'https://ekitan.com/transit/fare/sf-4960/st-5590'},
+ 'Daikokucho → Yodoyabashi':{yen:240,origin:'Daikokucho',destination:'Yodoyabashi',source:'https://ekitan.com/transit/fare/sf-5590/st-6143'},
+ 'Yodoyabashi → Daikokucho':{yen:240,origin:'Yodoyabashi',destination:'Daikokucho',source:'https://ekitan.com/transit/fare/sf-5590/st-6143'},
+ 'Daikokucho → Namba':{yen:190,origin:'Daikokucho',destination:'Namba',source:'https://ekitan.com/transit/fare/sf-5590/st-5727'},
+ 'Namba → Daikokucho':{yen:190,origin:'Namba',destination:'Daikokucho',source:'https://ekitan.com/transit/fare/sf-5727/st-5590'},
 });
 export const osakaMetroFareSource='https://subway-tr.osakametro.co.jp/en/guide/fare/fare/price.php';
 export const metroFareForSegment=segment=>segment?.type==='metro'?osakaMetroFareTable[segment.route]||null:null;
