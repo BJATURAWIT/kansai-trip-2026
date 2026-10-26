@@ -24,11 +24,11 @@ export const transportByDay={
   ],
   2:[
     mk('Centara → Daikokucho','walk','เดิน','สถานีอยู่ใกล้โรงแรม'),
-    mk('Daikokucho → Morinomiya (Osaka Castle)','metro','ICOCA / Osaka Metro','ค่าโดยสารขึ้นกับระยะทางและการเปลี่ยนสาย','¥190–390/เที่ยว ตามระยะทาง'),
-    mk('Osaka Castle → Nippombashi (Kuromon)','metro','ICOCA / Osaka Metro','เปลี่ยนสายภายใน Metro ตามเส้นทาง'),
-    mk('Nippombashi → Shinsaibashi / Namba','metro','ICOCA / Osaka Metro','เลือกเดินแทนได้บางช่วง'),
-    mk('Shinsaibashi → Umeda Sky','metro','ICOCA / Osaka Metro','ขึ้น Midosuji ไป Umeda จากนั้นเดินต่อ'),
-    mk('Umeda → Daikokucho','metro','ICOCA / Osaka Metro','ขากลับโรงแรม'),
+    mk('Daikokucho → Morinomiya (Osaka Castle)','metro','ICOCA / Osaka Metro','Zone 2 · ¥240/คน (Daikokucho → Morinomiya; ไม่คิดค่าการเปลี่ยนสายแยก)'),
+    mk('Osaka Castle → Nippombashi (Kuromon)','metro','ICOCA / Osaka Metro','Zone 2 · ¥240/คน (Morinomiya → Nippombashi)'),
+    mk('Nippombashi → Shinsaibashi / Namba','metro','ICOCA / Osaka Metro','Zone 1 · ¥190/คน ถึง Shinsaibashi หรือเดินแทนฟรี; ถ้าไป Namba เป็นคนละปลายทาง'),
+    mk('Shinsaibashi → Umeda Sky','metro','ICOCA / Osaka Metro','Zone 2 · ¥240/คน ถึง Umeda แล้วเดินต่อ Umeda Sky'),
+    mk('Umeda → Daikokucho','metro','ICOCA / Osaka Metro','Zone 2 · ¥240/คน ขากลับ Daikokucho'),
   ],
   3:[
     mk('Osaka-Namba → Nishikujo','other','ICOCA · Hanshin','รถไฟ Hanshin ไม่ใช่ JR'),
