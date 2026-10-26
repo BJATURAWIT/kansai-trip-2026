@@ -1,3 +1,4 @@
+import {travelBookings} from './centralTravel.js';
 // Curated for the 17–24 November 2026 travel plan.
 // Opening hours are published schedules, not guarantees for a future date.
 // 'verified' means a venue and its published information were checked, not a live reservation.
@@ -11,10 +12,10 @@ const allDays=[0,1,2,3,4,5,6];
 export const foodVenues={
  stardust:food('Sky Lounge STARDUST','umeda','Sky lounge / International dinner','Window Seat Guaranteed “Venus” course · menu includes premium beef fillet',12000,'¥12,000/คนรวมภาษี + service charge 10% (¥1,200 หากคิดเต็มราคา) + เครื่องดื่มอย่างน้อยคนละ 1 แก้วแยก · รวม 2 คนเริ่มราว ¥26,400 ก่อนเครื่องดื่ม เมื่อเงื่อนไขคอร์สยืนยันแล้ว','17:00–22:00, Food L.O. 21:00','ปกติเปิดทุกวัน / ตรวจประกาศวันจริง','https://www.skybldg.co.jp/cafeshop/stardust/','https://www.tablecheck.com/en/sky-lounge-stardust','Umeda Sky Building Tower East 39F อาคารเดียวกับจุดชมวิว','วิวสูง/ที่นั่งริมหน้าต่างเหมาะกับมื้อพิเศษ; ข้อจำกัด: แพ็กเกจอาจมีราคาแพง ต้องเลือก Window Seat Guaranteed และเครื่องดื่มแยก','https://www.tablecheck.com/en/sky-lounge-stardust',{
  map:'Sky Lounge STARDUST Umeda Sky Building 39F',booking:'https://www.tablecheck.com/en/sky-lounge-stardust',
- window:'เลือกคอร์ส Window Seat Guaranteed เท่านั้น; ยืนยันโต๊ะและเวลาโดยตรงก่อนชำระ',
- diet:'เมนูตัวอย่างมี Beef Fillet; ทั้งสองคนไม่ทานเนื้อวัว (ไม่ใช่อาหารแพ้) ต้องขอร้านเปลี่ยนเป็นปลา/อาหารทะเลหรือจานอื่น และได้รับคำตอบยืนยันก่อนจอง',
- note:'เวลาคอร์สที่แสดงบน TableCheck อาจกำหนด 17:30–19:30 ไม่ตรงแผน 18:15–20:00; ตรวจเวลาที่จองได้จริง ห้ามถือว่าจองแล้ว',
- verifiedMenuDate:'2026-10-26',special:true,walkIn:false
+ window:'ชื่อคอร์สและสิทธิ์โต๊ะริมหน้าต่างยังไม่ยืนยันจากเอกสารการจอง อย่าสรุปว่าได้โต๊ะริมหน้าต่างแล้ว',
+ diet:'ตัวอย่างเมนูมี Beef Fillet; ยังไม่ทราบสถานะคำขอเปลี่ยนเมนู กรุณายืนยันกับร้านก่อนวันใช้บริการ',
+ note:'ร้านจองยืนยันแล้ว แต่ยังไม่ได้ยืนยันเวลาจองจริง ชื่อคอร์ส สิทธิ์โต๊ะริมหน้าต่าง และการเปลี่ยนเมนูจากหลักฐานการจอง',
+ verifiedMenuDate:'2026-10-26',reservation:travelBookings.restaurants.stardust.status,special:true,walkIn:false
  }),
  xex:food('XEX WEST — aburiyaki & sushi An','umeda','Edomae sushi / Japanese fine dining','Edomae sushi, sashimi, grilled seafood',null,'ข้อมูล HERBIS ระบุงบ Dinner ตั้งแต่ ¥8,500/คน (ไม่ใช่ราคาเมนูรับประกัน)','17:30–23:00, Dinner L.O. 21:30','ตรวจตาราง HERBIS ก่อนจอง','https://www.herbis.jp/restaurant-cafe/detail/200','https://www.herbis.jp/restaurant-cafe/detail/200','Umeda Sky → HERBIS PLAZA ENT 7F เดินประมาณ 15–20 นาที (ตรวจ Maps)','จุดเด่น: ซูชิเอโดะมาเอะและโต๊ะ/เคาน์เตอร์; ข้อจำกัด: มีที่นั่งร้าน An ค่อนข้างจำกัด ราคาเป็นมื้อพิเศษ','https://www.herbis.jp/restaurant-cafe/detail/200',{
  map:'XEX WEST aburiyaki sushi An HERBIS PLAZA ENT 7F Osaka',
@@ -44,7 +45,7 @@ export function foodStopsForDay(day,prefs={}){
  const kyoto=prefs.kyoto==='east'?'east':'west',mode=prefs.dayPlans?.[day]||'original';
  switch(day){
  case 1:return [f('21:00','kura','primary','late-dinner','ถ้าตรวจ ตม./เช็กอินเสร็จทัน; ถ้าคิวเกิน 15 นาทีไป Tsurutontan ใกล้โรงแรม'),f('21:00','tsurutontan','backup','late-dinner','สำรองเปิดถึงดึกใกล้ Daikokucho')];
- case 2:return [f('11:45','sushiro','primary','lunch','จาก Kuromon Market เดินไป Namba Amza ถ้าคิวเกิน 15 นาทีใช้ Yayoiken'),f('11:45','yayoiken','backup','lunch','ร้านเซ็ตใกล้ Nipponbashi'),f('18:15','stardust','primary','dinner','Special Dinner · Not Booked'),f('18:15','xex','backup','dinner','เลือกเมื่อร้านหลักยืนยันเปลี่ยน Beef ไม่ได้ / ไม่มีโต๊ะเหมาะสม')];
+ case 2:return [f('11:45','sushiro','primary','lunch','จาก Kuromon Market เดินไป Namba Amza ถ้าคิวเกิน 15 นาทีใช้ Yayoiken'),f('11:45','yayoiken','backup','lunch','ร้านเซ็ตใกล้ Nipponbashi'),f(travelBookings.restaurants.stardust.reservationTimeLocal||travelBookings.restaurants.stardust.plannedDinnerStartLocal,'stardust','primary','dinner','Special Dinner · Confirmed booking; dinner time tentative pending restaurant confirmation'),f('18:15','xex','backup','dinner','Emergency backup only; STARDUST reservation already confirmed')];
  case 3:return [f('11:45',null,'primary','lunch','USJ Quick Service ภายในสวนสนุก; พักก่อน Super Nintendo World 13:50 · เลือกจากแอปสวนสนุกวันจริง')];
  case 4:if(mode==='rainy')return kyoto==='west'?[f('11:30','saganoya','primary','lunch','ร้านในอาคารใกล้ Saga-Arashiyama ก่อนกลับ/ไปพิพิธภัณฑ์; ถ้าคิวเกิน 15 นาทีตรวจ Ozuru'),f('11:30','ozuru','backup','lunch','อุด้งสำรองถ้าเดินในฝนไหว')]:[f('13:00',null,'primary','lunch','เลือกอาหารในอาคารใกล้ Kyoto National Museum / Nishiki ตามเส้นทางฝนตกจริง')];
  if(kyoto==='east')return [f('13:45','izuju','primary','lunch','ซูชิเกียวโตหลัง Kiyomizu · เผื่อคิว'),f('15:30','tsujiri','optional','dessert','Matcha parfait ใกล้ Gion')];
