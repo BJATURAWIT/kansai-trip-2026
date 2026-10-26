@@ -18,7 +18,7 @@ export function normalizePreferences(value){
  for(let day=1;day<=8;day++){const v=p.dayPlans?.[day];days[day]=['original','rainy','relaxed'].includes(v)?v:'original'}
  const metro={};
  for(let day=1;day<=8;day++)metro[day]=p.metroPassDays?.[day]===true;
- return {kyoto:p.kyoto==='east'?'east':'west',dayPlans:days,metroPassDays:metro,airportTrain:p.airportTrain==='rapit'?'rapit':'express'};
+ return {kyoto:p.kyoto==='east'?'east':'west',dayPlans:days,metroPassDays:metro,airportTrain:['express','rapit','jr'].includes(p.airportTrain)?p.airportTrain:'express'};
 }
 const slot=(time,title,detail,map)=>({time,title,detail,map});
 const fixedTime=new Map([
