@@ -85,3 +85,37 @@ test('food items appear in original schedule and selected routes and dining data
  assert.equal(itinerary.length,8);
  assert.ok(checklist.some(x=>x.id==='flight'&&x.done));
 });
+
+test('walk-in budget strategy has fallback and never labels ordinary courses as booked',()=>{
+ const important=[[1,'late-dinner'],[2,'lunch'],[4,'lunch'],[5,'lunch'],[7,'lunch'],[7,'dinner'],[8,'lunch']];
+ for(const [day,kind] of important){
+  const stops=foodStopsForDay(day,prefs('west','original',day)).filter(x=>x.kind===kind);
+  assert.equal(stops.filter(x=>x.role==='primary').length,1,day+'/'+kind);
+  assert.ok(stops.filter(x=>x.role==='backup').length>=1,day+'/'+kind);
+  for(const stop of stops){
+   if(!stop.id)continue;
+   const venue=foodVenues[stop.id];
+   assert.equal(venue.reservation,'not-booked');
+   assert.ok(venue.site&&venue.map&&venue.diet);
+   assert.ok(venue.review&&venue.reviewSource);
+   assert.ok(venue.hours&&venue.closures);
+  }
+ }
+ assert.equal(foodStopsForDay(2,prefs('west','original',2)).find(x=>x.kind==='dinner'&&x.role==='primary').id,'stardust');
+ assert.ok(foodVenues.stardust.window.includes('Window Seat Guaranteed'));
+ assert.ok(foodVenues.stardust.diet.includes('ก่อนจอง'));
+ assert.ok(foodVenues.stardust.priceNote.includes('10%'));
+ const normal=['kura','sushiro','yayoiken','ozuru','saganoya'];
+ assert.ok(normal.every(id=>foodVenues[id].priceYen===null||foodVenues[id].priceYen<=1800));
+});
+test('2026-11-20 Kyoto west is preferred with bridge before Ozuru and no East stops',()=>{
+ const p=prefs('west','original',4);
+ const entries=resolvedSchedule(4,p);
+ const at=title=>entries.findIndex(e=>e.title.includes(title));
+ assert.ok(at('Arashiyama Bamboo Grove')<at('Tenryu-ji'));
+ assert.ok(at('Tenryu-ji')<at('Togetsukyo Bridge'));
+ assert.ok(at('Togetsukyo Bridge')<at('Ozuru Udon'));
+ assert.equal(entries[at('Ozuru Udon')].time,'11:00');
+ assert.equal(entries.some(e=>/Izuju|Tsujiri/.test(e.title)),false);
+ assert.equal(foodVenues.saganoya.days.includes(5),true);
+});
