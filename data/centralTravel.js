@@ -27,6 +27,16 @@ export const travelBookings = Object.freeze({
     {id:'nishimuraya',name:'Nishimuraya Hotel Shogetsutei',date:'22–23 พ.ย. · 1 คืน',plan:'Dinner + Breakfast',area:'Kinosaki Onsen',map:'Nishimuraya Hotel Shogetsutei',booked:true},
     {id:'centara2',name:'Centara Life Namba Hotel Osaka',date:'23–24 พ.ย. · 1 คืน',plan:'Breakfast included',area:'Osaka / Namba',map:'Centara Life Namba Hotel Osaka',booked:true},
   ],
+  // Only public-safe fields. Reservation email, confirmation IDs and private notes stay offline.
+  restaurants:{
+    stardust:{
+      id:'stardust',name:'Sky Lounge STARDUST',date:'2026-11-18',
+      partySize:2,location:'Umeda Sky Building Tower East 39F',
+      status:'confirmed',publicLabel:'Special Dinner',
+      reservationTimeLocal:null,plannedDinnerStartLocal:'18:15',plannedDinnerEndLocal:'20:00',
+      courseName:null,windowSeatConfirmed:null,beefSubstitutionConfirmed:null
+    }
+  },
   nankaiArrival:{
     product:'Rapi:t Digital Ticket',seatClass:'Super Seat',direction:'Kansai Airport → Nankai Namba',date:'2026-11-17',
     travelers:2,pricePerAdultYen:1590,totalPaidYen:3180,purchased:true,seatSelectionConfirmed:false,
