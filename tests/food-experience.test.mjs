@@ -36,7 +36,7 @@ test('all restaurant stops are on their plan routes and not on venue closing day
    for(const x of stops){
     if(!x.id)continue;
     assert.ok(foodVenues[x.id],x.id);
-    assert.equal(foodVenues[x.id].reservation,'not-booked');
+    assert.equal(foodVenues[x.id].reservation,x.id==='stardust'?'confirmed':'not-booked');
     assert.ok(foodVenues[x.id].diet);
     assert.ok(foodVenues[x.id].map);
     assert.equal(foodVenues[x.id].priceYen===null||Number.isInteger(foodVenues[x.id].priceYen),true);
@@ -63,7 +63,7 @@ test('no duplicate ryokan meals or Centara breakfasts; rainy Nara no Nara food',
  assert.ok(!names(foodStopsForDay(5,prefs('west','rainy',5))).includes('nakatanidou'));
  assert.ok(names(foodStopsForDay(5,prefs('west','original',5))).includes('nakatanidou'));
 });
-test('Day 2 special evening is discreet and dinner is not booked',()=>{
+test('Day 2 special dinner is confirmed but unknown booking details remain unset',()=>{
  const p=prefs('west','original',2);
  const events=resolveDay(2,p).schedule;
  assert.ok(events.some(s=>s.time==='15:45–16:15'&&s.title==='Umeda Sky Building'));
@@ -71,7 +71,12 @@ test('Day 2 special evening is discreet and dinner is not booked',()=>{
  assert.ok(events.some(s=>s.time==='18:15–20:00'&&s.title==='Special Dinner'));
  const food=foodStopsForDay(2,p);
  assert.deepEqual(names(food).filter(x=>x==='stardust'||x==='xex'),['stardust','xex']);
- assert.equal(foodVenues.stardust.reservation,'not-booked');
+ assert.equal(foodVenues.stardust.reservation,'confirmed');
+ assert.equal(travelBookings.restaurants.stardust.status,'confirmed');
+ assert.equal(travelBookings.restaurants.stardust.reservationTimeLocal,null);
+ assert.equal(travelBookings.restaurants.stardust.courseName,null);
+ assert.equal(travelBookings.restaurants.stardust.windowSeatConfirmed,null);
+ assert.equal(travelBookings.restaurants.stardust.beefSubstitutionConfirmed,null);
  assert.equal(foodVenues.xex.reservation,'not-booked');
  const serialized=JSON.stringify([foodVenues,events]);
  assert.ok(!serialized.includes('private-surprise-details'));
@@ -102,8 +107,8 @@ test('walk-in budget strategy has fallback and never labels ordinary courses as 
   }
  }
  assert.equal(foodStopsForDay(2,prefs('west','original',2)).find(x=>x.kind==='dinner'&&x.role==='primary').id,'stardust');
- assert.ok(foodVenues.stardust.window.includes('Window Seat Guaranteed'));
- assert.ok(foodVenues.stardust.diet.includes('ก่อนจอง'));
+ assert.ok(foodVenues.stardust.window.includes('ยังไม่ยืนยัน'));
+ assert.ok(foodVenues.stardust.diet.includes('ก่อนวันใช้บริการ'));
  assert.ok(foodVenues.stardust.priceNote.includes('10%'));
  const normal=['kura','sushiro','yayoiken','ozuru','saganoya'];
  assert.ok(normal.every(id=>foodVenues[id].priceYen===null||foodVenues[id].priceYen<=1800));
