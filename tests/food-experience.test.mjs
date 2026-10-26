@@ -23,8 +23,8 @@ test('Kyoto West and East restaurants follow selected route and never overlap',(
  }
  const west=resolvedSchedule(4,prefs('west')).map(x=>x.title);
  assert.ok(west.indexOf('Arashiyama Bamboo Grove')<west.indexOf('Tenryu-ji Temple'));
- assert.ok(west.indexOf('Tenryu-ji Temple')<west.indexOf('Yudofu Sagano · Lunch'));
- assert.ok(west.indexOf('Yudofu Sagano · Lunch')<west.indexOf('Togetsukyo Bridge'));
+ assert.ok(west.indexOf('Tenryu-ji Temple')<west.indexOf('Togetsukyo Bridge'));
+ assert.ok(west.indexOf('Togetsukyo Bridge')<west.indexOf('Ozuru Udon · Lunch'));
 });
 
 test('all restaurant stops are on their plan routes and not on venue closing days',()=>{

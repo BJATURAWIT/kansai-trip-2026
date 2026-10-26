@@ -90,7 +90,7 @@ function buildKyoto(choice,mode){
  const option=kyotoOptions[choice==='east'?'east':'west'];
  if(mode==='original')return option.schedule;
  if(mode==='relaxed')return choice==='west'?
-  option.schedule.filter((_,i)=>[0,1,2,3].includes(i)).concat(slot('14:00–16:00','กลับ Osaka หรือเดินย่าน Arashiyama ต่อ','คงวันที่ 20 พ.ย. เป็นวันพักผ่อนหลังเที่ยววัด','Saga-Arashiyama Station Kyoto')):
+  option.schedule.filter((_,i)=>[0,1,2,3,4].includes(i)).concat(slot('14:00–16:00','กลับ Osaka หรือเดินย่าน Arashiyama ต่อ','คงวันที่ 20 พ.ย. เป็นวันพักผ่อนหลังเที่ยววัด','Saga-Arashiyama Station Kyoto')):
   option.schedule.filter((_,i)=>[0,1,3,4].includes(i)).concat(slot('16:00','Gion หรือกลับ Osaka','เลือกได้ตามความเหนื่อย','Gion Kyoto'));
  return choice==='west'?
  [
