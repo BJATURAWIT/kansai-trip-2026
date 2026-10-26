@@ -1,4 +1,5 @@
 'use client';
+import {metroFareForSegment,metroChoiceForDay,metroDayPassYen,osakaMetroFareSource} from '../../data/osakaMetroFares';
 import { useEffect,useState } from 'react';
 import { Ticket,TrainFront,MapPin,Clock3,CheckCircle2,Navigation,ArrowRight } from 'lucide-react';
 import {itinerary} from '../../data/trip';
@@ -10,8 +11,10 @@ import {getJapanClock,tripPhase,dayForDate,nextScheduleEntry,resolveDay,resolved
 const labelDay=n=>`${n+16} พ.ย.`;
 export function PassGuide({tickets,prefs}){
  const [filter,setFilter]=useState('all');
- const dayPassPrice=day=>[5,6,7].includes(day)?620:820;
+ const dayPassPrice=metroDayPassYen;
  const knownPrice=segment=>{
+   const metro=metroFareForSegment(segment);
+   if(metro)return {fare:metro.yen,source:osakaMetroFareSource};
    if(segment.type==='kintetsu'&&segment.route.includes('Kintetsu-Nara'))return {fare:680,source:'https://www.kintetsu.co.jp/foreign/english/aoniyoshi/'};
    return {fare:null,source:null};
  };
@@ -29,7 +32,7 @@ export function PassGuide({tickets,prefs}){
    const missing=list.filter(x=>x.fare===null).length;
    const eligibleMetro=list.filter(x=>x.type==='metro').length;
    const pass=dayPassPrice(d.day);
-   return {day:d.day,known:known*2,missing,eligibleMetro,pass,saved:prefs.metroPassDays?.[d.day]===true};
+   return {day:d.day,known:known*2,missing,eligibleMetro,pass,saved:prefs.metroPassDays?.[d.day]===true,metroChoice:metroChoiceForDay(d.day,list)};
  });
  const visible=filter==='all'?all:all.filter(x=>String(x.day)===filter);
  const total=grouped.reduce((sum,x)=>sum+x.known,0);
@@ -40,7 +43,7 @@ export function PassGuide({tickets,prefs}){
  <div className="tool-day-picker"><button className={filter==='all'?'active':''} onClick={()=>setFilter('all')}>ทุกวัน</button>{itinerary.map(d=><button key={d.day} className={filter===String(d.day)?'active':''} onClick={()=>setFilter(String(d.day))}>{d.day+16} พ.ย.</button>)}</div>
  <div className="fare-table-wrap"><table className="fare-table"><thead><tr><th>เส้นทาง</th><th>บัตร</th><th>ค่าโดยสาร · 2 คน</th></tr></thead><tbody>{visible.map(x=><tr key={x.id}><td><small>{x.day+16} พ.ย.</small><strong>{x.route}</strong><p>{x.note}</p></td><td>{x.card}</td><td><span className={'fare-pill '+x.state.status}>{x.state.label}</span><p>{x.fare===null?'ยังไม่ตรวจราคา':x.waived?'รวมใน Pass (ต้องรับบัตรก่อน)':x.prepaid?'จ่ายล่วงหน้าแล้ว ¥'+(x.fareYenPerAdult*2).toLocaleString('en-US')+' · ไม่ต้องจ่ายซ้ำ':x.free?'ฟรีเมื่อเดิน/ใช้ Shuttle':'¥'+(x.fare*2).toLocaleString('en-US')}</p>{x.source&&<a href={x.source} target="_blank" rel="noopener noreferrer">แหล่งราคา</a>}</td></tr>)}</tbody></table></div>
  <h3 className="tool-subtitle">สรุปรายวัน / Osaka Metro Day Pass</h3>
- {grouped.map(x=><div key={x.day} className="tool-card" style={{display:'flex',justifyContent:'space-between',alignItems:'start',gap:12}}><div><strong>{x.day+16} พ.ย. · ตรวจยืนยันแล้ว ¥{x.known.toLocaleString('en-US')} / 2 คน</strong><p>ไม่ทราบราคาอีก {x.missing} ช่วง</p><p>Osaka Metro Day Pass: ¥{x.pass.toLocaleString('en-US')}/คน (2 คน ¥{(x.pass*2).toLocaleString('en-US')})</p><p>Metro ที่คาดว่าจะใช้ {x.eligibleMetro} ช่วง · ควรเปรียบเทียบกับค่าโดยสารจริงก่อนซื้อ</p></div></div>)}
+ {grouped.map(x=><div key={x.day} className="tool-card" style={{display:'flex',justifyContent:'space-between',alignItems:'start',gap:12}}><div><strong>{x.day+16} พ.ย. · ตรวจยืนยันแล้ว ¥{x.known.toLocaleString('en-US')} / 2 คน</strong><p>ไม่ทราบราคาอีก {x.missing} ช่วง</p><p>Osaka Metro Day Pass: ¥{x.pass.toLocaleString('en-US')}/คน (2 คน ¥{(x.pass*2).toLocaleString('en-US')})</p><p>Metro ที่คาดว่าจะใช้ {x.eligibleMetro} ช่วง · {x.metroChoice.known?'จ่าย ICOCA ¥'+x.metroChoice.regularYenForTwo.toLocaleString('en-US')+' / 2 คน เทียบ Day Pass ¥'+x.metroChoice.dayPassYenForTwo.toLocaleString('en-US')+' · '+(x.metroChoice.recommendation==='day-pass'?'Day Pass ประหยัด ¥'+x.metroChoice.savingForTwo.toLocaleString('en-US'):'ICOCA คุ้มกว่า'):'ยังมีช่วง Metro ที่ต้องตรวจราคาเพิ่ม'}</p></div></div>)}
  <p className="tool-footnote">ราคา Kintetsu Osaka-Namba–Kintetsu-Nara ¥680 ต่อเที่ยวต่อคน อ้างอิงข้อมูลค่าโดยสารที่ค้นได้ · Day Pass ราคาเป็นบัตร Osaka Metro เท่านั้น ไม่รวม JR/Keihan/Kintetsu/Nankai · ราคารถไฟ/เส้นทางอื่นยังรอหลักฐาน ไม่ใช้ค่าประมาณ</p></section>;
 }
 export function TicketPanel({tickets,onOpenChecklist}){
