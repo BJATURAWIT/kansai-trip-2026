@@ -53,7 +53,7 @@ function RestaurantPhotoGallery({images,name}){
  const [selected,setSelected]=useState(0);
  const [failed,setFailed]=useState({});
  const current=images[selected]||images[0];
- if(!current)return <div className="food-photo-placeholder" role="img" aria-label={name+' · image not yet verified'}>Image not yet verified</div>;
+ if(!current)return <div className="food-gallery"><div className="food-photo-placeholder" role="img" aria-label={name+' · ภาพจริงยังไม่ยืนยัน'}>ยังไม่มีภาพถ่ายจริงของร้านที่ตรวจสิทธิ์แล้ว</div><div className="food-gallery-credit">เปิดเว็บไซต์ร้านจากลิงก์ Official Website ด้านล่างเพื่อดูภาพร้านและเมนูโดยตรง</div></div>;
  const broken=!!failed[selected];
  return <div className="food-gallery">
  <div className="food-gallery-main">
