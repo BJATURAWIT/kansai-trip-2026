@@ -17,24 +17,14 @@ const realCommons=(filename,{alt,caption,credit,license,relationship})=>({
  credit,license,type:'photograph',relationship,label:relationship==='same-venue'?'ภาพจริงของร้าน/เมนู':'ภาพจริงของแบรนด์ (ต่างสาขา)',verified:true
 });
 const photosByVenue={
- stardust:[],
- xex:[],
- kura:[realCommons('Kura Sushi Shinsekai-Tsutenkaku.jpg',{alt:'ภาพ Kura Sushi สาขา Shinsekai Tsutenkaku',caption:'ภาพจริง Kura Sushi สาขา Shinsekai-Tsutenkaku (ไม่ใช่สาขา Namba Parks South)',credit:'Mr.ちゅらさん',license:'CC BY-SA 4.0',relationship:'same-brand-other-branch'})],
- tsurutontan:[realCommons('Curry Udon @ Tsurutontan @ Roppongi (13622104654).jpg',{alt:'อาหาร Curry Udon ที่ Tsurutontan สาขา Roppongi',caption:'อาหารจริงของ Tsurutontan สาขา Roppongi ไม่ใช่ Daikokucho',credit:'Guilhem Vellut',license:'CC BY 2.0',relationship:'same-brand-other-branch'})],
- sushiro:[realCommons('Sushiro sushi plates.jpg',{alt:'จานซูชิจริงที่ร้าน Sushiro',caption:'ภาพซูชิจริงของ Sushiro ไม่ระบุสาขา Namba Amza',credit:'Tokumeigakarinoaoshima',license:'CC BY-SA 4.0',relationship:'same-brand-other-branch'})],
- yayoiken:[realCommons('Yayoiken Namba-Motomachi shop.jpg',{alt:'หน้าร้าน Yayoiken สาขา Namba Motomachi',caption:'หน้าร้านจริงของ Yayoiken สาขา Namba-Motomachi ไม่ใช่ Nipponbashi',credit:'Tokumeigakarinoaoshima',license:'CC BY-SA 4.0',relationship:'same-brand-other-branch'})],
- ozuru:[],saganoya:[],kamaiki:[],
- saizeriya:[realCommons('Saizeriya Namba Ocat.jpg',{alt:'ร้าน Saizeriya Namba OCAT',caption:'ภาพสาขา Saizeriya Namba OCAT ไม่ใช่ Kintetsu-Nara',credit:'Wikimedia Commons contributor',license:'See Wikimedia Commons file page',relationship:'same-brand-other-branch'})],
- masyua:[],inaba:[],shirokitsune:[],
- nakatanidou:[],
+ stardust:[],xex:[],kura:[],tsurutontan:[],sushiro:[],yayoiken:[],
+ ozuru:[],saganoya:[],kamaiki:[],saizeriya:[],masyua:[],inaba:[],shirokitsune:[],nakatanidou:[],
  izuju:[
-  realCommons('Sabazushi Izuju.jpg',{alt:'ซาบะซูชิที่ทำและจำหน่ายโดย Gion Izuju Kyoto',caption:'ซาบะซูชิของร้าน Gion Izuju ที่เกียวโต',credit:'Kykk wiki',license:'CC0 1.0',relationship:'same-venue'}),
-  realCommons('Sushi restaurant in front of Yasaka-jinja by carendt242.jpg',{alt:'หน้าร้าน Gion Izuju ตรงทางเข้าศาลเจ้า Yasaka',caption:'หน้าร้าน Gion Izuju ใกล้ Yasaka-jinja',credit:'carendt242',license:'CC BY 2.0',relationship:'same-venue'})],
+  realCommons('Sabazushi Izuju.jpg',{alt:'ซาบะซูชิที่ทำและจำหน่ายโดย Gion Izuju Kyoto',caption:'ภาพซาบะซูชิจริงของร้าน Gion Izuju',credit:'Kykk wiki',license:'CC0 1.0',relationship:'same-venue'}),
+  realCommons('Sushi restaurant in front of Yasaka-jinja by carendt242.jpg',{alt:'หน้าร้าน Gion Izuju ตรงทางเข้าศาลเจ้า Yasaka',caption:'หน้าร้านจริง Gion Izuju ใกล้ Yasaka-jinja',credit:'carendt242',license:'CC BY 2.0',relationship:'same-venue'})
+ ],
  tsujiri:[],excafe:[],
- arabica:[
-  realCommons('% Arabica Kyoto Arashiyama.jpg',{alt:'ภาพภายนอกร้าน % Arabica Kyoto Arashiyama ข้างแม่น้ำ',caption:'ภาพจริงของ % Arabica สาขา Kyoto Arashiyama',credit:'Lenoopen1',license:'CC BY-SA 4.0',relationship:'same-venue'}),
-  realCommons('% Arabica Kyoto Arashiyama by Takumi Ota.jpg',{alt:'ภาพบรรยากาศ % Arabica Kyoto Arashiyama',caption:'ภาพจริง % Arabica Arashiyama โดย Takumi Ota',credit:'Takumi Ota',license:'CC BY-SA 2.0',relationship:'same-venue'})
- ]
+ arabica:[realCommons('% Arabica Kyoto Arashiyama.jpg',{alt:'ร้าน % Arabica Kyoto Arashiyama ข้างแม่น้ำ',caption:'ภาพถ่ายร้าน % Arabica สาขา Kyoto Arashiyama',credit:'Lenoopen1',license:'CC BY-SA 4.0',relationship:'same-venue'})]
 };
 export const restaurantImagesFor=id=>photosByVenue[id]||[];
 
