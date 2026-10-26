@@ -49,6 +49,20 @@ function RouteIcon({ type }) {
   return type === 'walk' ? <Footprints size={19}/> : type === 'bus' ? <Bus size={19}/> : type === 'plane' ? <Plane size={19}/> : <TrainFront size={19}/>;
 }
 
+function RestaurantPhotoGallery({images,name}){
+ const [selected,setSelected]=useState(0);
+ const [failed,setFailed]=useState({});
+ const current=images[selected]||images[0];
+ if(!current)return <div className="food-photo-placeholder" role="img" aria-label={name+' · image not yet verified'}>Image not yet verified</div>;
+ const broken=!!failed[selected];
+ return <div className="food-gallery">
+ <div className="food-gallery-main">
+ {broken||current.type==='placeholder'?<div className="food-photo-placeholder" role="img" aria-label={current.alt}>Image not yet verified</div>:<img key={current.src} src={current.src} alt={current.alt} loading="lazy" decoding="async" referrerPolicy="no-referrer" onError={()=>setFailed(p=>({...p,[selected]:true}))}/>}
+ </div>
+ <div className="food-gallery-credit"><span>{broken?'Image not yet verified':current.label}</span> · {current.caption}{current.source&&!broken&&<a href={current.source} target="_blank" rel="noopener noreferrer">Source / {current.license} / {current.credit}</a>}</div>
+ {images.length>1&&<div className="food-gallery-thumbs" aria-label={name+' photo gallery'}>{images.slice(0,3).map((item,i)=><button type="button" key={i} className={selected===i?'selected':''} onClick={()=>setSelected(i)} aria-label={'View image '+(i+1)+' of '+name}>{item.type==='placeholder'||failed[i]?<span>?</span>:<img src={item.src} alt={item.alt} loading="lazy" decoding="async" onError={()=>setFailed(p=>({...p,[i]:true}))}/>}</button>)}</div>}
+ </div>;
+}
 function FoodDining({day,prefs}){
  const stops=foodStopsForDay(day,prefs);
  const schedule=resolveDay(day,prefs).schedule;
@@ -61,7 +75,7 @@ function FoodDining({day,prefs}){
    return <article className="food-item" key={stop.id||'flex-'+i}>
      <div className="food-item-top"><span>{stop.time}</span><span>{stop.role==='primary'?'Primary':stop.role==='backup'?'Backup':'Optional'}</span><span>{v?.status==='verified'?'Verified':'Unverified'}</span></div>
      <h4>{v?.name||foodName(stop)}</h4>
-     {v?.image?.src&&<div className="food-thumb"><img src={v.image.src} alt={v.image.caption} loading="lazy" onError={event=>{event.currentTarget.style.display='none'}}/><small>{v.image.caption} · <a href={v.image.source} target="_blank" rel="noopener noreferrer">{v.image.license} · {v.image.credit}</a></small></div>}
+     {v&&<RestaurantPhotoGallery images={v.images||[]} name={v.name}/>} 
      <p>{v?.type||stop.kind} · {stop.note}</p>{v?.review&&<p><strong>ข้อดี / ข้อควรทราบ:</strong> {v.review}</p>}
      {v&&<><p><strong>เมนู:</strong> {v.menu}</p><p><strong>{['kura','sushiro'].includes(stop.id)?'ราคาเริ่มต้น/จาน:':v.special?'ราคาคอร์สตัวอย่าง/คน:':'ราคาเมนูตัวอย่าง:'}</strong> {v.priceYen?'¥'+v.priceYen.toLocaleString('en-US'):'ยังไม่ยืนยัน'} · {v.priceNote}</p><p><strong>เวลาเปิด:</strong> {v.hours} · {v.closures}</p><p><strong>จากจุดก่อนหน้า:</strong> {v.from}</p><p><strong>Dietary Note · No Beef:</strong> {v.diet}</p>{v.window&&<p><strong>เงื่อนไขโต๊ะ:</strong> {v.window}</p>}{v.special&&<span className="food-booking">{v.reservation==='confirmed'?'Confirmed / Booked':'Not Booked'}</span>}{!v.special&&<span className="food-booking">Walk-in · ถ้ารอเกิน 10–15 นาที ใช้ร้านสำรอง</span>}</>}
      <div className="food-actions">{v?.map&&<a href={mapSearchUrl(v.map)} target="_blank" rel="noopener noreferrer">Google Maps</a>}{v?.map&&prior?.map&&<a href={mapDirectionsUrl(prior.map,v.map,'walking')} target="_blank" rel="noopener noreferrer">Walking Directions from attraction</a>}{stop.id==='saganoya'&&<a href={mapDirectionsUrl('Arashiyama Udon Ozuru Kyoto',v.map,'walking')} target="_blank" rel="noopener noreferrer">Ozuru → Saganoya</a>}{stop.id==='saganoya'&&<a href={mapDirectionsUrl(v.map,'Saga-Arashiyama Station Kyoto','walking')} target="_blank" rel="noopener noreferrer">Saganoya → JR Saga-Arashiyama</a>}{v?.site&&<a href={v.site} target="_blank" rel="noopener noreferrer">Official Website</a>}{v?.booking&&<a href={v.booking} target="_blank" rel="noopener noreferrer">Booking Link</a>}{v?.menuSource&&<a href={v.menuSource} target="_blank" rel="noopener noreferrer">Menu / Price</a>}{v?.reviewSource&&<a href={v.reviewSource} target="_blank" rel="noopener noreferrer">Review / Source</a>}</div>
