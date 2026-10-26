@@ -72,7 +72,7 @@ export function validateFoodPlan(day,prefs){
  if(!v||!v.days.includes(weekday))return false;
  if(day===4&&v.area!==(prefs?.kyoto==='east'?'kyoto-east':'kyoto-west'))return false;
  if(day===5&&prefs?.dayPlans?.[5]==='rainy'&&v.area==='nara')return false;
- if(stop.kind==='lunch'&&!(/11:00|11:30|12:00|13:00|13:45/.test(stop.time)))return false;
+ if(stop.kind==='lunch'&&!(/^(11:00|11:30|11:45|12:00|13:00|13:45)$/.test(stop.time)))return false;
  return true;
  });
 }
