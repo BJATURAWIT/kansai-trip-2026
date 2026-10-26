@@ -24,16 +24,18 @@ export const transportByDay={
   ],
   2:[
     mk('Centara → Daikokucho','walk','เดิน','สถานีอยู่ใกล้โรงแรม'),
-    mk('Daikokucho → Morinomiya (Osaka Castle)','metro','ICOCA / Osaka Metro','ค่าโดยสารขึ้นกับระยะทางและการเปลี่ยนสาย','¥190–390/เที่ยว ตามระยะทาง'),
-    mk('Osaka Castle → Nippombashi (Kuromon)','metro','ICOCA / Osaka Metro','เปลี่ยนสายภายใน Metro ตามเส้นทาง'),
-    mk('Nippombashi → Shinsaibashi / Namba','metro','ICOCA / Osaka Metro','เลือกเดินแทนได้บางช่วง'),
-    mk('Shinsaibashi → Umeda Sky','metro','ICOCA / Osaka Metro','ขึ้น Midosuji ไป Umeda จากนั้นเดินต่อ'),
-    mk('Umeda → Daikokucho','metro','ICOCA / Osaka Metro','ขากลับโรงแรม'),
+    mk('Daikokucho → Morinomiya (Osaka Castle)','metro','ICOCA / Osaka Metro','Zone 2 · ¥240/คน (Daikokucho → Morinomiya; ไม่คิดค่าการเปลี่ยนสายแยก)'),
+    mk('Osaka Castle → Nippombashi (Kuromon)','metro','ICOCA / Osaka Metro','Zone 2 · ¥240/คน (Morinomiya → Nippombashi)'),
+    mk('Nippombashi → Shinsaibashi / Namba','metro','ICOCA / Osaka Metro','Zone 1 · ¥190/คน ถึง Shinsaibashi หรือเดินแทนฟรี; ถ้าไป Namba เป็นคนละปลายทาง'),
+    mk('Shinsaibashi → Umeda Sky','metro','ICOCA / Osaka Metro','Zone 2 · ¥240/คน ถึง Umeda แล้วเดินต่อ Umeda Sky'),
+    mk('Umeda → Daikokucho','metro','ICOCA / Osaka Metro','Zone 2 · ¥240/คน ขากลับ Daikokucho'),
   ],
   3:[
     mk('Osaka-Namba → Nishikujo','other','ICOCA · Hanshin','รถไฟ Hanshin ไม่ใช่ JR'),
     mk('Nishikujo → Universal-City','jr','ICOCA · JR ก่อนวันเริ่มพาส','JR Pass แผนเริ่ม 20 พ.ย. จึงยังไม่ครอบคลุมวันที่ 19'),
-    mk('Universal-City → โรงแรม','mixed','ICOCA · JR + Hanshin/Metro','จ่ายตามระยะทางที่ใช้จริง'),
+    mk('Universal-City → Nishikujo','jr','ICOCA · JR Yumesaki','JR Pass ยังไม่เริ่ม · ¥180/คน'),
+    mk('Nishikujo → Osaka-Namba','other','ICOCA · Hanshin','Hanshin ¥220/คน'),
+    mk('Osaka-Namba → Centara','walk','เดิน','เดินกลับ Centara ฟรี'),
   ],
   4:[
     mk('Daikokucho → Umeda','metro','ICOCA · Osaka Metro','ไม่รวมใน Kansai WIDE'),
@@ -48,6 +50,7 @@ export const transportByDay={
     mk('Osaka-Namba → Kintetsu-Nara','kintetsu','ICOCA · Kintetsu','เลือก Kintetsu เพราะใกล้ Nara Park กว่า JR Nara'),
     mk('Nara Park → Todai-ji → Kasuga Taisha','walk','เดิน','ค่าเข้าวัด/สวนจ่ายแยก'),
     mk('Kintetsu-Nara → Osaka-Namba','kintetsu','ICOCA · Kintetsu','JR Pass ไม่ครอบคลุม Kintetsu'),
+    mk('Namba → Daikokucho','metro','ICOCA · Osaka Metro','กลับโรงแรมด้วย Midosuji Line ¥190/คน'),
   ],
   6:[
     mk('Centara → Daikokucho → Umeda','metro','ICOCA · Osaka Metro','Metro จ่ายแยก'),
@@ -80,27 +83,26 @@ export function fareLabel(segment,day,tickets){
 }
 const spot=(time,title,detail,map)=>({time,title,detail,map});
 export const kyotoOptions={
- west:{name:'Arashiyama + Tenryu-ji',label:'Kyoto West · ป่าไผ่และเต้าหู้',summary:'ป่าไผ่ วัดเซน มื้อเต้าหู้ และสะพานริมแม่น้ำ',
+ west:{name:'Kyoto West — Arashiyama',label:'Kyoto West · Main Plan',summary:'เช้า Arashiyama → ป่าไผ่ → Tenryu-ji → สะพาน → อุด้งใกล้ทางเดิน → กลับ Osaka',
  schedule:[
- spot('06:15','Centara → JR Osaka → Saga-Arashiyama','Metro + JR Kyoto Line + Sagano Line','Saga-Arashiyama Station Kyoto'),
- spot('08:15','Arashiyama Bamboo Grove','ถ่ายภาพป่าไผ่ก่อนคนเยอะ','Arashiyama Bamboo Grove Kyoto'),
- spot('09:00','Tenryu-ji Temple','ชมวัดและสวนเซน','Tenryu-ji Kyoto'),
- spot('10:30','eX cafe Kyoto Arashiyama (Optional)','Dango / Matcha ถ้าคิวไม่ยาว','eX cafe Kyoto Arashiyama'),
- spot('11:30','Yudofu Sagano · Lunch','Walk-in ฤดูใบไม้แดง; Yoshimura/Shoraian เป็นร้านสำรอง','Yudofu Sagano Kyoto'),
- spot('13:00','Togetsukyo Bridge','ชมสะพานและแม่น้ำ','Togetsukyo Bridge Kyoto'),
- spot('14:00','% Arabica Kyoto Arashiyama (Optional)','เลือกแวะตามคิว','Arabica Kyoto Arashiyama'),
- spot('14:30–16:30','เดินเล่นหรือกลับ Osaka','เดินกลับ Saga-Arashiyama ต่อ JR ไป Osaka','Saga-Arashiyama Station Kyoto')
- ],note:'Shoraian เดินอ้อมริมแม่น้ำ ควรจองล่วงหน้า'},
- east:{name:'Higashiyama + Fushimi Inari',label:'Kyoto East · วัดเก่าและ Gion',summary:'Fushimi Inari → Tofukuji → Kiyomizu-dera → Gion ไม่ย้อนทาง',
+ spot('06:30–07:00','ออกจาก Centara ไป Arashiyama','Osaka Metro → JR Osaka → Kyoto → Saga-Arashiyama','Saga-Arashiyama Station Kyoto'),
+ spot('08:15','Arashiyama Bamboo Grove','เดินป่าไผ่ก่อนคนแน่น','Arashiyama Bamboo Grove Kyoto'),
+ spot('09:00','Tenryu-ji Temple','ชมสวนเซนตามทาง','Tenryu-ji Kyoto'),
+ spot('10:15','Togetsukyo Bridge','เดินชมสะพานก่อนมื้อกลางวัน','Togetsukyo Bridge Kyoto'),
+ spot('11:00','Ozuru Udon · Lunch','Kitsune/Tempura udon; ถ้าคิวเกิน 10–15 นาที ไป Saganoya ที่เปิด 11:30','Arashiyama Udon Ozuru Kyoto'),
+ spot('13:00–14:30','Local Snacks / Matcha / Sightseeing (Optional)','เฉพาะร้านใกล้เส้นทางและคิวสั้น ไม่เดินอ้อม','Arashiyama Kyoto'),
+ spot('14:30–16:00','เดินทางกลับ Osaka','เดินกลับ JR Saga-Arashiyama → Kyoto → Osaka','Saga-Arashiyama Station Kyoto')
+ ],note:'Main Plan เป็น Kyoto West เท่านั้น; ร้าน Saganoya ใกล้ JR Saga-Arashiyama เปิด 11:30'},
+ east:{name:'Kyoto East — Higashiyama',label:'Kyoto East · Alternative',summary:'Fushimi Inari → Tofukuji → Kiyomizu-dera → Gion ไม่ย้อนกลับ Arashiyama',
  schedule:[
- spot('07:15','Daikokucho → Yodoyabashi → Fushimi-Inari','Metro + Keihan (ICOCA)','Fushimi Inari Station Kyoto'),
+ spot('07:15','Daikokucho → Fushimi Inari','Osaka Metro + Keihan (ICOCA)','Fushimi Inari Station Kyoto'),
  spot('09:00','Fushimi Inari Taisha','เดินเสาโทริอิแดง','Fushimi Inari Taisha Kyoto'),
- spot('10:30','Tofukuji','จุดใบไม้แดงตามแนวรถไฟไปทางเหนือ','Tofukuji Temple Kyoto'),
- spot('12:30','Kiyomizu-dera + Sannenzaka / Ninenzaka','เดินลงจากวัดไป Gion','Kiyomizu-dera Kyoto'),
- spot('13:45','Gion Izuju Sushi · Lunch','Saba-zushi ใกล้ Yasaka; ไม่รับจองโต๊ะ','Gion Izuju Sushi Kyoto'),
- spot('15:30','Saryo Tsujiri Gion Honten','Matcha parfait','Saryo Tsujiri Gion Honten Kyoto'),
+ spot('10:30','Tofukuji','จุดชมใบไม้แดงระหว่างทาง','Tofukuji Temple Kyoto'),
+ spot('12:30','Kiyomizu-dera','เดินผ่าน Sannenzaka/Ninenzaka','Kiyomizu-dera Kyoto'),
+ spot('13:45','Izuju Sushi (optional East lunch)','Kyoto style sushi; ราคาและคิวตรวจหน้างาน','Gion Izuju Sushi Kyoto'),
+ spot('15:30','Saryo Tsujiri (optional)','Matcha parfait','Saryo Tsujiri Gion Honten Kyoto'),
  spot('16:30','Gion-Shijo → Osaka','Keihan + Osaka Metro','Gion Shijo Station Kyoto')
- ],note:'Sushi และ Matcha อยู่ในย่าน Gion ต่อจาก Kiyomizu-dera'}
+ ],note:'Kyoto East เป็นทางเลือกแยก ไม่ผสมกับ West'}
 };
 export const importantStops={
   1:['Don Mueang International Airport','Kansai International Airport Terminal 1','Nankai Namba Station','Centara Life Namba Hotel Osaka'],

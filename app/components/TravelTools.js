@@ -1,4 +1,5 @@
 'use client';
+import {fareSummary} from '../../data/transportPricing';
 import { useEffect,useState } from 'react';
 import { Ticket,TrainFront,MapPin,Clock3,CheckCircle2,Navigation,ArrowRight } from 'lucide-react';
 import {itinerary} from '../../data/trip';
@@ -8,40 +9,30 @@ import {mapSearchUrl,mapDirectionsUrl} from '../../data/mobility';
 import {getJapanClock,tripPhase,dayForDate,nextScheduleEntry,resolveDay,resolvedStops,resolvedSegments} from '../../data/experience';
 
 const labelDay=n=>`${n+16} พ.ย.`;
-export function PassGuide({tickets,prefs}){
+export function PassGuide({tickets,prefs,onChange}){
  const [filter,setFilter]=useState('all');
- const dayPassPrice=day=>[5,6,7].includes(day)?620:820;
- const knownPrice=segment=>{
-   if(segment.type==='kintetsu'&&segment.route.includes('Kintetsu-Nara'))return {fare:680,source:'https://www.kintetsu.co.jp/foreign/english/aoniyoshi/'};
-   return {fare:null,source:null};
- };
- const all=itinerary.flatMap(d=>resolvedSegments(d.day,prefs).map((leg,i)=>{
-   const state=fareLabel(leg,d.day,tickets),verified=knownPrice(leg);
-   const waived=leg.type==='jr'&&(state.status==='included');
-   const prepaid=leg.prepaid===true;
-   const free=leg.type==='walk'||leg.type==='shuttle';
-   const fare=waived||free||prepaid?0:verified.fare;
-   return {...leg,day:d.day,id:d.day+'-'+i,state,fare,source:verified.source,waived,free,prepaid};
- }));
- const grouped=itinerary.map(d=>{
-   const list=all.filter(x=>x.day===d.day);
-   const known=list.reduce((sum,x)=>sum+(x.fare??0),0);
-   const missing=list.filter(x=>x.fare===null).length;
-   const eligibleMetro=list.filter(x=>x.type==='metro').length;
-   const pass=dayPassPrice(d.day);
-   return {day:d.day,known:known*2,missing,eligibleMetro,pass,saved:prefs.metroPassDays?.[d.day]===true};
+ const days=itinerary.map(d=>{
+  const routes=resolvedSegments(d.day,prefs);
+  const priced=fareSummary(d.day,routes,tickets,{metroPass:prefs?.metroPassDays?.[d.day]===true});
+  return {...priced,day:d.day};
  });
- const visible=filter==='all'?all:all.filter(x=>String(x.day)===filter);
- const total=grouped.reduce((sum,x)=>sum+x.known,0);
- const unknown=grouped.reduce((sum,x)=>sum+x.missing,0);
- return <section className="tool-pane"><header className="tool-head"><span>TRANSPORT CALCULATOR · 2 ADULTS</span><h2><TrainFront/> ค่าเดินทางและบัตรโดยสาร</h2><p>ใช้เฉพาะราคาที่ตรวจยืนยันได้ · ราคาที่ไม่ทราบจะไม่ถูกนำมาบวกเป็นศูนย์แบบหลอกว่าเป็นยอดรวมจริง</p></header>
- <div className="pass-alert"><strong>{travelBookings.jrPass.name} · {travelBookings.jrPass.startDate} ถึง {travelBookings.jrPass.endDate} · ซื้อแล้ว ¥{travelBookings.jrPass.totalPriceYen.toLocaleString('en-US')} สำหรับ {travelBookings.jrPass.travelers} คน</strong><span>แสดงค่า JR ที่อยู่ในช่วงพาสว่า “รวมเมื่อรับพาส” จนกว่าจะยืนยันรับบัตรที่ Checklist · ค่า Metro, Nankai และ Kintetsu จ่ายเพิ่ม</span></div>
- <div className="tool-card"><h3>ค่าโดยสารเพิ่มเติมที่ตรวจยืนยันได้ (2 คน)</h3><strong style={{fontSize:28}}>¥{total.toLocaleString('en-US')} + ส่วนที่ยังไม่ทราบ</strong><p>มี {unknown} ช่วงที่ยังไม่สามารถระบุราคาปลายทางจริงได้ · ไม่ใช่ยอดรวมทั้งทริป</p><p>JR Pass ¥24,000 จ่ายแล้ว แสดงแยกจากค่าเดินทางเพิ่มเติม</p></div>
+ const visible=filter==='all'?days:days.filter(d=>String(d.day)===filter);
+ const grand=days.reduce((a,x)=>a+x.twoPeopleYen,0);
+ const unknown=days.reduce((a,x)=>a+x.unresolved,0);
+ return <section className="tool-pane"><header className="tool-head"><span>TRANSPORT CALCULATOR · 2 ADULTS</span><h2><TrainFront/> ค่าเดินทางและบัตรโดยสาร</h2><p>รายการรถไฟที่เลือกตามแผน Kyoto และสนามบินจริง · ไม่คิดเงิน JR ที่อยู่ในพาสและตั๋ว Rapi:t ขาเข้าที่จ่ายแล้วซ้ำ</p></header>
+ <div className="pass-alert"><strong>Kansai WIDE Pass ¥24,000 / 2 คน จ่ายแล้ว · 20–24 พ.ย.</strong><span>คำนวณค่าโดยสารเพิ่มจากพาส และแสดงค่า Metro Day Pass ให้เปรียบเทียบ · ตัวเลือกวันกลับเป็นเส้นทางใดเส้นทางหนึ่งเท่านั้น</span></div>
+ <div className="tool-card"><h3>ค่าเดินทางเพิ่มเติมตามแผนที่เลือก · 2 คน</h3><strong style={{fontSize:28}}>¥{grand.toLocaleString('en-US')}{unknown?' + รายการที่ยังเลือกเส้นทางไม่ได้':''}</strong><p>รายการที่ยังระบุราคาตายตัวไม่ได้: {unknown} รายการ · ค่าเดิน/รถรับส่งฟรีไม่เพิ่มยอด</p><p>ไม่รวม JR Pass และ Rapi:t ขาเข้าที่จ่ายแล้ว · ไม่รวมแท็กซี่และค่าเข้าชมสถานที่</p></div>
+ <div className="tool-card"><h3>24 พ.ย. · เลือกเส้นทางกลับสนามบิน</h3><div className="tool-day-picker">{[['express','Nankai Airport Express · ¥970/คน'],['rapit','Nankai Rapi:t · ¥1,670/คน'],['jr','JR ผ่าน Imamiya · รวมในพาส']].map(([key,label])=><button key={key} className={(prefs?.airportTrain||'express')===key?'active':''} onClick={()=>onChange?.({airportTrain:key})}>{label}</button>)}</div><p>เลือกเพียงเส้นทางเดียว · JR ต้องรับ Kansai WIDE Pass จริงและขึ้นขบวนในเครือข่าย JR ที่ครอบคลุม ส่วน Nankai ต้องจ่ายแยก</p></div>
  <div className="tool-day-picker"><button className={filter==='all'?'active':''} onClick={()=>setFilter('all')}>ทุกวัน</button>{itinerary.map(d=><button key={d.day} className={filter===String(d.day)?'active':''} onClick={()=>setFilter(String(d.day))}>{d.day+16} พ.ย.</button>)}</div>
- <div className="fare-table-wrap"><table className="fare-table"><thead><tr><th>เส้นทาง</th><th>บัตร</th><th>ค่าโดยสาร · 2 คน</th></tr></thead><tbody>{visible.map(x=><tr key={x.id}><td><small>{x.day+16} พ.ย.</small><strong>{x.route}</strong><p>{x.note}</p></td><td>{x.card}</td><td><span className={'fare-pill '+x.state.status}>{x.state.label}</span><p>{x.fare===null?'ยังไม่ตรวจราคา':x.waived?'รวมใน Pass (ต้องรับบัตรก่อน)':x.prepaid?'จ่ายล่วงหน้าแล้ว ¥'+(x.fareYenPerAdult*2).toLocaleString('en-US')+' · ไม่ต้องจ่ายซ้ำ':x.free?'ฟรีเมื่อเดิน/ใช้ Shuttle':'¥'+(x.fare*2).toLocaleString('en-US')}</p>{x.source&&<a href={x.source} target="_blank" rel="noopener noreferrer">แหล่งราคา</a>}</td></tr>)}</tbody></table></div>
- <h3 className="tool-subtitle">สรุปรายวัน / Osaka Metro Day Pass</h3>
- {grouped.map(x=><div key={x.day} className="tool-card" style={{display:'flex',justifyContent:'space-between',alignItems:'start',gap:12}}><div><strong>{x.day+16} พ.ย. · ตรวจยืนยันแล้ว ¥{x.known.toLocaleString('en-US')} / 2 คน</strong><p>ไม่ทราบราคาอีก {x.missing} ช่วง</p><p>Osaka Metro Day Pass: ¥{x.pass.toLocaleString('en-US')}/คน (2 คน ¥{(x.pass*2).toLocaleString('en-US')})</p><p>Metro ที่คาดว่าจะใช้ {x.eligibleMetro} ช่วง · ควรเปรียบเทียบกับค่าโดยสารจริงก่อนซื้อ</p></div></div>)}
- <p className="tool-footnote">ราคา Kintetsu Osaka-Namba–Kintetsu-Nara ¥680 ต่อเที่ยวต่อคน อ้างอิงข้อมูลค่าโดยสารที่ค้นได้ · Day Pass ราคาเป็นบัตร Osaka Metro เท่านั้น ไม่รวม JR/Keihan/Kintetsu/Nankai · ราคารถไฟ/เส้นทางอื่นยังรอหลักฐาน ไม่ใช้ค่าประมาณ</p></section>;
+ {visible.map(d=><article className="tool-card" key={d.day}>
+ <h3>{d.day+16} พ.ย. · ค่าเดินทางเพิ่ม ¥{d.twoPeopleYen.toLocaleString('en-US')} / 2 คน</h3>
+ <div className="fare-table-wrap"><table className="fare-table"><thead><tr><th>ช่วงเดินทาง</th><th>บัตร</th><th>ราคาสำหรับ 2 คน</th></tr></thead><tbody>
+ {d.rows.map((r,i)=><tr key={i}><td><strong>{r.route}</strong><p>{r.note}</p></td><td>{r.card}</td><td><span className={'fare-pill '+r.state.status}>{r.state.label}</span><p>{r.status==='prepaid'?'จ่ายแล้ว ¥'+r.paidYen.toLocaleString('en-US')+' ไม่คิดซ้ำ':r.status==='covered'?'รวมใน JR Pass':r.status==='free'?'ฟรี / เดิน':r.yen===null?'ขึ้นกับเส้นทางที่ยังไม่ระบุ':'¥'+(r.yen*2).toLocaleString('en-US')}</p>{r.source&&<a href={r.source} target="_blank" rel="noopener noreferrer">ตรวจแหล่งราคา</a>}</td></tr>)}
+ </tbody></table></div>
+ {d.metro.metroLegs>0&&<p className="tool-footnote">Osaka Metro: {d.metro.known?'ICOCA ¥'+d.metro.regularYenForTwo.toLocaleString('en-US')+' / 2 คน เทียบ Day Pass ¥'+d.metro.dayPassYenForTwo.toLocaleString('en-US')+' / 2 คน · '+(d.metro.recommendation==='day-pass'?'Day Pass คุ้มกว่า':'ICOCA คุ้มกว่า'):'ยังต้องระบุช่วง Metro ให้ชัดเจน'} · วันหยุดราคาพาส ¥620/คน วันธรรมดา ¥820/คน</p>}
+ </article>)}
+ <p className="tool-footnote">ค่าแท็กซี่ขึ้นกับมิเตอร์ ระยะทางและสภาพจราจรจึงไม่มีราคาเหมาจ่าย · เมื่อเลือกเดินไม่เสียค่าโดยสาร · ข้อมูลที่ยังไม่ระบุสถานีชัดเจนจะไม่แต่งตัวเลขขึ้นเอง</p>
+ </section>;
 }
 export function TicketPanel({tickets,onOpenChecklist}){
  const collected = tickets.passStatus === 'collected';

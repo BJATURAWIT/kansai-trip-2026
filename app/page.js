@@ -49,6 +49,21 @@ function RouteIcon({ type }) {
   return type === 'walk' ? <Footprints size={19}/> : type === 'bus' ? <Bus size={19}/> : type === 'plane' ? <Plane size={19}/> : <TrainFront size={19}/>;
 }
 
+const foodSampleUrls={
+ sushi:'https://images.unsplash.com/photo-1579871494447-9811cf80d66c?w=900&auto=format&fit=crop&q=78',
+ noodle:'https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=900&auto=format&fit=crop&q=78',
+ dinner:'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=900&auto=format&fit=crop&q=78',
+ seafood:'https://images.unsplash.com/photo-1547592180-85f173990554?w=900&auto=format&fit=crop&q=78',
+ dessert:'https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=900&auto=format&fit=crop&q=78',
+ coffee:'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=900&auto=format&fit=crop&q=78',
+ japanese:'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=900&auto=format&fit=crop&q=78',
+ italian:'https://images.unsplash.com/photo-1473093295043-cdd812d0e601?w=900&auto=format&fit=crop&q=78'
+};
+function foodSamplePhoto(id){
+ const type={stardust:'dinner',xex:'sushi',kura:'sushi',sushiro:'sushi',izuju:'sushi',tsurutontan:'noodle',ozuru:'noodle',saganoya:'noodle',kamaiki:'noodle',masyua:'noodle',shirokitsune:'noodle',inaba:'seafood',yayoiken:'japanese',saizeriya:'italian',nakatanidou:'dessert',tsujiri:'dessert',excafe:'dessert',arabica:'coffee'}[id]||'japanese';
+ return foodSampleUrls[type];
+}
+
 function FoodDining({day,prefs}){
  const stops=foodStopsForDay(day,prefs);
  const schedule=resolveDay(day,prefs).schedule;
@@ -57,14 +72,17 @@ function FoodDining({day,prefs}){
  <div className="food-list">{stops.map((stop,i)=>{
    const v=stop.id?foodVenues[stop.id]:null;
    const timeValue=x=>{const m=String(x).match(/^(\d{1,2}):(\d{2})/);return m?Number(m[1])*60+Number(m[2]):-1};
-   const prior=schedule.filter(x=>x.map&&x.map!==v?.map&&timeValue(x.time)>=0&&timeValue(x.time)<=timeValue(stop.time)).at(-1);
+   const prior=schedule.filter(x=>x.map&&x.map!==v?.map&&timeValue(x.time)>=0&&timeValue(x.time)<=timeValue(stop.time)&&!x.foodId).at(-1);
    return <article className="food-item" key={stop.id||'flex-'+i}>
      <div className="food-item-top"><span>{stop.time}</span><span>{stop.role==='primary'?'Primary':stop.role==='backup'?'Backup':'Optional'}</span><span>{v?.status==='verified'?'Verified':'Unverified'}</span></div>
      <h4>{v?.name||foodName(stop)}</h4>
-     {v?.image?.src&&<div className="food-thumb"><img src={v.image.src} alt={v.image.caption} loading="lazy" onError={event=>{event.currentTarget.style.display='none'}}/><small>{v.image.caption} · <a href={v.image.source} target="_blank" rel="noopener noreferrer">{v.image.license} · {v.image.credit}</a></small></div>}
-     <p>{v?.type||stop.kind} · {stop.note}</p>
-     {v&&<><p><strong>เมนู:</strong> {v.menu}</p><p><strong>ราคา/คน:</strong> {v.priceYen?'¥'+v.priceYen.toLocaleString('en-US'):'ยังไม่ยืนยัน'} · {v.priceNote}</p><p><strong>เวลาเปิด:</strong> {v.hours} · {v.closures}</p><p><strong>จากจุดก่อนหน้า:</strong> {v.from}</p><p><strong>Dietary Note · No Beef:</strong> {v.diet}</p>{v.window&&<p><strong>เงื่อนไขโต๊ะ:</strong> {v.window}</p>}<span className="food-booking">Not Booked</span></>}
-     <div className="food-actions">{v?.map&&<a href={mapSearchUrl(v.map)} target="_blank" rel="noopener noreferrer">Google Maps</a>}{v?.map&&prior?.map&&<a href={mapDirectionsUrl(prior.map,v.map,'walking')} target="_blank" rel="noopener noreferrer">Walking Directions</a>}{v?.site&&<a href={v.site} target="_blank" rel="noopener noreferrer">Official Website</a>}{v?.booking&&<a href={v.booking} target="_blank" rel="noopener noreferrer">Booking Link</a>}{v?.menuSource&&<a href={v.menuSource} target="_blank" rel="noopener noreferrer">Menu / Price</a>}</div>
+     {v&&<div className="food-photo-card" style={{overflow:'hidden',borderRadius:14,margin:'12px 0',background:'#f4f5f2',border:'1px solid #dbe6de'}}>
+       <img src={v.image?.src||foodSamplePhoto(stop.id)} alt={'ภาพอาหารตัวอย่างประเภท '+v.type} loading="lazy" decoding="async" style={{display:'block',width:'100%',height:'clamp(180px,32vw,300px)',objectFit:'cover'}} onError={e=>{const img=e.currentTarget;if(!img.dataset.fallback){img.dataset.fallback='1';img.src='https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=900&auto=format&fit=crop&q=78';}else img.style.display='none';}}/>
+       <div style={{padding:'12px 14px'}}><strong style={{display:'block',fontSize:13}}>{v.type}</strong><span style={{display:'block',fontSize:12,lineHeight:1.7,marginTop:4}}>เมนูตัวอย่าง: {v.menu}</span><small style={{display:'block',fontSize:10,color:'#63736c',marginTop:6}}>ภาพประกอบใกล้เคียง ไม่ใช่ภาพอาหารหรือบรรยากาศที่ยืนยันว่าเป็นของร้านนี้</small><a href={'https://www.google.com/search?tbm=isch&q='+encodeURIComponent(v.name+' '+v.type)} target="_blank" rel="noopener noreferrer" style={{fontSize:12,color:'#176b55',display:'inline-block',marginTop:7,fontWeight:800}}>ดูภาพจริงของร้าน ↗</a></div>
+     </div>}
+     <p>{v?.type||stop.kind} · {stop.note}</p>{v?.review&&<p><strong>ข้อดี / ข้อควรทราบ:</strong> {v.review}</p>}
+     {v&&<><p><strong>เมนู:</strong> {v.menu}</p><p><strong>{['kura','sushiro'].includes(stop.id)?'ราคาเริ่มต้น/จาน:':v.special?'ราคาคอร์สตัวอย่าง/คน:':'ราคาเมนูตัวอย่าง:'}</strong> {v.priceYen?'¥'+v.priceYen.toLocaleString('en-US'):'ยังไม่ยืนยัน'} · {v.priceNote}</p><p><strong>เวลาเปิด:</strong> {v.hours} · {v.closures}</p><p><strong>จากจุดก่อนหน้า:</strong> {v.from}</p><p><strong>Dietary Note · No Beef:</strong> {v.diet}</p>{v.window&&<p><strong>เงื่อนไขโต๊ะ:</strong> {v.window}</p>}{v.special&&<span className="food-booking">{v.reservation==='confirmed'?'Confirmed / Booked':'Not Booked'}</span>}{!v.special&&<span className="food-booking">Walk-in · ถ้ารอเกิน 10–15 นาที ใช้ร้านสำรอง</span>}</>}
+     <div className="food-actions">{v?.map&&<a href={mapSearchUrl(v.map)} target="_blank" rel="noopener noreferrer">Google Maps</a>}{v?.map&&prior?.map&&<a href={mapDirectionsUrl(prior.map,v.map,'walking')} target="_blank" rel="noopener noreferrer">Walking Directions from attraction</a>}{stop.id==='saganoya'&&<a href={mapDirectionsUrl('Arashiyama Udon Ozuru Kyoto',v.map,'walking')} target="_blank" rel="noopener noreferrer">Ozuru → Saganoya</a>}{stop.id==='saganoya'&&<a href={mapDirectionsUrl(v.map,'Saga-Arashiyama Station Kyoto','walking')} target="_blank" rel="noopener noreferrer">Saganoya → JR Saga-Arashiyama</a>}{v?.site&&<a href={v.site} target="_blank" rel="noopener noreferrer">Official Website</a>}{v?.booking&&<a href={v.booking} target="_blank" rel="noopener noreferrer">Booking Link</a>}{v?.menuSource&&<a href={v.menuSource} target="_blank" rel="noopener noreferrer">Menu / Price</a>}{v?.reviewSource&&<a href={v.reviewSource} target="_blank" rel="noopener noreferrer">Review / Source</a>}</div>
    </article>;
  })}</div></section>;
 }
@@ -152,6 +170,7 @@ function BookingsPanel() {
     <div className="flight-board"><span className="kicker">FLIGHT INFORMATION · 2 TRAVELERS</span>{trip.flights.map(f => <div className="flight-row" key={f.id}><div><strong>{f.route}</strong><span>{f.date} 2026 · {f.time} · Terminal 1 ทั้งขาออกและขาเข้า</span></div><Tag color="light">{f.code||'รอยืนยัน'}</Tag></div>)}</div>
     <div className="section-title bookings-heading"><div><span className="kicker">CONFIRMED STAYS</span><h3>ที่พักทั้งหมด 7 คืน</h3></div></div>
     {trip.hotels.map((hotel,index) => <div className="booking-row" key={hotel.id}><div className="booking-count">0{index+1}</div><div className="booking-body"><Tag color="green">ยืนยันการจองแล้ว</Tag><h3>{hotel.name}</h3><p>{hotel.date}</p><small>{hotel.plan} · {hotel.area}</small><LinkOut href={mapSearchUrl(hotel.map)} className="subtle-link">ดูที่ตั้งโรงแรม</LinkOut></div></div>)}
+    <div className="ticket-card"><Ticket size={24}/><div><Tag color="green">Confirmed / Booked</Tag><h3>{travelBookings.restaurants.stardust.publicLabel} · Sky Lounge STARDUST</h3><p>18 พ.ย. 2026 · {travelBookings.restaurants.stardust.partySize} คน · Umeda Sky Building 39F</p><p>เวลาในแผน 18:15 (ยังไม่ยืนยันจากใบจอง) · ชื่อคอร์ส / โต๊ะริมหน้าต่าง / การเปลี่ยนเมนูยังรอตรวจหลักฐานจริง</p></div></div>
     <div className="ticket-card"><Ticket size={24}/><div><Tag color="green">จ่ายแล้ว</Tag><h3>Universal Studios Japan · 19 พ.ย.</h3><p>Studio Pass + Express Pass · 2 คน</p><p>Nintendo {travelBookings.usj.nintendoEntry} · Harry Potter {travelBookings.usj.harryPotterEntry} (ตรวจจาก QR อีกครั้ง)</p></div></div>
     <div className="pass-card"><div><span className="kicker">NANKAI DIGITAL TICKET · 17 NOV</span><h3>Rapi:t Super Seat — Kansai Airport → Nankai Namba</h3><p>ซื้อแล้ว {travelBookings.nankaiArrival.travelers} คน รวม ¥{travelBookings.nankaiArrival.totalPaidYen.toLocaleString('en-US')} · รวมค่าโดยสารพื้นฐาน + Limited Express</p><p><strong>ยังไม่เลือกขบวนและที่นั่ง</strong> · หลังผ่าน ตม. รับกระเป๋า ให้เปิด Ticket Wallet เลือกขบวนและ Super Seat ของทั้ง 2 คน ก่อนรถออกอย่างน้อย 5 นาที</p><p>ต้องเริ่มใช้ก่อน 18 พ.ย. 02:59 JST · อีเมลยืนยันไม่ใช่ QR ตั๋วจริง</p></div><Tag color="green">ซื้อแล้ว · รอเลือกที่นั่ง</Tag><LinkOut href={travelBookings.nankaiArrival.walletUrl} className="action-link">เปิด Purchased Ticket / เลือกที่นั่ง</LinkOut></div>
     <div className="pass-card"><div><span className="kicker">JR-WEST RAIL PASS</span><h3>Kansai WIDE Area Pass · 5 วัน</h3><p>ซื้อแล้ว 2 คน รวม ¥24,000 · ใช้ 20–24 พ.ย. · ต้องไปรับบัตร/ตั๋วที่จองก่อนขึ้นรถ</p></div><Tag color="green">ซื้อแล้ว · รอรับ</Tag><LinkOut href="https://www.westjr.co.jp/travel-information/en/tickets-passes/jrwest-rail-pass/kansai_wide/" className="action-link">รายละเอียด / ซื้อ JR Pass</LinkOut></div>
@@ -247,7 +266,7 @@ export default function Home() {
       <div className="day-pagination"><button disabled={currentDay===1} onClick={() => setCurrentDay(x=>Math.max(1,x-1))}><ArrowLeft size={16}/> ก่อนหน้า</button><span>{currentDay} / 8</span><button disabled={currentDay===8} onClick={() => setCurrentDay(x=>Math.min(8,x+1))}>วันถัดไป <ArrowRight size={16}/></button></div>
     </>}
     {activeTab === 'table' && <TripTable prefs={prefs} onOpenDay={day => { setCurrentDay(day); selectTab('plan'); }}/>}
-    {activeTab === 'costs' && <PassGuide tickets={tickets} prefs={prefs}/>}
+    {activeTab === 'costs' && <PassGuide tickets={tickets} prefs={prefs} onChange={updatePrefs}/>}
     {activeTab === 'checklist' && <ChecklistPanel checked={checked} setChecked={changeChecked} syncStatus={syncStatus}/>}
     {activeTab === 'bookings' && <><TicketPanel tickets={tickets} onOpenChecklist={()=>selectTab('checklist')}/><BookingsPanel/></>}
     {activeTab === 'dining' && <section className="content-pane"><Heading label="FOOD & DINING" title="Food Experiences" caption="เลือกตามวันและแผน Kyoto/Backup · สถานะร้านไม่ใช่การยืนยันจอง"/>{itinerary.map(d=><div key={d.day}><h3>{d.day+16} พ.ย. · {d.day===4?(prefs.kyoto==='east'?'Kyoto East':'Kyoto West'):d.location}</h3><FoodDining day={d.day} prefs={prefs}/></div>)}</section>}

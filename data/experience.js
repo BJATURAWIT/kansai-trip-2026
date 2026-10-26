@@ -18,7 +18,7 @@ export function normalizePreferences(value){
  for(let day=1;day<=8;day++){const v=p.dayPlans?.[day];days[day]=['original','rainy','relaxed'].includes(v)?v:'original'}
  const metro={};
  for(let day=1;day<=8;day++)metro[day]=p.metroPassDays?.[day]===true;
- return {kyoto:p.kyoto==='east'?'east':'west',dayPlans:days,metroPassDays:metro,airportTrain:p.airportTrain==='rapit'?'rapit':'express'};
+ return {kyoto:p.kyoto==='east'?'east':'west',dayPlans:days,metroPassDays:metro,airportTrain:['express','rapit','jr'].includes(p.airportTrain)?p.airportTrain:'express'};
 }
 const slot=(time,title,detail,map)=>({time,title,detail,map});
 const fixedTime=new Map([
@@ -90,7 +90,7 @@ function buildKyoto(choice,mode){
  const option=kyotoOptions[choice==='east'?'east':'west'];
  if(mode==='original')return option.schedule;
  if(mode==='relaxed')return choice==='west'?
-  option.schedule.filter((_,i)=>[0,1,2,3].includes(i)).concat(slot('14:00–16:00','กลับ Osaka หรือเดินย่าน Arashiyama ต่อ','คงวันที่ 20 พ.ย. เป็นวันพักผ่อนหลังเที่ยววัด','Saga-Arashiyama Station Kyoto')):
+  option.schedule.filter((_,i)=>[0,1,2,3,4].includes(i)).concat(slot('14:00–16:00','กลับ Osaka หรือเดินย่าน Arashiyama ต่อ','คงวันที่ 20 พ.ย. เป็นวันพักผ่อนหลังเที่ยววัด','Saga-Arashiyama Station Kyoto')):
   option.schedule.filter((_,i)=>[0,1,3,4].includes(i)).concat(slot('16:00','Gion หรือกลับ Osaka','เลือกได้ตามความเหนื่อย','Gion Kyoto'));
  return choice==='west'?
  [
@@ -116,7 +116,7 @@ export function resolvedSchedule(day,prefs){
    const late=[
     slot('15:45–16:15','Umeda Sky Building','ไปจุดชมวิวก่อนช่วงพระอาทิตย์ตก','Umeda Sky Building Osaka'),
     slot('16:20–17:20','Sunset Special Moment','ชมแสงเย็นและถ่ายภาพ','Umeda Sky Building Osaka'),
-    slot('18:15–20:00','Special Dinner','STARDUST / XEX WEST · Not Booked; เลือกคอร์สที่ไม่มี Beef หรือขอเปลี่ยน','Sky Lounge STARDUST Osaka')
+    slot('18:15–20:00','Special Dinner','STARDUST · Confirmed booking (เวลาในแผนยังไม่ยืนยันจากใบจอง); XEX WEST เป็นสำรองฉุกเฉิน','Sky Lounge STARDUST Osaka')
    ];
    base=[...base.filter(x=>!/(Umeda Sky|Grand Front|Sunset|Special Dinner)/i.test(x.title)),...late];
  }
@@ -145,10 +145,22 @@ export function resolveDay(day,prefs){
 }
 export function resolvedSegments(day,prefs){
  const base=transportByDay[day]||[];
+ if(day===8){
+   const choice=prefs?.airportTrain||'express';
+   if(choice==='jr')return [
+    {route:'Centara → JR Imamiya',card:'เดิน',type:'walk',note:'เดินไปสถานี JR Imamiya ก่อนใช้พาส'},
+    {route:'JR Imamiya → Tennoji → Kansai Airport',card:'Kansai WIDE Pass · JR Kansai Airport Rapid',type:'jr',note:'นั่ง JR ที่อยู่ในเขตพาส ถ้าเริ่ม/รับพาสแล้วจะไม่มีค่า JR เพิ่ม'},
+   ];
+   return [
+    {route:'Centara → Nankai Namba',card:'เดิน',type:'walk',note:'เดินถึงสถานี Nankai Namba'},
+    choice==='rapit'?{route:'Nankai Namba → Kansai Airport · Rapi:t Regular Seat',type:'nankai',card:'Nankai Rapi:t Reserved Seat',note:'ค่าโดยสาร ¥970 + Express Regular Seat ¥700; ยังไม่ได้ซื้อตั๋วขากลับ'}:
+     {route:'Nankai Namba → Kansai Airport · Airport Express',type:'nankai',card:'ICOCA · Nankai Airport Express',note:'¥970/คน ไม่มีค่ารถด่วนเพิ่มเติม'},
+   ];
+ }
  if(day!==4){
   if(day===5&&prefs?.dayPlans?.[5]==='rainy')return [
-   {route:'Centara → Namba / Nippombashi (Osaka Metro ถ้าเลือกนั่ง)',type:'metro',card:'ICOCA / Metro',note:'ใช้ภายใน Osaka; ไม่ไป Kintetsu-Nara'},
-   {route:'Namba / Nippombashi → Centara',type:'metro',card:'ICOCA / Metro',note:'เดินฟรีหรือ Metro จ่ายแยก'}
+   {route:'Daikokucho → Namba',type:'metro',card:'ICOCA / Metro',note:'Metro ¥190/คน; หรือเดินฟรีได้'},
+   {route:'Namba → Daikokucho',type:'metro',card:'ICOCA / Metro',note:'Metro ¥190/คน; หรือเดินกลับฟรีได้'}
   ];
   return base;
  }
