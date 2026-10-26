@@ -8,43 +8,35 @@ const food=(name,area,type,menu,priceYen,priceNote,hours,closed,site,menuSource,
  status:'verified',reservation:'not-booked',diet:'ไม่ทานเนื้อวัว (ความชอบ ไม่ใช่แพ้อาหาร); ตรวจน้ำซุปและเครื่องเคียงก่อนสั่ง',
  days:[0,1,2,3,4,5,6],booking:null,window:null,image:null,images:[],...more
 });
-// Curated reusable Commons photos; never labeled as photos of a specific restaurant.
-// All CC licenses and photographers were checked against the linked Commons file pages.
-// Wikimedia serves width-capped thumbnails; local placeholder is always available.
-const commons=(filename,credit,license,alt,type='food')=>({
+// Rights-checked REAL photographs from Commons; captions disclose another branch when relevant.
+// No illustrations or unrelated menu photos are shown as actual restaurant photographs.
+// The venue's official site stays accessible when no reusable photo is confirmed.
+const realCommons=(filename,{alt,caption,credit,license,relationship})=>({
  src:'https://commons.wikimedia.org/wiki/Special:FilePath/'+encodeURIComponent(filename)+'?width=640',
- alt,caption:'Sample image · อาหารตัวอย่าง ไม่ใช่ภาพจากร้านนี้',source:'https://commons.wikimedia.org/wiki/File:'+encodeURIComponent(filename),
- license,credit,type,label:'Sample image',verified:true
+ alt,caption,source:'https://commons.wikimedia.org/wiki/File:'+encodeURIComponent(filename.replaceAll(' ','_')),
+ credit,license,type:'photograph',relationship,label:relationship==='same-venue'?'ภาพจริงของร้าน/เมนู':'ภาพจริงของแบรนด์ (ต่างสาขา)',verified:true
 });
-const placeholder=(alt)=>({src:'/food-image-placeholder.svg',alt,
- caption:'Image not yet verified · ยังไม่มีภาพร้านหรือเมนูที่ยืนยันสิทธิ์ใช้',source:null,
- credit:null,license:'Original website placeholder',type:'placeholder',label:'Image not yet verified',verified:false});
-const SUSHI=commons('Sushi Nigiri01.JPG','Alessandro Scotti','CC BY-SA 3.0','ภาพตัวอย่างนิกิริซูชิ');
-const UDON=commons('Udon.jpg','Adriano','CC BY-SA 3.0','ภาพตัวอย่างชามอุด้งญี่ปุ่น');
-const MATCHA=commons('Matcha chawan and wagashi at teahouse in Japanese garden.jpg','Laitche','CC BY-SA 4.0','ภาพตัวอย่างชาเขียวมัทฉะกับขนมญี่ปุ่น');
-const TOFU=placeholder('ยังไม่มีรูปชุดอาหารเต้าหู้ที่ตรวจสิทธิ์และแหล่งที่มาได้');
-const OKONOMIYAKI=placeholder('ยังไม่มีภาพเมนู Saizeriya ที่ตรวจสิทธิ์และแหล่งที่มาได้');
-const licensedPhotos={
- stardust:[{src:'/food-illustrations/stardust.svg',alt:'Sky lounge — ตัวอย่างภาพวาดสำหรับ stardust',caption:'Sample illustration · ภาพประกอบสำหรับ stardust ไม่ใช่ภาพร้านหรือเมนูจริง',source:null,license:'Original website illustration',credit:'Kansai Trip 2026',type:'illustration',label:'Sample illustration',verified:true}],
- xex:[{src:'/food-illustrations/xex.svg',alt:'Japanese sushi — ตัวอย่างภาพวาดสำหรับ xex',caption:'Sample illustration · ภาพประกอบสำหรับ xex ไม่ใช่ภาพร้านหรือเมนูจริง',source:null,license:'Original website illustration',credit:'Kansai Trip 2026',type:'illustration',label:'Sample illustration',verified:true}],
- kura:[{src:'/food-illustrations/kura.svg',alt:'Conveyor sushi — ตัวอย่างภาพวาดสำหรับ kura',caption:'Sample illustration · ภาพประกอบสำหรับ kura ไม่ใช่ภาพร้านหรือเมนูจริง',source:null,license:'Original website illustration',credit:'Kansai Trip 2026',type:'illustration',label:'Sample illustration',verified:true}],
- tsurutontan:[{src:'/food-illustrations/tsurutontan.svg',alt:'Udon noodles — ตัวอย่างภาพวาดสำหรับ tsurutontan',caption:'Sample illustration · ภาพประกอบสำหรับ tsurutontan ไม่ใช่ภาพร้านหรือเมนูจริง',source:null,license:'Original website illustration',credit:'Kansai Trip 2026',type:'illustration',label:'Sample illustration',verified:true}],
- sushiro:[{src:'/food-illustrations/sushiro.svg',alt:'Conveyor sushi — ตัวอย่างภาพวาดสำหรับ sushiro',caption:'Sample illustration · ภาพประกอบสำหรับ sushiro ไม่ใช่ภาพร้านหรือเมนูจริง',source:null,license:'Original website illustration',credit:'Kansai Trip 2026',type:'illustration',label:'Sample illustration',verified:true}],
- yayoiken:[{src:'/food-illustrations/yayoiken.svg',alt:'Japanese teishoku — ตัวอย่างภาพวาดสำหรับ yayoiken',caption:'Sample illustration · ภาพประกอบสำหรับ yayoiken ไม่ใช่ภาพร้านหรือเมนูจริง',source:null,license:'Original website illustration',credit:'Kansai Trip 2026',type:'illustration',label:'Sample illustration',verified:true}],
- ozuru:[{src:'/food-illustrations/ozuru.svg',alt:'Kyoto udon — ตัวอย่างภาพวาดสำหรับ ozuru',caption:'Sample illustration · ภาพประกอบสำหรับ ozuru ไม่ใช่ภาพร้านหรือเมนูจริง',source:null,license:'Original website illustration',credit:'Kansai Trip 2026',type:'illustration',label:'Sample illustration',verified:true}],
- saganoya:[{src:'/food-illustrations/saganoya.svg',alt:'Arashiyama meals — ตัวอย่างภาพวาดสำหรับ saganoya',caption:'Sample illustration · ภาพประกอบสำหรับ saganoya ไม่ใช่ภาพร้านหรือเมนูจริง',source:null,license:'Original website illustration',credit:'Kansai Trip 2026',type:'illustration',label:'Sample illustration',verified:true}],
- kamaiki:[{src:'/food-illustrations/kamaiki.svg',alt:'Nara udon — ตัวอย่างภาพวาดสำหรับ kamaiki',caption:'Sample illustration · ภาพประกอบสำหรับ kamaiki ไม่ใช่ภาพร้านหรือเมนูจริง',source:null,license:'Original website illustration',credit:'Kansai Trip 2026',type:'illustration',label:'Sample illustration',verified:true}],
- saizeriya:[{src:'/food-illustrations/saizeriya.svg',alt:'Italian restaurant — ตัวอย่างภาพวาดสำหรับ saizeriya',caption:'Sample illustration · ภาพประกอบสำหรับ saizeriya ไม่ใช่ภาพร้านหรือเมนูจริง',source:null,license:'Original website illustration',credit:'Kansai Trip 2026',type:'illustration',label:'Sample illustration',verified:true}],
- masyua:[{src:'/food-illustrations/masyua.svg',alt:'Tajima soba — ตัวอย่างภาพวาดสำหรับ masyua',caption:'Sample illustration · ภาพประกอบสำหรับ masyua ไม่ใช่ภาพร้านหรือเมนูจริง',source:null,license:'Original website illustration',credit:'Kansai Trip 2026',type:'illustration',label:'Sample illustration',verified:true}],
- inaba:[{src:'/food-illustrations/inaba.svg',alt:'Seafood market — ตัวอย่างภาพวาดสำหรับ inaba',caption:'Sample illustration · ภาพประกอบสำหรับ inaba ไม่ใช่ภาพร้านหรือเมนูจริง',source:null,license:'Original website illustration',credit:'Kansai Trip 2026',type:'illustration',label:'Sample illustration',verified:true}],
- shirokitsune:[{src:'/food-illustrations/shirokitsune.svg',alt:'Namba udon — ตัวอย่างภาพวาดสำหรับ shirokitsune',caption:'Sample illustration · ภาพประกอบสำหรับ shirokitsune ไม่ใช่ภาพร้านหรือเมนูจริง',source:null,license:'Original website illustration',credit:'Kansai Trip 2026',type:'illustration',label:'Sample illustration',verified:true}],
- nakatanidou:[{src:'/food-illustrations/nakatanidou.svg',alt:'Yomogi mochi — ตัวอย่างภาพวาดสำหรับ nakatanidou',caption:'Sample illustration · ภาพประกอบสำหรับ nakatanidou ไม่ใช่ภาพร้านหรือเมนูจริง',source:null,license:'Original website illustration',credit:'Kansai Trip 2026',type:'illustration',label:'Sample illustration',verified:true}],
- izuju:[{src:'/food-illustrations/izuju.svg',alt:'Kyoto saba sushi — ตัวอย่างภาพวาดสำหรับ izuju',caption:'Sample illustration · ภาพประกอบสำหรับ izuju ไม่ใช่ภาพร้านหรือเมนูจริง',source:null,license:'Original website illustration',credit:'Kansai Trip 2026',type:'illustration',label:'Sample illustration',verified:true}],
- tsujiri:[{src:'/food-illustrations/tsujiri.svg',alt:'Matcha parfait — ตัวอย่างภาพวาดสำหรับ tsujiri',caption:'Sample illustration · ภาพประกอบสำหรับ tsujiri ไม่ใช่ภาพร้านหรือเมนูจริง',source:null,license:'Original website illustration',credit:'Kansai Trip 2026',type:'illustration',label:'Sample illustration',verified:true}],
- excafe:[{src:'/food-illustrations/excafe.svg',alt:'Dango and matcha — ตัวอย่างภาพวาดสำหรับ excafe',caption:'Sample illustration · ภาพประกอบสำหรับ excafe ไม่ใช่ภาพร้านหรือเมนูจริง',source:null,license:'Original website illustration',credit:'Kansai Trip 2026',type:'illustration',label:'Sample illustration',verified:true}],
- arabica:[{src:'/food-illustrations/arabica.svg',alt:'Coffee — ตัวอย่างภาพวาดสำหรับ arabica',caption:'Sample illustration · ภาพประกอบสำหรับ arabica ไม่ใช่ภาพร้านหรือเมนูจริง',source:null,license:'Original website illustration',credit:'Kansai Trip 2026',type:'illustration',label:'Sample illustration',verified:true}]
+const photosByVenue={
+ stardust:[],
+ xex:[],
+ kura:[realCommons('Kura Sushi Shinsekai-Tsutenkaku.jpg',{alt:'ภาพ Kura Sushi สาขา Shinsekai Tsutenkaku',caption:'ภาพจริง Kura Sushi สาขา Shinsekai-Tsutenkaku (ไม่ใช่สาขา Namba Parks South)',credit:'Mr.ちゅらさん',license:'CC BY-SA 4.0',relationship:'same-brand-other-branch'})],
+ tsurutontan:[realCommons('Curry Udon @ Tsurutontan @ Roppongi (13622104654).jpg',{alt:'อาหาร Curry Udon ที่ Tsurutontan สาขา Roppongi',caption:'อาหารจริงของ Tsurutontan สาขา Roppongi ไม่ใช่ Daikokucho',credit:'Guilhem Vellut',license:'CC BY 2.0',relationship:'same-brand-other-branch'})],
+ sushiro:[realCommons('Sushiro sushi plates.jpg',{alt:'จานซูชิจริงที่ร้าน Sushiro',caption:'ภาพซูชิจริงของ Sushiro ไม่ระบุสาขา Namba Amza',credit:'Tokumeigakarinoaoshima',license:'CC BY-SA 4.0',relationship:'same-brand-other-branch'})],
+ yayoiken:[realCommons('Yayoiken Namba-Motomachi shop.jpg',{alt:'หน้าร้าน Yayoiken สาขา Namba Motomachi',caption:'หน้าร้านจริงของ Yayoiken สาขา Namba-Motomachi ไม่ใช่ Nipponbashi',credit:'Tokumeigakarinoaoshima',license:'CC BY-SA 4.0',relationship:'same-brand-other-branch'})],
+ ozuru:[],saganoya:[],kamaiki:[],
+ saizeriya:[realCommons('Saizeriya Namba Ocat.jpg',{alt:'ร้าน Saizeriya Namba OCAT',caption:'ภาพสาขา Saizeriya Namba OCAT ไม่ใช่ Kintetsu-Nara',credit:'Wikimedia Commons contributor',license:'See Wikimedia Commons file page',relationship:'same-brand-other-branch'})],
+ masyua:[],inaba:[],shirokitsune:[],
+ nakatanidou:[],
+ izuju:[
+  realCommons('Sabazushi Izuju.jpg',{alt:'ซาบะซูชิที่ทำและจำหน่ายโดย Gion Izuju Kyoto',caption:'ซาบะซูชิของร้าน Gion Izuju ที่เกียวโต',credit:'Kykk wiki',license:'CC0 1.0',relationship:'same-venue'}),
+  realCommons('Sushi restaurant in front of Yasaka-jinja by carendt242.jpg',{alt:'หน้าร้าน Gion Izuju ตรงทางเข้าศาลเจ้า Yasaka',caption:'หน้าร้าน Gion Izuju ใกล้ Yasaka-jinja',credit:'carendt242',license:'CC BY 2.0',relationship:'same-venue'})],
+ tsujiri:[],excafe:[],
+ arabica:[
+  realCommons('% Arabica Kyoto Arashiyama.jpg',{alt:'ภาพภายนอกร้าน % Arabica Kyoto Arashiyama ข้างแม่น้ำ',caption:'ภาพจริงของ % Arabica สาขา Kyoto Arashiyama',credit:'Lenoopen1',license:'CC BY-SA 4.0',relationship:'same-venue'}),
+  realCommons('% Arabica Kyoto Arashiyama by Takumi Ota.jpg',{alt:'ภาพบรรยากาศ % Arabica Kyoto Arashiyama',caption:'ภาพจริง % Arabica Arashiyama โดย Takumi Ota',credit:'Takumi Ota',license:'CC BY-SA 2.0',relationship:'same-venue'})
+ ]
 };
-export const restaurantImagesFor=(id)=>licensedPhotos[id]||[placeholder('ยังไม่มีภาพร้านหรืออาหารที่ตรวจสิทธิ์แล้ว')];
+export const restaurantImagesFor=id=>photosByVenue[id]||[];
 
 const allDays=[0,1,2,3,4,5,6];
 export const foodVenues={
