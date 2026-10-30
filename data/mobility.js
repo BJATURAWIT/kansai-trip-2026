@@ -41,21 +41,19 @@ export const travelGuide = [
     ],
   },
   {
-    day: 4, kicker: 'Arashiyama → Kyoto East', leave: 'แนะนำออกจากโรงแรมราว 06:15 น. เพื่อไปป่าไผ่ช่วงเช้า (เวลาแผน)', confirmed: false,
-    overview: 'Daikokucho → JR Osaka → Kyoto → Saga-Arashiyama → Bamboo Grove → Tenryu-ji → Fushimi Inari → Kiyomizu-dera → Gion → Osaka',
-    reminder: 'วันเที่ยวเดินมาก • JR Pass ที่เลือกครอบคลุมรถ JR ตามเงื่อนไข แต่ Metro / Keihan / รถบัสจ่ายแยก • ตรวจเวลาเที่ยวจริง',
-    legs: [
-      { from: centara, to: jrOsaka, mode: 'Osaka Metro', line: 'Daikokucho → Umeda → JR Osaka', how: 'ใช้ Midosuji Line จาก Daikokucho ไป Umeda เดินตามป้าย JR Osaka ซึ่งอยู่คนละระบบกัน', duration: 'ประมาณ 30–40 นาที', pay: 'ICOCA / Metro', icon: 'train' },
-      { from: jrOsaka, to: 'Saga-Arashiyama Station, Kyoto', mode: 'JR Kyoto + JR Sagano Line', line: 'JR Osaka → Kyoto → Saga-Arashiyama', how: 'ขึ้น JR Special Rapid จาก Osaka ไป Kyoto แล้วเปลี่ยนขบวน Sagano Line (San-in Line) ไปลง Saga-Arashiyama ดูหมายเลขชานชาลาตามจอจริง', duration: 'เผื่อ 60–80 นาทีรวมเปลี่ยนรถ', pay: 'JR Pass เมื่อเปิดใช้แล้ว', icon: 'train' },
-      { from: 'Saga-Arashiyama Station, Kyoto', to: 'Arashiyama Bamboo Grove, Kyoto', mode: 'เดิน', line: 'สถานี → ป่าไผ่อาราชิยามะ', how: 'เดินตาม Google Maps ราว 15–20 นาที เข้าอุโมงค์ป่าไผ่ช่วงเช้าก่อนคนหนาแน่น', duration: '15–20 นาที', pay: 'ฟรี', icon: 'walk' },
-      { from: 'Arashiyama Bamboo Grove, Kyoto', to: 'Tenryu-ji Temple, Kyoto', mode: 'เดิน', line: 'ป่าไผ่ → วัด Tenryu-ji', how: 'ทางเข้าสวนวัดอยู่ใกล้ป่าไผ่ เดินไปไม่ไกล ตรวจเวลาเปิดและค่าเข้าหน้างาน', duration: 'ประมาณ 5–10 นาที', pay: 'ค่าเข้าวัดแยก', icon: 'walk' },
-      { from: 'Tenryu-ji Temple, Kyoto', to: 'Fushimi Inari Taisha, Kyoto', mode: 'เดิน + JR', line: 'Saga-Arashiyama → Kyoto → Inari', how: 'เดินกลับสถานี Saga-Arashiyama ขึ้น Sagano Line ไป Kyoto แล้วเปลี่ยน JR Nara Line ขบวน Local ลง Inari', duration: 'เผื่อ 60–80 นาทีรวมเดิน', pay: 'JR Pass เมื่อเปิดใช้แล้ว', icon: 'train' },
-      { from: 'Fushimi Inari Taisha, Kyoto', to: 'Kiyomizu-dera, Kyoto', mode: 'Keihan + เดิน', line: 'Fushimi-Inari → Kiyomizu-Gojo', how: 'เดินไป Keihan Fushimi-Inari ขึ้นรถขึ้นเหนือไป Kiyomizu-Gojo แล้วเดินขึ้นเนิน/แท็กซี่ไป Kiyomizu-dera', duration: 'ประมาณ 45–65 นาที', pay: 'ICOCA / Keihan ไม่รวม JR Pass', icon: 'train' },
-      { from: 'Kiyomizu-dera, Kyoto', to: 'Gion, Kyoto', mode: 'เดิน', line: 'Kiyomizu → Sannenzaka / Ninenzaka → Gion', how: 'เดินลงตามเส้นถนนเมืองเก่าผ่าน Sannenzaka/Ninenzaka ไป Gion เผื่อเวลาถ่ายรูปและคนเยอะ', duration: 'ประมาณ 30–45 นาที ไม่รวมเที่ยว', pay: 'ฟรี', icon: 'walk' },
-      { from: 'Gion, Kyoto', to: centara, mode: 'Keihan + Osaka Metro', line: 'Gion-Shijo → Yodoyabashi → Daikokucho', how: 'เดินไป Keihan Gion-Shijo ขึ้นรถมุ่ง Osaka ไป Yodoyabashi ต่อ Osaka Metro กลับ Daikokucho', duration: 'เผื่อ 80–100 นาที', pay: 'ICOCA / Keihan + Metro', icon: 'train' },
+    day: 4, kicker:'Arashiyama → Gion → Kodaiji Night Illumination',leave:'ออก Centara ประมาณ 06:30 น. กลับราว 21:00 น.',confirmed:false,
+    overview:'Daikokucho → JR Osaka → Kyoto → Saga-Arashiyama → Bamboo Grove → Tenryu-ji → Ozuru Udon → Togetsukyo → Hankyu Kyoto-Kawaramachi → Gion → Yasaka Shrine → Kodaiji → Osaka',
+    reminder:'ใช้ JR Kansai WIDE Pass สำหรับ JR เท่านั้น; Metro, Hankyu และ Keihan ต้องจ่ายแยก ตรวจเวลาและทางเข้าจริง',
+    legs:[
+      {from:centara,to:jrOsaka,mode:'Osaka Metro',line:'Daikokucho M21 → Umeda M16 → JR Osaka',how:'Midosuji สีแดงมุ่งเหนือ ลง Umeda แล้วเดินตามป้าย JR Osaka',duration:'25–40 นาทีรวมเดิน',pay:'ICOCA / Metro',icon:'train'},
+      {from:jrOsaka,to:'Saga-Arashiyama Station Kyoto',mode:'JR Kyoto + Sagano',line:'JR Osaka → Kyoto → Saga-Arashiyama',how:'Special Rapid ไป Kyoto แล้วเปลี่ยน JR Sagano Line',duration:'60–80 นาที',pay:'JR Kansai WIDE Pass',icon:'train'},
+      {from:'Saga-Arashiyama Station Kyoto',to:'Hankyu Arashiyama Station Kyoto',mode:'Walking',line:'Bamboo Grove → Tenryu-ji → Ozuru → Togetsukyo Bridge',how:'เที่ยวตามตารางจนถึงสะพานแล้วเดินไป Hankyu ทางฝั่งใต้',duration:'08:20–13:20',pay:'เดินฟรี ค่าเข้าวัดแยก',icon:'walk'},
+      {from:'Hankyu Arashiyama Station Kyoto',to:'Kyoto-Kawaramachi Station Kyoto',mode:'Hankyu',line:'HK98 → Katsura HK81 → Kyoto-Kawaramachi HK86',how:'เปลี่ยนจาก Hankyu Arashiyama Line ที่ Katsura ไป Kyoto Line',duration:'40–55 นาทีรวมเดิน/รอ',pay:'ICOCA / ไม่รวมใน JR Pass',icon:'train'},
+      {from:'Kyoto-Kawaramachi Station Kyoto',to:'Kodaiji Temple Kyoto',mode:'Walking',line:'Hanamikoji → Yasaka Shrine → Maruyama Park → Nene-no-Michi → Kodaiji',how:'เดินตามทางสาธารณะและป้ายชมวัด เตรียมเข้าชมงานเปิดไฟ 17:00',duration:'14:15–17:00',pay:'เดินฟรี ค่าเข้า Kodaiji แยก',icon:'walk'},
+      {from:'Gion-Shijo Station Kyoto',to:centara,mode:'Keihan + Osaka Metro',line:'Gion-Shijo KH39 → Yodoyabashi KH01 → Metro M17 → Daikokucho M21',how:'Keihan Limited Express มุ่ง Osaka/Yodoyabashi แล้วต่อ Midosuji Line ไป Daikokucho',duration:'19:30–21:00',pay:'ICOCA / จ่ายแยกจาก JR Pass',icon:'train'}
     ],
   },
-  {
+    {
     day: 5, kicker: 'Nara Day Trip (ตัวเลือก)', leave: 'แผนออก ~08:30', confirmed: false,
     overview: 'Namba / JR Namba → Nara Park → Todai-ji → กลับโรงแรม',
     reminder: 'วันนี้เป็นวันยืดหยุ่น หากเหนื่อยเปลี่ยนเป็น Osaka free day ได้ • ขาไป Nara เลือก JR เพื่อใช้ Pass',
