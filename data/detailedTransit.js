@@ -95,11 +95,14 @@ const dayTwo=(mode)=>{
  at('Daikokucho (M21)','ขึ้น Midosuji Line สีแดง มุ่งเหนือ Shin-Osaka / Minoh-kayano'),
  at('Hommachi (M18 / C16)','ลง Hommachi แล้วเดินตามป้าย Chuo Line สีเขียว (C16) ไม่ต้องออกประตู'),
  at('Hommachi (C16)','ขึ้น Chuo Line มุ่งตะวันออก Nagata / Gakken-Nara-Tomigaoka'),
- at('Morinomiya (C19)','ลง Morinomiya แตะ ICOCA ออก ทางออก 1 หรือ 3-B ไป Osaka Castle Park')],{duration:'Metro ประมาณ 20–25 นาที + เดินถึงปราสาท',note:'เส้นทางนี้เปลี่ยน 1 ครั้งที่ Hommachi; ถ้าขบวน Chuo ไปปลายทางอื่นต้องตรวจว่าผ่าน C19'}),
- leg('Osaka Castle Park / Morinomiya (C19)','Kuromon Ichiba Market','Osaka Metro Chuo + Sakaisuji + เดิน','ICOCA · แตะเข้า Morinomiya / ออก Nippombashi',[
+ at('Morinomiya (C19)','ลง Morinomiya แตะ ICOCA ออก ทางออกที่ชี้ไป Osaka Castle Park (ตรวจป้ายจริง)')],{duration:'Metro ประมาณ 20–25 นาที ไม่รวมเดินไปปราสาท',note:'เส้นทางนี้เปลี่ยน 1 ครั้งที่ Hommachi; ถ้าขบวน Chuo ไปปลายทางอื่นต้องตรวจว่าผ่าน C19'}),
+ walk('Morinomiya Station (C19)','Osaka Castle Main Tower','แตะ ICOCA ออกสถานี แล้วเดินตาม Google Maps ผ่าน Osaka Castle Park ไปตัวปราสาท Osaka Castle Main Tower (อย่าสับสนทางเข้าสวนกับตัวอาคาร)', 'ประมาณ 15–25 นาทีตามทางเดินและจุดที่แวะ'),
+ walk('Osaka Castle Main Tower','Morinomiya Station (C19)','หลังชมปราสาท เดินย้อนผ่าน Osaka Castle Park ไป Morinomiya เพื่อขึ้น Metro ต่อไป Kuromon', 'ประมาณ 15–25 นาที'),
+ leg('Morinomiya Station (C19)','Nippombashi Station (K17)','Osaka Metro Chuo + Sakaisuji','ICOCA · แตะเข้า Morinomiya / ออก Nippombashi',[
  at('Morinomiya (C19)','เดินกลับสถานี Metro ขึ้น Chuo สีเขียวมุ่ง Yumeshima / Cosmosquare'),
  at('Sakaisuji-Hommachi (C17 / K15)','เปลี่ยนเป็น Sakaisuji Line สีน้ำตาล มุ่ง Tengachaya (ใต้) โดยไม่ออกประตู'),
- at('Nippombashi (K17)','ลงแล้วแตะ ICOCA ออก เดินไป Kuromon Ichiba Market')],{duration:'เผื่อ 25–35 นาทีรวมเดิน'}),
+ at('Nippombashi (K17)','ลงแล้วแตะ ICOCA ออก เดินต่อไป Kuromon Ichiba Market')],{duration:'Metro ประมาณ 15–25 นาทีตามขบวน ไม่รวมเดิน'}),
+ walk('Nippombashi Station (K17)','Kuromon Ichiba Market','ออกสถานี Nippombashi แล้วเดินตาม Google Maps ไปทางเข้าตลาด Kuromon','ประมาณ 5–10 นาที'),
  walk('Kuromon Ichiba Market','Shinsaibashi-suji Shopping Street','เดินผ่านย่าน Namba / Dotonbori แล้วขึ้นเหนือบนถนนช้อปปิงไป Shinsaibashi; หากเหนื่อยเปิด Google Maps เลือก Metro','ประมาณ 20–30 นาที'),
  umedaSky(),sunset(),skyReturn(),daikokuHome()
  ];
