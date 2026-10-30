@@ -33,9 +33,9 @@ export const dayPhotos = {
   4: {
     src: '/photos/day-4-1.jpg',
     source: '/photos/credits.json',
-    filename: 'day-04-kyoto-fushimi-inari.jpg',
-    alt: 'ทางเดินผ่านเสาโทริอิสีแดงเรียงกันในศาลเจ้าฟุชิมิอินาริ เกียวโต',
-    caption: 'KYOTO · Fushimi Inari',
+    filename: 'day-04-kyoto-day4-photo.jpg',
+    alt: 'ภาพประกอบเกียวโตสำหรับ Arashiyama, Gion และ Kodaiji (ไม่ใช่ภาพ Kodaiji ที่ยืนยัน)',
+    caption: 'KYOTO · Arashiyama → Gion → Kodaiji',
     author: 'ดูเครดิตภาพ',
     license: 'โปรดดู credits.json',
     position: 'center 53%',
