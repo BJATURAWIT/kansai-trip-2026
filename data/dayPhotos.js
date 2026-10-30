@@ -31,10 +31,10 @@ export const dayPhotos = {
     position: 'center 54%',
   },
   4: {
-    src: '/photos/day-4-1.jpg',
+    src: '/photos/day-4-4.jpg',
     source: '/photos/credits.json',
-    filename: 'day-04-kyoto-day4-photo.jpg',
-    alt: 'ภาพประกอบเกียวโตสำหรับ Arashiyama, Gion และ Kodaiji (ไม่ใช่ภาพ Kodaiji ที่ยืนยัน)',
+    filename: 'day-04-kyoto-bamboo-grove.jpg',
+    alt: 'ป่าไผ่ Arashiyama Bamboo Grove ในเกียวโต (ภาพประกอบ) ',
     caption: 'KYOTO · Arashiyama → Gion → Kodaiji',
     author: 'ดูเครดิตภาพ',
     license: 'โปรดดู credits.json',
