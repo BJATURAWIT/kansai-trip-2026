@@ -41,11 +41,12 @@ export const transportByDay={
   ],
   4:[
     mk('Daikokucho → Umeda','metro','ICOCA · Osaka Metro','ไม่รวมใน Kansai WIDE'),
-    mk('JR Osaka → Kyoto → Saga-Arashiyama','jr','Kansai WIDE Pass','รถไฟ JR Kyoto/Sagano ภายในเขตพาส'),
-    mk('Saga-Arashiyama → Bamboo Grove / Tenryu-ji','walk','เดิน','ค่าเข้าวัด Tenryu-ji จ่ายแยก ไม่ใช่ค่าโดยสาร'),
-    mk('Saga-Arashiyama → Kyoto → Inari','jr','Kansai WIDE Pass','ใช้เมื่อเลือกเที่ยวทั้งฝั่งตะวันตกและตะวันออก'),
-    mk('Fushimi-Inari → Kiyomizu-Gojo','keihan','ICOCA · Keihan','Keihan ไม่รวมใน JR Pass'),
-    mk('Gion-Shijo → Yodoyabashi → Daikokucho','mixed','ICOCA · Keihan + Metro','จ่ายแยกจาก JR Pass'),
+    mk('JR Osaka → Kyoto → Saga-Arashiyama','jr','Kansai WIDE Pass','JR Kyoto/Sagano ครอบคลุมเมื่อรับพาสแล้ว'),
+    mk('Saga-Arashiyama → Bamboo Grove → Tenryu-ji → Ozuru → Togetsukyo','walk','เดิน','ค่าเข้า Tenryu-ji ¥500/คน จ่ายแยก'),
+    mk('Hankyu Arashiyama → Katsura → Kyoto-Kawaramachi','hankyu','ICOCA · Hankyu','JR Pass ไม่ครอบคลุม Hankyu'),
+    mk('Hanamikoji → Yasaka → Kodaiji → Gion-Shijo','walk','เดิน','Kodaiji ¥800/คน จ่ายแยก'),
+    mk('Gion-Shijo → Yodoyabashi','keihan','ICOCA · Keihan','JR Pass ไม่ครอบคลุม Keihan'),
+    mk('Yodoyabashi → Daikokucho','metro','ICOCA · Osaka Metro','จ่ายแยกจาก Keihan'),
   ],
   5:[
     mk('Daikokucho → Namba','metro','ICOCA · Osaka Metro','ค่าโดยสาร Metro จ่ายแยก'),
@@ -85,16 +86,24 @@ export function fareLabel(segment,day,tickets){
 }
 const spot=(time,title,detail,map)=>({time,title,detail,map});
 export const kyotoOptions={
- west:{name:'Kyoto West — Arashiyama',label:'Kyoto West · Main Plan',summary:'เช้า Arashiyama → ป่าไผ่ → Tenryu-ji → สะพาน → อุด้งใกล้ทางเดิน → กลับ Osaka',
+ west:{name:'Kyoto West + Gion Night',label:'Kyoto West → Gion · Main Plan',summary:'Arashiyama ตอนเช้า → Gion บ่าย → Kodaiji Night Illumination 17:00 → กลับ Osaka ประมาณ 21:00',
  schedule:[
- spot('06:30–07:00','ออกจาก Centara ไป Arashiyama','Osaka Metro → JR Osaka → Kyoto → Saga-Arashiyama','Saga-Arashiyama Station Kyoto'),
- spot('08:15','Arashiyama Bamboo Grove','เดินป่าไผ่ก่อนคนแน่น','Arashiyama Bamboo Grove Kyoto'),
- spot('09:00','Tenryu-ji Temple','ชมสวนเซนตามทาง','Tenryu-ji Kyoto'),
- spot('10:15','Togetsukyo Bridge','เดินชมสะพานก่อนมื้อกลางวัน','Togetsukyo Bridge Kyoto'),
- spot('11:00','Ozuru Udon · Lunch','Kitsune/Tempura udon; ถ้าคิวเกิน 10–15 นาที ไป Saganoya ที่เปิด 11:30','Arashiyama Udon Ozuru Kyoto'),
- spot('13:00–14:30','Local Snacks / Matcha / Sightseeing (Optional)','เฉพาะร้านใกล้เส้นทางและคิวสั้น ไม่เดินอ้อม','Arashiyama Kyoto'),
- spot('14:30–16:00','เดินทางกลับ Osaka','เดินกลับ JR Saga-Arashiyama → Kyoto → Osaka','Saga-Arashiyama Station Kyoto')
- ],note:'Main Plan เป็น Kyoto West เท่านั้น; ร้าน Saganoya ใกล้ JR Saga-Arashiyama เปิด 11:30'},
+ spot('06:30–08:20','Centara → Saga-Arashiyama','Daikokucho M21 → Umeda M16 → JR Osaka → Kyoto → Saga-Arashiyama; JR Pass ครอบคลุมเฉพาะ JR','Saga-Arashiyama Station Kyoto'),
+ spot('08:20–09:05','Arashiyama Bamboo Grove','เดินชมป่าไผ่ยามเช้า เข้าฟรี','Arashiyama Bamboo Grove Kyoto'),
+ spot('09:10–10:10','Tenryu-ji Temple & Garden','สวนญี่ปุ่น ¥500/คน ตรวจทางเข้าฝั่งเหนือและเวลาเปิด','Tenryu-ji Temple Kyoto'),
+ spot('10:10–10:50','Arashiyama Main Street / Shopping','ของฝากและขนมท้องถิ่น แวะเฉพาะคิวสั้น','Arashiyama Main Street Kyoto'),
+ spot('10:50–11:50','Lunch — Ozuru Udon','อุด้ง/เทมปุระ งบ ¥1,000–1,800/คน คิวเกิน 15 นาทีเปลี่ยนร้านสำรอง','Arashiyama Udon Ozuru Kyoto'),
+ spot('11:50–12:40','Togetsukyo Bridge','เดินชมวิวภูเขาและสะพาน','Togetsukyo Bridge Kyoto'),
+ spot('12:40–13:20','Riverside Walk / Café','เดินข้ามสะพานฝั่งใต้ไป Hankyu Arashiyama HK98','Arashiyama Nakanoshima Park Kyoto'),
+ spot('13:20–14:15','Arashiyama → Kyoto-Kawaramachi','Hankyu HK98 → Katsura HK81 เปลี่ยน Kyoto Line → Kawaramachi HK86 (จ่าย ICOCA)','Kyoto-Kawaramachi Station Kyoto'),
+ spot('14:15–15:10','Hanamikoji Street / Gion','ชมถนนเกียวโตดั้งเดิม เคารพพื้นที่ห้ามถ่ายภาพ','Hanamikoji Street Gion Kyoto'),
+ spot('15:10–15:45','Yasaka Shrine','ศาลเจ้ายาซากะ เข้าฟรี','Yasaka Shrine Kyoto'),
+ spot('15:45–16:40','Maruyama Park → Nene-no-Michi','เดินผ่านสวนและถนนหินเก่า','Nene no Michi Kyoto'),
+ spot('16:40–17:00','Kodaiji Entrance / Queue','เผื่อคิวงานใบไม้แดง','Kodaiji Temple Kyoto'),
+ spot('17:00–18:15','Kodaiji Night Illumination','งานเปิดไฟฤดูใบไม้แดง 17:00 · ค่าเข้า ¥800/คนโดยประมาณ','Kodaiji Temple Kyoto'),
+ spot('18:15–19:30','Dinner — Gion / Kawaramachi','เลือกอาหารญี่ปุ่นง่าย ๆ งบ ¥800–1,800/คน และร้านสำรองใกล้สถานี','Gion Shijo Kyoto'),
+ spot('19:30–21:00','Gion-Shijo → Centara Osaka','Keihan KH39 → Yodoyabashi KH01 → Metro M17 → Daikokucho M21 แล้วเดินกลับโรงแรม','Centara Life Namba Hotel Osaka')
+ ],note:'Day 4 รวม Kyoto West ตอนเช้า และ Gion/Kodaiji ตอนค่ำ · กลับโรงแรมราว 21:00; East-only เป็นแผนสำรองแยก'},
  east:{name:'Kyoto East — Higashiyama',label:'Kyoto East · Alternative',summary:'Fushimi Inari → Tofukuji → Kiyomizu-dera → Gion ไม่ย้อนกลับ Arashiyama',
  schedule:[
  spot('07:15','Daikokucho → Fushimi Inari','Osaka Metro + Keihan (ICOCA)','Fushimi Inari Station Kyoto'),
@@ -110,7 +119,7 @@ export const importantStops={
   1:['Don Mueang International Airport','Kansai International Airport Terminal 1','Nankai Namba Station','Centara Life Namba Hotel Osaka'],
   2:['Osaka Castle','Tempura Makino Namba Sennichimae','Dotonbori Glico Sign','Shinsaibashi','Umeda Sky Building'],
   3:['Universal Studios Japan','Hollywood Dream The Ride Universal Studios Japan','Universal Studios Japan JAWS','Super Nintendo World Osaka','Wizarding World Harry Potter Osaka'],
-  4:['Osaka Station','Arashiyama Bamboo Grove Kyoto','Tenryu-ji Temple Kyoto','Togetsukyo Bridge Kyoto','Gion Kyoto'],
+  4:['Osaka Station','Arashiyama Bamboo Grove Kyoto','Tenryu-ji Temple Kyoto','Togetsukyo Bridge Kyoto','Hanamikoji Street Kyoto','Yasaka Shrine Kyoto','Kodaiji Temple Kyoto'],
   5:['Osaka Namba Station','Nara Park','Todai-ji Nara','Kasuga Taisha Nara'],
   6:['Centara Life Namba Hotel Osaka','Osaka Station','Kinosaki Onsen Station','Nishimuraya Hotel Shogetsutei'],
   7:['Nishimuraya Hotel Shogetsutei','Kinosaki Onsen Station','Osaka Station','Centara Life Namba Hotel Osaka'],
