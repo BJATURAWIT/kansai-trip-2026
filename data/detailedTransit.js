@@ -132,9 +132,27 @@ const dayThree=()=>[
  walk('Super Nintendo World','The Wizarding World of Harry Potter','เดินผ่านโซนในสวนตาม USJ App; รักษาเวลา Express Harry Potter 16:00','ขึ้นกับตำแหน่งและคนในสวน'),
  ...usjBack()
 ];
-const kyotoWest=(mode)=>[
+const kyotoRainyRoute=()=>[
  daikokuWalk(),daikokuUmeda(),kyotoJR(),
- walk(SAGA,'Arashiyama Bamboo Grove','เดินจาก Saga-Arashiyama ประมาณ 15–20 นาที ผ่านทาง Nonomiya Shrine','15–20 นาที'),
+ walk(SAGA,'Arashiyama Bamboo Grove','ลดเวลาเดินถ้าฝนเบา; ฝนหนักให้เดินเข้าร้านอาหารในร่มโดยตรง','15–20 นาที'),
+ walk('Arashiyama Bamboo Grove','Tenryu-ji Temple','ตรวจสวนเปิดและทางเดินที่ไม่ลื่น','5–10 นาที'),
+ walk('Tenryu-ji Temple','Arashiyama Udon Ozuru','หาร้านอุด้งในอาคารบริเวณ Arashiyama','10–15 นาที'),
+ walk('Arashiyama Udon Ozuru','Hankyu Arashiyama Station (HK98)','เดินทางตรงไปสถานี Hankyu ไม่แวะริมแม่น้ำหรือสะพาน','15–20 นาที'),
+ leg('Hankyu Arashiyama Station (HK98)','Kyoto-Kawaramachi Station (HK86)','Hankyu Arashiyama + Kyoto Line','ICOCA · Hankyu ไม่รวมใน JR Pass',[
+  at('Hankyu Arashiyama (HK98)','ขึ้น Arashiyama Line มุ่ง Katsura'),
+  at('Katsura (HK81)','เปลี่ยนเป็น Kyoto Line มุ่ง Kyoto-Kawaramachi'),
+  at('Kyoto-Kawaramachi (HK86)','ลงและเข้าถนนช้อปปิ้งมีหลังคา')],{duration:'40–55 นาที'}),
+ walk('Kyoto-Kawaramachi Station','Shijo Covered Shops Kyoto','เลือกเดินใต้หลังคาและพักร้านชาเมื่อฝนหนัก','5–15 นาที'),
+ walk('Shijo Covered Shops Kyoto','Kodaiji Temple Kyoto','เดินไปวัดเมื่อฝนเบาและยืนยันการเปิดงาน; ถ้าปิดให้กลับที่ Gion-Shijo','20–35 นาที'),
+ walk('Kodaiji Temple Kyoto','Gion Kyomen Kyoto','มื้อเย็นในร้าน ตรวจสภาพอากาศ','15–25 นาที'),
+ walk('Gion Kyomen Kyoto','Keihan Gion-Shijo Station','เดินเข้าสถานีหลังอาหาร','5–15 นาที'),
+ ...eastReturn()
+];
+const kyotoWest=(mode)=>[
+ ...(mode==='rainy'?kyotoRainyRoute():[]),
+
+ ...(mode==='rainy'?[]:[daikokuWalk(),daikokuUmeda(),kyotoJR()]),
+ ...(mode==='rainy'?[]:[walk(SAGA,'Arashiyama Bamboo Grove','เดินจาก Saga-Arashiyama ประมาณ 15–20 นาที ผ่านทาง Nonomiya Shrine','15–20 นาที'),
  walk('Arashiyama Bamboo Grove','Tenryu-ji Temple','เดินไปทางเข้าสวนวัดฝั่งเหนือ (เปิด 08:30) ค่าเข้าประมาณ ¥500','5–10 นาที'),
  walk('Tenryu-ji Temple','Arashiyama Main Street','ออกประตูหลักเข้าสู่ย่านร้านอาหารและของฝาก','5–10 นาที'),
  walk('Arashiyama Main Street','Arashiyama Udon Ozuru','รับประทานอุด้งใกล้ถนนหลัก ถ้าคิวเกิน 15 นาทีเลือกร้านสำรอง','5–10 นาที'),
@@ -149,8 +167,9 @@ const kyotoWest=(mode)=>[
  walk('Yasaka Shrine','Maruyama Park Kyoto','เดินเข้าด้านหลังศาลเจ้าสู่สวนสาธารณะ','5–10 นาที'),
  walk('Maruyama Park Kyoto','Nene no Michi Kyoto','เดินผ่านทางเดินย่าน Higashiyama ถนนหินเก่า','10–15 นาที'),
  walk('Nene no Michi Kyoto','Kodaiji Temple Kyoto','ขึ้นทางเดินไป Kodaiji เผื่อคิวชมไฟเวลา 17:00','5–10 นาที'),
- walk('Kodaiji Temple Kyoto','Gion Shijo Kyoto','เดินไปหาร้านอาหารช่วงเย็น และกลับสถานี Gion-Shijo หลังมื้ออาหาร','15–25 นาที ไม่รวมเวลารับประทานอาหาร'),
- ...eastReturn()
+ walk('Kodaiji Temple Kyoto','Gion Kyomen Kyoto','เดินไปทานมื้อเย็นที่ Gion หากร้านปิดหรือคิวเกิน 15 นาทีใช้ร้านสำรอง','15–25 นาที'),
+ walk('Gion Kyomen Kyoto','Keihan Gion-Shijo Station','หลังมื้อเย็นเดินไปสถานี Keihan Gion-Shijo (KH39)','5–15 นาที'),
+ ...eastReturn()]),
 ];
 const kyotoEast=(mode)=>{
  const origin=[
