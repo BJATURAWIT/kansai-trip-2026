@@ -3,6 +3,8 @@
 // The provider's fare table: https://subway-tr.osakametro.co.jp/en/guide/fare/fare/price.php
 // Pairs confirmed against station-to-station fares listed in route references.
 export const osakaMetroFareTable=Object.freeze({
+ 'Morinomiya (N20) → Shinsaibashi (N15) → Namba (M20)':{yen:240,zone:2,kmBand:'3–7 km',origin:'Morinomiya',destination:'Namba',source:'https://ekitan.com/transit/fare/sf-6090/st-5727'},
+ 'Shinsaibashi (M19) → Umeda (M16)':{yen:240,zone:2,kmBand:'3–7 km',origin:'Shinsaibashi',destination:'Umeda',source:'https://global.yometro.com/route-from-shinsaibashi-osaka-to-umeda-osaka'},
  'Daikokucho → Morinomiya (Osaka Castle)':{yen:240,zone:2,kmBand:'3–7 km',origin:'Daikokucho',destination:'Morinomiya',source:'https://global.yometro.com/route-from-daikokucho-osaka-to-morinomiya-osaka'},
  'Osaka Castle → Nippombashi (Kuromon)':{yen:240,zone:2,kmBand:'3–7 km',origin:'Morinomiya',destination:'Nippombashi',source:'https://global.yometro.com/route-from-morinomiya-osaka-to-nippombashi-osaka'},
  'Nippombashi → Shinsaibashi / Namba':{yen:190,zone:1,kmBand:'0–3 km',origin:'Nippombashi',destination:'Shinsaibashi',source:'https://global.yometro.com/route-from-nippombashi-osaka-to-shinsaibashi-osaka',optionalWalk:true},

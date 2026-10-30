@@ -9,6 +9,8 @@ const options={
  'Universal-City → Nishikujo':{yen:180,source:'https://transit.yahoo.co.jp/search/result/西九条-ユニバーサルシティ',operator:'JR West'},
  'Osaka-Namba → Kintetsu-Nara':{yen:680,source:'https://eki.kintetsu.co.jp/english/N3?date=20260423&ep=0&pn=3&rp=0&sf=5212-Kintetsu-Nara+%5BA28%5D&sr=0&st=5213-Osaka-Namba+%5BA01%5D&time=1300&tp=0',operator:'Kintetsu'},
  'Kintetsu-Nara → Osaka-Namba':{yen:680,source:'https://eki.kintetsu.co.jp/english/N3?date=20260423&ep=0&pn=3&rp=0&sf=5212-Kintetsu-Nara+%5BA28%5D&sr=0&st=5213-Osaka-Namba+%5BA01%5D&time=1300&tp=0',operator:'Kintetsu'},
+ 'Hankyu Arashiyama → Kyoto-Kawaramachi':{yen:240,source:'https://www.hankyu.co.jp/station/fare.html',operator:'Hankyu',note:'ตรวจค่าโดยสารจริงบนเส้นทาง HK98–HK86'},
+ 'Gion-Shijo → Yodoyabashi':{yen:490,source:'https://ekitan.com/rail-company/592/fare/sf-5378/st-6143',operator:'Keihan'},
  'Yodoyabashi → Fushimi-Inari':{yen:480,source:'https://ekitan.com/transit/fare/sf-6143/st-5921',operator:'Keihan'},
  'Fushimi-Inari → Kiyomizu-Gojo / Kyoto National Museum':{yen:240,source:'https://ekitan.com/transit/fare/sf-5921/st-5301',operator:'Keihan',note:'ราคาปลายทางสถานี Kiyomizu-Gojo; เดินต่อพิพิธภัณฑ์'},
  'Gion-Shijo / Kyoto → Yodoyabashi':{yen:490,source:'https://ekitan.com/rail-company/592/fare/sf-5378/st-6143',operator:'Keihan',note:'สถานีขึ้น Gion-Shijo เท่านั้น'},

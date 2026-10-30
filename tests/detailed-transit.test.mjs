@@ -28,10 +28,14 @@ test('Kyoto switch and rainy mode follow their own routes',()=>{
  const east=detailedRouteGuide(4,prefs('east'));
  const rainy=detailedRouteGuide(4,prefs('west','rainy'));
  assert.ok(west.legs.some(x=>x.to.includes('Ozuru')));
- assert.ok(!west.legs.some(x=>x.to.includes('Gion')));
+ assert.ok(west.legs.some(x=>x.to.includes('Hanamikoji')));
+ assert.ok(west.legs.some(x=>x.to.includes('Kodaiji')));
+ assert.ok(west.legs.some(x=>x.to.includes('Gion Kyomen')));
  assert.ok(east.legs.some(x=>x.to.includes('Tofuku')));
  assert.ok(!east.legs.some(x=>x.to.includes('Arashiyama')));
- assert.ok(rainy.legs.some(x=>x.to.includes('Kyoto Railway Museum')));
+ assert.ok(rainy.legs.some(x=>x.to.includes('Covered Shops')));
+ assert.ok(rainy.legs.some(x=>x.to.includes('Kodaiji')));
+ assert.ok(!rainy.legs.some(x=>x.to.includes('Togetsukyo')));
 });
 test('preserve booked train information and avoid misleading airport fares',()=>{
  const d1=detailedRouteGuide(1,prefs()),d6=detailedRouteGuide(6,prefs()),d7=detailedRouteGuide(7,prefs());

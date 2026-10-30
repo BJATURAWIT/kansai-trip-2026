@@ -43,10 +43,11 @@ const sagaOsaka=()=>leg(SAGA,OSAKA,'JR Sagano Line + JR Kyoto Line','JR Kansai W
 const sunset=()=>leg('Umeda Sky Building','Sky Lounge STARDUST 39F','เดิน','ไม่ใช้ตั๋วรถไฟ · การจองร้านยืนยันแล้ว',[
  at('Umeda Sky Building','หลังชมวิว ลงจากจุดชมวิวตามป้ายทางออก/Restaurant'),
  at('Tower East ชั้น 39','ตามป้าย Sky Lounge STARDUST; แสดงหลักฐานยืนยันการจองให้พนักงาน')],{duration:'อยู่ภายในอาคารเดียวกัน',note:'เวลา 18:15 เป็นแผน ไม่ใช่เวลาการจองที่ยืนยันจากเอกสาร; ไม่เปิดเผยรายละเอียดโอกาสส่วนตัว'});
-const umedaSky=()=>leg('Shinsaibashi Station (M19)','Umeda Sky Building','Osaka Metro + เดิน','ICOCA แตะเข้า Shinsaibashi / ออก Umeda',[
- at('Shinsaibashi (M19)','แตะ ICOCA เข้า Midosuji สีแดง ขึ้นรถมุ่งเหนือ Shin-Osaka / Minoh-kayano'),
- at('Umeda (M16)','ลง Umeda แล้วแตะออก Metro เดินตามป้าย Grand Front Osaka / Umeda Sky Building'),
- at('Umeda Sky Building','เดินต่อประมาณ 10–20 นาทีตาม Google Maps ไปอาคารจุดชมวิว เผื่อเวลาเข้าคิว')],{duration:'เผื่อ 30–45 นาทีรวมเดิน'});
+const umedaSkyMetro=()=>leg('Shinsaibashi Station (M19)','Umeda Station (M16)','Osaka Metro Midosuji','ICOCA แตะเข้า Shinsaibashi / ออก Umeda',[
+ at('Shinsaibashi (M19)','ขึ้น Midosuji Line สีแดง มุ่งเหนือ Shin-Osaka / Minoh-kayano'),
+ at('Umeda (M16)','ลง Umeda แล้วแตะ ICOCA ออก Metro ตามป้ายทางไป Grand Front Osaka / Umeda Sky Building')],{duration:'ประมาณ 10–15 นาทีบนรถ ไม่รวมเดิน'});
+const umedaSkyWalk=()=>walk('Umeda Station (M16)','Umeda Sky Building','เดินตามป้าย Grand Front Osaka / Umeda Sky Building ไปอาคาร Tower East; ตรวจทางเดินล่าสุดใน Google Maps และเผื่อเวลาข้ามถนน','ประมาณ 12–20 นาที');
+const shinsaibashiStationWalk=()=>walk('Shinsaibashi-suji Shopping Street','Shinsaibashi Station (M19)','เดินขึ้นเหนือผ่านทางเดินร้านค้าไปสถานี Osaka Metro Shinsaibashi Midosuji (M19)','ประมาณ 5–15 นาที');
 const skyReturn=()=>leg('Umeda Sky Building',DAI,'เดิน + Osaka Metro','ICOCA แตะเข้า Umeda / ออก Daikokucho',[
  at('Umeda Sky Building','เดินกลับ Osaka Metro Umeda (M16) ไม่ใช่ JR Osaka'),
  at('Umeda (M16)','ขึ้น Midosuji สีแดง มุ่งใต้ Nakamozu / Tennoji'),
@@ -89,44 +90,41 @@ const dayOne=()=>[
  walk(NANKAI,HOME,'เดินตาม Google Maps ไป Centara Life Namba Hotel Osaka หากกระเป๋าใหญ่/เหนื่อย ใช้แท็กซี่จากสถานีได้','เผื่อ 15–25 นาทีเดิน')
 ];
 const dayTwo=(mode)=>{
- const normal=[
- daikokuWalk(),
- leg(DAI,'Morinomiya Station (C19)','Osaka Metro Midosuji + Chuo','ICOCA แตะเข้า Daikokucho และออก Morinomiya; เปลี่ยนสายภายในไม่ต้องแตะออก',[
- at('Daikokucho (M21)','ขึ้น Midosuji Line สีแดง มุ่งเหนือ Shin-Osaka / Minoh-kayano'),
- at('Hommachi (M18 / C16)','ลง Hommachi แล้วเดินตามป้าย Chuo Line สีเขียว (C16) ไม่ต้องออกประตู'),
- at('Hommachi (C16)','ขึ้น Chuo Line มุ่งตะวันออก Nagata / Gakken-Nara-Tomigaoka'),
- at('Morinomiya (C19)','ลง Morinomiya แตะ ICOCA ออก แล้วกด Google Maps ด้านล่างเพื่อนำทางเดินถึงตัวปราสาท Osaka Castle Main Tower (ไม่ใช่แค่ทางเข้าสวน)',{walkTo:'Osaka Castle Main Tower',walkFrom:'Morinomiya Station (C19)'})],{duration:'Metro ประมาณ 20–25 นาที ไม่รวมเดินไปปราสาท',note:'เส้นทางนี้เปลี่ยน 1 ครั้งที่ Hommachi; ถ้าขบวน Chuo ไปปลายทางอื่นต้องตรวจว่าผ่าน C19'}),
- walk('Morinomiya Station (C19)','Osaka Castle Main Tower','แตะ ICOCA ออกสถานี แล้วเดินตาม Google Maps ผ่าน Osaka Castle Park ไปตัวปราสาท Osaka Castle Main Tower (อย่าสับสนทางเข้าสวนกับตัวอาคาร)', 'ประมาณ 15–25 นาทีตามทางเดินและจุดที่แวะ'),
- walk('Osaka Castle Main Tower','Morinomiya Station (C19)','หลังชมปราสาท เดินย้อนผ่าน Osaka Castle Park ไป Morinomiya เพื่อขึ้น Metro ต่อไป Kuromon', 'ประมาณ 15–25 นาที'),
- leg('Morinomiya Station (C19)','Nippombashi Station (K17)','Osaka Metro Chuo + Sakaisuji','ICOCA · แตะเข้า Morinomiya / ออก Nippombashi',[
- at('Morinomiya (C19)','เดินกลับสถานี Metro ขึ้น Chuo สีเขียวมุ่ง Yumeshima / Cosmosquare'),
- at('Sakaisuji-Hommachi (C17 / K15)','เปลี่ยนเป็น Sakaisuji Line สีน้ำตาล มุ่ง Tengachaya (ใต้) โดยไม่ออกประตู'),
- at('Nippombashi (K17)','ลงแล้วแตะ ICOCA ออก เดินต่อไป Kuromon Ichiba Market')],{duration:'Metro ประมาณ 15–25 นาทีตามขบวน ไม่รวมเดิน'}),
- walk('Nippombashi Station (K17)','Kuromon Ichiba Market','ออกสถานี Nippombashi แล้วเดินตาม Google Maps ไปทางเข้าตลาด Kuromon','ประมาณ 5–10 นาที'),
- walk('Kuromon Ichiba Market','Shinsaibashi-suji Shopping Street','เดินผ่านย่าน Namba / Dotonbori แล้วขึ้นเหนือบนถนนช้อปปิงไป Shinsaibashi; หากเหนื่อยเปิด Google Maps เลือก Metro','ประมาณ 20–30 นาที'),
- umedaSky(),sunset(),skyReturn(),daikokuHome()
+ const castle=[
+  daikokuWalk(),
+  leg(DAI,'Morinomiya Station (C19)','Osaka Metro Midosuji + Chuo','ICOCA แตะเข้า Daikokucho และออก Morinomiya (ไม่แตะออกที่ Hommachi)',[
+   at('Daikokucho (M21)','ขึ้น Midosuji Line สีแดง มุ่งเหนือ Shin-Osaka / Minoh-kayano'),
+   at('Hommachi (M18 / C16)','เปลี่ยนเป็น Chuo Line สีเขียว โดยเดินภายในสถานี ไม่แตะออก'),
+   at('Hommachi (C16)','ขึ้น Chuo Line มุ่ง Nagata / Gakken-Nara-Tomigaoka'),
+   at('Morinomiya (C19)','ลง Morinomiya แตะ ICOCA ออก เดินเข้าทาง Osaka Castle Park',{walkTo:'Osaka Castle Main Tower',walkFrom:'Morinomiya Station (C19)'})],{duration:'ประมาณ 20–25 นาทีรถไฟ + เดินไปปราสาท'}),
+  walk('Morinomiya Station (C19)','Osaka Castle Main Tower','เดินเข้าสวนไปตัวปราสาทตาม Google Maps','ประมาณ 15–25 นาที')
  ];
- if(mode==='relaxed')return [
- walk(HOME,'Kuromon Ichiba Market','ออกช้ากว่าเดิม เดินหรือใช้ Metro ไป Namba แล้วเดินผ่าน Nipponbashi ตามสภาพอากาศ','เผื่อ 20–30 นาที'),
- walk('Kuromon Ichiba Market','Dotonbori / Shinsaibashi','เดินจากตลาดไป Dotonbori ผ่าน Ebisubashi และขึ้นเหนือไป Shinsaibashi','ประมาณ 20–30 นาที'),
- umedaSky(),sunset(),skyReturn(),daikokuHome()
+ const midday=[
+  walk('Osaka Castle Main Tower','Morinomiya Station (N20)','ออกจากปราสาทราว 11:10 เดินกลับไป Morinomiya เพื่อใช้สาย Nagahori Tsurumi-ryokuchi สีเขียวอ่อน (N20)','ประมาณ 15–25 นาที'),
+  leg('Morinomiya Station (N20)','Namba Station (M20)','Osaka Metro Nagahori Tsurumi-ryokuchi + Midosuji','ICOCA แตะเข้า Morinomiya และออก Namba; เปลี่ยนสายโดยไม่ออกจากประตูตรวจตั๋ว',[
+   at('Morinomiya (N20)','ขึ้น Nagahori Tsurumi-ryokuchi Line สีเขียวอ่อน มุ่ง Taisho'),
+   at('Shinsaibashi (N15)','ลง Shinsaibashi เปลี่ยนไป Midosuji Line สีแดง (M19) ภายในสถานี'),
+   at('Shinsaibashi (M19)','ขึ้น Midosuji Line มุ่งใต้ Nakamozu / Tennoji'),
+   at('Namba (M20)','ลง 1 สถานี แตะ ICOCA ออก แล้วเดินไปร้าน Tempura Makino')],{duration:'ประมาณ 15–25 นาทีบน Metro รวมเปลี่ยนสาย'}),
+  walk('Namba Station (M20)','Tempura Makino Namba Sennichimae','เดินไป Namba 3-3-4 อาคาร Namba Nichidai ชั้น 1 ร้าน Tempura Makino; ตรวจทางออกจาก Google Maps','ประมาณ 3–7 นาที'),
+  walk('Tempura Makino Namba Sennichimae','Dotonbori Glico Sign','หลังมื้อเที่ยงเดินขึ้นเหนือจาก Namba ผ่าน Dotonbori ไปป้าย Glico บริเวณสะพาน Ebisubashi','ประมาณ 10–15 นาที'),
+  walk('Dotonbori Glico Sign','Shinsaibashi-suji Shopping Street','จาก Glico / Ebisubashi เดินต่อขึ้นเหนือบนถนน Shinsaibashi-suji; ไม่ต้องขึ้นรถไฟ','ประมาณ 5–15 นาที'),
+  shinsaibashiStationWalk(),umedaSkyMetro(),umedaSkyWalk(),sunset(),skyReturn(),daikokuHome()
  ];
  if(mode==='rainy')return [
- daikokuWalk(),
- leg(DAI,'Osaka Museum of Housing and Living','Osaka Metro Midosuji + Tanimachi','ICOCA แตะ Metro ตามปกติ',[
- at('Daikokucho (M21)','ขึ้น Midosuji สีแดงมุ่งเหนือ ไป Umeda (M16)'),
- at('Umeda / Higashi-Umeda (T20)','เดินตามป้ายเชื่อม Higashi-Umeda (Tanimachi สีม่วง) ตรวจทางเดิน/การแตะประตูตามจริง'),
- at('Tenjimbashisuji 6-chome (T18)','ขึ้น Tanimachi มุ่ง Dainichi ลง T18 เดินไป Osaka Museum of Housing and Living')]),
- leg('Tenjimbashisuji 6-chome (K11)','Nippombashi Station (K17)','Osaka Metro Sakaisuji','ICOCA แตะเข้า/ออก Metro',[
- at('Tenjimbashisuji 6-chome (K11)','ขึ้น Sakaisuji สีน้ำตาล มุ่งใต้ Tengachaya'),
- at('Nippombashi (K17)','ลงแล้วเดินเข้าตลาด Kuromon')]),
- walk('Kuromon Market','Namba Parks','เดินไปย่าน Namba Parks / Namba City ใช้เวลาให้พอกินมื้อกลางวัน','เผื่อ 15–25 นาที'),
- leg('Namba (M20)','Umeda Sky Building','Midosuji + เดิน','ICOCA เข้า Namba / ออก Umeda',[
- at('Namba (M20)','ขึ้น Midosuji สีแดงมุ่งเหนือ Shin-Osaka / Minoh-kayano'),
- at('Umeda (M16)','ลงแล้วออก Metro เดินตามแผนที่ไป Umeda Sky Building / Grand Front Osaka')]),
- sunset(),skyReturn(),daikokuHome()
+  daikokuWalk(),
+  leg(DAI,'Osaka Museum of Housing and Living','Osaka Metro Midosuji + Tanimachi','ICOCA แตะเข้าและออกตามป้าย Metro',[
+   at('Daikokucho (M21)','ขึ้น Midosuji ไป Umeda'),
+   at('Umeda (M16)','เดินตามป้าย Higashi-Umeda (T20) เพื่อเปลี่ยนเป็น Tanimachi Line'),
+   at('Tenjimbashisuji 6-chome (T18)','ลงแล้วเดินเข้าพิพิธภัณฑ์')]),
+  leg('Tenjimbashisuji 6-chome Station (K11)','Nippombashi Station (K17)','Osaka Metro Sakaisuji','ICOCA; เปลี่ยนเป็นทางใต้ Tengachaya',[
+   at('Tenjimbashisuji 6-chome (K11)','ขึ้น Sakaisuji Line มุ่ง Tengachaya'),
+   at('Nippombashi (K17)','ลงแล้วเดินหรือเปลี่ยน Metro เพื่อไปยัง Namba')]),
+  walk('Nippombashi Station (K17)','Tempura Makino Namba Sennichimae','เดินไปย่าน Namba Sennichimae ร้าน Tempura Makino; หากฝนหนักตรวจเส้นทางใน Google Maps','ประมาณ 15–25 นาที'),
+  ...midday.slice(3)
  ];
- return normal;
+ if(mode==='relaxed')return [...castle,...midday];
+ return [...castle,...midday];
 };
 const dayThree=()=>[
  ...usjOut(),
@@ -134,28 +132,45 @@ const dayThree=()=>[
  walk('Super Nintendo World','The Wizarding World of Harry Potter','เดินผ่านโซนในสวนตาม USJ App; รักษาเวลา Express Harry Potter 16:00','ขึ้นกับตำแหน่งและคนในสวน'),
  ...usjBack()
 ];
-const kyotoWest=(mode)=>{
- const route=[daikokuWalk(),daikokuUmeda(),kyotoJR(),
- walk(SAGA,'Arashiyama Bamboo Grove','ออกสถานี Saga-Arashiyama และเดินตามแผนที่ไปป่าไผ่ สวนทางกับแถวคนได้ช่วงเช้า','ประมาณ 15–20 นาที'),
- walk('Arashiyama Bamboo Grove','Tenryu-ji Temple','ออกจากป่าไผ่ตามทางเข้าสวนวัด Tenryu-ji และเตรียมค่าเข้าวัด','ประมาณ 5–10 นาที')];
- if(mode==='rainy')route.push(
- walk('Tenryu-ji Temple','Saganoya near Saga-Arashiyama','เดินกลับฝั่ง JR Saga-Arashiyama เพื่อลองมื้อกลางวันในร้าน (เปิดตามวันจริง)','ประมาณ 10–20 นาที'),
- leg(SAGA,'Kyoto Railway Museum','JR Sagano Line + เดิน','JR Kansai WIDE Area Pass ครอบคลุม JR; ค่าเข้าพิพิธภัณฑ์จ่ายแยก',[
- at('JR Saga-Arashiyama','ขึ้น Sagano Line มุ่ง Kyoto ลง Umekoji-Kyotonishi'),
- at('Umekoji-Kyotonishi','แตะ/แสดง JR Pass ออก แล้วเดินตามป้าย Kyoto Railway Museum')]),
- leg('Kyoto Railway Museum',OSAKA,'เดิน + JR Sagano + JR Kyoto','JR Kansai WIDE Area Pass',[
- at('Kyoto Railway Museum','เดินกลับ Umekoji-Kyotonishi Station'),
- at('Umekoji-Kyotonishi','ขึ้น JR Sagano Line มุ่ง Kyoto'),
- at('JR Kyoto','เปลี่ยน JR Kyoto Line Special Rapid / Rapid ไป Osaka')])
- );
- else route.push(
- walk('Tenryu-ji Temple','Togetsukyo Bridge','เดินไปสะพาน Togetsukyo ชมภูเขาและแม่น้ำ','ประมาณ 10–15 นาที'),
- walk('Togetsukyo Bridge','Ozuru Udon Arashiyama','เดินเข้าย่านร้านอุด้ง Ozuru; ถ้าคิวเกิน 10–15 นาทีใช้ Saganoya ใกล้ทางกลับ JR','ประมาณ 5–15 นาที'),
- walk('Ozuru Udon Arashiyama',SAGA,'ออกจากร้านไปทาง JR Saga-Arashiyama หากเลือกแวะคาเฟ่/ขนมให้ทำเฉพาะเมื่อคิวสั้น','ประมาณ 15–25 นาที'),
- sagaOsaka()
- );
- route.push(osakaDaikoku(),daikokuHome());return route;
-};
+const kyotoRainyRoute=()=>[
+ daikokuWalk(),daikokuUmeda(),kyotoJR(),
+ walk(SAGA,'Arashiyama Bamboo Grove','ลดเวลาเดินถ้าฝนเบา; ฝนหนักให้เดินเข้าร้านอาหารในร่มโดยตรง','15–20 นาที'),
+ walk('Arashiyama Bamboo Grove','Tenryu-ji Temple','ตรวจสวนเปิดและทางเดินที่ไม่ลื่น','5–10 นาที'),
+ walk('Tenryu-ji Temple','Arashiyama Udon Ozuru','หาร้านอุด้งในอาคารบริเวณ Arashiyama','10–15 นาที'),
+ walk('Arashiyama Udon Ozuru','Hankyu Arashiyama Station (HK98)','เดินทางตรงไปสถานี Hankyu ไม่แวะริมแม่น้ำหรือสะพาน','15–20 นาที'),
+ leg('Hankyu Arashiyama Station (HK98)','Kyoto-Kawaramachi Station (HK86)','Hankyu Arashiyama + Kyoto Line','ICOCA · Hankyu ไม่รวมใน JR Pass',[
+  at('Hankyu Arashiyama (HK98)','ขึ้น Arashiyama Line มุ่ง Katsura'),
+  at('Katsura (HK81)','เปลี่ยนเป็น Kyoto Line มุ่ง Kyoto-Kawaramachi'),
+  at('Kyoto-Kawaramachi (HK86)','ลงและเข้าถนนช้อปปิ้งมีหลังคา')],{duration:'40–55 นาที'}),
+ walk('Kyoto-Kawaramachi Station','Shijo Covered Shops Kyoto','เลือกเดินใต้หลังคาและพักร้านชาเมื่อฝนหนัก','5–15 นาที'),
+ walk('Shijo Covered Shops Kyoto','Kodaiji Temple Kyoto','เดินไปวัดเมื่อฝนเบาและยืนยันการเปิดงาน; ถ้าปิดให้กลับที่ Gion-Shijo','20–35 นาที'),
+ walk('Kodaiji Temple Kyoto','Gion Kyomen Kyoto','มื้อเย็นในร้าน ตรวจสภาพอากาศ','15–25 นาที'),
+ walk('Gion Kyomen Kyoto','Keihan Gion-Shijo Station','เดินเข้าสถานีหลังอาหาร','5–15 นาที'),
+ ...eastReturn()
+];
+const kyotoWest=(mode)=>[
+ ...(mode==='rainy'?kyotoRainyRoute():[]),
+
+ ...(mode==='rainy'?[]:[daikokuWalk(),daikokuUmeda(),kyotoJR()]),
+ ...(mode==='rainy'?[]:[walk(SAGA,'Arashiyama Bamboo Grove','เดินจาก Saga-Arashiyama ประมาณ 15–20 นาที ผ่านทาง Nonomiya Shrine','15–20 นาที'),
+ walk('Arashiyama Bamboo Grove','Tenryu-ji Temple','เดินไปทางเข้าสวนวัดฝั่งเหนือ (เปิด 08:30) ค่าเข้าประมาณ ¥500','5–10 นาที'),
+ walk('Tenryu-ji Temple','Arashiyama Main Street','ออกประตูหลักเข้าสู่ย่านร้านอาหารและของฝาก','5–10 นาที'),
+ walk('Arashiyama Main Street','Arashiyama Udon Ozuru','รับประทานอุด้งใกล้ถนนหลัก ถ้าคิวเกิน 15 นาทีเลือกร้านสำรอง','5–10 นาที'),
+ walk('Arashiyama Udon Ozuru','Togetsukyo Bridge','เดินลงใต้ไปสะพาน Togetsukyo','5–15 นาที'),
+ walk('Togetsukyo Bridge','Hankyu Arashiyama Station (HK98)','ข้ามสะพานลงฝั่งใต้ เดินตามป้าย Hankyu Arashiyama; พักริมแม่น้ำได้ตามเวลา','10–15 นาที'),
+ leg('Hankyu Arashiyama Station (HK98)','Kyoto-Kawaramachi Station (HK86)','Hankyu Arashiyama + Kyoto Line','ICOCA · Hankyu ไม่ครอบคลุมโดย JR Kansai WIDE Pass',[
+   at('Hankyu Arashiyama (HK98)','แตะ ICOCA ขึ้น Hankyu Arashiyama Line มุ่ง Katsura'),
+   at('Katsura (HK81)','เปลี่ยนขบวน Hankyu Kyoto Line มุ่ง Kyoto-Kawaramachi ตรวจป้ายปลายทาง'),
+   at('Kyoto-Kawaramachi (HK86)','ลงสถานีและแตะ ICOCA ออก เดินข้าม Shijo Bridge สู่ Gion')],{duration:'เผื่อ 40–55 นาทีรวมเดิน/รอ/เปลี่ยนรถ'}),
+ walk('Kyoto-Kawaramachi Station','Hanamikoji Street Gion','เดินข้ามสะพาน Shijo เข้าถนนสาธารณะ Hanamikoji; ไม่ถ่ายภาพในพื้นที่ห้าม','10–15 นาที'),
+ walk('Hanamikoji Street Gion','Yasaka Shrine','เดินเลียบถนน Gion ไปศาลเจ้ายาซากะ','10–15 นาที'),
+ walk('Yasaka Shrine','Maruyama Park Kyoto','เดินเข้าด้านหลังศาลเจ้าสู่สวนสาธารณะ','5–10 นาที'),
+ walk('Maruyama Park Kyoto','Nene no Michi Kyoto','เดินผ่านทางเดินย่าน Higashiyama ถนนหินเก่า','10–15 นาที'),
+ walk('Nene no Michi Kyoto','Kodaiji Temple Kyoto','ขึ้นทางเดินไป Kodaiji เผื่อคิวชมไฟเวลา 17:00','5–10 นาที'),
+ walk('Kodaiji Temple Kyoto','Gion Kyomen Kyoto','เดินไปทานมื้อเย็นที่ Gion หากร้านปิดหรือคิวเกิน 15 นาทีใช้ร้านสำรอง','15–25 นาที'),
+ walk('Gion Kyomen Kyoto','Keihan Gion-Shijo Station','หลังมื้อเย็นเดินไปสถานี Keihan Gion-Shijo (KH39)','5–15 นาที'),
+ ...eastReturn()]),
+];
 const kyotoEast=(mode)=>{
  const origin=[
  daikokuWalk(),
@@ -294,7 +309,7 @@ const airportEnd=()=>[
 export function detailedRouteGuide(day,prefs={}){
  const mode=prefs.dayPlans?.[day]||'original';
  const legs=day===1?dayOne():day===2?dayTwo(mode):day===3?dayThree():day===4?(prefs.kyoto==='east'?kyotoEast(mode):kyotoWest(mode)):day===5?dayFive(mode):day===6?daySix():day===7?daySeven():day===8?dayEight(prefs):[];
- return {day,legs,kicker:['','จากสนามบินเข้าที่พัก','เที่ยว Osaka Castle / Kuromon / Umeda','USJ ไป–กลับ','Kyoto แบบเลือก West / East','Nara ไป–กลับ','Osaka → Kinosaki Onsen','Kinosaki → Osaka','Namba → KIX'][day],
+ return {day,legs,kicker:['','จากสนามบินเข้าที่พัก','เที่ยว Osaka Castle / Kuromon / Umeda','USJ ไป–กลับ','Kyoto West + Gion + Kodaiji Night Illumination','Nara ไป–กลับ','Osaka → Kinosaki Onsen','Kinosaki → Osaka','Namba → KIX'][day],
  overview:legs.map(x=>x.from+' → '+x.to).join(' · '),
  leave:day===1?'ถึง KIX 18:15 แล้วเลือก Rapi:t หลังรับกระเป๋า':day===3?'ออกก่อนเปิดสวน · ตรวจเวลา USJ จริง':day===6?'Kounotori 5 ออกจาก JR Osaka 10:12':day===7?'Kounotori 22 ออกจาก Kinosaki 15:30':day===8?'ออกจากโรงแรมราว 15:00 · เที่ยวบิน 19:45':'ดูเวลารายวันและเผื่อการเดิน/ต่อรถ',
  reminder:'ขั้นตอนเป็นแผนใช้เดินทาง ไม่ใช่การบอกชานชาลา/รอบรถแบบ Real-time · อ่านป้ายปลายทางขบวนจริง และใช้ Google Maps ตรวจเส้นทางวันเดินทาง'};
