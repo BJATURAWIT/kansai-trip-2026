@@ -95,23 +95,20 @@ const alternatives={
 function buildKyoto(choice,mode){
  const option=kyotoOptions[choice==='east'?'east':'west'];
  if(mode==='original')return option.schedule;
- if(mode==='relaxed')return choice==='west'?
-  option.schedule.filter((_,i)=>[0,1,2,3,4].includes(i)).concat(slot('14:00–16:00','กลับ Osaka หรือเดินย่าน Arashiyama ต่อ','คงวันที่ 20 พ.ย. เป็นวันพักผ่อนหลังเที่ยววัด','Saga-Arashiyama Station Kyoto')):
-  option.schedule.filter((_,i)=>[0,1,3,4].includes(i)).concat(slot('16:00','Gion หรือกลับ Osaka','เลือกได้ตามความเหนื่อย','Gion Kyoto'));
- return choice==='west'?
- [
-  slot('07:00','Osaka → Saga-Arashiyama','JR Osaka → Kyoto → JR Sagano Line; เช็กฝนก่อนออก','Saga-Arashiyama Station Kyoto'),
-  slot('09:00','Arashiyama Bamboo Grove (เดินสั้นเมื่อฝนเบา)','หลีกเลี่ยงทางลื่นและฝนหนัก','Arashiyama Bamboo Grove Kyoto'),
-  slot('09:40','Tenryu-ji โซนที่เปิดให้ชม','ตรวจส่วนในอาคารที่เปิด/ค่าเข้าจริง','Tenryu-ji Temple Kyoto'),
-  slot('12:00','อาหารกลางวันในร่ม','พักกินใกล้สถานี JR Saga-Arashiyama','Saga-Arashiyama Station Kyoto'),
-  slot('14:00','Kyoto Railway Museum (ถ้าฝนหนัก)','สลับเป็นพิพิธภัณฑ์ในอาคาร ตรวจเวลาเปิด/บัตรก่อน','Kyoto Railway Museum'),
-  slot('16:30','กลับ Osaka','เดินทางกลับผ่าน Kyoto Station','Kyoto Station'),
- ]:[
-  slot('08:00','Keihan → Fushimi-Inari','Metro + Keihan ใช้ ICOCA ค่าโดยสารจ่ายแยก','Fushimi Inari Station Kyoto'),
-  slot('09:00','Fushimi Inari (เดินสั้นช่วงฝนเบา)','อย่าขึ้นเขาในวันที่ลื่น','Fushimi Inari Taisha Kyoto'),
-  slot('11:00','Kyoto National Museum','ย้ายไปชมพิพิธภัณฑ์ในร่มแทนเดิน Kiyomizu กลางฝน','Kyoto National Museum'),
-  slot('13:00','ร้านอาหารและถนนใต้หลังคา','เลือก Nishiki Market หรือร้านในย่านใจกลาง Kyoto','Nishiki Market Kyoto'),
-  slot('16:00','กลับ Osaka','Keihan / Metro ตามเส้นทางที่สะดวก','Yodoyabashi Station Osaka')
+ if(choice==='east')return mode==='relaxed'?option.schedule.filter((_,i)=>[0,1,3,4,6].includes(i)):option.schedule;
+ if(mode==='relaxed')return option.schedule.filter((_,i)=>![3,6,11].includes(i)).map(x=>x.title==='Maruyama Park → Nene-no-Michi'?{...x,detail:'เดินชมตามแรงและพักก่อนชมไฟ Kodaiji'}:x);
+ return [
+  slot('07:00–08:45','Osaka → Arashiyama','Metro + JR ใช้พาสเฉพาะ JR','Saga-Arashiyama Station Kyoto'),
+  slot('09:00–09:40','Bamboo Grove (ฝนเบา)','เดินเฉพาะจุดไม่ลื่น ถ้าฝนหนักตัดได้','Arashiyama Bamboo Grove Kyoto'),
+  slot('09:45–10:30','Tenryu-ji Garden / Indoor break','ตรวจการเปิดสวนในวันที่ฝนตก','Tenryu-ji Temple Kyoto'),
+  slot('10:50–11:50','Lunch — Ozuru / indoor backup','ร้านอุด้งในอาคาร ไม่เดินออกนอกเส้นทาง','Arashiyama Udon Ozuru Kyoto'),
+  slot('12:00–13:15','พักร้านชา / รอรถ Hankyu','ลดเดินริมแม่น้ำและสะพานเมื่อฝนหนัก','Hankyu Arashiyama Station Kyoto'),
+  slot('13:20–14:15','Hankyu → Kyoto-Kawaramachi','HK98 → Katsura HK81 → HK86 ใช้ ICOCA','Kyoto-Kawaramachi Station Kyoto'),
+  slot('14:20–15:50','Gion · Covered Shops / Café','ย่นกิจกรรมกลางแจ้งตามสภาพอากาศ','Kyoto-Kawaramachi Station Kyoto'),
+  slot('15:50–16:50','เดินไป Kodaiji / พักในร่ม','ตรวจสภาพอากาศและการเปิดงานจริง','Kodaiji Temple Kyoto'),
+  slot('17:00–18:15','Kodaiji Night Illumination (if operating)','ชมเฉพาะเมื่อวัดเปิดและฝนไม่รุนแรง; ถ้าปิดให้เปลี่ยนเป็นมื้อเย็นก่อน','Kodaiji Temple Kyoto'),
+  slot('18:15–19:30','Dinner — Gion / Kawaramachi','ร้านญี่ปุ่นในอาคาร','Gion-Shijo Station Kyoto'),
+  slot('19:30–21:00','Keihan → Yodoyabashi → Daikokucho','ICOCA แยกจาก JR Pass','Centara Life Namba Hotel Osaka')
  ];
 }
 export function resolvedSchedule(day,prefs){
