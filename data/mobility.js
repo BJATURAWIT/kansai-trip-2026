@@ -96,5 +96,113 @@ export const travelGuide = [
   },
 ];
 
-export const mapDirectionsUrl = (from, to, mode = 'transit') => `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(from)}&destination=${encodeURIComponent(to)}&travelmode=${mode}`;
-export const mapSearchUrl = place => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(place)}`;
+// Locations used in the itinerary are display labels, not always valid Google Maps queries.
+// Map URLs must use unambiguous real-world place names and the country, never line codes,
+// variants such as "Station (M19)", or vague names without a city.
+const MAP_PLACE_ALIASES = Object.freeze({
+  'Shinsaibashi Station (M19)':'Shinsaibashi Station, Chuo Ward, Osaka, Japan',
+  'Shinsaibashi Station':'Shinsaibashi Station, Chuo Ward, Osaka, Japan',
+  'Umeda Sky Building':'Umeda Sky Building, 1 Chome-1-88 Oyodonaka, Kita Ward, Osaka, Japan',
+  'Sky Lounge STARDUST 39F':'Sky Lounge Stardust, Umeda Sky Building 39F, Osaka, Japan',
+  'Sky Lounge STARDUST Osaka':'Sky Lounge Stardust, Umeda Sky Building 39F, Osaka, Japan',
+  'Centara Life Namba Hotel Osaka':'Centara Life Namba Hotel Osaka, 3 Chome-4-21 Shikitsuhigashi, Naniwa Ward, Osaka, Japan',
+  'Daikokucho Station (M21 / Y16)':'Daikokucho Station, Naniwa Ward, Osaka, Japan',
+  'Daikokucho Station (M21)':'Daikokucho Station, Naniwa Ward, Osaka, Japan',
+  'Daikokucho Station':'Daikokucho Station, Naniwa Ward, Osaka, Japan',
+  'Morinomiya Station (C19)':'Morinomiya Station, Chuo Ward, Osaka, Japan',
+  'Morinomiya Station':'Morinomiya Station, Chuo Ward, Osaka, Japan',
+  'Osaka Castle Main Tower':'Osaka Castle Main Tower, Chuo Ward, Osaka, Japan',
+  'Osaka Castle Park':'Osaka Castle Park, Chuo Ward, Osaka, Japan',
+  'Nippombashi Station (K17)':'Nippombashi Station, Chuo Ward, Osaka, Japan',
+  'Nippombashi Station':'Nippombashi Station, Chuo Ward, Osaka, Japan',
+  'Namba (M20)':'Osaka Metro Namba Station, Chuo Ward, Osaka, Japan',
+  'Namba Station (M20)':'Osaka Metro Namba Station, Chuo Ward, Osaka, Japan',
+  'Umeda (M16)':'Osaka Metro Umeda Station, Kita Ward, Osaka, Japan',
+  'JR Osaka Station':'Osaka Station (JR), Kita Ward, Osaka, Japan',
+  'Osaka-Namba Station':'Osaka-Namba Station (Hanshin/Kintetsu), Chuo Ward, Osaka, Japan',
+  'Osaka-Namba Station (Hanshin / Kintetsu)':'Osaka-Namba Station (Hanshin/Kintetsu), Chuo Ward, Osaka, Japan',
+  'Osaka-Namba Station (Kintetsu)':'Osaka-Namba Station (Kintetsu/Hanshin), Chuo Ward, Osaka, Japan',
+  'Nankai Namba Station':'Nankai Namba Station, Naniwa Ward, Osaka, Japan',
+  'JR Namba Station':'JR Namba Station, Naniwa Ward, Osaka, Japan',
+  'Nishikujo Station':'Nishikujo Station, Konohana Ward, Osaka, Japan',
+  'Nishikujo Station (JR)':'JR Nishikujo Station, Konohana Ward, Osaka, Japan',
+  'Nishikujo Station (Hanshin)':'Hanshin Nishikujo Station, Konohana Ward, Osaka, Japan',
+  'Universal-City Station':'Universal-City Station, Konohana Ward, Osaka, Japan',
+  'Universal Studios Japan Main Area':'Universal Studios Japan, Konohana Ward, Osaka, Japan',
+  'Universal Studios Japan':'Universal Studios Japan, Konohana Ward, Osaka, Japan',
+  'Super Nintendo World':'Super Nintendo World, Universal Studios Japan, Osaka, Japan',
+  'The Wizarding World of Harry Potter':'The Wizarding World of Harry Potter, Universal Studios Japan, Osaka, Japan',
+  'JR Kyoto Station':'Kyoto Station, Shimogyo Ward, Kyoto, Japan',
+  'JR Saga-Arashiyama Station':'Saga-Arashiyama Station, Ukyo Ward, Kyoto, Japan',
+  'Saga-Arashiyama Station':'Saga-Arashiyama Station, Ukyo Ward, Kyoto, Japan',
+  'Saganoya near Saga-Arashiyama':'Saganoya restaurant, Saga-Arashiyama, Kyoto, Japan',
+  'Ozuru Udon Arashiyama':'Arashiyama Udon Ozuru, Ukyo Ward, Kyoto, Japan',
+  'Nishiki Market':'Nishiki Market, Nakagyo Ward, Kyoto, Japan',
+  'Gion Izuju Sushi':'Izuju Sushi, Gion, Higashiyama Ward, Kyoto, Japan',
+  'Saryo Tsujiri Gion':'Saryo Tsujiri Gion Honten, Kyoto, Japan',
+  'Keihan Fushimi-Inari':'Fushimi-Inari Station, Keihan Railway, Kyoto, Japan',
+  'Keihan Fushimi-Inari Station':'Fushimi-Inari Station, Keihan Railway, Kyoto, Japan',
+  'Fushimi-Inari (Keihan)':'Fushimi-Inari Station, Keihan Railway, Kyoto, Japan',
+  'Keihan Yodoyabashi':'Keihan Yodoyabashi Station, Chuo Ward, Osaka, Japan',
+  'Keihan Gion-Shijo':'Gion-Shijo Station, Keihan Railway, Kyoto, Japan',
+  'Keihan Gion-Shijo Station':'Gion-Shijo Station, Keihan Railway, Kyoto, Japan',
+  'Osaka Metro Yodoyabashi Station':'Yodoyabashi Station (Osaka Metro), Osaka, Japan',
+  'Tofuku-ji Temple':'Tofuku-ji Temple, Higashiyama Ward, Kyoto, Japan',
+  'Kiyomizu-dera':'Kiyomizu-dera Temple, Higashiyama Ward, Kyoto, Japan',
+  'JR Tennoji Station':'Tennoji Station (JR), Tennoji Ward, Osaka, Japan',
+  'Nara Park / Kintetsu-Nara Area':'Nara Park, Nara, Japan',
+  'Kintetsu-Nara Station':'Kintetsu Nara Station, Nara, Japan',
+  'Nippombashi / Yayoiken':'Yayoiken Nipponbashi, Osaka, Japan',
+  'Namba Dining Area / Kura Sushi':'Kura Sushi Namba Parks South, Osaka, Japan',
+  'Namba Dining Area':'Namba Parks South, Osaka, Japan',
+  'Namba CITY / Shirokitsune':'Shirokitsune Namba CITY, Osaka, Japan',
+  'Namba CITY / Centara':'Namba City, Naniwa Ward, Osaka, Japan',
+  'Namba Parks':'Namba Parks, Naniwa Ward, Osaka, Japan',
+  'Namba City':'Namba CITY, Naniwa Ward, Osaka, Japan',
+  'Dotonbori / Shinsaibashi':'Dotonbori, Chuo Ward, Osaka, Japan',
+  'Kuromon Market':'Kuromon Ichiba Market, Chuo Ward, Osaka, Japan',
+  'Kuromon Ichiba Market':'Kuromon Ichiba Market, Chuo Ward, Osaka, Japan',
+  'Tenjimbashisuji 6-chome (K11)':'Tenjimbashisuji 6-chome Station, Kita Ward, Osaka, Japan',
+  'Kansai-airport Station (Nankai)':'Nankai Kansai-airport Station, Kansai International Airport, Osaka, Japan',
+  'Kansai-airport Station (JR)':'JR Kansai-airport Station, Kansai International Airport, Osaka, Japan',
+  'Kansai-airport Station':'Kansai-airport Station, Kansai International Airport, Osaka, Japan',
+  'KIX Terminal 1':'Kansai International Airport Terminal 1, Osaka, Japan',
+  'Kansai Airport Terminal 1':'Kansai International Airport Terminal 1, Osaka, Japan',
+  'Don Mueang Airport Terminal 1':'Don Mueang International Airport Terminal 1, Bangkok, Thailand',
+  'JR Kinosaki Onsen Station':'Kinosaki Onsen Station, Toyooka, Hyogo, Japan',
+  'Kinosaki Onsen Town':'Kinosaki Onsen, Toyooka, Hyogo, Japan',
+  'Kinosaki Onsen Town / Masuya Soba':'Tajima Soba Masuya, Kinosaki Onsen, Toyooka, Hyogo, Japan',
+  'Nishimuraya Hotel Shogetsutei':'Nishimuraya Hotel Shogetsutei, Kinosaki Onsen, Toyooka, Hyogo, Japan',
+});
+
+export function mapPlaceQuery(place) {
+  const input=String(place??'').trim();
+  if (!input) return 'Osaka, Japan';
+  if (/^-?\d{1,3}\.\d+,\s*-?\d{1,3}\.\d+$/.test(input)) return input;
+  if (MAP_PLACE_ALIASES[input]) return MAP_PLACE_ALIASES[input];
+  // Line/platform codes are for travelers, not for Google Maps geocoding.
+  let cleaned=input.replace(/\s*\([^)]*\)/g,'').trim();
+  // Slash-combined attractions or station choices are not real addresses.
+  if (cleaned.includes(' / ')) cleaned=cleaned.split(' / ')[0].trim();
+  if (/\b(Thailand|Bangkok|Don Mueang|DMK)\b/i.test(cleaned))
+    return /\bThailand\b/i.test(cleaned)?cleaned:cleaned+', Bangkok, Thailand';
+  if (/\bJapan\b/i.test(cleaned)) return cleaned;
+  const locale=/\b(Kinosaki|Toyooka|Hyogo|Tajima|Nishimuraya)\b/i.test(cleaned)
+    ? 'Toyooka, Hyogo, Japan'
+    : /\b(Nara|Todai-ji|Kasuga)\b/i.test(cleaned)
+      ? 'Nara, Japan'
+      : /\b(Kyoto|Arashiyama|Saga-|Tenryu|Togetsukyo|Fushimi|Gion|Kiyomizu|Tofuku|Nishiki|Shichijo)\b/i.test(cleaned)
+        ? 'Kyoto, Japan' : 'Osaka, Japan';
+  // Avoid duplicating the city if the readable label already includes it.
+  return cleaned+', '+locale;
+}
+
+export function mapDirectionsUrl(from, to, mode='transit') {
+  const origin=mapPlaceQuery(from),destination=mapPlaceQuery(to);
+  const valid=['driving','walking','bicycling','transit'].includes(mode)?mode:'transit';
+  return 'https://www.google.com/maps/dir/?api=1&origin='+encodeURIComponent(origin)
+    +'&destination='+encodeURIComponent(destination)+'&travelmode='+valid;
+}
+export const mapSearchUrl=place=>
+  'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(mapPlaceQuery(place));
+

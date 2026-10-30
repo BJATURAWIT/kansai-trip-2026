@@ -1,4 +1,5 @@
 import {foodScheduleEvents} from './foodExperience.js';
+import {detailedRouteGuide} from './detailedTransit.js';
 import {travelBookings,localClock} from './centralTravel.js';
 import {itinerary} from './trip.js';
 import {travelGuide} from './mobility.js';
@@ -184,6 +185,8 @@ export function resolvedSegments(day,prefs){
  ];
 }
 export function resolvedGuide(day,prefs){
+  const detailed=detailedRouteGuide(day,prefs);
+  if(detailed.legs.length)return detailed;
  if(day!==4&&prefs?.dayPlans?.[day]!=='rainy'&&prefs?.dayPlans?.[day]!=='relaxed')
    return travelGuide[day-1];
  const plan=resolveDay(day,prefs);
