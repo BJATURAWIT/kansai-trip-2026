@@ -10,12 +10,15 @@ export const beginnerDayGuide = {
  ['Kansai-airport Station → Nankai Namba','ออก T1 ตามป้าย Railway ไป Nankai (ไม่ใช่ JR) → เปิด Use the Seat/QR ตั๋วจริงในมือถือ สแกนประตูเฉพาะ Digital Ticket และขึ้นตู้/ที่นั่งที่จอง · อีเมลยืนยัน/ใบเสร็จใช้แทน QR ไม่ได้','รวมค่าโดยสารพื้นฐานและค่ารถด่วนแล้ว'],
  ['Nankai Namba → โรงแรม','ลง Nankai Namba เปิด Google Maps ไป Centara Life Namba; ถ้ามีกระเป๋าใหญ่แนะนำแท็กซี่ระยะสั้นจากสถานี ไม่ต้องลากกระเป๋าไกล','เส้นทางแนะนำ'],
 ],note:'หลังเครื่องถึง KIX 18:15 ค่อยเลือก Rapi:t Super Seat หลังผ่าน ตม. และรับกระเป๋า · ต้องเริ่มใช้ก่อน 18 พ.ย. 02:59 JST ตามอีเมล · QR อยู่ใน Ticket Wallet ไม่ใช่อีเมล'},
-2:{time:'08:30–19:00',label:'Osaka Castle · Kuromon · Umeda',steps:[
- ['08:30 Osaka Castle','เดินจาก Centara ไป Daikokucho (Osaka Metro) นั่ง Midosuji Line มุ่ง Umeda ลง Hommachi เปลี่ยน Chuo Line ไป Morinomiya แล้วเดินเข้าปราสาท','Metro / ICOCA หรือ Enjoy Eco Card'],
- ['12:00 Kuromon Market','จากย่าน Osaka Castle ใช้ Metro มาย่าน Nippombashi แล้วเดินไป Kuromon Market สำหรับมื้อกลางวัน','Metro / เดิน'],
- ['14:00 Shinsaibashi / Namba','จาก Kuromon เดินหรือขึ้น Metro ต่อไปช้อปปิงย่าน Namba และ Shinsaibashi','เดิน / Metro'],
- ['16:30 Umeda Sky Building','ไป Umeda ด้วย Midosuji Line แล้วเดินจากสถานีไป Umeda Sky Building เผื่อเดิน 10–20 นาที; กลับ Daikokucho ด้วย Midosuji Line','เที่ยวชมช่วงเย็น แผนไม่ใช่ตั๋ว'],
-],note:'แผน Final เพิ่ม Kuromon และ Umeda Sky Building; วันเดินทางหลายเที่ยวพิจารณา Enjoy Eco Card'},
+2:{time:'09:00–20:00',label:'Osaka Castle · Tempura Makino Namba · Dotonbori · Umeda',steps:[
+ ['09:00–11:10 Osaka Castle','Daikokucho (M21) → Midosuji ถึง Hommachi (M18) → Chuo ไป Morinomiya (C19) แล้วเดินผ่าน Osaka Castle Park ไปตัวปราสาท','Metro / ICOCA'],
+ ['11:10–11:55 Castle → Namba','เดินกลับ Morinomiya (N20) ขึ้น Nagahori Tsurumi-ryokuchi มุ่ง Taisho ลง Shinsaibashi (N15) เปลี่ยน Midosuji (M19) มุ่ง Nakamozu ลง Namba (M20); เดินไปร้าน 3-3-4','ICOCA · เปลี่ยนภายในไม่แตะออก'],
+ ['12:00–13:00 Tempura Makino / Tendon Tenya','Makino เป็นร้านหลัก ถ้าคิวเกิน 15 นาที เดินไปร้าน Tenya Namba Sennichimae ไม่ต้องเปลี่ยนเส้นทางช่วงบ่าย','เดิน / งบหลัก ¥1,100–1,600 ต่อคน'],
+ ['13:00–13:30 Dotonbori / Glico','เดินขึ้นเหนือผ่าน Dotonbori ถ่ายรูปหน้าป้าย Glico ที่สะพาน Ebisubashi','เดินฟรี'],
+ ['13:30–14:55 Shinsaibashi','เดินต่อขึ้นเหนือบน Shinsaibashi-suji Shopping Street ไปสถานี Shinsaibashi (M19)','เดินฟรี'],
+ ['14:55–15:40 Umeda Sky','ขึ้น Midosuji ที่ Shinsaibashi (M19) มุ่ง Shin-Osaka ลง Umeda (M16) และเดินไป Umeda Sky Building อีกประมาณ 12–20 นาที','ICOCA + เดิน'],
+ ['15:45 เป็นต้นไป','รักษาแผน Umeda Sky, Sunset และ STARDUST ที่ยืนยันการจองร้านแล้ว (เวลาจองจริงยังต้องตรวจหลักฐาน)','STARDUST Booked'],
+],note:'ช่วง 11:10–11:55 รวมเดินกลับจากตัวปราสาทและเปลี่ยน Metro จึงค่อนข้างแน่น ถ้าต้องการกินเที่ยงตรง 12:00 ให้เริ่มเดินออกจากตัวปราสาทก่อน 11:10 · ไม่มี Kuromon ในแผนวันนี้'},
 3:{time:'07:15 ออกจากโรงแรม',label:'Universal Studios Japan',steps:[
  ['07:15 Centara → Osaka-Namba','เดิน/ขึ้น Metro ไปสถานี Osaka-Namba ให้ดูชื่อสถานีชัดเจนว่า Osaka-Namba สำหรับ Hanshin','ใช้ ICOCA'],
  ['Hanshin → Nishikujo','ขึ้น Hanshin Namba Line มุ่ง Nishikujo เช็กป้ายปลายทางขบวนก่อนขึ้น','เปลี่ยนที่ Nishikujo'],
