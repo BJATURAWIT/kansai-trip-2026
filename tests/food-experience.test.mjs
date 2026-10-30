@@ -22,9 +22,11 @@ test('Kyoto West and East restaurants follow selected route and never overlap',(
   assert.ok(!westTitles.includes('Izuju Sushi'));
  }
  const west=resolvedSchedule(4,prefs('west')).map(x=>x.title);
- assert.ok(west.indexOf('Arashiyama Bamboo Grove')<west.indexOf('Tenryu-ji Temple'));
- assert.ok(west.indexOf('Tenryu-ji Temple')<west.indexOf('Togetsukyo Bridge'));
- assert.ok(west.indexOf('Togetsukyo Bridge')<west.indexOf('Ozuru Udon · Lunch'));
+ assert.ok(west.indexOf('Arashiyama Bamboo Grove')<west.indexOf('Tenryu-ji Temple & Garden'));
+ assert.ok(west.indexOf('Tenryu-ji Temple & Garden')<west.indexOf('Lunch — Ozuru Udon'));
+ assert.ok(west.indexOf('Lunch — Ozuru Udon')<west.indexOf('Togetsukyo Bridge'));
+ assert.ok(west.indexOf('Togetsukyo Bridge')<west.indexOf('Hanamikoji Street / Gion'));
+ assert.ok(west.indexOf('Hanamikoji Street / Gion')<west.indexOf('Kodaiji Night Illumination'));
 });
 
 test('all restaurant stops are on their plan routes and not on venue closing days',()=>{
@@ -113,14 +115,16 @@ test('walk-in budget strategy has fallback and never labels ordinary courses as 
  const normal=['kura','sushiro','yayoiken','ozuru','saganoya'];
  assert.ok(normal.every(id=>foodVenues[id].priceYen===null||foodVenues[id].priceYen<=1800));
 });
-test('2026-11-20 Kyoto west is preferred with bridge before Ozuru and no East stops',()=>{
+test('2026-11-20 Kyoto West and Gion are combined with Kodaiji night and lunch before bridge',()=>{
  const p=prefs('west','original',4);
  const entries=resolvedSchedule(4,p);
  const at=title=>entries.findIndex(e=>e.title.includes(title));
  assert.ok(at('Arashiyama Bamboo Grove')<at('Tenryu-ji'));
  assert.ok(at('Tenryu-ji')<at('Togetsukyo Bridge'));
- assert.ok(at('Togetsukyo Bridge')<at('Ozuru Udon'));
- assert.equal(entries[at('Ozuru Udon')].time,'11:00');
+ assert.ok(at('Ozuru Udon')<at('Togetsukyo Bridge'));
+ assert.equal(entries[at('Ozuru Udon')].time,'10:50–11:50');
+ assert.ok(at('Togetsukyo Bridge')<at('Kodaiji Night Illumination'));
+ assert.equal(entries.at(-1).time,'19:30–21:00');
  assert.equal(entries.some(e=>/Izuju|Tsujiri/.test(e.title)),false);
  assert.equal(foodVenues.saganoya.days.includes(5),true);
 });
