@@ -106,7 +106,6 @@ const dayTwo=(mode)=>{
    at('Shinsaibashi (M19)','ขึ้น Midosuji Line มุ่งใต้ Nakamozu / Tennoji'),
    at('Namba (M20)','ลง 1 สถานี แตะ ICOCA ออก แล้วเดินไปร้าน Tempura Makino')],{duration:'ประมาณ 15–25 นาทีบน Metro รวมเปลี่ยนสาย'}),
   walk('Namba Station (M20)','Tempura Makino Namba Sennichimae','เดินไป Namba 3-3-4 อาคาร Namba Nichidai ชั้น 1 ร้าน Tempura Makino; ตรวจทางออกจาก Google Maps','ประมาณ 3–7 นาที'),
-  walk('Tempura Makino Namba Sennichimae','Tendon Tenya Namba Sennichimae','เส้นทางสำรองเท่านั้น: หาก Makino ประเมินคิวเกิน 15 นาที เดินไป Tenya Namba 3-1-33 โดยไม่ต้องย้อนกลับสถานี','ประมาณ 3–7 นาที'),
   walk('Tempura Makino Namba Sennichimae','Dotonbori Glico Sign','หลังมื้อเที่ยงเดินขึ้นเหนือจาก Namba ผ่าน Dotonbori ไปป้าย Glico บริเวณสะพาน Ebisubashi','ประมาณ 10–15 นาที'),
   walk('Dotonbori Glico Sign','Shinsaibashi-suji Shopping Street','จาก Glico / Ebisubashi เดินต่อขึ้นเหนือบนถนน Shinsaibashi-suji; ไม่ต้องขึ้นรถไฟ','ประมาณ 5–15 นาที'),
   umedaSky(),sunset(),skyReturn(),daikokuHome()
@@ -121,7 +120,7 @@ const dayTwo=(mode)=>{
    at('Tenjimbashisuji 6-chome (K11)','ขึ้น Sakaisuji Line มุ่ง Tengachaya'),
    at('Nippombashi (K17)','ลงแล้วเดินหรือเปลี่ยน Metro เพื่อไปยัง Namba')]),
   walk('Nippombashi Station (K17)','Tempura Makino Namba Sennichimae','เดินไปย่าน Namba Sennichimae ร้าน Tempura Makino; หากฝนหนักตรวจเส้นทางใน Google Maps','ประมาณ 15–25 นาที'),
-  ...midday.slice(4)
+  ...midday.slice(3)
  ];
  if(mode==='relaxed')return [...castle,...midday];
  return [...castle,...midday];
