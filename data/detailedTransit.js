@@ -43,10 +43,11 @@ const sagaOsaka=()=>leg(SAGA,OSAKA,'JR Sagano Line + JR Kyoto Line','JR Kansai W
 const sunset=()=>leg('Umeda Sky Building','Sky Lounge STARDUST 39F','เดิน','ไม่ใช้ตั๋วรถไฟ · การจองร้านยืนยันแล้ว',[
  at('Umeda Sky Building','หลังชมวิว ลงจากจุดชมวิวตามป้ายทางออก/Restaurant'),
  at('Tower East ชั้น 39','ตามป้าย Sky Lounge STARDUST; แสดงหลักฐานยืนยันการจองให้พนักงาน')],{duration:'อยู่ภายในอาคารเดียวกัน',note:'เวลา 18:15 เป็นแผน ไม่ใช่เวลาการจองที่ยืนยันจากเอกสาร; ไม่เปิดเผยรายละเอียดโอกาสส่วนตัว'});
-const umedaSky=()=>leg('Shinsaibashi Station (M19)','Umeda Sky Building','Osaka Metro + เดิน','ICOCA แตะเข้า Shinsaibashi / ออก Umeda',[
- at('Shinsaibashi (M19)','แตะ ICOCA เข้า Midosuji สีแดง ขึ้นรถมุ่งเหนือ Shin-Osaka / Minoh-kayano'),
- at('Umeda (M16)','ลง Umeda แล้วแตะออก Metro เดินตามป้าย Grand Front Osaka / Umeda Sky Building'),
- at('Umeda Sky Building','เดินต่อประมาณ 10–20 นาทีตาม Google Maps ไปอาคารจุดชมวิว เผื่อเวลาเข้าคิว')],{duration:'เผื่อ 30–45 นาทีรวมเดิน'});
+const umedaSkyMetro=()=>leg('Shinsaibashi Station (M19)','Umeda Station (M16)','Osaka Metro Midosuji','ICOCA แตะเข้า Shinsaibashi / ออก Umeda',[
+ at('Shinsaibashi (M19)','ขึ้น Midosuji Line สีแดง มุ่งเหนือ Shin-Osaka / Minoh-kayano'),
+ at('Umeda (M16)','ลง Umeda แล้วแตะ ICOCA ออก Metro ตามป้ายทางไป Grand Front Osaka / Umeda Sky Building')],{duration:'ประมาณ 10–15 นาทีบนรถ ไม่รวมเดิน'});
+const umedaSkyWalk=()=>walk('Umeda Station (M16)','Umeda Sky Building','เดินตามป้าย Grand Front Osaka / Umeda Sky Building ไปอาคาร Tower East; ตรวจทางเดินล่าสุดใน Google Maps และเผื่อเวลาข้ามถนน','ประมาณ 12–20 นาที');
+const shinsaibashiStationWalk=()=>walk('Shinsaibashi-suji Shopping Street','Shinsaibashi Station (M19)','เดินขึ้นเหนือผ่านทางเดินร้านค้าไปสถานี Osaka Metro Shinsaibashi Midosuji (M19)','ประมาณ 5–15 นาที');
 const skyReturn=()=>leg('Umeda Sky Building',DAI,'เดิน + Osaka Metro','ICOCA แตะเข้า Umeda / ออก Daikokucho',[
  at('Umeda Sky Building','เดินกลับ Osaka Metro Umeda (M16) ไม่ใช่ JR Osaka'),
  at('Umeda (M16)','ขึ้น Midosuji สีแดง มุ่งใต้ Nakamozu / Tennoji'),
@@ -108,7 +109,7 @@ const dayTwo=(mode)=>{
   walk('Namba Station (M20)','Tempura Makino Namba Sennichimae','เดินไป Namba 3-3-4 อาคาร Namba Nichidai ชั้น 1 ร้าน Tempura Makino; ตรวจทางออกจาก Google Maps','ประมาณ 3–7 นาที'),
   walk('Tempura Makino Namba Sennichimae','Dotonbori Glico Sign','หลังมื้อเที่ยงเดินขึ้นเหนือจาก Namba ผ่าน Dotonbori ไปป้าย Glico บริเวณสะพาน Ebisubashi','ประมาณ 10–15 นาที'),
   walk('Dotonbori Glico Sign','Shinsaibashi-suji Shopping Street','จาก Glico / Ebisubashi เดินต่อขึ้นเหนือบนถนน Shinsaibashi-suji; ไม่ต้องขึ้นรถไฟ','ประมาณ 5–15 นาที'),
-  umedaSky(),sunset(),skyReturn(),daikokuHome()
+  shinsaibashiStationWalk(),umedaSkyMetro(),umedaSkyWalk(),sunset(),skyReturn(),daikokuHome()
  ];
  if(mode==='rainy')return [
   daikokuWalk(),
