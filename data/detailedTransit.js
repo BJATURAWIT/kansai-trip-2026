@@ -14,7 +14,7 @@ const RYOKAN='Nishimuraya Hotel Shogetsutei';
 const KIX='Kansai Airport Terminal 1';
 const NANKAI='Nankai Namba Station';
 
-const at=(station,detail)=>({station,detail});
+const at=(station,detail,extra={})=>({station,detail,...extra});
 const leg=(from,to,mode,pay,steps,options={})=>({
  from,to,mode,pay,steps,icon:mode==='เดิน'?'walk':mode==='รถรับส่ง'?'bus':mode==='เครื่องบิน'?'plane':'train',
  line:from+' → '+to,duration:options.duration||'ตรวจเวลาจริง',how:options.note||'ดูป้ายสถานีและข้อมูลรถรอบจริงก่อนเดินทาง',
@@ -95,7 +95,7 @@ const dayTwo=(mode)=>{
  at('Daikokucho (M21)','ขึ้น Midosuji Line สีแดง มุ่งเหนือ Shin-Osaka / Minoh-kayano'),
  at('Hommachi (M18 / C16)','ลง Hommachi แล้วเดินตามป้าย Chuo Line สีเขียว (C16) ไม่ต้องออกประตู'),
  at('Hommachi (C16)','ขึ้น Chuo Line มุ่งตะวันออก Nagata / Gakken-Nara-Tomigaoka'),
- at('Morinomiya (C19)','ลง Morinomiya แตะ ICOCA ออก ทางออกที่ชี้ไป Osaka Castle Park (ตรวจป้ายจริง)')],{duration:'Metro ประมาณ 20–25 นาที ไม่รวมเดินไปปราสาท',note:'เส้นทางนี้เปลี่ยน 1 ครั้งที่ Hommachi; ถ้าขบวน Chuo ไปปลายทางอื่นต้องตรวจว่าผ่าน C19'}),
+ at('Morinomiya (C19)','ลง Morinomiya แตะ ICOCA ออก แล้วกด Google Maps ด้านล่างเพื่อนำทางเดินถึงตัวปราสาท Osaka Castle Main Tower (ไม่ใช่แค่ทางเข้าสวน)',{walkTo:'Osaka Castle Main Tower',walkFrom:'Morinomiya Station (C19)'})],{duration:'Metro ประมาณ 20–25 นาที ไม่รวมเดินไปปราสาท',note:'เส้นทางนี้เปลี่ยน 1 ครั้งที่ Hommachi; ถ้าขบวน Chuo ไปปลายทางอื่นต้องตรวจว่าผ่าน C19'}),
  walk('Morinomiya Station (C19)','Osaka Castle Main Tower','แตะ ICOCA ออกสถานี แล้วเดินตาม Google Maps ผ่าน Osaka Castle Park ไปตัวปราสาท Osaka Castle Main Tower (อย่าสับสนทางเข้าสวนกับตัวอาคาร)', 'ประมาณ 15–25 นาทีตามทางเดินและจุดที่แวะ'),
  walk('Osaka Castle Main Tower','Morinomiya Station (C19)','หลังชมปราสาท เดินย้อนผ่าน Osaka Castle Park ไป Morinomiya เพื่อขึ้น Metro ต่อไป Kuromon', 'ประมาณ 15–25 นาที'),
  leg('Morinomiya Station (C19)','Nippombashi Station (K17)','Osaka Metro Chuo + Sakaisuji','ICOCA · แตะเข้า Morinomiya / ออก Nippombashi',[
