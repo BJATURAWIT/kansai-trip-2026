@@ -89,44 +89,42 @@ const dayOne=()=>[
  walk(NANKAI,HOME,'เดินตาม Google Maps ไป Centara Life Namba Hotel Osaka หากกระเป๋าใหญ่/เหนื่อย ใช้แท็กซี่จากสถานีได้','เผื่อ 15–25 นาทีเดิน')
 ];
 const dayTwo=(mode)=>{
- const normal=[
- daikokuWalk(),
- leg(DAI,'Morinomiya Station (C19)','Osaka Metro Midosuji + Chuo','ICOCA แตะเข้า Daikokucho และออก Morinomiya; เปลี่ยนสายภายในไม่ต้องแตะออก',[
- at('Daikokucho (M21)','ขึ้น Midosuji Line สีแดง มุ่งเหนือ Shin-Osaka / Minoh-kayano'),
- at('Hommachi (M18 / C16)','ลง Hommachi แล้วเดินตามป้าย Chuo Line สีเขียว (C16) ไม่ต้องออกประตู'),
- at('Hommachi (C16)','ขึ้น Chuo Line มุ่งตะวันออก Nagata / Gakken-Nara-Tomigaoka'),
- at('Morinomiya (C19)','ลง Morinomiya แตะ ICOCA ออก แล้วกด Google Maps ด้านล่างเพื่อนำทางเดินถึงตัวปราสาท Osaka Castle Main Tower (ไม่ใช่แค่ทางเข้าสวน)',{walkTo:'Osaka Castle Main Tower',walkFrom:'Morinomiya Station (C19)'})],{duration:'Metro ประมาณ 20–25 นาที ไม่รวมเดินไปปราสาท',note:'เส้นทางนี้เปลี่ยน 1 ครั้งที่ Hommachi; ถ้าขบวน Chuo ไปปลายทางอื่นต้องตรวจว่าผ่าน C19'}),
- walk('Morinomiya Station (C19)','Osaka Castle Main Tower','แตะ ICOCA ออกสถานี แล้วเดินตาม Google Maps ผ่าน Osaka Castle Park ไปตัวปราสาท Osaka Castle Main Tower (อย่าสับสนทางเข้าสวนกับตัวอาคาร)', 'ประมาณ 15–25 นาทีตามทางเดินและจุดที่แวะ'),
- walk('Osaka Castle Main Tower','Morinomiya Station (C19)','หลังชมปราสาท เดินย้อนผ่าน Osaka Castle Park ไป Morinomiya เพื่อขึ้น Metro ต่อไป Kuromon', 'ประมาณ 15–25 นาที'),
- leg('Morinomiya Station (C19)','Nippombashi Station (K17)','Osaka Metro Chuo + Sakaisuji','ICOCA · แตะเข้า Morinomiya / ออก Nippombashi',[
- at('Morinomiya (C19)','เดินกลับสถานี Metro ขึ้น Chuo สีเขียวมุ่ง Yumeshima / Cosmosquare'),
- at('Sakaisuji-Hommachi (C17 / K15)','เปลี่ยนเป็น Sakaisuji Line สีน้ำตาล มุ่ง Tengachaya (ใต้) โดยไม่ออกประตู'),
- at('Nippombashi (K17)','ลงแล้วแตะ ICOCA ออก เดินต่อไป Kuromon Ichiba Market')],{duration:'Metro ประมาณ 15–25 นาทีตามขบวน ไม่รวมเดิน'}),
- walk('Nippombashi Station (K17)','Kuromon Ichiba Market','ออกสถานี Nippombashi แล้วเดินตาม Google Maps ไปทางเข้าตลาด Kuromon','ประมาณ 5–10 นาที'),
- walk('Kuromon Ichiba Market','Shinsaibashi-suji Shopping Street','เดินผ่านย่าน Namba / Dotonbori แล้วขึ้นเหนือบนถนนช้อปปิงไป Shinsaibashi; หากเหนื่อยเปิด Google Maps เลือก Metro','ประมาณ 20–30 นาที'),
- umedaSky(),sunset(),skyReturn(),daikokuHome()
+ const castle=[
+  daikokuWalk(),
+  leg(DAI,'Morinomiya Station (C19)','Osaka Metro Midosuji + Chuo','ICOCA แตะเข้า Daikokucho และออก Morinomiya (ไม่แตะออกที่ Hommachi)',[
+   at('Daikokucho (M21)','ขึ้น Midosuji Line สีแดง มุ่งเหนือ Shin-Osaka / Minoh-kayano'),
+   at('Hommachi (M18 / C16)','เปลี่ยนเป็น Chuo Line สีเขียว โดยเดินภายในสถานี ไม่แตะออก'),
+   at('Hommachi (C16)','ขึ้น Chuo Line มุ่ง Nagata / Gakken-Nara-Tomigaoka'),
+   at('Morinomiya (C19)','ลง Morinomiya แตะ ICOCA ออก เดินเข้าทาง Osaka Castle Park',{walkTo:'Osaka Castle Main Tower',walkFrom:'Morinomiya Station (C19)'})],{duration:'ประมาณ 20–25 นาทีรถไฟ + เดินไปปราสาท'}),
+  walk('Morinomiya Station (C19)','Osaka Castle Main Tower','เดินเข้าสวนไปตัวปราสาทตาม Google Maps','ประมาณ 15–25 นาที')
  ];
- if(mode==='relaxed')return [
- walk(HOME,'Kuromon Ichiba Market','ออกช้ากว่าเดิม เดินหรือใช้ Metro ไป Namba แล้วเดินผ่าน Nipponbashi ตามสภาพอากาศ','เผื่อ 20–30 นาที'),
- walk('Kuromon Ichiba Market','Dotonbori / Shinsaibashi','เดินจากตลาดไป Dotonbori ผ่าน Ebisubashi และขึ้นเหนือไป Shinsaibashi','ประมาณ 20–30 นาที'),
- umedaSky(),sunset(),skyReturn(),daikokuHome()
+ const midday=[
+  walk('Osaka Castle Main Tower','Morinomiya Station (N20)','ออกจากปราสาทราว 11:10 เดินกลับไป Morinomiya เพื่อใช้สาย Nagahori Tsurumi-ryokuchi สีเขียวอ่อน (N20)','ประมาณ 15–25 นาที'),
+  leg('Morinomiya Station (N20)','Namba Station (M20)','Osaka Metro Nagahori Tsurumi-ryokuchi + Midosuji','ICOCA แตะเข้า Morinomiya และออก Namba; เปลี่ยนสายโดยไม่ออกจากประตูตรวจตั๋ว',[
+   at('Morinomiya (N20)','ขึ้น Nagahori Tsurumi-ryokuchi Line สีเขียวอ่อน มุ่ง Taisho'),
+   at('Shinsaibashi (N15)','ลง Shinsaibashi เปลี่ยนไป Midosuji Line สีแดง (M19) ภายในสถานี'),
+   at('Shinsaibashi (M19)','ขึ้น Midosuji Line มุ่งใต้ Nakamozu / Tennoji'),
+   at('Namba (M20)','ลง 1 สถานี แตะ ICOCA ออก แล้วเดินไปร้าน Tempura Makino')],{duration:'ประมาณ 15–25 นาทีบน Metro รวมเปลี่ยนสาย'}),
+  walk('Namba Station (M20)','Tempura Makino Namba Sennichimae','เดินไป Namba 3-3-4 อาคาร Namba Nichidai ชั้น 1 ร้าน Tempura Makino; ตรวจทางออกจาก Google Maps','ประมาณ 3–7 นาที'),
+  walk('Tempura Makino Namba Sennichimae','Tendon Tenya Namba Sennichimae','เส้นทางสำรองเท่านั้น: หาก Makino ประเมินคิวเกิน 15 นาที เดินไป Tenya Namba 3-1-33 โดยไม่ต้องย้อนกลับสถานี','ประมาณ 3–7 นาที'),
+  walk('Tempura Makino Namba Sennichimae','Dotonbori Glico Sign','หลังมื้อเที่ยงเดินขึ้นเหนือจาก Namba ผ่าน Dotonbori ไปป้าย Glico บริเวณสะพาน Ebisubashi','ประมาณ 10–15 นาที'),
+  walk('Dotonbori Glico Sign','Shinsaibashi-suji Shopping Street','จาก Glico / Ebisubashi เดินต่อขึ้นเหนือบนถนน Shinsaibashi-suji; ไม่ต้องขึ้นรถไฟ','ประมาณ 5–15 นาที'),
+  umedaSky(),sunset(),skyReturn(),daikokuHome()
  ];
  if(mode==='rainy')return [
- daikokuWalk(),
- leg(DAI,'Osaka Museum of Housing and Living','Osaka Metro Midosuji + Tanimachi','ICOCA แตะ Metro ตามปกติ',[
- at('Daikokucho (M21)','ขึ้น Midosuji สีแดงมุ่งเหนือ ไป Umeda (M16)'),
- at('Umeda / Higashi-Umeda (T20)','เดินตามป้ายเชื่อม Higashi-Umeda (Tanimachi สีม่วง) ตรวจทางเดิน/การแตะประตูตามจริง'),
- at('Tenjimbashisuji 6-chome (T18)','ขึ้น Tanimachi มุ่ง Dainichi ลง T18 เดินไป Osaka Museum of Housing and Living')]),
- leg('Tenjimbashisuji 6-chome (K11)','Nippombashi Station (K17)','Osaka Metro Sakaisuji','ICOCA แตะเข้า/ออก Metro',[
- at('Tenjimbashisuji 6-chome (K11)','ขึ้น Sakaisuji สีน้ำตาล มุ่งใต้ Tengachaya'),
- at('Nippombashi (K17)','ลงแล้วเดินเข้าตลาด Kuromon')]),
- walk('Kuromon Market','Namba Parks','เดินไปย่าน Namba Parks / Namba City ใช้เวลาให้พอกินมื้อกลางวัน','เผื่อ 15–25 นาที'),
- leg('Namba (M20)','Umeda Sky Building','Midosuji + เดิน','ICOCA เข้า Namba / ออก Umeda',[
- at('Namba (M20)','ขึ้น Midosuji สีแดงมุ่งเหนือ Shin-Osaka / Minoh-kayano'),
- at('Umeda (M16)','ลงแล้วออก Metro เดินตามแผนที่ไป Umeda Sky Building / Grand Front Osaka')]),
- sunset(),skyReturn(),daikokuHome()
+  daikokuWalk(),
+  leg(DAI,'Osaka Museum of Housing and Living','Osaka Metro Midosuji + Tanimachi','ICOCA แตะเข้าและออกตามป้าย Metro',[
+   at('Daikokucho (M21)','ขึ้น Midosuji ไป Umeda'),
+   at('Umeda (M16)','เดินตามป้าย Higashi-Umeda (T20) เพื่อเปลี่ยนเป็น Tanimachi Line'),
+   at('Tenjimbashisuji 6-chome (T18)','ลงแล้วเดินเข้าพิพิธภัณฑ์')]),
+  leg('Tenjimbashisuji 6-chome Station (K11)','Nippombashi Station (K17)','Osaka Metro Sakaisuji','ICOCA; เปลี่ยนเป็นทางใต้ Tengachaya',[
+   at('Tenjimbashisuji 6-chome (K11)','ขึ้น Sakaisuji Line มุ่ง Tengachaya'),
+   at('Nippombashi (K17)','ลงแล้วเดินหรือเปลี่ยน Metro เพื่อไปยัง Namba')]),
+  walk('Nippombashi Station (K17)','Tempura Makino Namba Sennichimae','เดินไปย่าน Namba Sennichimae ร้าน Tempura Makino; หากฝนหนักตรวจเส้นทางใน Google Maps','ประมาณ 15–25 นาที'),
+  ...midday.slice(4)
  ];
- return normal;
+ if(mode==='relaxed')return [...castle,...midday];
+ return [...castle,...midday];
 };
 const dayThree=()=>[
  ...usjOut(),
