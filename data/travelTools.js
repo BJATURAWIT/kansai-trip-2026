@@ -23,12 +23,14 @@ export const transportByDay={
     mk('Nankai Namba → Centara','walk','เดิน / แท็กซี่','เดินฟรี หรือแท็กซี่จ่ายแยก'),
   ],
   2:[
-    mk('Centara → Daikokucho','walk','เดิน','สถานีอยู่ใกล้โรงแรม'),
-    mk('Daikokucho → Morinomiya (Osaka Castle)','metro','ICOCA / Osaka Metro','Zone 2 · ¥240/คน (Daikokucho → Morinomiya; ไม่คิดค่าการเปลี่ยนสายแยก)'),
-    mk('Osaka Castle → Nippombashi (Kuromon)','metro','ICOCA / Osaka Metro','Zone 2 · ¥240/คน (Morinomiya → Nippombashi)'),
-    mk('Nippombashi → Shinsaibashi / Namba','metro','ICOCA / Osaka Metro','Zone 1 · ¥190/คน ถึง Shinsaibashi หรือเดินแทนฟรี; ถ้าไป Namba เป็นคนละปลายทาง'),
-    mk('Shinsaibashi → Umeda Sky','metro','ICOCA / Osaka Metro','Zone 2 · ¥240/คน ถึง Umeda แล้วเดินต่อ Umeda Sky'),
-    mk('Umeda → Daikokucho','metro','ICOCA / Osaka Metro','Zone 2 · ¥240/คน ขากลับ Daikokucho'),
+    mk('Centara → Daikokucho','walk','เดิน','เดินจากโรงแรมไปสถานี Daikokucho'),
+    mk('Daikokucho → Morinomiya (Osaka Castle)','metro','ICOCA / Osaka Metro','Midosuji → Chuo เปลี่ยนที่ Hommachi · ค่าโดยสารตามป้าย/แอปจริง'),
+    mk('Osaka Castle → Morinomiya (N20)','walk','เดิน','เดินจากปราสาทกลับสถานี Morinomiya ราว 15–25 นาที'),
+    mk('Morinomiya (N20) → Shinsaibashi (N15) → Namba (M20)','metro','ICOCA / Osaka Metro','Nagahori Tsurumi-ryokuchi → Midosuji; เปลี่ยนภายใน Shinsaibashi ไม่คิดค่าแยก'),
+    mk('Namba → Tempura Makino / Tendon Tenya','walk','เดิน','เดินจาก Namba สู่ร้านหลักหรือสำรอง'),
+    mk('Namba → Dotonbori → Shinsaibashi','walk','เดิน','ผ่าน Glico Sign แล้วเดินขึ้นเหนือบนถนน Shinsaibashi-suji'),
+    mk('Shinsaibashi (M19) → Umeda (M16)','metro','ICOCA / Osaka Metro','ขึ้น Midosuji มุ่งเหนือ แล้วเดินไป Umeda Sky Building'),
+    mk('Umeda → Daikokucho','metro','ICOCA / Osaka Metro','Midosuji กลับ Daikokucho จ่ายตามระยะจริง'),
   ],
   3:[
     mk('Osaka-Namba → Nishikujo','other','ICOCA · Hanshin','รถไฟ Hanshin ไม่ใช่ JR'),
@@ -106,7 +108,7 @@ export const kyotoOptions={
 };
 export const importantStops={
   1:['Don Mueang International Airport','Kansai International Airport Terminal 1','Nankai Namba Station','Centara Life Namba Hotel Osaka'],
-  2:['Osaka Castle','Kuromon Ichiba Market','Shinsaibashi','Umeda Sky Building'],
+  2:['Osaka Castle','Tempura Makino Namba Sennichimae','Dotonbori Glico Sign','Shinsaibashi','Umeda Sky Building'],
   3:['Universal Studios Japan','Hollywood Dream The Ride Universal Studios Japan','Universal Studios Japan JAWS','Super Nintendo World Osaka','Wizarding World Harry Potter Osaka'],
   4:['Osaka Station','Arashiyama Bamboo Grove Kyoto','Tenryu-ji Temple Kyoto','Togetsukyo Bridge Kyoto','Gion Kyoto'],
   5:['Osaka Namba Station','Nara Park','Todai-ji Nara','Kasuga Taisha Nara'],
