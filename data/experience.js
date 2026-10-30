@@ -171,12 +171,12 @@ export function resolvedSegments(day,prefs){
  const west=prefs?.kyoto!=='east';
  const rainy=prefs?.dayPlans?.[4]==='rainy';
  if(west)return [
-  mk('Daikokucho → Umeda','metro','ICOCA / Osaka Metro','Metro จ่ายแยก'),
-  mk('JR Osaka → Kyoto → Saga-Arashiyama','jr','Kansai WIDE Pass','รวมใน JR Pass 20–24 พ.ย.'),
-  mk('Arashiyama Bamboo Grove → Tenryu-ji','walk','เดิน','ค่าชมวัดแยก'),
-  ...(rainy?[mk('Saga-Arashiyama → Kyoto Railway Museum','jr','Kansai WIDE Pass + เดิน','เส้นทางจริงตรวจวันเดินทาง')]:[]),
-  mk('JR Saga-Arashiyama / Kyoto → JR Osaka','jr','Kansai WIDE Pass','แผนขากลับ JR; ถ้าเลือก Metro/Keihan มีค่าเพิ่ม'),
-  mk('Umeda → Daikokucho','metro','ICOCA / Osaka Metro','Metro จ่ายแยก')
+  mk('Daikokucho → Umeda','metro','ICOCA / Osaka Metro','Metro ¥240/คน'),
+  mk('JR Osaka → Kyoto → Saga-Arashiyama','jr','Kansai WIDE Pass','ครอบคลุมเมื่อรับพาสแล้ว'),
+  mk('Arashiyama Bamboo Grove → Tenryu-ji','walk','เดิน','ค่าเข้าสวนจ่ายแยก'),
+  mk('Hankyu Arashiyama → Kyoto-Kawaramachi','hankyu','ICOCA / Hankyu','ผ่าน Katsura; ไม่ครอบคลุมโดย JR Pass'),
+  mk('Gion-Shijo → Yodoyabashi','keihan','ICOCA / Keihan','ไม่ครอบคลุมโดย JR Pass'),
+  mk('Yodoyabashi → Daikokucho','metro','ICOCA / Metro','Metro ¥240/คน')
  ];
  return [
   mk('Daikokucho → Yodoyabashi','metro','ICOCA / Osaka Metro','Metro จ่ายแยก'),
