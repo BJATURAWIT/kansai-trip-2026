@@ -108,14 +108,14 @@ function DayPlan({ day, prefs }) {
       </details>)}</div>
       <div className="beginner-note"><Info size={17}/><span>{resolvedBeginner(day.day,prefs).note}</span></div>
     </section>
-    <section className="travel-card"><div className="card-title"><div className="round-icon"><Navigation size={19}/></div><div><span className="kicker">STEP-BY-STEP ROUTE</span><h3>เดินทางอย่างไร</h3></div></div>
+    <section className="travel-card"><div className="card-title"><div className="round-icon"><Navigation size={19}/></div><div><span className="kicker">STEP-BY-STEP ROUTE</span><h3>เดินทางอย่างไร · ทีละสถานี</h3></div></div>
       <div className="route-overview">{guide.overview}</div>
       <div className="route-legs">{guide.legs.map((leg, index) => <div className="route-leg" key={`${day.day}-${index}`}>
         <span className="route-axis"><span className="route-icon"><RouteIcon type={leg.icon}/></span>{index < guide.legs.length - 1 && <span className="route-line"/>}</span>
         <div className="leg-main"><div className="leg-journey"><span className="leg-count">STEP {String(index + 1).padStart(2,'0')}</span><span className="leg-duration">{leg.duration}</span></div>
           <h4>{leg.line}</h4><p className="leg-mode">{leg.mode} · {leg.pay}</p>
-          <button type="button" className="leg-toggle" aria-expanded={!!expanded[index]} onClick={() => setExpanded(old => ({ ...old, [index]: !old[index] }))}>{expanded[index] ? 'ซ่อนคำแนะนำ' : 'ดูวิธีขึ้น / จุดเปลี่ยนรถ'} <ChevronDown size={15} className={expanded[index] ? 'rotated' : ''}/></button>
-          {expanded[index] && <div className="leg-detail"><p>{leg.how}</p><div className="leg-stations"><span>จาก <strong>{leg.from}</strong></span><span>ไป <strong>{leg.to}</strong></span></div></div>}
+          <button type="button" className="leg-toggle" aria-expanded={expanded[index]!==false} onClick={() => setExpanded(old => ({ ...old, [index]: !old[index] }))}>{expanded[index]!==false ? 'ย่อขั้นตอน' : 'ดูสถานี / จุดเปลี่ยนรถ'} <ChevronDown size={15} className={expanded[index]!==false ? 'rotated' : ''}/></button>
+          {expanded[index]!==false && <div className="leg-detail">{leg.steps?.length?<ol className="station-steps">{leg.steps.map((step,stepIndex)=><li key={stepIndex}><strong>{step.station}</strong><p>{step.detail}</p></li>)}</ol>:<p>{leg.how}</p>}{leg.note&&<p className="station-note">{leg.note}</p>}<div className="leg-stations"><span>จาก <strong>{leg.from}</strong></span><span>ไป <strong>{leg.to}</strong></span></div></div>}
           <LinkOut className="map-button" href={mapDirectionsUrl(leg.from, leg.to, leg.icon === 'walk' ? 'walking' : leg.icon === 'plane' ? 'driving' : 'transit')}><Navigation size={15}/> นำทาง Google Maps</LinkOut>
         </div>
       </div>)}</div>
