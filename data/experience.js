@@ -124,7 +124,7 @@ export function resolvedSchedule(day,prefs){
     slot('16:20–17:20','Sunset Special Moment','ชมแสงเย็นและถ่ายภาพ','Umeda Sky Building Osaka'),
     slot('18:15–20:00','Special Dinner','STARDUST · Confirmed booking (เวลาในแผนยังไม่ยืนยันจากใบจอง); XEX WEST เป็นสำรองฉุกเฉิน','Sky Lounge STARDUST Osaka')
    ];
-   base=[...base.filter(x=>!/(Umeda Sky|Grand Front|Sunset|Special Dinner)/i.test(x.title)),...late];
+   base=[...base.filter(x=>!(['Umeda Sky Building','Sunset Special Moment','Special Dinner'].includes(x.title)||/^Grand Front Osaka$/i.test(x.title))),...late];
  }
  const titles=base.map(x=>x.title.toLowerCase()).join(' | ');
  const meals=foodScheduleEvents(day,prefs).filter(x=>{
