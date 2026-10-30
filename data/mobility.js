@@ -128,6 +128,7 @@ const MAP_PLACE_ALIASES = Object.freeze({
   'Namba (M20)':'Osaka Metro Namba Station, Chuo Ward, Osaka, Japan',
   'Namba Station (M20)':'Osaka Metro Namba Station, Chuo Ward, Osaka, Japan',
   'Umeda (M16)':'Osaka Metro Umeda Station, Kita Ward, Osaka, Japan',
+  'Umeda Station (M16)':'Osaka Metro Umeda Station, Kita Ward, Osaka, Japan',
   'JR Osaka Station':'Osaka Station (JR), Kita Ward, Osaka, Japan',
   'Osaka-Namba Station':'Osaka-Namba Station (Hanshin/Kintetsu), Chuo Ward, Osaka, Japan',
   'Osaka-Namba Station (Hanshin / Kintetsu)':'Osaka-Namba Station (Hanshin/Kintetsu), Chuo Ward, Osaka, Japan',
