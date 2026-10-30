@@ -49,6 +49,8 @@ export const foodVenues={
  izuju:food('Gion Izuju Sushi','kyoto-east','Kyoto pressed sushi / Saba-zushi','Saba-zushi / Kyoto-style sushi',null,'ราคาตามเมนูหน้าร้าน','10:30–19:00 (L.O. 18:30)','ปิดพุธและพฤหัสบดี; ตรวจวันจริง','https://gion-izuju.com/english-page/','https://gion-izuju.com/english-page/','หลัง Kiyomizu ไปย่าน Yasaka/Gion ตามลำดับ','จุดเด่น: ซูชิแบบเกียวโต; ข้อจำกัด: อาจมีคิวและไม่รับจองโต๊ะ','https://gion-izuju.com/english-page/',{map:'Gion Izuju Sushi Kyoto',days:[0,1,2,5,6],walkIn:true}),
  tsujiri:food('Saryo Tsujiri Gion Honten','kyoto-east','Matcha tea & parfait','Matcha Parfait (ราคาตามเมนูฤดูกาล)',null,'ราคาต่างกันตามรายการพาร์เฟต์','10:30–20:30 (L.O. 19:30)','ตรวจเวลาและวันหยุดที่ร้าน','https://giontsujiri.co.jp/store/saryotsujiri-honten/','https://giontsujiri.co.jp/store/saryotsujiri-honten/','จาก Izuju เดินย่าน Gion ไป Shijo-dori','จุดเด่น: ของหวานชาเขียว; ข้อจำกัด: อาจต้องรอคิว','https://giontsujiri.co.jp/store/saryotsujiri-honten/',{map:'Saryo Tsujiri Gion Honten Kyoto',walkIn:true}),
  excafe:food('eX cafe Kyoto Arashiyama','kyoto-west','Matcha / Dango','Dango grilled / matcha',null,'ราคาเมนูยังไม่ยืนยัน','ประมาณ 09:00–18:00 (ตรวจวันจริง)','วันหยุดไม่แน่นอน',null,null,'อยู่ใน Arashiyama; แวะได้หากไม่ต้องต่อคิว','จุดเด่น: ดั้งโกะย่าง; ข้อจำกัด: นักท่องเที่ยวมากและอาจรอนาน','https://tabelog.com/en/kyoto/A2601/A260403/26005251/',{map:'eX cafe Kyoto Arashiyama',status:'unverified',walkIn:true}),
+ gionKyomen:food('Gion Kyomen Kyoto','kyoto-east','Udon / Soba / Tempura','อุด้ง โซบะ เทมปุระ (ตรวจเมนูจริง)',null,'งบเป้าหมาย ¥800–1,800/คน ราคายังไม่ยืนยัน','ตรวจเวลาเปิดช่วงมื้อเย็น','ตรวจวันหยุด',null,null,'ย่าน Gion หลัง Kodaiji','ร้านญี่ปุ่นแบบ Casual; ตรวจวันจริง',null,{map:'Gion Kyomen Kyoto',status:'unverified',walkIn:true}),
+ katsukuraKyoto:food('Katsukura Shijo Teramachi Kyoto','kyoto-east','Pork Tonkatsu','ทงคัตสึหมู',null,'ประมาณ ¥1,200–2,200/คน เมนูบางจานเกินงบ','ตรวจเวลาเปิด','ตรวจวันหยุด','https://www.fukunaga-tf.com/katsukura/',null,'ย่าน Kawaramachi','สำรองหมูทอด ร้านอาจคิวยาว',null,{map:'Katsukura Shijo Teramachi Kyoto',status:'unverified',walkIn:true}),
  arabica:food('% Arabica Kyoto Arashiyama','kyoto-west','Coffee','Latte / espresso (ราคาเมนูยังไม่ยืนยัน)',null,'เมนูหน้าร้าน','ตรวจเวลาวันจริง','ตรวจวันจริง','https://arabica.coffee/',null,'อยู่ใกล้สะพาน Togetsukyo; เลือกแวะตามคิว','จุดเด่น: กาแฟคุณภาพ; ข้อจำกัด: อาจมีคิวใกล้สะพาน','https://arabica.coffee/',{map:'Arabica Kyoto Arashiyama',status:'unverified',walkIn:true}),
 };
 export const foodPlanDate=day=>'2026-11-'+String(day+16).padStart(2,'0');
@@ -59,10 +61,15 @@ export function foodStopsForDay(day,prefs={}){
  case 1:return [f('21:00','kura','primary','late-dinner','ถ้าตรวจ ตม./เช็กอินเสร็จทัน; ถ้าคิวเกิน 15 นาทีไป Tsurutontan ใกล้โรงแรม'),f('21:00','tsurutontan','backup','late-dinner','สำรองเปิดถึงดึกใกล้ Daikokucho')];
  case 2:return [f('12:00','makino','primary','lunch','Osaka Castle → Morinomiya (N20) → Shinsaibashi (N15/M19) → Namba (M20); เดินไปร้าน หากรอเกิน 15 นาทีเปลี่ยน Tendon Tenya'),f('12:00','tenya','backup','lunch','ร้านสำรอง Namba Sennichimae ใกล้ Makino; เดินได้ ไม่ต้องเปลี่ยนแผนเที่ยว'),f(travelBookings.restaurants.stardust.reservationTimeLocal||travelBookings.restaurants.stardust.plannedDinnerStartLocal,'stardust','primary','dinner','Special Dinner · Confirmed booking; dinner time tentative pending restaurant confirmation'),f('18:15','xex','backup','dinner','Emergency backup only; STARDUST reservation already confirmed')];
  case 3:return [f('11:45',null,'primary','lunch','USJ Quick Service ภายในสวนสนุก; พักก่อน Super Nintendo World 13:50 · เลือกจากแอปสวนสนุกวันจริง')];
- case 4:if(mode==='rainy')return kyoto==='west'?[f('11:30','saganoya','primary','lunch','ร้านในอาคารใกล้ Saga-Arashiyama ก่อนกลับ/ไปพิพิธภัณฑ์; ถ้าคิวเกิน 15 นาทีตรวจ Ozuru'),f('11:30','ozuru','backup','lunch','อุด้งสำรองถ้าเดินในฝนไหว')]:[f('13:00',null,'primary','lunch','เลือกอาหารในอาคารใกล้ Kyoto National Museum / Nishiki ตามเส้นทางฝนตกจริง')];
- if(kyoto==='east')return [f('13:45','izuju','primary','lunch','ซูชิเกียวโตหลัง Kiyomizu · เผื่อคิว'),f('15:30','tsujiri','optional','dessert','Matcha parfait ใกล้ Gion')];
- return [f('11:00','ozuru','primary','lunch','Kitsune/Tempura udon; ถ้าคิวเกิน 10–15 นาทีรอ Saganoya เปิด 11:30'),f('11:30','saganoya','backup','lunch','ใกล้ JR Saga-Arashiyama เปิด 11:30; มีอุด้ง/ข้าวหน้า'),f('13:30','excafe','optional','snack','เฉพาะคิวสั้น ไม่อ้อมทาง'),f('13:50','arabica','optional','coffee','ใกล้สะพาน แวะเฉพาะถ้าคิวสั้น')];
- case 5:return mode==='rainy'?[f('12:00','yayoiken','primary','lunch','เปลี่ยนวัน Nara เป็น Osaka Indoor ใกล้ Nippombashi'),f('19:00','kura','primary','dinner','ซูชิใกล้ Namba'),f('19:00','tsurutontan','backup','dinner','เปลี่ยนเมื่อคิว Kura เกิน 15 นาที')]:[
+ case 4:if(kyoto==='east')return [f('13:45','izuju','primary','lunch','Kyoto East-only alternative'),f('15:30','tsujiri','optional','dessert','Kyoto East-only alternative')];
+  return [
+   f('10:50','ozuru','primary','lunch','อุด้ง/เทมปุระ ถ้าคิวเกิน 15 นาทีใช้ร้านสำรอง'),
+   f('11:30','saganoya','backup','lunch','ร้านสำรองบริเวณ Saga-Arashiyama (ตรวจระยะเดิน)'),
+   ...(mode==='rainy'?[]:[f('12:40','arabica','optional','coffee','แวะใกล้สะพานเมื่อคิวสั้น')]),
+   f('18:15','gionKyomen','primary','dinner','มื้อเย็นใน Gion ตรวจเวลาเปิดและราคา'),
+   f('18:15','katsukuraKyoto','backup','dinner','สำรองหมูทอดใน Kawaramachi ราคาบางเมนูเกินงบ')
+  ];
+  case 5:return mode==='rainy'?[f('12:00','yayoiken','primary','lunch','เปลี่ยนวัน Nara เป็น Osaka Indoor ใกล้ Nippombashi'),f('19:00','kura','primary','dinner','ซูชิใกล้ Namba'),f('19:00','tsurutontan','backup','dinner','เปลี่ยนเมื่อคิว Kura เกิน 15 นาที')]:[
  f('11:30','kamaiki','primary','lunch','Kintetsu Nara 2 นาที; ถ้าคิวเกิน 10–15 นาทีเปลี่ยน Saizeriya'),
  f('11:30','saizeriya','backup','lunch','ในอาคารสถานี Kintetsu Nara 3F'),f('15:00','nakatanidou','optional','snack','แวะซื้อโมจิตามเส้นทางกลับสถานี'),f('19:00','kura','primary','dinner','อาหารค่ำ Namba'),f('19:00','tsurutontan','backup','dinner','สำรองใกล้ Daikokucho')];
  case 6:return [f('13:30','inaba','optional','light-lunch','หลังรถถึง 12:51 เลือกอาหารเบาก่อนเดินทางไปเรียวกัง; Dinner Nishimuraya รวมแล้ว')];
@@ -83,9 +90,10 @@ export function validateFoodPlan(day,prefs){
  return foodStopsForDay(day,prefs).every(stop=>{
  if(!stop.id)return true;const v=foodVenues[stop.id];
  if(!v||!v.days.includes(weekday))return false;
- if(day===4&&v.area!==(prefs?.kyoto==='east'?'kyoto-east':'kyoto-west'))return false;
+ if(day===4&&prefs?.kyoto==='east'&&v.area!=='kyoto-east')return false;
+  if(day===4&&prefs?.kyoto!=='east'&&!['kyoto-east','kyoto-west'].includes(v.area))return false;
  if(day===5&&prefs?.dayPlans?.[5]==='rainy'&&v.area==='nara')return false;
- if(stop.kind==='lunch'&&!(/^(11:00|11:30|11:45|12:00|13:00|13:45)$/.test(stop.time)))return false;
+ if(stop.kind==='lunch'&&!(/^(10:50|11:00|11:30|11:45|12:00|13:00|13:45)$/.test(stop.time)))return false;
  return true;
  });
 }
