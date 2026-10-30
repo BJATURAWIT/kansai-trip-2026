@@ -132,28 +132,26 @@ const dayThree=()=>[
  walk('Super Nintendo World','The Wizarding World of Harry Potter','เดินผ่านโซนในสวนตาม USJ App; รักษาเวลา Express Harry Potter 16:00','ขึ้นกับตำแหน่งและคนในสวน'),
  ...usjBack()
 ];
-const kyotoWest=(mode)=>{
- const route=[daikokuWalk(),daikokuUmeda(),kyotoJR(),
- walk(SAGA,'Arashiyama Bamboo Grove','ออกสถานี Saga-Arashiyama และเดินตามแผนที่ไปป่าไผ่ สวนทางกับแถวคนได้ช่วงเช้า','ประมาณ 15–20 นาที'),
- walk('Arashiyama Bamboo Grove','Tenryu-ji Temple','ออกจากป่าไผ่ตามทางเข้าสวนวัด Tenryu-ji และเตรียมค่าเข้าวัด','ประมาณ 5–10 นาที')];
- if(mode==='rainy')route.push(
- walk('Tenryu-ji Temple','Saganoya near Saga-Arashiyama','เดินกลับฝั่ง JR Saga-Arashiyama เพื่อลองมื้อกลางวันในร้าน (เปิดตามวันจริง)','ประมาณ 10–20 นาที'),
- leg(SAGA,'Kyoto Railway Museum','JR Sagano Line + เดิน','JR Kansai WIDE Area Pass ครอบคลุม JR; ค่าเข้าพิพิธภัณฑ์จ่ายแยก',[
- at('JR Saga-Arashiyama','ขึ้น Sagano Line มุ่ง Kyoto ลง Umekoji-Kyotonishi'),
- at('Umekoji-Kyotonishi','แตะ/แสดง JR Pass ออก แล้วเดินตามป้าย Kyoto Railway Museum')]),
- leg('Kyoto Railway Museum',OSAKA,'เดิน + JR Sagano + JR Kyoto','JR Kansai WIDE Area Pass',[
- at('Kyoto Railway Museum','เดินกลับ Umekoji-Kyotonishi Station'),
- at('Umekoji-Kyotonishi','ขึ้น JR Sagano Line มุ่ง Kyoto'),
- at('JR Kyoto','เปลี่ยน JR Kyoto Line Special Rapid / Rapid ไป Osaka')])
- );
- else route.push(
- walk('Tenryu-ji Temple','Togetsukyo Bridge','เดินไปสะพาน Togetsukyo ชมภูเขาและแม่น้ำ','ประมาณ 10–15 นาที'),
- walk('Togetsukyo Bridge','Ozuru Udon Arashiyama','เดินเข้าย่านร้านอุด้ง Ozuru; ถ้าคิวเกิน 10–15 นาทีใช้ Saganoya ใกล้ทางกลับ JR','ประมาณ 5–15 นาที'),
- walk('Ozuru Udon Arashiyama',SAGA,'ออกจากร้านไปทาง JR Saga-Arashiyama หากเลือกแวะคาเฟ่/ขนมให้ทำเฉพาะเมื่อคิวสั้น','ประมาณ 15–25 นาที'),
- sagaOsaka()
- );
- route.push(osakaDaikoku(),daikokuHome());return route;
-};
+const kyotoWest=(mode)=>[
+ daikokuWalk(),daikokuUmeda(),kyotoJR(),
+ walk(SAGA,'Arashiyama Bamboo Grove','เดินจาก Saga-Arashiyama ประมาณ 15–20 นาที ผ่านทาง Nonomiya Shrine','15–20 นาที'),
+ walk('Arashiyama Bamboo Grove','Tenryu-ji Temple','เดินไปทางเข้าสวนวัดฝั่งเหนือ (เปิด 08:30) ค่าเข้าประมาณ ¥500','5–10 นาที'),
+ walk('Tenryu-ji Temple','Arashiyama Main Street','ออกประตูหลักเข้าสู่ย่านร้านอาหารและของฝาก','5–10 นาที'),
+ walk('Arashiyama Main Street','Arashiyama Udon Ozuru','รับประทานอุด้งใกล้ถนนหลัก ถ้าคิวเกิน 15 นาทีเลือกร้านสำรอง','5–10 นาที'),
+ walk('Arashiyama Udon Ozuru','Togetsukyo Bridge','เดินลงใต้ไปสะพาน Togetsukyo','5–15 นาที'),
+ walk('Togetsukyo Bridge','Hankyu Arashiyama Station (HK98)','ข้ามสะพานลงฝั่งใต้ เดินตามป้าย Hankyu Arashiyama; พักริมแม่น้ำได้ตามเวลา','10–15 นาที'),
+ leg('Hankyu Arashiyama Station (HK98)','Kyoto-Kawaramachi Station (HK86)','Hankyu Arashiyama + Kyoto Line','ICOCA · Hankyu ไม่ครอบคลุมโดย JR Kansai WIDE Pass',[
+   at('Hankyu Arashiyama (HK98)','แตะ ICOCA ขึ้น Hankyu Arashiyama Line มุ่ง Katsura'),
+   at('Katsura (HK81)','เปลี่ยนขบวน Hankyu Kyoto Line มุ่ง Kyoto-Kawaramachi ตรวจป้ายปลายทาง'),
+   at('Kyoto-Kawaramachi (HK86)','ลงสถานีและแตะ ICOCA ออก เดินข้าม Shijo Bridge สู่ Gion')],{duration:'เผื่อ 40–55 นาทีรวมเดิน/รอ/เปลี่ยนรถ'}),
+ walk('Kyoto-Kawaramachi Station','Hanamikoji Street Gion','เดินข้ามสะพาน Shijo เข้าถนนสาธารณะ Hanamikoji; ไม่ถ่ายภาพในพื้นที่ห้าม','10–15 นาที'),
+ walk('Hanamikoji Street Gion','Yasaka Shrine','เดินเลียบถนน Gion ไปศาลเจ้ายาซากะ','10–15 นาที'),
+ walk('Yasaka Shrine','Maruyama Park Kyoto','เดินเข้าด้านหลังศาลเจ้าสู่สวนสาธารณะ','5–10 นาที'),
+ walk('Maruyama Park Kyoto','Nene no Michi Kyoto','เดินผ่านทางเดินย่าน Higashiyama ถนนหินเก่า','10–15 นาที'),
+ walk('Nene no Michi Kyoto','Kodaiji Temple Kyoto','ขึ้นทางเดินไป Kodaiji เผื่อคิวชมไฟเวลา 17:00','5–10 นาที'),
+ walk('Kodaiji Temple Kyoto','Gion Shijo Kyoto','เดินไปหาร้านอาหารช่วงเย็น และกลับสถานี Gion-Shijo หลังมื้ออาหาร','15–25 นาที ไม่รวมเวลารับประทานอาหาร'),
+ ...eastReturn()
+];
 const kyotoEast=(mode)=>{
  const origin=[
  daikokuWalk(),
@@ -292,7 +290,7 @@ const airportEnd=()=>[
 export function detailedRouteGuide(day,prefs={}){
  const mode=prefs.dayPlans?.[day]||'original';
  const legs=day===1?dayOne():day===2?dayTwo(mode):day===3?dayThree():day===4?(prefs.kyoto==='east'?kyotoEast(mode):kyotoWest(mode)):day===5?dayFive(mode):day===6?daySix():day===7?daySeven():day===8?dayEight(prefs):[];
- return {day,legs,kicker:['','จากสนามบินเข้าที่พัก','เที่ยว Osaka Castle / Kuromon / Umeda','USJ ไป–กลับ','Kyoto แบบเลือก West / East','Nara ไป–กลับ','Osaka → Kinosaki Onsen','Kinosaki → Osaka','Namba → KIX'][day],
+ return {day,legs,kicker:['','จากสนามบินเข้าที่พัก','เที่ยว Osaka Castle / Kuromon / Umeda','USJ ไป–กลับ','Kyoto West + Gion + Kodaiji Night Illumination','Nara ไป–กลับ','Osaka → Kinosaki Onsen','Kinosaki → Osaka','Namba → KIX'][day],
  overview:legs.map(x=>x.from+' → '+x.to).join(' · '),
  leave:day===1?'ถึง KIX 18:15 แล้วเลือก Rapi:t หลังรับกระเป๋า':day===3?'ออกก่อนเปิดสวน · ตรวจเวลา USJ จริง':day===6?'Kounotori 5 ออกจาก JR Osaka 10:12':day===7?'Kounotori 22 ออกจาก Kinosaki 15:30':day===8?'ออกจากโรงแรมราว 15:00 · เที่ยวบิน 19:45':'ดูเวลารายวันและเผื่อการเดิน/ต่อรถ',
  reminder:'ขั้นตอนเป็นแผนใช้เดินทาง ไม่ใช่การบอกชานชาลา/รอบรถแบบ Real-time · อ่านป้ายปลายทางขบวนจริง และใช้ Google Maps ตรวจเส้นทางวันเดินทาง'};
