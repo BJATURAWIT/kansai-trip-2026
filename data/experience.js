@@ -31,15 +31,20 @@ const fixedTime=new Map([
 const alternatives={
   2:{
     rainy:[
-      slot('09:30','Osaka Museum of Housing and Living (ในอาคาร)','พิพิธภัณฑ์บ้านเรือนโอซาก้า เหมาะวันฝนตก ตรวจเวลา/ค่าเข้าก่อน','Osaka Museum of Housing and Living'),
-      slot('12:00','Kuromon / Nippombashi มื้อกลางวัน','เลือกอาหารทะเลและร้านซูชิที่มีที่นั่งในอาคาร','Kuromon Market Osaka'),
-      slot('14:00','Namba Parks / Namba City','ห้างและร้านค้าภายในอาคาร เน้นพักเดินสบาย','Namba Parks Osaka'),
-      slot('16:30','Grand Front Osaka / Umeda','นั่ง Metro ไป Umeda เดินเล่นในห้างแทนจุดชมวิวกลางแจ้ง','Grand Front Osaka'),
+      slot('09:00–11:10','Osaka Museum of Housing and Living (indoor option)','ฝนหนักแทนปราสาทด้วยพิพิธภัณฑ์ในอาคาร','Osaka Museum of Housing and Living'),
+      slot('11:10–11:55','เดินทางไป Namba','ใช้ Osaka Metro ไป Namba แล้วเดินไปร้านเทมปุระ','Osaka Metro Namba Station'),
+      slot('12:00–13:00','Lunch — Tempura Makino Namba','ร้านหลัก; ถ้าคิวเกิน 15 นาทีใช้ Tendon Tenya Namba Sennichimae','Tempura Makino Namba Sennichimae Osaka'),
+      slot('13:00–13:30','Dotonbori / Glico Sign','เดินชมตามฝน; ข้ามช่วงนี้ได้ถ้าฝนหนัก','Dotonbori Glico Sign Osaka'),
+      slot('13:30–14:55','Shinsaibashi Shopping','ร้านค้าและทางเดินมีหลังคาบางช่วง','Shinsaibashi-suji Shopping Street Osaka'),
+      slot('14:55–15:40','เดินทางไป Umeda Sky Building','Midosuji Shinsaibashi (M19) → Umeda (M16) แล้วเดินต่อ','Umeda Sky Building Osaka'),
     ],
     relaxed:[
-      slot('10:00','Kuromon Market และอาหารกลางวัน','ออกช้ากว่าแผนปกติ เลือกร้านซูชิที่นั่งสบาย','Kuromon Market Osaka'),
-      slot('13:00','Shinsaibashi / Dotonbori','เดินถ่ายรูป กินขนม จัดเวลาอย่างสบาย','Dotonbori Osaka'),
-      slot('16:00','Umeda Sky Building (ถ้าอยากไป)','ชมพระอาทิตย์ตกตามสภาพอากาศ หรือกลับพักโรงแรม','Umeda Sky Building Osaka')
+      slot('09:00–11:10','Osaka Castle (Relaxed)','ชมปราสาทเท่าที่ไหว และออกจากปราสาทตามเวลาเพื่อให้ทันมื้อเที่ยง','Osaka Castle Main Tower Osaka'),
+      slot('11:10–11:55','Osaka Castle → Namba','Morinomiya (N20) → Shinsaibashi (N15) → Namba (M20)','Osaka Metro Namba Station'),
+      slot('12:00–13:00','Lunch — Tempura Makino Namba','Tendon Tenya เป็นสำรองถ้าคิวเกิน 15 นาที','Tempura Makino Namba Sennichimae Osaka'),
+      slot('13:00–13:30','Dotonbori / Glico Sign','เดินเล่นริมน้ำ','Dotonbori Glico Sign Osaka'),
+      slot('13:30–14:55','Shinsaibashi Shopping','เดินช้อปตามกำลัง ไม่ต้องเข้าทุกร้าน','Shinsaibashi-suji Shopping Street Osaka'),
+      slot('14:55–15:40','Shinsaibashi → Umeda Sky Building','Midosuji Line มุ่งเหนือไป Umeda แล้วเดินไป Sky Building','Umeda Sky Building Osaka'),
     ]
   },
   3:{
