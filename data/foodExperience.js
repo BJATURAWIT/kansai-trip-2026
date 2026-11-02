@@ -76,7 +76,7 @@ export function foodStopsForDay(day,prefs={}){
  f('11:30','saizeriya','backup','lunch','ในอาคารสถานี Kintetsu Nara 3F'),f('15:00','nakatanidou','optional','snack','แวะซื้อโมจิตามเส้นทางกลับสถานี'),f('19:00','kura','primary','dinner','อาหารค่ำ Namba'),f('19:00','tsurutontan','backup','dinner','สำรองใกล้ Daikokucho')];
  case 6:return [f('13:30','inaba','optional','light-lunch','หลังรถถึง 12:51 เลือกอาหารเบาก่อนเดินทางไปเรียวกัง; Dinner Nishimuraya รวมแล้ว')];
  case 7:return [f('12:00','masyua','primary','lunch','อย่าช้ากว่า 14:00 ต้องทัน Kounotori 22 15:30'),f('12:00','inaba','backup','lunch','อยู่ใกล้สถานี เหมาะถ้าร้าน Masuya เต็ม'),f('19:45','kura','primary','dinner','หลังเช็กอิน Centara'),f('19:45','tsurutontan','backup','dinner','อุด้งใกล้โรงแรม เปิดดึก')];
- case 8:return [f('11:00','crepe9','optional','dessert','เครปหลังร้านเปิด 11:00'),f('12:25','rikuroNamba','optional','dessert','ซื้อชีสเค้ก Takeaway สาขา Namba'),f('13:00','shirokitsune','primary','lunch','มื้อกลางวันเบา ๆ ถ้ายังหิว'),f('13:00','kura','backup','lunch','สำรองใกล้ Namba')]; จัดเวลาเผื่อไปสนามบิน')];
+ case 8:return [f('11:00','crepe9','optional','dessert','เครปหลังร้านเปิด 11:00'),f('12:25','rikuroNamba','optional','dessert','ซื้อชีสเค้ก Takeaway สาขา Namba'),f('13:00','shirokitsune','primary','lunch','มื้อกลางวันเบา ๆ ถ้ายังหิว'),f('13:00','kura','backup','lunch','สำรองใกล้ Namba')];
  default:return [];
  }
 }
