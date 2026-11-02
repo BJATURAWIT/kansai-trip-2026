@@ -20,7 +20,7 @@ test('all 8 day galleries contain only distinct actual-photo assets with known s
    assert.ok(card.title&&card.map,'card missing title/map: day '+day);
    if(card.image){
     const filename=card.image.split('/').at(-1);
-    assert.ok(names.has(filename),'image file not in manifest: '+filename);
+    assert.ok(names.has(filename)||filename==='day-8-crepe-user.webp','image file not in manifest or user upload: '+filename);
     assert.ok(!images.has(filename),'gallery reused file across different cards: '+filename);
     images.add(filename);
    }else{
@@ -40,4 +40,6 @@ test('Day 4 and Day 8 landmarks and restaurant photos never use the same file',(
  assert.match(galleryByDay[4].find(x=>x.title.includes('Kodaiji')).image,/day-4-9/);
  assert.match(galleryByDay[8].find(x=>x.title.includes('Yasaka')).image,/day-8-4/);
  assert.match(galleryByDay[8].find(x=>x.title.includes('Rikuro')).image,/day-8-5/);
+ assert.equal(galleryByDay[8].find(x=>x.title.includes('Crepe')).image,'/photos/day-8-crepe-user.webp');
+ assert.equal(galleryByDay[8].find(x=>x.title.includes('Crepe')).photoStatus,'user-provided');
 });
