@@ -5,7 +5,7 @@ import {galleryByDay} from '../data/gallery.js';
 const photos=JSON.parse(fs.readFileSync(new URL('../data/photo-sources.json',import.meta.url),'utf8'));
 test('all 8 day galleries contain only distinct actual-photo assets with known sources',()=>{
  assert.equal(Object.keys(galleryByDay).length,8);
- assert.equal(photos.length,35);
+ assert.equal(photos.length,36);
  const names=new Set(),images=new Set();
  for(const src of photos){
   assert.ok(!names.has(src.file),'duplicate manifest file: '+src.file);
@@ -24,8 +24,9 @@ test('all 8 day galleries contain only distinct actual-photo assets with known s
     assert.ok(!images.has(filename),'gallery reused file across different cards: '+filename);
     images.add(filename);
    }else{
-    assert.equal(card.photoStatus,'external-only','missing photo must be explicitly identified');
-    assert.ok(card.photoSource?.startsWith('https://'),'missing external official image source');
+    assert.equal(card.photoStatus,'official-embed','unlicensed photos must use official embed rather than image fallback');
+    assert.match(card.embedUrl,/^https:\/\/www\.instagram\.com\/p\/[^/]+\/embed\/$/);
+    assert.ok(card.photoSource?.startsWith('https://'),'missing official photo source');
    }
   }
  }
@@ -34,7 +35,7 @@ test('Day 4 and Day 8 landmarks and restaurant photos never use the same file',(
  for(const day of [4,8]){
   const cards=galleryByDay[day];
   assert.equal(cards.length,day===4?6:4);
-  assert.equal(new Set(cards.map(x=>x.image||x.photoSource)).size,cards.length);
+  assert.equal(new Set(cards.map(x=>x.image||x.embedUrl)).size,cards.length);
  }
  assert.match(galleryByDay[4].find(x=>x.title.includes('Kodaiji')).image,/day-4-9/);
  assert.match(galleryByDay[8].find(x=>x.title.includes('Yasaka')).image,/day-8-4/);
