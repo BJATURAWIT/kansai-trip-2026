@@ -10,7 +10,8 @@ for(let day=1;day<=8;day++){const sum=fareSummary(day,resolvedSegments(day,p),de
 assert.equal(sum.unresolved,0,JSON.stringify({day,kyoto,mode,airportTrain,unknown:sum.rows.filter(x=>x.yen===null).map(x=>x.route)}));
 assert.ok(sum.twoPeopleYen>=0);}}});
 test('return airport alternatives are exclusive and user selected',()=>{
-const selections={express:1940,rapit:3340,jr:0};
+// Includes ¥380/adult Sennichimae round trip to Crepe & Espresso (¥760 for two), plus ¥190/adult Daikokucho–Tennoji when JR is selected.
+const selections={express:2700,rapit:4100,jr:1140};
 for(const [airportTrain,cost] of Object.entries(selections)){const p=normalizePreferences({airportTrain});const seg=resolvedSegments(8,p);
 assert.equal(seg.filter(x=>x.type==='nankai'||x.type==='jr').length,1);
 assert.equal(fareSummary(8,seg,defaultTickets).twoPeopleYen,cost);}
