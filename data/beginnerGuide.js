@@ -9,6 +9,7 @@ export const beginnerDayGuide = {
  ['หลังผ่าน ตม. / รับกระเป๋า','เปิด https://nk-digital-ticket.nankai.co.jp/ → Purchased Ticket / Ticket Wallet → เลือกวันที่ 17 พ.ย. ขบวน Rapi:t และ Super Seat ทั้ง 2 คนขบวนเดียวกัน ไม่ต้องจ่ายเพิ่ม · ต้องเลือกก่อนรถออก 5 นาที','ตั๋ว Rapi:t Super Seat ซื้อแล้ว ¥3,180 / 2 คน · ยังไม่ได้เลือกที่นั่ง'],
  ['Kansai-airport Station → Nankai Namba','ออก T1 ตามป้าย Railway ไป Nankai (ไม่ใช่ JR) → เปิด Use the Seat/QR ตั๋วจริงในมือถือ สแกนประตูเฉพาะ Digital Ticket และขึ้นตู้/ที่นั่งที่จอง · อีเมลยืนยัน/ใบเสร็จใช้แทน QR ไม่ได้','รวมค่าโดยสารพื้นฐานและค่ารถด่วนแล้ว'],
  ['Nankai Namba → โรงแรม','ลง Nankai Namba เปิด Google Maps ไป Centara Life Namba; ถ้ามีกระเป๋าใหญ่แนะนำแท็กซี่ระยะสั้นจากสถานี ไม่ต้องลากกระเป๋าไกล','เส้นทางแนะนำ'],
+ ['หลังเช็กอิน · มื้อค่ำประมาณ 21:00 (หากทัน)','ตัวเลือกแรก Toritoriko (とりとりこ) ร้านยากิโทริใกล้ Daikokucho · หากคิวเกิน 15 นาที/เข้าที่พักช้า มี Kura Sushi และ Tsurutontan เป็นร้านสำรอง','Walk-in ยังไม่ได้จอง · ตรวจเวลาเปิดและเส้นทางจากโรงแรม'],
 ],note:'หลังเครื่องถึง KIX 18:15 ค่อยเลือก Rapi:t Super Seat หลังผ่าน ตม. และรับกระเป๋า · ต้องเริ่มใช้ก่อน 18 พ.ย. 02:59 JST ตามอีเมล · QR อยู่ใน Ticket Wallet ไม่ใช่อีเมล'},
 2:{time:'09:00–20:00',label:'Osaka Castle · Tempura Makino Namba · Dotonbori · Umeda',steps:[
  ['09:00–11:10 Osaka Castle','Daikokucho (M21) → Midosuji ถึง Hommachi (M18) → Chuo ไป Morinomiya (C19) แล้วเดินผ่าน Osaka Castle Park ไปตัวปราสาท','Metro / ICOCA'],
