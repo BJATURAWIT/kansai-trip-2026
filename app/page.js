@@ -130,12 +130,12 @@ function DayPlan({ day, prefs }) {
 <FoodDining day={day.day} prefs={prefs}/>
 <section className="gallery-card"><div className="section-title"><div><span className="kicker">TODAY'S GALLERY</span><h3>วันนี้จะเจออะไรบ้าง</h3><p className="gallery-copy">รวมจุดไฮไลต์ จุดกระแส และมุมถ่ายรูปสวยของวันนั้น ๆ สำหรับเปิดดูจากมือถือระหว่างเที่ยว</p></div><Tag color="soft">{gallery.length} จุดแนะนำ</Tag></div>
   <div className="gallery-grid">{gallery.map((spot, index) => <article className="gallery-spot" key={`${day.day}-${index}`}>
-    <div className="gallery-thumb"><img src={spot.image} alt={`${spot.title} — ${spot.subtitle}`} loading="lazy" onError={event => { event.currentTarget.onerror = null; event.currentTarget.src = '/photos/placeholder.svg'; }} /></div>
+    <div className="gallery-thumb">{spot.image ? <img src={spot.image} alt={`${spot.title} — ${spot.subtitle}`} loading="lazy" onError={event => { const img=event.currentTarget; img.hidden=true; const fallback=img.nextElementSibling; if(fallback) fallback.hidden=false; }} /> : null}<div className="gallery-photo-unavailable" hidden={Boolean(spot.image)}><span>ภาพจริงจากแหล่งทางการ</span>{spot.photoSource&&<a href={spot.photoSource} target="_blank" rel="noopener noreferrer">เปิดดูรูปจริงของสถานที่ ↗</a>}</div></div>
     <div className="gallery-body">
       <div className="gallery-topline"><span className="gallery-index">SPOT {String(index + 1).padStart(2, '0')}</span><span className="gallery-vibe">{spot.vibe}</span></div>
       <h4>{spot.title}</h4>
       <p className="gallery-subtitle">{spot.subtitle}</p>
-      <p className="gallery-why">{spot.why}</p>
+      <p className="gallery-why">{spot.why}</p>{spot.image&&<small className="gallery-image-credit">ภาพถ่ายสถานที่จริง · <a href={'/photos/credits.json'} target="_blank" rel="noopener noreferrer">เครดิตภาพและสิทธิ์การใช้งาน</a></small>}
       <div className="gallery-tags">{spot.tags.map(tag => <span key={tag}>{tag}</span>)}</div>
       <LinkOut className="map-button" href={mapSearchUrl(spot.map)}><MapPin size={15}/> เปิดตำแหน่งใน Google Maps</LinkOut>
     </div>
