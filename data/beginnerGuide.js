@@ -63,12 +63,18 @@ export const beginnerDayGuide = {
  ['Osaka Station → Centara','เดินตามป้าย Metro Umeda ขึ้น Midosuji ลง Daikokucho แล้วเดินเข้าโรงแรม คืนสุดท้าย','ICOCA / Metro'],
  ['ค่ำ Namba / Shinsaibashi','ช้อปปิงเก็บตกตามแรงและเวลา นอนพักก่อนวันกลับ','ตามสะดวก'],
 ],note:'23 พ.ย. เป็นวันหยุดญี่ปุ่น · ขากลับ Kounotori 22 จองที่นั่งแล้ว ควรเผื่อเวลาที่สถานี'},
-8:{time:'บิน 19:45 JST',label:'Namba → KIX → Bangkok',steps:[
- ['เช้า / เที่ยง Namba','ทาน Breakfast ที่ Centara เช็กเอาต์ตามเวลาโรงแรม ฝากกระเป๋าไว้หากออกไปเดินเล่นใกล้ ๆ','อย่าออกเที่ยวไกล'],
- ['14:30–15:00 กลับมารับกระเป๋า','ตั้งเป้าออกจากโรงแรมประมาณ 15:00 เพื่อเผื่อเวลารถไฟและสนามบิน','เวลาแนะนำที่ปรับตาม PDF'],
- ['Nankai Namba → Kansai-airport','จากโรงแรมเดินหรือแท็กซี่ไป Nankai Namba ไปฝั่ง Nankai ไม่ใช่ JR Namba ใช้ Airport Express หรือ Rapi:t แบบจองที่นั่ง','Nankai จ่ายแยกจาก JR Pass'],
- ['16:45 เป้าหมายถึง KIX T1','ออกสถานีสนามบินตามป้าย Terminal 1 Departures เช็กจอ AirAsia X รอยืนยันหมายเลขเที่ยวบิน เช็กอิน โหลด 20 กก./คน ผ่าน Security และ Immigration','ควรถึงก่อนบิน ~3 ชั่วโมง'],
- [localClock(travelBookings.flights.inbound.departure)+' KIX T1 → DMK T1','เที่ยวบิน '+flightNumberLabel(travelBookings.flights.inbound)+' ขาออกจากญี่ปุ่นเวลา '+localClock(travelBookings.flights.inbound.departure),'เวลาจากข้อมูลล่าสุดของผู้เดินทาง'],
- [localClock(travelBookings.flights.inbound.arrival)+' วันที่ 25 พ.ย.','ถึงดอนเมือง Terminal 1 เวลาไทยหลังเที่ยงคืน เตรียมรถกลับบ้านสำหรับวันที่ 25','เวลาตามข้อมูลที่ได้รับ; ตรวจเอกสารต้นฉบับอีกครั้ง'],
+8:{time:'08:00–19:45 JST',label:'Namba Yasaka → Crepe & Espresso & 9-chome → Rikuro → KIX',steps:[
+ ['08:00–09:00 Check-out Centara','อาหารเช้า เช็กเอาต์ ฝากกระเป๋ากับ Reception','ไม่ต้องลากกระเป๋าเที่ยว'],
+ ['09:00–10:00 Namba Yasaka Shrine','เดินจาก Centara ไปศาลเจ้าหัวสิงโตยักษ์ ชมและถ่ายรูป','เดินฟรี · เข้าเยี่ยมฟรี'],
+ ['10:00–10:50 Namba → Tanimachi 9-chome','Namba (S16) ขึ้น Sennichimae Line สีชมพู มุ่ง Minami-Tatsumi ลง Tanimachi 9-chome (S18) เดินไปคาเฟ่','ICOCA ¥190/คน'],
+ ['11:00–11:45 Crepe & Espresso & 9-chome','สั่งเครป/กาแฟ ตรวจวันหยุดและคิวก่อนเดินทาง','ร้านเปิดราว 11:00'],
+ ['11:45–12:25 Tanimachi 9-chome → Namba','ขึ้น Sennichimae Line จาก S18 มุ่ง Noda-Hanshin ลง Namba S16','ICOCA ¥190/คน'],
+ ['12:25–13:00 Rikuro’s Cheesecake Namba','แวะซื้อชีสเค้กอบใหม่แบบ Takeaway ถ้าคิวยาวเกิน 15 นาทีให้ข้าม','ใกล้ Ebisubashi-suji'],
+ ['13:00–13:40 อาหารกลางวันเบา ๆ','Shirokitsune Namba CITY หรือข้ามถ้าอิ่ม','Optional'],
+ ['13:40–14:30 กลับ Centara รับกระเป๋า','ตรวจสัมภาระและตั๋วรถไฟสนามบิน','ห้ามออกช้าเกิน 15:00'],
+ ['15:00 ไป KIX','เดินไป Nankai Namba ขึ้น Airport Express หรือ Rapi:t ขากลับแยกจากขาเข้า','Nankai จ่ายแยก'],
+ ['16:45 ถึง KIX T1','เช็กอิน/โหลดกระเป๋าก่อนเที่ยวบิน 19:45','เผื่อเวลา 3 ชั่วโมง'],
+ ['19:45 บินออก KIX Terminal 1','เที่ยวบินขากลับตามเอกสารการจอง หมายเลขเที่ยวบินยังรอยืนยัน','เวลา JST'],
+ ['00:15 (25 พ.ย.) ถึง DMK Terminal 1','ถึงประเทศไทยหลังเที่ยงคืน วันที่ 25 พ.ย.','เวลาไทย ICT']
 ],note:'ยึดข้อมูลเวลา AirAsia ล่าสุดจากผู้เดินทาง; หมายเลขเที่ยวบินขากลับยังต้องยืนยันเอกสารต้นฉบับ'},
 };

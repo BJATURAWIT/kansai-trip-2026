@@ -278,7 +278,21 @@ const daySeven=()=>[
 ];
 const dayEight=prefs=>{
  const choice=prefs?.airportTrain||'express';
- const common=[walk(HOME,'Namba CITY / Shirokitsune','หลังเช็กเอาต์หรือฝากกระเป๋า เลือกมื้อกลางวันใน Namba CITY แล้วกลับรับสัมภาระให้เรียบร้อย','ตามจุดที่เลือก')];
+ const common=[
+  walk(HOME,'Namba Yasaka Shrine Osaka','หลังอาหารเช้าเช็กเอาต์ฝากกระเป๋า เดินไป Namba Yasaka ศาลเจ้าหัวสิงโตยักษ์','10–20 นาที'),
+  walk('Namba Yasaka Shrine Osaka','Osaka Metro Namba Station (S16)','เดินกลับสถานี Namba สาย Sennichimae สีชมพู','10–20 นาที'),
+  leg('Osaka Metro Namba Station (S16)','Tanimachi 9-chome Station (S18)','Osaka Metro Sennichimae Line','ICOCA ¥190/คน · JR Pass ไม่ครอบคลุม',[
+   at('Namba (S16)','ขึ้น Sennichimae Line สีชมพู มุ่ง Minami-Tatsumi ผ่าน Nippombashi'),
+   at('Tanimachi 9-chome (S18)','ลงสถานี S18 แตะออก แล้วเดินไป Crepe & Espresso & 9-chome')],{duration:'ประมาณ 3–5 นาทีบนรถ ไม่รวมเดิน'}),
+  walk('Tanimachi 9-chome Station (S18)','Crepe & Espresso & 9-chome Osaka','เดินไปคาเฟ่ เปิดประมาณ 11:00 ตรวจวันหยุด','1–5 นาที'),
+  walk('Crepe & Espresso & 9-chome Osaka','Tanimachi 9-chome Station (S18)','หลังทานเครปกลับสถานี','1–5 นาที'),
+  leg('Tanimachi 9-chome Station (S18)','Osaka Metro Namba Station (S16)','Osaka Metro Sennichimae Line','ICOCA ¥190/คน · JR Pass ไม่ครอบคลุม',[
+   at('Tanimachi 9-chome (S18)','ขึ้นรถมุ่ง Noda-Hanshin ผ่าน Nippombashi'),
+   at('Namba (S16)','ลง Namba แตะออกและเดินไปร้านชีสเค้ก')],{duration:'ประมาณ 3–5 นาทีบนรถ ไม่รวมเดิน'}),
+  walk('Osaka Metro Namba Station (S16)','Rikuro’s Cheesecake Namba Main Store Osaka','ซื้อชีสเค้กแบบ Takeaway ถ้าคิวเกิน 15 นาทีให้ข้าม','5–12 นาที'),
+  walk('Rikuro’s Cheesecake Namba Main Store Osaka','Shirokitsune Namba CITY South Osaka','เลือกรับประทานมื้อกลางวันเบา ๆ ถ้ายังหิว','5–15 นาที'),
+  walk('Shirokitsune Namba CITY South Osaka',HOME,'กลับ Centara รับกระเป๋าให้เสร็จก่อน 14:30 และออก KIX 15:00','10–20 นาที')
+ ];
  if(choice==='jr')return [
  ...common,
  walk('Namba CITY / Centara',DAI,'รับกระเป๋าจากโรงแรม แล้วเดินไป Metro Daikokucho','ประมาณ 5–15 นาที'),

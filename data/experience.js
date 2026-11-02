@@ -127,6 +127,7 @@ export function resolvedSchedule(day,prefs){
  const meals=foodScheduleEvents(day,prefs).filter(x=>{
   if(day===2&&(x.foodKind==='dinner'||x.foodKind==='lunch'))return false;
   if(day===4&&['lunch','dinner','coffee','snack'].includes(x.foodKind))return false;
+   if(day===8&&['lunch','dessert'].includes(x.foodKind))return false;
   if(day===4&&mode==='relaxed'&&x.foodKind==='snack')return false;
   return !titles.includes(x.title.toLowerCase());
  });
@@ -149,16 +150,17 @@ export function resolveDay(day,prefs){
 export function resolvedSegments(day,prefs){
  const base=transportByDay[day]||[];
  if(day===8){
-   const choice=prefs?.airportTrain||'express';
-   if(choice==='jr')return [
-    {route:'Centara → JR Imamiya',card:'เดิน',type:'walk',note:'เดินไปสถานี JR Imamiya ก่อนใช้พาส'},
-    {route:'JR Imamiya → Tennoji → Kansai Airport',card:'Kansai WIDE Pass · JR Kansai Airport Rapid',type:'jr',note:'นั่ง JR ที่อยู่ในเขตพาส ถ้าเริ่ม/รับพาสแล้วจะไม่มีค่า JR เพิ่ม'},
-   ];
-   return [
-    {route:'Centara → Nankai Namba',card:'เดิน',type:'walk',note:'เดินถึงสถานี Nankai Namba'},
-    choice==='rapit'?{route:'Nankai Namba → Kansai Airport · Rapi:t Regular Seat',type:'nankai',card:'Nankai Rapi:t Reserved Seat',note:'ค่าโดยสาร ¥970 + Express Regular Seat ¥700; ยังไม่ได้ซื้อตั๋วขากลับ'}:
-     {route:'Nankai Namba → Kansai Airport · Airport Express',type:'nankai',card:'ICOCA · Nankai Airport Express',note:'¥970/คน ไม่มีค่ารถด่วนเพิ่มเติม'},
-   ];
+ const choice=prefs?.airportTrain||'express';
+ const visits=[
+  {route:'Centara → Namba Yasaka Shrine',type:'walk',card:'เดิน',note:'ฟรี'},
+  {route:'Namba Yasaka Shrine → Namba (S16)',type:'walk',card:'เดิน',note:'ฟรี'},
+  {route:'Namba (S16) → Tanimachi 9-chome (S18)',type:'metro',card:'ICOCA · Sennichimae',note:'¥190/คน'},
+  {route:'Tanimachi 9-chome → Crepe & Espresso & 9-chome',type:'walk',card:'เดิน',note:'ฟรี'},
+  {route:'Crepe & Espresso & 9-chome → Tanimachi 9-chome',type:'walk',card:'เดิน',note:'ฟรี'},
+  {route:'Tanimachi 9-chome (S18) → Namba (S16)',type:'metro',card:'ICOCA · Sennichimae',note:'¥190/คน'},
+  {route:'Namba → Rikuro’s Cheesecake → Centara',type:'walk',card:'เดิน',note:'ฟรี'}];
+ if(choice==='jr')return [...visits,{route:'Daikokucho → Tennoji',type:'metro',card:'ICOCA · Midosuji',note:'¥190/คน'},{route:'Tennoji → Kansai Airport',type:'jr',card:'Kansai WIDE Pass · JR',note:'พาสครอบคลุมเฉพาะ JR ตามเงื่อนไข'}];
+ return [...visits,{route:'Centara → Nankai Namba',card:'เดิน',type:'walk',note:'ฟรี'},choice==='rapit'?{route:'Nankai Namba → Kansai Airport · Rapi:t Regular Seat',type:'nankai',card:'Nankai Rapi:t Reserved Seat',note:'ขากลับต้องซื้อแยก'}:{route:'Nankai Namba → Kansai Airport · Airport Express',type:'nankai',card:'ICOCA · Airport Express',note:'จ่ายแยก'}];
  }
  if(day!==4){
   if(day===5&&prefs?.dayPlans?.[5]==='rainy')return [

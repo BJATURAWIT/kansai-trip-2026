@@ -185,32 +185,9 @@ export const galleryByDay = {
     },
   ],
   8: [
-    {
-      title: 'Namba Before Departure',
-      subtitle: 'เดินเบา ๆ ก่อนกลับ',
-      vibe: 'วันสบาย',
-      why: 'วันกลับควรเที่ยวแบบเบา ๆ ใกล้โรงแรม เพื่อไม่เสี่ยงพลาดเวลาเดินทางไปสนามบิน',
-      tags: ['ใกล้โรงแรม', 'ไม่รีบ', 'วันกลับ'],
-      map: 'Namba, Osaka',
-      image: localPhoto(8, 1),
-    },
-    {
-      title: 'Rapi:t or Airport Express',
-      subtitle: 'ทางกลับ KIX',
-      vibe: 'travel moment',
-      why: 'อีกหนึ่งโมเมนต์ของวันสุดท้ายคือการนั่งรถไฟออกจากเมืองไปสนามบิน เตรียมตัวปิดท้ายทริป',
-      tags: ['Nankai', 'สนามบิน', 'เดินทาง'],
-      map: 'Nankai Namba Station, Osaka',
-      image: localPhoto(8, 2),
-    },
-    {
-      title: 'Kansai Airport',
-      subtitle: 'ภาพสุดท้ายก่อนกลับไทย',
-      vibe: 'farewell',
-      why: 'ถึงสนามบินแล้วเช็กอินให้เรียบร้อย จากนั้นเก็บภาพปิดท้ายทริปก่อนขึ้นเครื่อง',
-      tags: ['KIX', 'กลับไทย', 'ปิดทริป'],
-      map: 'Kansai International Airport',
-      image: localPhoto(8, 3),
-    },
+    {title:'Namba Yasaka Shrine',subtitle:'ศาลเจ้าหัวสิงโตยักษ์ช่วงเช้า',vibe:'Osaka highlight',why:'แวะถ่ายภาพหัวสิงโตยักษ์ก่อนออกจาก Namba',tags:['09:20–10:00','ฟรี','เดินจากโรงแรม'],map:'Namba Yasaka Shrine Osaka',image:localPhoto(8,1)},
+    {title:'Crepe & Espresso & 9-chome',subtitle:'เครปเปิดร้าน 11:00',vibe:'Sweet stop',why:'ร้านเครปใกล้ Tanimachi 9-chome (S18); เช็กวันหยุดและคิว',tags:['11:00','เครป','Metro Sennichimae'],map:'Crepe & Espresso & 9-chome Osaka',image:localPhoto(8,1)},
+    {title:'Rikuro’s Cheesecake',subtitle:'Namba Main Store · ซื้อแบบ Takeaway',vibe:'Osaka dessert',why:'ซื้อชีสเค้กอบใหม่แล้วกลับโรงแรมรับกระเป๋า',tags:['12:25','ชีสเค้ก','Namba'],map:'Rikuro’s Cheesecake Namba Main Store Osaka',image:localPhoto(8,1)},
+    {title:'Nankai Namba → KIX',subtitle:'ออกจากโรงแรม 15:00',vibe:'Flight home',why:'ไม่เลื่อนเวลารถไฟไปสนามบิน เตรียมเช็กอินเที่ยวบิน 19:45',tags:['สนามบิน','Nankai','กระเป๋า'],map:'Nankai Namba Station Osaka',image:localPhoto(8,2)}
   ],
 };
