@@ -87,7 +87,8 @@ const dayOne=()=>[
  at('Nankai Ticket Wallet','หลังผ่าน ตม. เปิด Purchased Ticket เลือกวันที่ 17 พ.ย. ขบวนและ Super Seat ทั้ง 2 คนให้ตรงกันก่อนรถออกอย่างน้อย 5 นาที'),
  at('Kansai-airport (Nankai)','ใช้ QR สดของ Digital Ticket ผ่านประตูที่รองรับ; ดูป้ายชานชาลา หมายเลขตู้ และที่นั่งที่เลือก'),
  at('Nankai Namba','ลงที่ Nankai Namba ไม่ใช่ JR Namba หรือ Osaka-Namba แล้วออกจากประตูรถไฟ')],{duration:'ประมาณ 35–45 นาทีบนรถตามขบวน',note:'ยังไม่ได้เลือกขบวน/ที่นั่งไว้; ตั๋วที่ซื้อคือ Rapi:t Super Seat สองคน'}),
- walk(NANKAI,HOME,'เดินตาม Google Maps ไป Centara Life Namba Hotel Osaka หากกระเป๋าใหญ่/เหนื่อย ใช้แท็กซี่จากสถานีได้','เผื่อ 15–25 นาทีเดิน')
+ walk(NANKAI,HOME,'เดินตาม Google Maps ไป Centara Life Namba Hotel Osaka หากกระเป๋าใหญ่/เหนื่อย ใช้แท็กซี่จากสถานีได้','เผื่อ 15–25 นาทีเดิน'),
+ walk(HOME,'炭火焼き とりとりこ 大阪市浪速区敷津西2-1-16','มื้อค่ำตัวเลือกแรก Toritoriko หลังเช็กอิน · เดินจากโรงแรมประมาณ 5–12 นาที; ถ้าร้านเต็มหรือเดินทางดึกให้เลือก Kura Sushi หรือ Tsurutontan แทน','ประมาณ 5–12 นาที (optional; 21:00 เป็นเวลาเป้าหมาย)')
 ];
 const dayTwo=(mode)=>{
  const castle=[
