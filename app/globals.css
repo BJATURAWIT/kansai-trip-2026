@@ -162,3 +162,7 @@
 .station-steps p{margin:5px 0 0;line-height:1.75;font-size:13px;}
 .station-note{margin:10px 0;padding:10px 12px;border-left:3px solid #7b9e89;background:rgba(120,150,130,.09);font-size:13px;line-height:1.6;}
 @media(max-width:640px){.station-steps{padding-left:23px}.station-steps li{padding-left:4px}.station-steps p{font-size:13px}}
+
+/* Official social photo embeds: a full-height, tappable gallery visual, not a text-only placeholder. */
+.gallery-thumb:has(iframe){aspect-ratio:4/5;background:#fff}
+.gallery-thumb iframe{display:block;width:100%;height:100%;border:0}

@@ -33,7 +33,7 @@ export const galleryByDay = {
   6:[
     {title:'Limited Express Kounotori',subtitle:'รถไฟ JR ไป Kinosaki',vibe:'Rail journey',why:'ภาพขบวน Kounotori จริง ไม่ใช่ Kuroshio',tags:['รถไฟ'],map:'Osaka Station',image:localPhoto(6,4)},
     {title:'Kinosaki Onsen Canal',subtitle:'คลองและถนนเมืองออนเซ็น',vibe:'Kinosaki',why:'เมืองริมคลองที่ไปพักค้างคืน',tags:['เมืองออนเซ็น'],map:'Kinosaki Onsen Japan',image:localPhoto(6,1)},
-    {title:'Nishimuraya Hotel Shogetsutei',subtitle:'พักเรียวกังและแช่ออนเซ็น',vibe:'Ryokan',why:'ดูภาพจริงของโรงแรมผ่านแหล่งทางการ',tags:['เรียวกัง'],map:'Nishimuraya Hotel Shogetsutei Kinosaki',image:null,photoStatus:'external-only',photoSource:'https://www.nishimuraya.ne.jp/shogetsu/'}
+    {title:'Nishimuraya Hotel Shogetsutei',subtitle:'ภาพถ่ายจริงของโรงแรมที่พัก',vibe:'Ryokan',why:'ภาพจากโรงแรม Nishimuraya Kinosaki Onsen เผยแพร่ภายใต้ CC BY-SA 2.0 พร้อมเครดิตผู้ถ่าย',tags:['เรียวกัง','ภาพจริง'],map:'Nishimuraya Hotel Shogetsutei Kinosaki',image:localPhoto(6,5)}
   ],
   7:[
     {title:'Kinosaki Onsen by Day',subtitle:'ถนนเมืองออนเซ็นช่วงกลางวัน',vibe:'Kinosaki',why:'รูปจริงของถนนคิโนซากิในเวลากลางวัน',tags:['เมืองเก่า'],map:'Kinosaki Onsen Japan',image:localPhoto(7,4)},
@@ -42,7 +42,7 @@ export const galleryByDay = {
   ],
   8:[
     {title:'Namba Yasaka Shrine',subtitle:'ศาลเจ้าหัวสิงโตยักษ์',vibe:'Osaka',why:'ภาพถ่ายหัวสิงโตจริงของศาลเจ้านัมบะยาซากะ',tags:['09:20','ศาลเจ้า'],map:'Namba Yasaka Shrine Osaka',image:localPhoto(8,4)},
-    {title:'Crepe & Espresso & 9-chome',subtitle:'ร้านเครปย่าน Tanimachi 9-chome',vibe:'Dessert',why:'ยังไม่พบรูปที่ตรวจสอบสิทธิ์เผยแพร่ได้ เปิดภาพจริงจากแหล่งร้านแทน',tags:['11:00','เครป'],map:'Crepe & Espresso & 9-chome Osaka',image:null,photoStatus:'external-only',photoSource:'https://crepe-and.com/shop/'},
+    {title:'Crepe & Espresso & 9-chome',subtitle:'ภาพจาก Instagram ทางการของร้าน',vibe:'Dessert',why:'แสดงโพสต์จากบัญชีร้านจริงโดยตรง ผ่าน Instagram Embed ไม่คัดลอกหรือเก็บไฟล์ภาพของร้าน',tags:['11:00','เครป'],map:'Crepe & Espresso & 9-chome Osaka',image:null,photoStatus:'official-embed',embedUrl:'https://www.instagram.com/p/DK5lgVgTMDU/embed/',photoSource:'https://www.instagram.com/p/DK5lgVgTMDU/'},
     {title:'Rikuro’s Cheesecake — Namba Main Store',subtitle:'หน้าร้าน Rikuro’s Namba',vibe:'Dessert',why:'รูปถ่ายจริงของหน้าร้าน Namba Main Store',tags:['12:25','ชีสเค้ก'],map:'Rikuro’s Cheesecake Namba Main Store Osaka',image:localPhoto(8,5)},
     {title:'Nankai Namba Station',subtitle:'สถานีต้นทางไปสนามบิน KIX',vibe:'Transit',why:'ภาพชานชาลาของสถานี Nankai Namba จริง',tags:['15:00','สนามบิน'],map:'Nankai Namba Station Osaka',image:localPhoto(8,6)}
   ],
