@@ -34,7 +34,6 @@ const tabItems = [
   { id: 'costs', text: 'ค่าเดินทาง', icon: TrainFront },
   { id: 'checklist', text: 'Checklist', icon: ListChecks },
   { id: 'bookings', text: 'ตั๋ว', icon: Ticket },
-  { id: 'dining', text: 'ร้านอาหาร', icon: BedDouble },
   { id: 'help', text: 'ข้อมูล', icon: Info },
 ];
 
@@ -269,7 +268,6 @@ export default function Home() {
     {activeTab === 'costs' && <PassGuide tickets={tickets} prefs={prefs} onChange={updatePrefs}/>}
     {activeTab === 'checklist' && <ChecklistPanel checked={checked} setChecked={changeChecked} syncStatus={syncStatus}/>}
     {activeTab === 'bookings' && <><TicketPanel tickets={tickets} onOpenChecklist={()=>selectTab('checklist')}/><BookingsPanel/></>}
-    {activeTab === 'dining' && <section className="content-pane"><Heading label="FOOD & DINING" title="Food Experiences" caption="เลือกตามวันและแผน Kyoto/Backup · สถานะร้านไม่ใช่การยืนยันจอง"/>{itinerary.map(d=><div key={d.day}><h3>{d.day+16} พ.ย. · {d.day===4?(prefs.kyoto==='east'?'Kyoto East':'Kyoto West'):d.location}</h3><FoodDining day={d.day} prefs={prefs}/></div>)}</section>}
     {activeTab === 'help' && <HelpPanel/>}
     <div className="site-foot">Kansai, With You · 2026 <span>✦</span> Made for the journey</div>
   </div>
