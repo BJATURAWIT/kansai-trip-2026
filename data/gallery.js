@@ -5,7 +5,7 @@ export const galleryByDay = {
   1:[
     {title:'Kansai International Airport',subtitle:'สนามบิน KIX ที่เดินทางมาถึง',vibe:'Arrival',why:'แลนด์มาร์กสนามบินคันไซเมื่อเดินทางมาถึงญี่ปุ่น',tags:['สนามบิน','KIX'],map:'Kansai International Airport Terminal 1',image:localPhoto(8,3)},
     {title:'Nankai Rapi:t',subtitle:'รถด่วนจาก KIX สู่ Namba',vibe:'Airport train',why:'รถด่วน Rapi:t ที่ซื้อบัตร Super Seat แล้ว',tags:['Nankai','รถไฟ'],map:'Nankai Kansai-airport Station Osaka',image:localPhoto(8,2)},
-    {title:'Dotonbori & Glico Sign (Optional)',subtitle:'ย่าน Namba เมื่อยังมีแรง',vibe:'Optional night',why:'เดินเล่นเพิ่มเติมได้หลังเช็กอิน หากไม่เหนื่อยจากเที่ยวบิน',tags:['เดินเล่น','ไม่บังคับ'],map:'Dotonbori Glico Sign Osaka',image:localPhoto(1,1)}
+    {title:'Dotonbori & Glico Sign (Optional)',subtitle:'ย่าน Namba เมื่อยังมีแรง',vibe:'Optional night',why:'เดินเล่นเพิ่มเติมได้หลังเช็กอิน หากไม่เหนื่อยจากเที่ยวบิน',tags:['เดินเล่น','ไม่บังคับ'],map:'Dotonbori Glico Sign Osaka',image:localPhoto(1,3)}
   ],
   2:[
     {title:'Osaka Castle',subtitle:'ปราสาทโอซาก้า',vibe:'Landmark',why:'เที่ยวปราสาทและสวนในช่วงเช้า',tags:['ปราสาท','เช้า'],map:'Osaka Castle Osaka',image:localPhoto(2,1)},
