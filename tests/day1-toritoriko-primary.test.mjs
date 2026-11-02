@@ -15,7 +15,7 @@ test('Toritoriko yakitori is Day 1 primary, with Kura and Tsurutontan backups',(
 });
 test('Day 1 timeline follows flight, railway, check-in then first-choice dinner',()=>{
  const events=resolveDay(1,p).schedule;
- const indices=[/บินออกจาก DMK/,/ถึง Kansai Airport/,/เลือกที่นั่ง Nankai/,/Rapi:t Super Seat/,/Check-in/,/Toritoriko/].map(re=>events.findIndex(x=>re.test(x.title)));
+ const indices=[/บินออกจาก DMK/,/ถึง Kansai Airport/,/เลือกที่นั่ง Nankai/,/^Rapi:t Super Seat →/,/Check-in/,/Toritoriko/].map(re=>events.findIndex(x=>re.test(x.title)));
  assert.ok(indices.every(i=>i>=0),JSON.stringify(indices));
  assert.ok(indices.every((v,i)=>i===0||v>indices[i-1]),JSON.stringify(indices));
  const guide=detailedRouteGuide(1,p);
