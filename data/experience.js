@@ -131,6 +131,9 @@ export function resolvedSchedule(day,prefs){
   if(day===4&&mode==='relaxed'&&x.foodKind==='snack')return false;
   return !titles.includes(x.title.toLowerCase());
  });
+ // Preserve arrival flow: immigration → train → hotel check-in → late dinner.
+ // Relative-time entries cannot be sorted by clock time.
+ if(day===1)return [...base,...meals];
  return [...base,...meals].sort((a,b)=>{
    const m=x=>{const r=String(x.time).match(/^(\d{1,2}):(\d{2})/);return r?+r[1]*60 + +r[2]:9999};
    return m(a)-m(b);

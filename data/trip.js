@@ -30,7 +30,7 @@ export const itinerary = [
       { time: 'หลังผ่าน ตม.', title: 'เลือกที่นั่ง Nankai Rapi:t Super Seat', detail: 'ตั๋ว 2 คนชำระแล้ว ¥'+travelBookings.nankaiArrival.totalPaidYen.toLocaleString('en-US')+' · เปิด Purchased Ticket ที่ Nankai Digital Ticket เลือกวัน/ขบวน/ที่นั่งหลังรับกระเป๋า ต้องก่อนรถออกอย่างน้อย 5 นาที; ยังไม่ได้เลือกที่นั่ง' },
       { time: 'ช่วงค่ำ', title: 'Rapi:t Super Seat → Nankai Namba', detail: 'เปิด QR ตั๋วจริงบนมือถือที่ช่องประตู Nankai สำหรับ Digital Ticket แล้วขึ้นขบวน/ตู้/ที่นั่งที่เลือก ไม่ต้องจ่ายค่าโดยสารซ้ำ; รถจริงยังไม่ได้เลือก' },
       { time: 'ดึก', title: 'Check-in + พักผ่อน', detail: 'Centara Life Namba Hotel Osaka' },
-    ], note: 'ซื้อตั๋ว Nankai Rapi:t Super Seat ไป Namba แล้ว 2 คน ¥3,180 แต่ต้องเลือกขบวนและที่นั่งผ่าน Ticket Wallet หลังผ่าน ตม. · อีเมลยืนยันไม่ใช่ QR ตั๋วจริง · ตรวจรถเที่ยวสุดท้าย',
+    ], note: 'ซื้อตั๋ว Nankai Rapi:t Super Seat ไป Namba แล้ว 2 คน ¥3,180 แต่ต้องเลือกขบวนและที่นั่งผ่าน Ticket Wallet หลังผ่าน ตม. · อีเมลยืนยันไม่ใช่ QR ตั๋วจริง · ตรวจรถเที่ยวสุดท้าย · หลังเช็กอิน: มื้อค่ำตัวเลือกแรก Toritoriko ยากิโทริ ใกล้ Daikokucho (เป้าหมายประมาณ 21:00 หากทัน; Kura Sushi และ Tsurutontan เป็นร้านสำรอง)',
   },
   {
     day: 2, date: '18 NOV', dow: 'WED', location: 'OSAKA', title: 'A Day in Osaka', subtitle: 'สำรวจเมือง ของกิน และแสงนีออน', image: 'osaka', type: 'draft',

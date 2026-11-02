@@ -13,6 +13,7 @@ export const travelGuide = [
     legs: [
       { from: 'Kansai International Airport (KIX)', to: 'Nankai Namba Station, Osaka', mode: 'Nankai Rapi:t · Super Seat', line: 'Kansai-airport → Nankai Namba · เลือกขบวนหลัง ตม.', how: 'หลัง ตม./รับกระเป๋า/ศุลกากร เปิด Nankai Digital Ticket → Purchased Ticket / Wallet → เลือกวัน ขบวน และ Super Seat ทั้ง 2 คนให้ตรงกัน ก่อนรถออก ≥5 นาที; เปิด QR สดบนโทรศัพท์เพื่อผ่านประตู Nankai Digital Ticket (อีเมลยืนยันไม่ใช่ตั๋ว) แล้วขึ้นตู้ที่จอง · ไม่ต้องซื้อค่าโดยสารซ้ำ', duration: 'ตามขบวน Rapi:t ที่เลือกจริง (ยังไม่กำหนด)', pay: 'ชำระแล้ว ¥3,180 สำหรับ 2 คน · รวมค่าโดยสารปกติ + Limited Express', icon: 'train' },
       { from: 'Nankai Namba Station, Osaka', to: centara, mode: 'เดิน / แท็กซี่', line: 'ไป Centara Life Namba', how: 'ลง Nankai Namba (ไม่ใช่ JR Namba หรือ Osaka-Namba) เปิด Google Maps เดินไป Centara Life Namba ย่าน Shikitsuhigashi ถ้ากระเป๋าใหญ่ให้ใช้แท็กซี่จากจุดรับรถใกล้สถานี', duration: 'ระยะเดินขึ้นอยู่กับทางออก', pay: 'เดินฟรี', icon: 'walk' },
+      { from: centara, to: '炭火焼き とりとりこ, Shikitsunishi 2-1-16, Naniwa-ku, Osaka', mode: 'เดิน (หลังเช็กอิน)', line: 'มื้อค่ำตัวเลือกแรก · Toritoriko Yakitori', how: 'ฝากกระเป๋าและเช็กอินให้เรียบร้อยก่อน แล้วเปิด Google Maps เดินไปร้าน Toritoriko ใกล้ Daikokucho หากดึก/ร้านเต็มให้ใช้ Kura Sushi หรือ Tsurutontan (Backup)', duration: 'เดินประมาณ 5–12 นาที (ตรวจ Google Maps วันจริง)', pay: 'เดินฟรี · ค่าอาหารจ่ายแยก', icon: 'walk' },
     ],
   },
   {
