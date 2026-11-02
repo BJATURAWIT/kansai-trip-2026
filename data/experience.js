@@ -127,6 +127,7 @@ export function resolvedSchedule(day,prefs){
  const meals=foodScheduleEvents(day,prefs).filter(x=>{
   if(day===2&&(x.foodKind==='dinner'||x.foodKind==='lunch'))return false;
   if(day===4&&['lunch','dinner','coffee','snack'].includes(x.foodKind))return false;
+   if(day===8&&['lunch','dessert'].includes(x.foodKind))return false;
   if(day===4&&mode==='relaxed'&&x.foodKind==='snack')return false;
   return !titles.includes(x.title.toLowerCase());
  });
