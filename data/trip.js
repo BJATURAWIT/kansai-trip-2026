@@ -118,15 +118,23 @@ export const itinerary = [
   },
   {
     day: 8, date: '24 NOV', dow: 'TUE', location: 'DEPARTURE', title: 'Until Next Time, Japan', subtitle: 'วันสุดท้าย เก็บความทรงจำก่อนกลับบ้าน', image: 'osaka', type: 'confirmed',
-    summary: 'Check-out → Kansai Airport → '+flightNumberLabel(travelBookings.flights.inbound)+' '+localClock(travelBookings.flights.inbound.departure), stay: 'กลับประเทศไทย',
+    summary: 'Namba Yasaka Shrine → Crepe & Espresso & 9-chome → Rikuro’s Cheesecake → KIX → '+flightNumberLabel(travelBookings.flights.inbound)+' '+localClock(travelBookings.flights.inbound.departure), stay: 'กลับประเทศไทย',
     highlight: flightNumberLabel(travelBookings.flights.inbound)+' · '+localClock(travelBookings.flights.inbound.departure), map: 'Kansai International Airport',
     schedule: [
-      { time: 'เช้า', title: 'อาหารเช้าที่ Centara', detail: 'รวมในคืนวันที่ 23–24 พ.ย.' },
-      { time: '15:00 (แนะนำ)', title: 'ออกจากโรงแรมไป KIX', detail: 'เผื่อเวลาไป Nankai Namba ซื้อตั๋ว นั่งรถ และหาทางไป Terminal 1; เช็กตารางรถจริงก่อนออก' },
-      { time: '16:45 (เป้าหมาย)', title: 'ถึง KIX Terminal 1', detail: 'เผื่อเวลาเช็กอินระหว่างประเทศ 3 ชั่วโมง' },
+      { time: '08:00–09:00', title: 'Breakfast / Check-out / ฝากกระเป๋า Centara', detail: 'อาหารเช้าที่ Centara แล้วเช็กเอาต์และฝากกระเป๋ากับโรงแรมก่อนออกเที่ยว ไม่ต้องแบกกระเป๋า', map:'Centara Life Namba Hotel Osaka' },
+      { time: '09:00–09:20', title: 'เดินจาก Centara → Namba Yasaka Shrine', detail: 'เดินไปศาลเจ้าหัวสิงโตยักษ์ Namba Yasaka Shrine (ประมาณ 10–20 นาที)', map:'Namba Yasaka Shrine Osaka' },
+      { time: '09:20–10:00', title: 'Namba Yasaka Shrine — Giant Lion Head', detail: 'ไหว้ศาลเจ้าและถ่ายรูปหัวสิงโตยักษ์ · เข้าฟรี · ประตูเปิด 06:00–17:00 น.', map:'Namba Yasaka Shrine Osaka' },
+      { time: '10:00–10:50', title: 'Namba Yasaka → Crepe & Espresso & 9-chome', detail: 'เดินกลับ Osaka Metro Namba (S16) → Sennichimae Line สีชมพู มุ่ง Minami-Tatsumi ลง Tanimachi 9-chome (S18) → เดินไปร้านประมาณ 1–3 นาที; Metro ¥190/คน · เผื่อคิวก่อนร้านเปิด', map:'Crepe & Espresso & 9-chome Osaka' },
+      { time: '11:00–11:45', title: 'Crepe & Espresso & 9-chome', detail: 'ร้านเครปใกล้สถานี Tanimachi 9-chome เปิด 11:00–19:00 หรือจนแป้งหมด; รีวิวระบุค่าใช้จ่ายราว ¥1,000–1,999/คน เช็กวันหยุดก่อนเดินทาง', map:'Crepe & Espresso & 9-chome Osaka' },
+      { time: '11:45–12:25', title: 'Crepe & Espresso → Rikuro’s Namba', detail: 'กลับ Metro Tanimachi 9-chome (S18) → Sennichimae Line มุ่ง Noda-Hanshin ลง Namba (S16) · ¥190/คน แล้วเดินไปร้านใน Ebisubashi-suji Shopping Street', map:'Rikuro’s Cheesecake Namba Main Store Osaka' },
+      { time: '12:25–13:00', title: 'Rikuro’s Cheesecake — Namba Main Store', detail: 'ซื้อชีสเค้กอบใหม่แบบ Takeaway ร้านชั้น 1 เปิด 09:00–20:00 น.; ถ้าคิวยาวเกิน 15 นาทีให้ข้ามเพื่อรักษาเวลาไปสนามบิน', map:'Rikuro’s Cheesecake Namba Main Store Osaka' },
+      { time: '13:00–13:40', title: 'Optional Light Lunch — Namba CITY', detail: 'แวะ Shirokitsune Udon ใน Namba CITY ถ้ายังหิวหลังขนม (Kura Sushi เป็นสำรอง) ไม่ต้องกินครบทุกจุด', map:'Shirokitsune Namba CITY South Osaka' },
+      { time: '13:40–14:30', title: 'กลับ Centara / รับกระเป๋า / เตรียมไป KIX', detail: 'เดินกลับโรงแรม รับกระเป๋าที่ฝากไว้ ตรวจสัมภาระและตั๋วรถไฟ สนามบินห้ามเลื่อนเวลาออก 15:00', map:'Centara Life Namba Hotel Osaka' },
+      { time: '15:00 (แนะนำ)', title: 'ออกจากโรงแรมไป KIX', detail: 'เดินไป Nankai Namba เพื่อขึ้น Airport Express หรือ Rapi:t (ต้องซื้อขากลับแยก) หรือเลือก JR ตาม Pass · ตรวจรอบรถจริง', map:'Nankai Namba Station Osaka' },
+      { time: '16:45 (เป้าหมาย)', title: 'ถึง KIX Terminal 1', detail: 'เผื่อเวลาผ่านเช็กอิน โหลดกระเป๋าและ ตม. ก่อนเที่ยวบิน 19:45', map:'Kansai International Airport Terminal 1' },
       { time: localClock(travelBookings.flights.inbound.departure), date:'2026-11-24',timeZone:'Asia/Tokyo', title: 'บินออก KIX Terminal 1', detail: flightNumberLabel(travelBookings.flights.inbound)+' · เวลาญี่ปุ่น' },
       { time: localClock(travelBookings.flights.inbound.arrival)+' (25 พ.ย.)', date:'2026-11-25',timeZone:'Asia/Bangkok', title: 'ถึง DMK Terminal 1', detail: 'เวลาประเทศไทย · เดินทางถึงหลังเที่ยงคืน' },
-    ], note: 'เช็กเวลาเช็กอิน ปิดเคาน์เตอร์ และกระเป๋ากับสายการบินก่อนเดินทาง',
+    ], note: '3 จุดเช้าวันกลับ: Namba Yasaka Shrine, Crepe & Espresso & 9-chome, Rikuro’s Cheesecake · Crepe เปิด 11:00 และอาจหยุดไม่แน่นอน · ถ้าคิวเกิน 15 นาทีให้ข้ามร้าน · กลับรับกระเป๋าให้ทัน 14:30 และออก KIX 15:00 ตามเดิม',
   },
 ];
 
