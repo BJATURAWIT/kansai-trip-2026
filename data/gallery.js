@@ -2,192 +2,48 @@
 const localPhoto = (day, spot) => `/photos/day-${day}-${spot}.jpg`;
 
 export const galleryByDay = {
-  1: [
-    {
-      title: 'Dotonbori & Glico Sign',
-      subtitle: 'ไฮไลต์แรกของโอซาก้ายามค่ำ',
-      vibe: 'กระแส / ถ่ายรูปสวย',
-      why: 'ป้าย Glico, คลองโดทงโบริ และแสงนีออนคือภาพจำของ Osaka เหมาะกับการมาเดินคืนแรกหลังเช็กอิน',
-      tags: ['ฮิตมาก', 'กลางคืนสวย', 'รูปคู่สวย'],
-      map: 'Dotonbori, Osaka',
-      image: localPhoto(1, 1),
-    },
-    {
-      title: 'Shinsekai & Tsutenkaku',
-      subtitle: 'ฟีลโอซาก้าเก่า ๆ ใกล้โรงแรม',
-      vibe: 'เดินง่าย',
-      why: 'ถ้าไม่อยากเดินไกลจาก Centara มาก ย่านนี้ได้บรรยากาศโอซาก้าโลคอล ร้านกินเล่น และมุมถ่ายรูปย้อนยุค',
-      tags: ['ใกล้ที่พัก', 'ของกิน', 'โลคอล'],
-      map: 'Tsutenkaku, Osaka',
-      image: localPhoto(1, 2),
-    },
-    {
-      title: 'Namba Night Street',
-      subtitle: 'บรรยากาศย่านชอปปิงและของกิน',
-      vibe: 'ชิล ๆ คืนแรก',
-      why: 'เหมาะกับเดินเล่นหลังเข้าเมือง ดูร้านอาหาร คาเฟ่ และซึมซับจังหวะของทริปวันแรก',
-      tags: ['เดินเล่น', 'หาอาหารง่าย', 'ใกล้โรงแรม'],
-      map: 'Namba, Osaka',
-      image: localPhoto(1, 3),
-    },
+  1:[
+    {title:'Kansai International Airport',subtitle:'สนามบิน KIX ที่เดินทางมาถึง',vibe:'Arrival',why:'แลนด์มาร์กสนามบินคันไซเมื่อเดินทางมาถึงญี่ปุ่น',tags:['สนามบิน','KIX'],map:'Kansai International Airport Terminal 1',image:localPhoto(8,3)},
+    {title:'Nankai Rapi:t',subtitle:'รถด่วนจาก KIX สู่ Namba',vibe:'Airport train',why:'รถด่วน Rapi:t ที่ซื้อบัตร Super Seat แล้ว',tags:['Nankai','รถไฟ'],map:'Nankai Kansai-airport Station Osaka',image:localPhoto(8,2)},
+    {title:'Dotonbori & Glico Sign (Optional)',subtitle:'ย่าน Namba เมื่อยังมีแรง',vibe:'Optional night',why:'เดินเล่นเพิ่มเติมได้หลังเช็กอิน หากไม่เหนื่อยจากเที่ยวบิน',tags:['เดินเล่น','ไม่บังคับ'],map:'Dotonbori Glico Sign Osaka',image:localPhoto(1,1)}
   ],
-  2: [
-    {
-      title: 'Osaka Castle',
-      subtitle: 'แลนด์มาร์กหลักของเมือง',
-      vibe: 'ไฮไลต์คลาสสิก',
-      why: 'ปราสาทโอซาก้าเป็นจุดเช็กอินหลัก ได้ทั้งภาพสถาปัตยกรรมและสวนโดยรอบ โดยเฉพาะช่วงเช้าแสงสวยมาก',
-      tags: ['แลนด์มาร์ก', 'เช้าสวย', 'ถ่ายรูปง่าย'],
-      map: 'Osaka Castle',
-      image: localPhoto(2, 1),
-    },
-    {
-      title: 'Dotonbori / Glico Sign',
-      subtitle: 'เดินต่อจากร้าน Tempura Makino ในย่าน Namba',
-      vibe: 'ชมเมือง / ถ่ายรูป',
-      why: 'หลังมื้อเที่ยงเดินขึ้นเหนือไป Glico Sign ที่ Ebisubashi แล้วต่อ Shinsaibashi-suji Shopping Street ได้ ไม่ต้องนั่งรถไฟ',
-      tags: ['แลนด์มาร์ก', 'เดินเที่ยว', 'หลังมื้อกลางวัน'],
-      map: 'Dotonbori Glico Sign Osaka',
-      image: localPhoto(1, 1),
-    },
-    {
-      title: 'Umeda Sky Building',
-      subtitle: 'วิวเมืองมุมสูงช่วงเย็น',
-      vibe: 'โรแมนติก / city view',
-      why: 'จุดชมวิวชื่อดังของ Osaka เหมาะกับมาช่วงเย็นถึงค่ำ ได้วิวเมืองกว้างและภาพคู่สวยมาก',
-      tags: ['วิวสวย', 'ช่วงเย็น', 'รูปคู่'],
-      map: 'Umeda Sky Building, Osaka',
-      image: localPhoto(2, 3),
-    },
+  2:[
+    {title:'Osaka Castle',subtitle:'ปราสาทโอซาก้า',vibe:'Landmark',why:'เที่ยวปราสาทและสวนในช่วงเช้า',tags:['ปราสาท','เช้า'],map:'Osaka Castle Osaka',image:localPhoto(2,1)},
+    {title:'Dotonbori / Glico Sign',subtitle:'ป้ายกูลิโกะหลังมื้อเที่ยง',vibe:'Namba',why:'เดินจากร้านอาหารไปจุดถ่ายรูป Ebisubashi',tags:['Glico','คลอง'],map:'Dotonbori Glico Sign Osaka',image:localPhoto(1,1)},
+    {title:'Umeda Sky Building',subtitle:'จุดชมวิวช่วงเย็น',vibe:'City view',why:'ชมทิวทัศน์เมืองโอซาก้าจาก Umeda Sky',tags:['วิวเมือง','ช่วงเย็น'],map:'Umeda Sky Building Osaka',image:localPhoto(2,3)}
   ],
-  3: [
-    {
-      title: 'Universal Studios Japan Globe',
-      subtitle: 'มุมบังคับก่อนเข้าสวนสนุก',
-      vibe: 'ไฮไลต์ / เช็กอิน',
-      why: 'ลูกโลก USJ คือภาพจำของวันนี้ เหมาะกับถ่ายตั้งแต่เช้าก่อนคนแน่น',
-      tags: ['USJ', 'จุดเช็กอิน', 'รูปคู่'],
-      map: 'Universal Studios Japan, Osaka',
-      image: localPhoto(3, 1),
-    },
-    {
-      title: 'Super Nintendo World',
-      subtitle: 'โซนกระแสมากที่สุด',
-      vibe: 'กระแสแรง',
-      why: 'โซนยอดฮิตที่หลายคนตั้งใจมาโดยเฉพาะ สีสันสดและมุมถ่ายรูปเยอะมาก',
-      tags: ['กระแส', 'Mario', 'คิวยาว'],
-      map: 'Super Nintendo World, Osaka',
-      image: localPhoto(3, 2),
-    },
-    {
-      title: 'Wizarding World of Harry Potter',
-      subtitle: 'ปราสาทและบรรยากาศแฟนตาซี',
-      vibe: 'ภาพสวย / mood ดี',
-      why: 'โซน Harry Potter ให้บรรยากาศต่างจากโซนอื่น ช่วงบ่ายและเย็นภาพจะออกฟีลแฟนตาซีมาก',
-      tags: ['Harry Potter', 'ปราสาท', 'บรรยากาศดี'],
-      map: 'The Wizarding World of Harry Potter, Osaka',
-      image: localPhoto(3, 3),
-    },
+  3:[
+    {title:'Universal Studios Japan Globe',subtitle:'ลูกโลกทางเข้าสวนสนุก',vibe:'USJ',why:'ถ่ายรูปตรงทางเข้าก่อนเที่ยวสวนสนุก',tags:['USJ'],map:'Universal Studios Japan Osaka',image:localPhoto(3,1)},
+    {title:'Super Nintendo World',subtitle:'โซน Mario และ Donkey Kong',vibe:'USJ',why:'โซนที่มีการจองเวลาเข้าไว้',tags:['Mario','Nintendo'],map:'Super Nintendo World Osaka',image:localPhoto(3,2)},
+    {title:'Wizarding World of Harry Potter',subtitle:'Hogwarts Castle',vibe:'USJ',why:'ชมปราสาท Hogwarts และเครื่องเล่น Harry Potter',tags:['Harry Potter'],map:'Wizarding World of Harry Potter Osaka',image:localPhoto(3,3)}
   ],
-  4: [
-   {title:'Arashiyama Bamboo Grove',subtitle:'ป่าไผ่ช่วงเช้า',vibe:'Kyoto West',why:'เดินชมป่าไผ่ก่อนคนหนาแน่น',tags:['ป่าไผ่','เช้า'],map:'Arashiyama Bamboo Grove Kyoto',image:localPhoto(4,4)},
-   {title:'Tenryu-ji Temple',subtitle:'สวนใบไม้แดง',vibe:'Kyoto West',why:'ชมสวน Sogenchi สวนญี่ปุ่นและภูเขา',tags:['วัด','สวน'],map:'Tenryu-ji Temple Kyoto',image:localPhoto(4,5)},
-   {title:'Togetsukyo Bridge',subtitle:'วิว Arashiyama',vibe:'Nature',why:'สะพานกับวิวภูเขาใบไม้เปลี่ยนสี',tags:['แม่น้ำ','ถ่ายรูป'],map:'Togetsukyo Bridge Kyoto',image:localPhoto(4,4)},
-   {title:'Hanamikoji / Gion',subtitle:'เมืองเก่าเกียวโตยามบ่าย',vibe:'Kyoto East',why:'เดินถนนสาธารณะใน Gion และเคารพป้ายห้ามถ่ายภาพ',tags:['Gion','เมืองเก่า'],map:'Hanamikoji Street Kyoto',image:localPhoto(4,3)},
-   {title:'Yasaka Shrine',subtitle:'ศาลเจ้ายาซากะ',vibe:'Kyoto East',why:'เดินชมศาลเจ้าฟรีก่อนขึ้นไป Kodaiji',tags:['ศาลเจ้า'],map:'Yasaka Shrine Kyoto',image:localPhoto(4,3)},
-   {title:'Kodaiji Night Illumination',subtitle:'ชมไฟใบไม้เปลี่ยนสี',vibe:'Autumn Night',why:'ไฮไลต์ชมไฟ 17:00 ภาพประกอบเป็นบรรยากาศทั่วไป ไม่ใช่ภาพ Kodaiji ที่ยืนยัน',tags:['ใบไม้แดง','กลางคืน'],map:'Kodaiji Temple Kyoto',image:localPhoto(4,3)},
+  4:[
+    {title:'Arashiyama Bamboo Grove',subtitle:'ป่าไผ่อาราชิยามะ',vibe:'Kyoto West',why:'ชมป่าไผ่ช่วงเช้า',tags:['Arashiyama'],map:'Arashiyama Bamboo Grove Kyoto',image:localPhoto(4,4)},
+    {title:'Tenryu-ji Temple',subtitle:'สวน Sogenchi ของวัด',vibe:'Kyoto West',why:'สวนวัดเทนริวจิ',tags:['สวนญี่ปุ่น'],map:'Tenryu-ji Temple Kyoto',image:localPhoto(4,5)},
+    {title:'Togetsukyo Bridge',subtitle:'สะพานข้ามแม่น้ำ Arashiyama',vibe:'Kyoto West',why:'สะพานโทเก็ตสึเคียวจริง',tags:['สะพาน','แม่น้ำ'],map:'Togetsukyo Bridge Kyoto',image:localPhoto(4,6)},
+    {title:'Hanamikoji / Gion',subtitle:'ถนนฮานามิโคจิ',vibe:'Kyoto East',why:'ถนนจริงในย่านกิอง',tags:['Gion'],map:'Hanamikoji Street Gion Kyoto',image:localPhoto(4,7)},
+    {title:'Yasaka Shrine',subtitle:'ประตูศาลเจ้ายาซากะ',vibe:'Kyoto East',why:'ชมศาลเจ้าก่อนเดินสู่โคไดจิ',tags:['ศาลเจ้า'],map:'Yasaka Shrine Kyoto',image:localPhoto(4,8)},
+    {title:'Kodaiji Night Illumination',subtitle:'สวนไผ่ภายใน Kodaiji ประดับไฟ',vibe:'Night',why:'ภาพถ่ายจริงของงานเปิดไฟวัดโคไดจิ ไม่ใช่ป่าไผ่ Arashiyama',tags:['เปิดไฟ','Kodaiji'],map:'Kodaiji Temple Kyoto',image:localPhoto(4,9)}
   ],
-  5: [
-    {
-      title: 'Nara Park Deer',
-      subtitle: 'กวางนาราที่ทุกคนอยากเจอ',
-      vibe: 'ไฮไลต์ / น่ารัก',
-      why: 'จุดขายหลักของ Nara คือกวางที่เดินอยู่ทั่วสวน ถ่ายรูปง่ายและเป็นเอกลักษณ์มาก',
-      tags: ['กวาง', 'รูปน่ารัก', 'เดินง่าย'],
-      map: 'Nara Park, Nara',
-      image: localPhoto(5, 1),
-    },
-    {
-      title: 'Todai-ji',
-      subtitle: 'วัดพระใหญ่ชื่อดัง',
-      vibe: 'แลนด์มาร์กหลัก',
-      why: 'วัดดังพร้อมประตูไม้ขนาดใหญ่และพระพุทธรูปองค์ใหญ่ เป็นอีกจุดที่ควรอยู่ในรูปของวันนี้',
-      tags: ['วัดดัง', 'ประวัติศาสตร์', 'ไฮไลต์'],
-      map: 'Todai-ji, Nara',
-      image: localPhoto(5, 2),
-    },
-    {
-      title: 'Kasuga Taisha',
-      subtitle: 'ศาลเจ้าบรรยากาศสงบ',
-      vibe: 'มุมสงบ / ถ่ายภาพดี',
-      why: 'ถ้าเดินต่อจากสวนกวาง จะได้เปลี่ยนอารมณ์มาบรรยากาศสงบและร่มรื่นมากขึ้น',
-      tags: ['สงบ', 'ธรรมชาติ', 'แผน final'],
-      map: 'Kasuga Taisha, Nara',
-      image: localPhoto(5, 3),
-    },
+  5:[
+    {title:'Nara Park Deer',subtitle:'กวางที่สวน Nara',vibe:'Nature',why:'กวางที่สวนสาธารณะนารา',tags:['กวาง'],map:'Nara Park Nara',image:localPhoto(5,1)},
+    {title:'Todai-ji',subtitle:'วัดพระใหญ่โทไดจิ',vibe:'Temple',why:'สถาปัตยกรรมของวัด Todai-ji',tags:['วัด'],map:'Todai-ji Nara',image:localPhoto(5,2)},
+    {title:'Kasuga Taisha',subtitle:'โคมไฟที่ศาลเจ้าคาสุงะ',vibe:'Shrine',why:'โคมไฟหินของศาลเจ้าคาสุงะ',tags:['ศาลเจ้า'],map:'Kasuga Taisha Nara',image:localPhoto(5,3)}
   ],
-  6: [
-    {
-      title: 'Kounotori Ride',
-      subtitle: 'เส้นทางรถไฟสู่เมืองออนเซ็น',
-      vibe: 'journey moment',
-      why: 'วันนี้ไฮไลต์คือการเปลี่ยนอารมณ์จากเมืองใหญ่ไปสู่เมืองออนเซ็น บนรถไฟ Limited Express',
-      tags: ['รถไฟ', 'เปลี่ยนเมือง', 'เริ่มชิล'],
-      map: 'Osaka Station',
-      image: localPhoto(6, 1),
-    },
-    {
-      title: 'Kinosaki Canal Street',
-      subtitle: 'ถนนคลองในฝันของ Kinosaki',
-      vibe: 'ไฮไลต์ / ถ่ายรูปสวย',
-      why: 'คลอง ต้นหลิว และเรียวกังสองข้างทางคือเอกลักษณ์ของ Kinosaki เดินช่วงบ่ายถึงเย็นคือดีที่สุด',
-      tags: ['คลองสวย', 'ออนเซ็นทาวน์', 'รูปสวย'],
-      map: 'Kinosaki Onsen',
-      image: localPhoto(6, 2),
-    },
-    {
-      title: 'Yukata Walk',
-      subtitle: 'ฟีลเรียวกังและออนเซ็น',
-      vibe: 'ต้องเจอแน่',
-      why: 'หนึ่งในเสน่ห์ของ Kinosaki คือคนใส่ยูกาตะเดินไปมา เหมาะกับบรรยากาศพักผ่อนและรูปแบบญี่ปุ่นแท้',
-      tags: ['ยูกาตะ', 'เรียวกัง', 'ฟีลญี่ปุ่น'],
-      map: 'Kinosaki Onsen',
-      image: localPhoto(6, 3),
-    },
+  6:[
+    {title:'Limited Express Kounotori',subtitle:'รถไฟ JR ไป Kinosaki',vibe:'Rail journey',why:'ภาพขบวน Kounotori จริง ไม่ใช่ Kuroshio',tags:['รถไฟ'],map:'Osaka Station',image:localPhoto(6,4)},
+    {title:'Kinosaki Onsen Canal',subtitle:'คลองและถนนเมืองออนเซ็น',vibe:'Kinosaki',why:'เมืองริมคลองที่ไปพักค้างคืน',tags:['เมืองออนเซ็น'],map:'Kinosaki Onsen Japan',image:localPhoto(6,1)},
+    {title:'Nishimuraya Hotel Shogetsutei',subtitle:'พักเรียวกังและแช่ออนเซ็น',vibe:'Ryokan',why:'ดูภาพจริงของโรงแรมผ่านแหล่งทางการ',tags:['เรียวกัง'],map:'Nishimuraya Hotel Shogetsutei Kinosaki',image:null,photoStatus:'external-only',photoSource:'https://www.nishimuraya.ne.jp/shogetsu/'}
   ],
-  7: [
-    {
-      title: 'Morning in Kinosaki',
-      subtitle: 'เก็บบรรยากาศเช้าก่อนกลับ',
-      vibe: 'slow travel',
-      why: 'ช่วงเช้าใน Kinosaki เงียบกว่าและเหมาะกับการเดินถ่ายรูปสบาย ๆ ก่อนกลับ Osaka',
-      tags: ['เช้าสงบ', 'ชิล', 'ถ่ายรูปสวย'],
-      map: 'Kinosaki Onsen',
-      image: localPhoto(7, 1),
-    },
-    {
-      title: 'Gosho-no-yu',
-      subtitle: 'โรงอาบน้ำชื่อดังของเมือง',
-      vibe: 'ไฮไลต์ออนเซ็น',
-      why: 'อาคารสวยและเป็นหนึ่งในจุดที่คนพูดถึงมากที่สุดใน Kinosaki',
-      tags: ['ออนเซ็น', 'ไฮไลต์', 'สถาปัตยกรรม'],
-      map: 'Gosho-no-yu, Kinosaki',
-      image: localPhoto(7, 2),
-    },
-    {
-      title: 'Final Osaka Night',
-      subtitle: 'ชอปปิงหรือเดินเก็บตก',
-      vibe: 'ปิดท้ายทริป',
-      why: 'คืนนี้เหมาะกับกลับมาชอปปิงหรือเดินเก็บบรรยากาศ Namba / Shinsaibashi เป็นคืนสุดท้าย',
-      tags: ['คืนสุดท้าย', 'ชอปปิง', 'เก็บตก'],
-      map: 'Shinsaibashi, Osaka',
-      image: localPhoto(7, 3),
-    },
+  7:[
+    {title:'Kinosaki Onsen by Day',subtitle:'ถนนเมืองออนเซ็นช่วงกลางวัน',vibe:'Kinosaki',why:'รูปจริงของถนนคิโนซากิในเวลากลางวัน',tags:['เมืองเก่า'],map:'Kinosaki Onsen Japan',image:localPhoto(7,4)},
+    {title:'Gosho-no-yu',subtitle:'อาคารโรงอาบน้ำโกะโชะโนะยุ',vibe:'Onsen',why:'ภาพอาคารโรงอาบน้ำ Gosho-no-yu',tags:['ออนเซ็น'],map:'Gosho-no-yu Kinosaki',image:localPhoto(7,1)},
+    {title:'Namba Night Street',subtitle:'เดินชมโอซาก้าคืนสุดท้าย',vibe:'Osaka',why:'บรรยากาศแสงสีเมืองโอซาก้ายามค่ำ',tags:['กลางคืน'],map:'Namba Osaka',image:localPhoto(7,3)}
   ],
-  8: [
-    {title:'Namba Yasaka Shrine',subtitle:'ศาลเจ้าหัวสิงโตยักษ์ช่วงเช้า',vibe:'Osaka highlight',why:'แวะถ่ายภาพหัวสิงโตยักษ์ก่อนออกจาก Namba',tags:['09:20–10:00','ฟรี','เดินจากโรงแรม'],map:'Namba Yasaka Shrine Osaka',image:localPhoto(8,1)},
-    {title:'Crepe & Espresso & 9-chome',subtitle:'เครปเปิดร้าน 11:00',vibe:'Sweet stop',why:'ร้านเครปใกล้ Tanimachi 9-chome (S18); เช็กวันหยุดและคิว',tags:['11:00','เครป','Metro Sennichimae'],map:'Crepe & Espresso & 9-chome Osaka',image:localPhoto(8,1)},
-    {title:'Rikuro’s Cheesecake',subtitle:'Namba Main Store · ซื้อแบบ Takeaway',vibe:'Osaka dessert',why:'ซื้อชีสเค้กอบใหม่แล้วกลับโรงแรมรับกระเป๋า',tags:['12:25','ชีสเค้ก','Namba'],map:'Rikuro’s Cheesecake Namba Main Store Osaka',image:localPhoto(8,1)},
-    {title:'Nankai Namba → KIX',subtitle:'ออกจากโรงแรม 15:00',vibe:'Flight home',why:'ไม่เลื่อนเวลารถไฟไปสนามบิน เตรียมเช็กอินเที่ยวบิน 19:45',tags:['สนามบิน','Nankai','กระเป๋า'],map:'Nankai Namba Station Osaka',image:localPhoto(8,2)}
+  8:[
+    {title:'Namba Yasaka Shrine',subtitle:'ศาลเจ้าหัวสิงโตยักษ์',vibe:'Osaka',why:'ภาพถ่ายหัวสิงโตจริงของศาลเจ้านัมบะยาซากะ',tags:['09:20','ศาลเจ้า'],map:'Namba Yasaka Shrine Osaka',image:localPhoto(8,4)},
+    {title:'Crepe & Espresso & 9-chome',subtitle:'ร้านเครปย่าน Tanimachi 9-chome',vibe:'Dessert',why:'ยังไม่พบรูปที่ตรวจสอบสิทธิ์เผยแพร่ได้ เปิดภาพจริงจากแหล่งร้านแทน',tags:['11:00','เครป'],map:'Crepe & Espresso & 9-chome Osaka',image:null,photoStatus:'external-only',photoSource:'https://crepe-and.com/shop/'},
+    {title:'Rikuro’s Cheesecake — Namba Main Store',subtitle:'หน้าร้าน Rikuro’s Namba',vibe:'Dessert',why:'รูปถ่ายจริงของหน้าร้าน Namba Main Store',tags:['12:25','ชีสเค้ก'],map:'Rikuro’s Cheesecake Namba Main Store Osaka',image:localPhoto(8,5)},
+    {title:'Nankai Namba Station',subtitle:'สถานีต้นทางไปสนามบิน KIX',vibe:'Transit',why:'ภาพชานชาลาของสถานี Nankai Namba จริง',tags:['15:00','สนามบิน'],map:'Nankai Namba Station Osaka',image:localPhoto(8,6)}
   ],
 };
