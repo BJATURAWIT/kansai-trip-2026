@@ -55,14 +55,17 @@ export const travelGuide = [
     ],
   },
     {
-    day: 5, kicker: 'Nara Day Trip (ตัวเลือก)', leave: 'แผนออก ~08:30', confirmed: false,
-    overview: 'Namba / JR Namba → Nara Park → Todai-ji → กลับโรงแรม',
-    reminder: 'วันนี้เป็นวันยืดหยุ่น หากเหนื่อยเปลี่ยนเป็น Osaka free day ได้ • ขาไป Nara เลือก JR เพื่อใช้ Pass',
-    legs: [
-      { from: centara, to: 'JR Namba Station, Osaka', mode: 'เดิน / Metro', line: 'ไป JR Namba (ต่างจาก Nankai Namba)', how: 'ใช้แผนที่เลือกทางไป JR Namba หากเดินไกลอาจขึ้น Metro หรือเริ่มจาก JR Imamiya แทน', duration: 'เผื่อเวลาเดินทางไปสถานี', pay: 'ขึ้นกับเส้นทาง', icon: 'walk' },
-      { from: 'JR Namba Station, Osaka', to: 'JR Nara Station, Nara Japan', mode: 'JR Yamatoji Line', line: 'มุ่งหน้า JR Nara (อาจเปลี่ยนขบวนที่ Imamiya)', how: 'ตรวจเที่ยว JR ที่ไป Nara อาจต้องเปลี่ยนขบวนที่ Imamiya หรือ Tennoji', duration: 'เผื่อประมาณ 60–75 นาที', pay: 'JR Pass', icon: 'train' },
-      { from: 'JR Nara Station, Nara Japan', to: 'Nara Park, Nara', mode: 'เดิน / Bus', line: 'ผ่านย่านเมืองเก่า', how: 'จาก JR Nara เดินเข้า Nara Park หรือขึ้นรถบัสท้องถิ่น; ต่อไป Todai-ji ได้', duration: 'เดินราว 25–35 นาที', pay: 'เดินฟรี / รถบัสจ่ายแยก', icon: 'walk' },
-      { from: 'Todai-ji, Nara', to: centara, mode: 'JR + Metro / เดิน', line: 'กลับ Osaka เตรียมกระเป๋า', how: 'กลับ JR Nara ไป JR Namba/Osaka แล้วกลับโรงแรม จัดกระเป๋าสำหรับค้าง Kinosaki 1 คืน', duration: 'เผื่อ 1–1.5 ชม.', pay: 'JR Pass + ICOCA ตามเส้นทาง', icon: 'train' },
+    day: 5, kicker:'Uji เช้า → Nara บ่าย', leave:'07:00 ออกจาก Centara (เป้าหมาย) · ถึงโรงแรม 18:30–19:00', confirmed:false,
+    overview:'Centara → Daikokucho → JR Osaka → Kyoto → JR Uji → Byodo-in → Uji Bridge → Nakamura Tokichi → JR Nara → Kamaiki → Nara Park → Todai-ji → Kasuga Taisha (optional) → JR Nara → Tennoji → Centara',
+    reminder:'21 พ.ย. วันเสาร์ ใบไม้แดงคิวอาจยาว; ข้าม Kasuga ก่อนเมื่อไม่ทัน · JR WIDE Pass ครอบคลุม JR แต่ไม่ครอบคลุม Metro/รถบัส · เวลาขบวนประมาณ ไม่ใช่จองแล้ว',
+    legs:[
+      {from:centara,to:'JR Uji Station Kyoto',mode:'Metro + JR',line:'Daikokucho M21 → Umeda M16 → JR Osaka → Kyoto → Uji',how:'Metro Midosuji ไป Umeda จ่าย ICOCA; เดินไป JR Osaka ขึ้น JR Kyoto Line ไป Kyoto แล้วเปลี่ยน JR Nara Line ขบวนที่จอด Uji โดยไม่ออกจากประตู JR',duration:'07:00–08:40 เป้าหมายรวม',pay:'Metro ICOCA / JR Kansai WIDE Pass',icon:'train'},
+      {from:'JR Uji Station Kyoto',to:'Byodo-in Temple Uji Kyoto',mode:'Walking',line:'JR Uji → Byodo-in Phoenix Hall',how:'เดินจากสถานี JR ผ่าน Byodoin Omotesando ราว 10–15 นาที ชมสวนวัด ¥700/คน เปิด 08:45',duration:'08:40–09:55 รวมเข้าชม',pay:'เดินฟรี · ค่าวัดแยก',icon:'walk'},
+      {from:'Byodo-in Temple Uji Kyoto',to:'Nakamura Tokichi Honten Uji Kyoto',mode:'Walking',line:'Byodo-in → Uji Bridge → Nakamura Tokichi Honten',how:'แวะสะพาน Uji Bridge แล้วเดินต่อร้านมัทฉะใกล้ JR Uji เปิด 10:00 ไม่รับจอง ถ้าคิวเกิน 20 นาที Takeaway',duration:'09:55–11:10',pay:'เดินฟรี · ค่าอาหารจ่ายแยก',icon:'walk'},
+      {from:'JR Uji Station Kyoto',to:'JR Nara Station',mode:'JR Nara Line',line:'JR Uji → JR Nara',how:'เดินจากร้าน Nakamura Tokichi ไป JR Uji เพียงประมาณ 1 นาที ขึ้น JR Nara Line มุ่ง JR Nara ตรง (ตรวจขบวนและเวลา)',duration:'ราว 30–40 นาทีบนรถ',pay:'JR Kansai WIDE Pass',icon:'train'},
+      {from:'JR Nara Station',to:'Todai-ji Great Buddha Hall Nara',mode:'Walking',line:'JR Nara → Kamaiki Honten → Nara Park → Todai-ji',how:'จาก JR Nara เดิน 18–25 นาทีไป Kamaiki; หลังอาหารเดิน Nara Park แล้ววัดพระใหญ่',duration:'12:15–15:10 เป้าหมายรวม',pay:'เดินฟรี · ค่าเข้า Todai-ji ¥800/คน',icon:'walk'},
+      {from:'Todai-ji Great Buddha Hall Nara',to:'JR Nara Station',mode:'Walk / Local Bus',line:'Kasuga Taisha (optional) → JR Nara',how:'หากเวลาไม่พอหรือเหนื่อยให้ข้าม Kasuga Taisha; เดินกลับ JR Nara หรือขึ้นรถบัสท้องถิ่นโดยจ่ายแยก',duration:'15:10–17:10',pay:'เดินฟรี / รถบัส ICOCA จ่ายแยก',icon:'walk'},
+      {from:'JR Nara Station',to:centara,mode:'JR + Metro',line:'JR Nara → JR Tennoji → Metro Tennoji M23 → Daikokucho M21',how:'JR Yamatoji Line ไป Tennoji ใช้ JR Pass; Metro Midosuji มุ่งเหนือไป Daikokucho ใช้ ICOCA แล้วเดินกลับโรงแรม',duration:'17:10–18:45 เป้าหมายรวม',pay:'JR Kansai WIDE Pass / Metro ICOCA',icon:'train'}
     ],
   },
   {
