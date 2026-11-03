@@ -14,16 +14,17 @@ const defaultPhotos={
 };
 const fallbackFor=venue=>/กาแฟ|Coffee/i.test(venue.category)?defaultPhotos.coffee:/ชูครีม|สโคน|ขนม|มิลเฟย/i.test(venue.category)?defaultPhotos.dessert:/ราเมง/i.test(venue.category)?defaultPhotos.noodle:/ซูชิ|ปลา|แซลมอน/i.test(venue.category)?defaultPhotos.sushi:defaultPhotos.food;
 const mapUrl=place=>'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(place);
+const imageSearchUrl=venue=>'https://www.google.com/search?tbm=isch&q='+encodeURIComponent(venue.name+' '+venue.place);
 
 function VenuePhoto({venue}){
  const [photoState,setPhotoState]=useState({id:venue.id,stage:0});
  const stage=photoState.id===venue.id?photoState.stage:0;
  const photoSrc=stage===0?venue.image:stage===1?fallbackFor(venue):null;
  const isSample=stage>0||venue.photoKind==='sample';
- return <div className="wishlist-photo">
+ return <a className="wishlist-photo" href={imageSearchUrl(venue)} target="_blank" rel="noopener noreferrer" aria-label={"ดูรูปเพิ่มเติมของร้าน "+venue.name+" ใน Google Images"} title="คลิกดูรูปเพิ่มเติมใน Google Images">
    {photoSrc?<img src={photoSrc} alt={isSample?'ภาพตัวอย่างประเภท '+venue.category:'ภาพประกอบ '+venue.name} loading="lazy" decoding="async" referrerPolicy="no-referrer" onError={()=>setPhotoState({id:venue.id,stage:Math.min(2,stage+1)})}/>:<div className="wishlist-photo-unavailable">ไม่สามารถแสดงรูปจากแหล่งภายนอกได้ — เปิดดูรูปจากแหล่งที่มาด้านล่าง</div>}
-   <span className="wishlist-photo-label"><Camera size={13}/>{isSample?'ภาพตัวอย่างประเภทอาหาร':'ภาพจากแหล่งรีวิว / ร้าน'}</span>
- </div>;
+   <span className="wishlist-photo-label"><Camera size={13}/>{isSample?'ภาพตัวอย่างประเภทอาหาร':'ภาพจากแหล่งรีวิว / ร้าน'} · กดดูรูปเพิ่มเติม</span>
+ </a>;
 }
 
 export default function RestaurantWishlist(){
@@ -53,13 +54,13 @@ export default function RestaurantWishlist(){
          <p className="wishlist-detail"><UtensilsCrossed size={15}/><span><strong>เมนู:</strong> {v.menu}</span></p>
          <p className="wishlist-detail"><Clock3 size={15}/><span><strong>เวลาร้าน:</strong> {v.hours}</span></p>
          {v.warning&&<p className="wishlist-caution"><AlertTriangle size={15}/><span>{v.warning}</span></p>}
-         <div className="wishlist-actions"><a href={mapUrl(v.place)} target="_blank" rel="noopener noreferrer"><MapPin size={15}/> Google Maps <ArrowUpRight size={13}/></a>{(v.source||v.photo)&&<a href={v.source||v.photo} target="_blank" rel="noopener noreferrer">ร้าน / แหล่งข้อมูล <ArrowUpRight size={13}/></a>}</div>
+         <div className="wishlist-actions"><a href={imageSearchUrl(v)} target="_blank" rel="noopener noreferrer" aria-label={"ดูรูป "+v.name+" ใน Google Images"}><Camera size={15}/> ดูรูปใน Google Images <ArrowUpRight size={13}/></a><a href={mapUrl(v.place)} target="_blank" rel="noopener noreferrer"><MapPin size={15}/> Google Maps <ArrowUpRight size={13}/></a>{(v.source||v.photo)&&<a href={v.source||v.photo} target="_blank" rel="noopener noreferrer">ร้าน / แหล่งข้อมูล <ArrowUpRight size={13}/></a>}</div>
          {v.photo&&<a className="wishlist-photo-credit" href={v.photo} target="_blank" rel="noopener noreferrer">เครดิตรูป: เปิดดูต้นทาง <ArrowUpRight size={11}/></a>}
          {v.photoKind==='sample'&&<small className="wishlist-sample-disclaimer">รูปเป็นภาพตัวอย่างชนิดอาหาร ไม่ใช่ภาพของร้าน</small>}
        </div>
      </article>)}
    </div>
    {visible.length===0&&<p className="wishlist-empty">ไม่พบร้านที่ตรงกับคำค้น ลองลบคำค้นหรือเลือก “ทั้งหมด”</p>}
-   <p className="wishlist-footnote">หมายเหตุ: เวลาเปิดร้านและการเข้าคิวอาจเปลี่ยนแปลงได้ รูปจากเว็บไซต์ภายนอกมีลิงก์เครดิตกำกับ หากโหลดไม่ได้จะแสดงภาพตัวอย่างอาหารแทนโดยไม่ระบุว่าเป็นรูปจากร้านจริง • ทั้งสองคนไม่ทานเนื้อวัว (ไม่ใช่อาหารแพ้)</p>
+   <p className="wishlist-footnote">หมายเหตุ: เวลาเปิดร้านและการเข้าคิวอาจเปลี่ยนแปลงได้ กดภาพหรือปุ่ม Google Images เพื่อดูรูปค้นหาตามชื่อร้านและพื้นที่ รูปจากเว็บไซต์ภายนอกมีลิงก์เครดิตกำกับ หากโหลดไม่ได้จะแสดงภาพตัวอย่างอาหารแทนโดยไม่ระบุว่าเป็นรูปจากร้านจริง • ทั้งสองคนไม่ทานเนื้อวัว (ไม่ใช่อาหารแพ้)</p>
  </section>;
 }
