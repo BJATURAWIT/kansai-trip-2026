@@ -154,6 +154,8 @@ export function resolveDay(day,prefs){
  const mode=prefs?.dayPlans?.[day]||'original';
  const opts=day===4?kyotoOptions[prefs?.kyoto==='east'?'east':'west']:null;
  return {...base,schedule:resolvedSchedule(day,prefs),
+  ...(day===5&&mode==='rainy'?{title:'Osaka Indoor · Rainy Plan',subtitle:'ฝนหนักเลือก Namba Parks และร้านอาหารในอาคารแทน Uji/Nara',location:'OSAKA',summary:'Namba Parks → Nippombashi indoor dining → Namba City → กลับ Centara',map:'Namba Parks Osaka',highlight:'Osaka Indoor · ไม่เดินทางไป Uji/Nara'}:{}),
+  ...(day===5&&mode==='relaxed'?{title:'Uji & Nara · Relaxed Plan',subtitle:'Byodo-in + Matcha + Nara Park + Todai-ji (ตัด Kasuga)',highlight:'Uji 09:10 · Nara 12:30 · กลับ Osaka ประมาณ 18:35'}:{}),
   ...(opts?{title:opts.name,subtitle:opts.label,summary:opts.summary,highlight:opts.label,
        map:prefs?.kyoto==='east'?'Fushimi Inari Taisha Kyoto':'Arashiyama Bamboo Grove Kyoto',
        note:opts.note}:{}),
@@ -179,6 +181,7 @@ export function resolvedSegments(day,prefs){
    {route:'Daikokucho → Namba',type:'metro',card:'ICOCA / Metro',note:'Metro ¥190/คน; หรือเดินฟรีได้'},
    {route:'Namba → Daikokucho',type:'metro',card:'ICOCA / Metro',note:'Metro ¥190/คน; หรือเดินกลับฟรีได้'}
   ];
+  if(day===5&&prefs?.dayPlans?.[5]==='relaxed')return base.map(x=>x.route.includes('Nara Park → Todai-ji → Kasuga Taisha')?{...x,route:'JR Nara → Kamaiki → Nara Park → Todai-ji',note:'Relaxed: ข้าม Kasuga Taisha แล้วเดินกลับสถานี JR Nara'}:x);
   return base;
  }
  const mk=(route,type,card,note)=>({route,type,card,note});
