@@ -102,7 +102,7 @@ export const itinerary = [
       { time:'17:10–18:45', title:'JR Nara → Tennoji → Centara Osaka', detail:'JR Nara ขึ้น JR Yamatoji Line / Yamatoji Rapid มุ่ง Tennoji (ยืนยันจอด Tennoji) ใช้ Kansai WIDE Pass → เปลี่ยน Osaka Metro Midosuji Tennoji (M23) ไป Daikokucho (M21) จ่าย ICOCA แล้วเดินกลับ Centara; ควรถึงประมาณ 18:30–19:00', map:'Centara Life Namba Hotel Osaka' },
       { time:'19:00 เป็นต้นไป', title:'Dinner / พักและแพ็กกระเป๋าไป Kinosaki', detail:'เลือกกินอาหารใกล้โรงแรมตามกำลัง เตรียมกระเป๋าใบเล็กสำหรับพัก Kinosaki วันที่ 22 พ.ย. และตรวจการรับ JR Pass/ตั๋ว Kounotori 5 ที่จองไว้', map:'Centara Life Namba Hotel Osaka' }
     ], note:'Uji เช้า + Nara บ่ายเป็นแผนเต็มวัน (เดินเยอะ) สำหรับ 21 พ.ย. 2026 · วันเสาร์ช่วงใบไม้แดงคิวอาจยาว; ถ้าเกินเวลาให้ตัด Kasuga Taisha ก่อน · รถไฟและเวลาเดินเป็นการประมาณ ต้องเช็กตารางจริง · JR Kansai WIDE Area Pass ใช้ได้กับขบวน JR ที่ครอบคลุม; Metro / รถบัสจ่ายแยก · หากฝนหนักเลือก Rainy Plan / หากเหนื่อยเลือก Relaxed Plan · งบประมาณ 2 คนราว ¥7,460–10,460 (ค่าเข้า Byodo-in + Todai-ji, มัทฉะ, มื้อกลางวัน, Metro ไป-กลับ; ไม่รวมรถบัสเสริม/มื้อเย็นและไม่คิด JR Pass ซ้ำ)',
-  
+  },
   {
     day: 6, date: '22 NOV', dow: 'SUN', location: 'KINOSAKI', title: 'Time to Slow Down', subtitle: 'หมู่บ้านออนเซ็นและเรียวกังที่รอคอย', image: 'kinosaki', type: 'confirmed',
     summary: travelBookings.kounotori.outward.train+' จองแล้ว · '+travelBookings.kounotori.outward.depart+'–'+travelBookings.kounotori.outward.arrive+' · Car '+travelBookings.kounotori.outward.car+' · Seats '+travelBookings.kounotori.outward.seats+' → Nishimuraya', stay: 'Nishimuraya Shogetsutei · 1 คืน',
