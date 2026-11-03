@@ -71,10 +71,18 @@ const alternatives={
       slot('16:00','กลับโรงแรม เตรียมกระเป๋า','เช็กรถ Kounotori ที่จองไว้ในวันถัดไป','Centara Life Namba Hotel Osaka'),
     ],
     relaxed:[
-      slot('09:30','Osaka-Namba → Kintetsu-Nara','ใช้ Kintetsu และ ICOCA จ่ายแยกจาก JR Pass','Kintetsu Nara Station'),
-      slot('10:30','Nara Park','ชมกวางและสวนอย่างสบาย','Nara Park Japan'),
-      slot('12:30','Todai-ji / มื้อกลางวัน','เลือกเที่ยวเฉพาะวัดหลัก หรือกลับก่อนก็ได้','Todai-ji Nara'),
-      slot('15:00','กลับ Osaka พักผ่อน','เตรียมกระเป๋าไป Kinosaki','Centara Life Namba Hotel Osaka'),
+      slot('07:30–09:10','Centara → JR Uji via Kyoto','Metro Daikokucho M21 → Umeda M16 (ICOCA) → JR Osaka → Kyoto → Uji (WIDE Pass)','JR Uji Station Kyoto'),
+      slot('09:10–10:05','Byodo-in Phoenix Hall & Garden','สวน ¥700/คน · งดคิวเข้าภายในวิหาร','Byodo-in Temple Uji Kyoto'),
+      slot('10:05–10:20','Uji Bridge / Omotesando','ชมสะพานและถ่ายรูปอย่างกระชับ','Uji Bridge Kyoto'),
+      slot('10:20–11:10','Nakamura Tokichi Honten · Matcha','คิวเกิน 15–20 นาทีซื้อ Takeaway','Nakamura Tokichi Honten Uji Kyoto'),
+      slot('11:10–12:30','JR Uji → JR Nara','เดินกลับสถานีและ JR Nara Line มุ่ง Nara; เผื่อเวลาขบวน','JR Nara Station'),
+      slot('12:30–13:00','JR Nara → Kamaiki','เดินไปย่าน Higashimuki / Kintetsu-Nara','Kamaiki Honten Nara'),
+      slot('13:00–13:45','Lunch — Kamaiki / Saizeriya backup','อุด้งไม่ใส่เนื้อวัว · หากคิวเกิน 15 นาทีใช้สำรอง','Kamaiki Honten Nara'),
+      slot('13:45–14:30','Nara Park & Deer','ชมกวางอย่างสบาย','Nara Park Nara Japan'),
+      slot('14:30–15:35','Todai-ji Great Buddha Hall','วัดพระใหญ่ ¥800/คน','Todai-ji Great Buddha Hall Nara'),
+      slot('15:35–17:00','กลับ JR Nara','ตัด Kasuga Taisha เพื่อไม่เร่ง · เดินหรือรถบัสไปสถานี','JR Nara Station'),
+      slot('17:00–18:35','JR Nara → Tennoji → Centara','JR Yamatoji ใช้ WIDE Pass → Metro Midosuji ไป Daikokucho จ่ายแยก','Centara Life Namba Hotel Osaka'),
+      slot('19:00','Dinner / เตรียมของ Kinosaki','พักและเตรียมกระเป๋าสำหรับวันถัดไป','Centara Life Namba Hotel Osaka')
     ]
   },
   7:{
@@ -128,6 +136,7 @@ export function resolvedSchedule(day,prefs){
   if(day===2&&(x.foodKind==='dinner'||x.foodKind==='lunch'))return false;
   if(day===4&&['lunch','dinner','coffee','snack'].includes(x.foodKind))return false;
    if(day===8&&['lunch','dessert'].includes(x.foodKind))return false;
+   if(day===5&&['lunch','dinner','dessert','coffee','snack'].includes(x.foodKind))return false;
   if(day===4&&mode==='relaxed'&&x.foodKind==='snack')return false;
   return !titles.includes(x.title.toLowerCase());
  });
@@ -145,6 +154,8 @@ export function resolveDay(day,prefs){
  const mode=prefs?.dayPlans?.[day]||'original';
  const opts=day===4?kyotoOptions[prefs?.kyoto==='east'?'east':'west']:null;
  return {...base,schedule:resolvedSchedule(day,prefs),
+  ...(day===5&&mode==='rainy'?{title:'Osaka Indoor · Rainy Plan',subtitle:'ฝนหนักเลือก Namba Parks และร้านอาหารในอาคารแทน Uji/Nara',location:'OSAKA',summary:'Namba Parks → Nippombashi indoor dining → Namba City → กลับ Centara',map:'Namba Parks Osaka',highlight:'Osaka Indoor · ไม่เดินทางไป Uji/Nara'}:{}),
+  ...(day===5&&mode==='relaxed'?{title:'Uji & Nara · Relaxed Plan',subtitle:'Byodo-in + Matcha + Nara Park + Todai-ji (ตัด Kasuga)',highlight:'Uji 09:10 · Nara 12:30 · กลับ Osaka ประมาณ 18:35'}:{}),
   ...(opts?{title:opts.name,subtitle:opts.label,summary:opts.summary,highlight:opts.label,
        map:prefs?.kyoto==='east'?'Fushimi Inari Taisha Kyoto':'Arashiyama Bamboo Grove Kyoto',
        note:opts.note}:{}),
@@ -170,6 +181,7 @@ export function resolvedSegments(day,prefs){
    {route:'Daikokucho → Namba',type:'metro',card:'ICOCA / Metro',note:'Metro ¥190/คน; หรือเดินฟรีได้'},
    {route:'Namba → Daikokucho',type:'metro',card:'ICOCA / Metro',note:'Metro ¥190/คน; หรือเดินกลับฟรีได้'}
   ];
+  if(day===5&&prefs?.dayPlans?.[5]==='relaxed')return base.map(x=>x.route.includes('Nara Park → Todai-ji → Kasuga Taisha')?{...x,route:'JR Nara → Kamaiki → Nara Park → Todai-ji',note:'Relaxed: ข้าม Kasuga Taisha แล้วเดินกลับสถานี JR Nara'}:x);
   return base;
  }
  const mk=(route,type,card,note)=>({route,type,card,note});

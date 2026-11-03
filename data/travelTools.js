@@ -49,11 +49,15 @@ export const transportByDay={
     mk('Yodoyabashi → Daikokucho','metro','ICOCA · Osaka Metro','จ่ายแยกจาก Keihan'),
   ],
   5:[
-    mk('Daikokucho → Namba','metro','ICOCA · Osaka Metro','ค่าโดยสาร Metro จ่ายแยก'),
-    mk('Osaka-Namba → Kintetsu-Nara','kintetsu','ICOCA · Kintetsu','เลือก Kintetsu เพราะใกล้ Nara Park กว่า JR Nara'),
-    mk('Nara Park → Todai-ji → Kasuga Taisha','walk','เดิน','ค่าเข้าวัด/สวนจ่ายแยก'),
-    mk('Kintetsu-Nara → Osaka-Namba','kintetsu','ICOCA · Kintetsu','JR Pass ไม่ครอบคลุม Kintetsu'),
-    mk('Namba → Daikokucho','metro','ICOCA · Osaka Metro','กลับโรงแรมด้วย Midosuji Line ¥190/คน'),
+    mk('Centara → Daikokucho','walk','เดิน','เดินไป Metro M21'),
+    mk('Daikokucho → Umeda','metro','ICOCA · Osaka Metro','¥240/คน · Metro ไม่รวมใน JR Pass'),
+    mk('JR Osaka → Kyoto → Uji','jr','JR Kansai WIDE Pass','JR Kyoto Line → JR Nara Line · ใช้ Pass 20–24 พ.ย. ไม่จ่ายซ้ำ'),
+    mk('Uji Station → Byodo-in → Uji Bridge → Nakamura Tokichi','walk','เดิน','Byodo-in ¥700/คน · Matcha จ่ายแยก'),
+    mk('JR Uji → JR Nara','jr','JR Kansai WIDE Pass','JR Nara Line ใช้ Pass ได้'),
+    mk('JR Nara → Kamaiki → Nara Park → Todai-ji → Kasuga Taisha','walk','เดิน','Todai-ji ¥800/คน · Kasuga Optional · ถ้าเหนื่อยใช้รถบัสจ่ายแยก'),
+    mk('JR Nara → Tennoji','jr','JR Kansai WIDE Pass','JR Yamatoji Line ครอบคลุม'),
+    mk('Tennoji → Daikokucho','metro','ICOCA · Osaka Metro','¥190/คน · Metro จ่ายแยก'),
+    mk('Daikokucho → Centara','walk','เดิน','กลับที่พัก เตรียมกระเป๋า Kinosaki')
   ],
   6:[
     mk('Centara → Daikokucho → Umeda','metro','ICOCA · Osaka Metro','Metro จ่ายแยก'),
@@ -120,7 +124,7 @@ export const importantStops={
   2:['Osaka Castle','Tempura Makino Namba Sennichimae','Dotonbori Glico Sign','Shinsaibashi','Umeda Sky Building'],
   3:['Universal Studios Japan','Hollywood Dream The Ride Universal Studios Japan','Universal Studios Japan JAWS','Super Nintendo World Osaka','Wizarding World Harry Potter Osaka'],
   4:['Osaka Station','Arashiyama Bamboo Grove Kyoto','Tenryu-ji Temple Kyoto','Togetsukyo Bridge Kyoto','Hanamikoji Street Kyoto','Yasaka Shrine Kyoto','Kodaiji Temple Kyoto'],
-  5:['Osaka Namba Station','Nara Park','Todai-ji Nara','Kasuga Taisha Nara'],
+  5:['JR Osaka Station','JR Uji Station Kyoto','Byodo-in Temple Uji Kyoto','Uji Bridge Kyoto','Nakamura Tokichi Honten Uji Kyoto','JR Nara Station','Kamaiki Honten Nara','Nara Park Nara Japan','Todai-ji Great Buddha Hall Nara','Kasuga Taisha Nara','JR Tennoji Station'],
   6:['Centara Life Namba Hotel Osaka','Osaka Station','Kinosaki Onsen Station','Nishimuraya Hotel Shogetsutei'],
   7:['Nishimuraya Hotel Shogetsutei','Kinosaki Onsen Station','Osaka Station','Centara Life Namba Hotel Osaka'],
   8:['Centara Life Namba Hotel Osaka','Nankai Namba Station','Kansai International Airport Terminal 1']

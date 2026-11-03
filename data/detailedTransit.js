@@ -243,15 +243,39 @@ const naraBack=()=>[
  daikokuHome()
 ];
 const dayFive=mode=>mode==='rainy'?[
- walk(HOME,'Namba Parks','เดินไป Namba Parks / Namba City เลือกทางเดินในอาคารเมื่อมีฝน','ประมาณ 15–25 นาที'),
- walk('Namba Parks','Nippombashi / Yayoiken','เดินหรือใช้ Metro ตามสภาพฝน เพื่อรับประทานอาหารร้านในอาคาร','เผื่อ 15–25 นาที'),
- walk('Nippombashi / Yayoiken','Namba City','เดินกลับย่าน Namba City / Takashimaya','ประมาณ 10–20 นาที'),
- walk('Namba City',HOME,'กลับโรงแรม เตรียมกระเป๋าไป Kinosaki วันถัดไป','ประมาณ 15–25 นาที')
+  walk(HOME,'Namba Parks','Rainy Plan: เลือก Osaka indoor แทน Uji/Nara เพื่อไม่เดินกลางฝน','15–25 นาที'),
+  walk('Namba Parks','Nippombashi / Yayoiken','เลือกหาร้านอาหารในอาคาร; หากฝนหนักให้ใช้ Metro ตามสภาพ','15–25 นาที'),
+  walk('Nippombashi / Yayoiken','Namba City','เดินกลับ Namba City / Takashimaya ภายในย่านห้าง','10–20 นาที'),
+  walk('Namba City',HOME,'กลับโรงแรม เตรียมกระเป๋า Kinosaki วันถัดไป','15–25 นาที')
  ]:[
- ...naraOut(),
- ...(mode==='relaxed'?[]:[walk('Todai-ji Temple','Kasuga Taisha','เดินใน Nara Park ต่อไปศาลเจ้า Kasuga ตามความเหนื่อย หากไม่ไหวสามารถข้ามได้','ประมาณ 20–30 นาที'),
- walk('Kasuga Taisha','Nara Park / Kintetsu-Nara Area','กลับทางย่านสวนและร้านอาหารไปทาง Kintetsu-Nara','ประมาณ 25–40 นาที')]),
- ...naraBack()
+  daikokuWalk(), daikokuUmeda(),
+  leg(OSAKA,'JR Uji Station Kyoto','JR Kyoto Line + JR Nara Line','JR Kansai WIDE Area Pass · ครอบคลุม JR เท่านั้น',[
+    at('JR Osaka','ใช้ JR Pass เข้า JR Osaka จาก Metro Umeda; ขึ้น Special Rapid / Rapid สาย JR Kyoto Line มุ่ง Kyoto และตรวจขบวนที่จอด Kyoto'),
+    at('JR Kyoto','ลงและเปลี่ยนภายในประตู JR ไป Nara Line สีน้ำตาล มุ่ง Nara; หาขบวนที่จอด Uji'),
+    at('JR Uji','ลง Uji (ไม่ใช่ Keihan Uji); ออก South Exit ฝั่ง JR Station ไปถนน Byodoin Omotesando')],{duration:'เผื่อ 60–90 นาทีรวมรอและเปลี่ยนรถ ไม่ใช่รอบขบวนยืนยัน'}),
+  walk('JR Uji Station Kyoto','Byodo-in Temple Uji Kyoto','เดินตาม Byodoin Omotesando ไปวัด Byodo-in ราว 10–15 นาที สวนเปิด 08:45 ค่าเข้า ¥700/คน','10–15 นาที'),
+  walk('Byodo-in Temple Uji Kyoto','Uji Bridge Kyoto','หลังชมวัด เดินกลับถนน Omotesando แล้วไปสะพาน Uji Bridge ริมแม่น้ำ','8–12 นาที'),
+  walk('Uji Bridge Kyoto','Nakamura Tokichi Honten Uji Kyoto','เดินต่อไปสาขาหลัก Nakamura Tokichi Honten ที่ Uji Ichiban 10 ใกล้ JR Uji; เปิด 10:00 ไม่รับจองคาเฟ่','8–15 นาที'),
+  walk('Nakamura Tokichi Honten Uji Kyoto','JR Uji Station Kyoto','ร้านห่างจากสถานี JR Uji เพียงประมาณ 1 นาที; เผื่อรอรถไฟให้ทันออกจาก Uji ก่อนเที่ยง','1–5 นาที'),
+  leg('JR Uji Station Kyoto','JR Nara Station','JR Nara Line','JR Kansai WIDE Area Pass · ไม่ใช้ Kintetsu',[
+    at('JR Uji','ขึ้น JR Nara Line ขบวนไป Nara; Rapid/Miyakoji Rapid หรือ Local ที่ระบุปลายทาง Nara ตรวจเวลาบนบอร์ด'),
+    at('JR Nara','ลง JR Nara Station; ไม่ใช่ Kintetsu-Nara · ทางเดินไปย่านร้านอาหารไกลกว่า Kintetsu')],{duration:'เดินทางประมาณ 30–40 นาที ขึ้นกับขบวนและรอ'}),
+  walk('JR Nara Station','Kamaiki Honten Nara','เดินจาก JR Nara ตาม Sanjo-dori ไปย่าน Higashimuki Shopping Street ที่ 13-2 Higashimuki-minamimachi ใกล้ Kintetsu-Nara; ถ้าคิวยาวไป Saizeriya ในสถานี Kintetsu','18–25 นาที'),
+  walk('Kamaiki Honten Nara','Nara Park Nara Japan','กินมื้อกลางวันก่อนเที่ยวสวนกวาง เดินจาก Higashimuki ไป Nara Park ตามถนน Noborioji','10–20 นาที'),
+  walk('Nara Park Nara Japan','Todai-ji Great Buddha Hall Nara','เดินจากสวนกวางไป Great Buddha Hall ผ่าน Nandaimon ชมวัด ค่าเข้า ¥800/คน','15–25 นาที'),
+  ...(mode==='relaxed'?[
+    walk('Todai-ji Great Buddha Hall Nara','JR Nara Station','Relaxed Plan: ข้าม Kasuga Taisha เดินทางกลับ JR Nara; ถ้าเดินเหนื่อยให้ใช้ Nara City Bus ไป JR Nara (ค่าโดยสารแยกจากพาส)','35–50 นาทีเดิน หรือรถบัสตามรอบ')
+  ]:[
+    walk('Todai-ji Great Buddha Hall Nara','Kasuga Taisha Nara','เดินไป Kasuga Taisha ราว 20–30 นาที เป็นจุด Optional; เขตสักการะทั่วไปเปิดถึง 17:00 แต่เขตพิเศษปิด 16:00','20–30 นาที'),
+    walk('Kasuga Taisha Nara','JR Nara Station','เดินกลับผ่านสวนและย่านเมืองเก่าราว 40–55 นาที หรือขึ้น Nara City Bus จากป้ายใกล้ศาลเจ้าไป JR Nara (จ่ายค่าโดยสารแยก)','40–55 นาทีเดิน / รถบัสตามรอบ')
+  ]),
+  leg('JR Nara Station','JR Tennoji Station','JR Yamatoji Line / Yamatoji Rapid','JR Kansai WIDE Area Pass · JR จ่ายแล้วในพาส',[
+    at('JR Nara','ใช้ JR Pass ผ่านประตู ขึ้น Yamatoji Rapid / Rapid / Local ตามจอที่ไป Tennoji ผ่าน Horyuji/Oji ตรวจปลายทางจริง'),
+    at('JR Tennoji','ลง Tennoji แล้วออกประตู JR ตามป้าย Osaka Metro Midosuji (M23)')],{duration:'ประมาณ 35–50 นาที ขึ้นกับขบวน'}),
+  leg('Tennoji (M23)',DAI,'Osaka Metro Midosuji Line','ICOCA · Metro ไม่รวม JR Pass (ประมาณ ¥190/คน)',[
+    at('Tennoji (M23)','แตะ ICOCA เข้า Metro Midosuji สีแดง ขึ้นขบวนมุ่งเหนือไป Umeda / Shin-Osaka'),
+    at('Daikokucho (M21)','ลง Daikokucho (2 สถานีจาก Tennoji ผ่าน Dobutsuen-mae) แล้วแตะออก')],{duration:'ประมาณ 5–10 นาทีบนรถ'}),
+  daikokuHome()
  ];
 const daySix=()=>[
  daikokuWalk(),daikokuUmeda(),

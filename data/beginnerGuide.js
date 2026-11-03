@@ -42,13 +42,23 @@ export const beginnerDayGuide = {
  ['18:15–19:30 Dinner — Gion / Kawaramachi','อาหารญี่ปุ่นง่าย ๆ ตรวจน้ำซุปไม่มีเนื้อวัว','งบ ¥800–1,800/คน'],
  ['19:30–21:00 กลับ Centara','Gion-Shijo KH39 → Keihan ไป Yodoyabashi KH01 → Metro M17 ไป Daikokucho M21','ICOCA ไม่รวม JR Pass']
 ],note:'Full Kyoto Day 4: Arashiyama + Gion + Kodaiji Night Illumination. เผื่อรถไฟและคิวใบไม้แดง; ดูแผน Rainy / Relaxed เมื่อจำเป็น'},
-5:{time:'07:40–18:00',label:'Nara Park · Todai-ji · Kasuga Taisha',steps:[
- ['07:40 ไป Osaka-Namba','จาก Centara ไป Daikokucho แล้วใช้ Midosuji ไป Namba เดินตามป้าย Kintetsu/Hanshin Osaka-Namba ไม่ใช่ JR Namba','Metro / ICOCA'],
- ['Kintetsu-Nara','ขึ้น Kintetsu Nara Line สู่ Kintetsu-Nara (บางขบวนเป็นแบบตรง ตรวจป้ายขบวน) สถานีนี้ใกล้สวนกวางกว่า JR Nara','Kintetsu / ICOCA'],
- ['09:00 Nara Park → Todai-ji','ออกสถานี Kintetsu-Nara ไป Nara Park เดินต่อไปวัด Todai-ji','เดิน / รถบัสตามอาการเมื่อย'],
- ['13:30 Kasuga Taisha / สวน','เดินต่อ Kasuga Taisha หากมีเวลาเพิ่ม Isuien หรือ Yoshikien (ตัวเลือก)','แผนยืดหยุ่น'],
- ['16:30 กลับ Osaka','ย้อนกลับ Kintetsu-Nara ไป Osaka-Namba แล้วเดิน/Metro กลับโรงแรม แพ็กกระเป๋าสำหรับ Kinosaki','ICOCA หรือ Kintetsu pass ตามที่ซื้อ'],
-],note:'ใน Excel Final เลือก Kintetsu แทน JR เพราะเดินจากสถานีไป Nara Park สะดวกกว่า'},
+5:{time:'07:00–18:45',label:'Uji เช้า → Nara บ่าย',steps:[
+ ['07:00 Centara → Daikokucho M21','เดินไป Metro Midosuji มุ่งเหนือ ลง Umeda M16 แล้วเดินเข้าสถานี JR Osaka','Metro ICOCA ¥240/คน'],
+ ['JR Osaka → Kyoto → Uji','ขึ้น JR Kyoto Line Special Rapid ไป JR Kyoto ต่อ JR Nara Line มุ่ง Nara ลง JR Uji; ตรวจชานชาลาและปลายทางจริง','Kansai WIDE Area Pass'],
+ ['08:55 Byodo-in Phoenix Hall','สวนเปิด 08:45 · ค่าเข้า ¥700/คน รวมพิพิธภัณฑ์ · เข้าภายในวิหารเพิ่ม ¥300/คนและต้องรอรอบ','เดินจาก JR Uji 10–15 นาที'],
+ ['09:55 Uji Bridge','เดินจาก Byodo-in ไป Uji Bridge และถนนชาสำหรับถ่ายภาพ','เดินฟรี'],
+ ['10:20 Nakamura Tokichi Honten','ร้านมัทฉะสาขาหลัก Uji Ichiban 10 เปิด 10:00 · ไม่รับจองคาเฟ่ · คิวเกิน 15–20 นาทีใช้ Takeaway','ใกล้ JR Uji ประมาณ 1 นาที'],
+ ['11:10 เดินกลับ JR Uji','เดินจาก Nakamura กลับสถานีแล้วรอ JR Nara Line มุ่ง Nara','JR Pass'],
+ ['11:35–12:15 JR Uji → JR Nara','JR Nara Line ผ่าน Uji ไป JR Nara ประมาณ 30–40 นาทีตามขบวน; ไม่ใช่ Kintetsu','WIDE Pass ครอบคลุม'],
+ ['12:15–12:35 JR Nara → Kamaiki','เดินตาม Sanjo-dori ไป Higashimuki Shopping Street แถวสถานี Kintetsu-Nara','เดินประมาณ 18–25 นาที'],
+ ['12:35–13:20 Lunch Kamaiki Honten','อุด้งทำสด · คิวเกิน 15 นาทีใช้ Saizeriya Kintetsu Nara Station Building เป็นสำรอง · ทั้งสองไม่ทานเนื้อวัว','งบ ¥1,000–1,800/คน'],
+ ['13:20–14:05 Nara Park','เดินชมกวางในสวน Nara และถ่ายรูป','เข้าฟรี'],
+ ['14:05–15:10 Todai-ji Great Buddha Hall','ชมวิหารพระใหญ่ · เปิดเดือนพฤศจิกายน 08:00–17:00','ค่าเข้า ¥800/คน'],
+ ['15:10 Kasuga Taisha (Optional)','เดินจาก Todai-ji 20–30 นาที · หากช้าให้ข้าม · สักการะทั่วไปเปิดถึง 17:00 เขตพิเศษปิด 16:00','จุดที่ตัดได้ก่อน'],
+ ['16:15–17:10 กลับ JR Nara','เดินจาก Kasuga กลับ JR Nara ประมาณ 40–55 นาที หรือใช้ Nara City Bus โดยจ่ายแยก','Bus จ่าย ICOCA ไม่รวม Pass'],
+ ['17:10–18:45 JR Nara → Centara','JR Yamatoji Line ไป Tennoji ใช้ WIDE Pass แล้วต่อ Metro Midosuji Tennoji M23 → Daikokucho M21 จ่าย ICOCA','Metro ¥190/คน'],
+ ['19:00 พักและแพ็กกระเป๋า','เตรียมกระเป๋าใบเล็กค้าง Kinosaki คืนถัดไป Kounotori 5 จองแล้ว','เตรียมวัน 22 พ.ย.']
+],note:'เส้นทางและเวลาเป็นกรอบประมาณ ไม่ใช่ตารางรถไฟจองจริง · Rainy Plan อยู่ Osaka ในร่ม; Relaxed Plan ยังไป Uji+Nara แต่ตัด Kasuga'},
 6:{time:'08:15–12:51 (รถไฟ)',label:'Kounotori 5 ไป Kinosaki',steps:[
  ['08:15 Check-out Centara','เตรียมกระเป๋าใบเล็กค้าง 1 คืน ถามโรงแรมก่อนว่าจะฝากกระเป๋าใหญ่ข้ามคืนได้หรือไม่','เผื่อเวลาจัดกระเป๋า'],
  ['08:30 Daikokucho → Umeda','ขึ้น Osaka Metro Midosuji มุ่ง Umeda ลง Umeda แล้วเดินตามป้าย JR Osaka Station เป็นคนละระบบกับ Metro','Metro ใช้ ICOCA ไม่รวม JR Pass'],

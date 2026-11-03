@@ -63,7 +63,9 @@ test('no duplicate ryokan meals or Centara breakfasts; rainy Nara no Nara food',
  assert.ok(!foodStopsForDay(7,prefs()).some(s=>s.kind==='breakfast'));
  assert.ok(!foodStopsForDay(8,prefs()).some(s=>s.kind==='breakfast'));
  assert.ok(!names(foodStopsForDay(5,prefs('west','rainy',5))).includes('nakatanidou'));
- assert.ok(names(foodStopsForDay(5,prefs('west','original',5))).includes('nakatanidou'));
+ assert.ok(names(foodStopsForDay(5,prefs('west','original',5))).includes('nakamuraUji'));
+  assert.ok(!names(foodStopsForDay(5,prefs('west','original',5))).includes('nakatanidou'));
+  assert.equal(foodStopsForDay(5,prefs('west','original',5)).find(x=>x.role==='primary'&&x.kind==='lunch').time,'12:35');
 });
 test('Day 2 special dinner is confirmed but unknown booking details remain unset',()=>{
  const p=prefs('west','original',2);
