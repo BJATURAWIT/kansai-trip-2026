@@ -17,6 +17,7 @@ export const osakaMetroFareTable=Object.freeze({
  'Yodoyabashi → Daikokucho':{yen:240,origin:'Yodoyabashi',destination:'Daikokucho',source:'https://ekitan.com/transit/fare/sf-5590/st-6143'},
  'Namba (S16) → Tanimachi 9-chome (S18)':{yen:190,origin:'Namba',destination:'Tanimachi 9-chome',source:'https://subway-tr.osakametro.co.jp/en/guide/fare/fare/price.php'},
  'Tanimachi 9-chome (S18) → Namba (S16)':{yen:190,origin:'Tanimachi 9-chome',destination:'Namba',source:'https://subway-tr.osakametro.co.jp/en/guide/fare/fare/price.php'},
+ 'Tennoji → Daikokucho':{yen:190,origin:'Tennoji',destination:'Daikokucho',source:'https://subway-tr.osakametro.co.jp/en/guide/fare/fare/price.php'},
  'Daikokucho → Tennoji':{yen:190,origin:'Daikokucho',destination:'Tennoji',source:'https://subway-tr.osakametro.co.jp/en/guide/fare/fare/price.php'},
  'Daikokucho → Namba':{yen:190,origin:'Daikokucho',destination:'Namba',source:'https://ekitan.com/transit/fare/sf-5590/st-5727'},
  'Namba → Daikokucho':{yen:190,origin:'Namba',destination:'Daikokucho',source:'https://ekitan.com/transit/fare/sf-5727/st-5590'},
