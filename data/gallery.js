@@ -26,11 +26,14 @@ export const galleryByDay = {
     {title:'Kodaiji Night Illumination',subtitle:'สวนไผ่ภายใน Kodaiji ประดับไฟ',vibe:'Night',why:'ภาพถ่ายจริงของงานเปิดไฟวัดโคไดจิ ไม่ใช่ป่าไผ่ Arashiyama',tags:['เปิดไฟ','Kodaiji'],map:'Kodaiji Temple Kyoto',image:localPhoto(4,9)}
   ],
   5:[
-    {title:'Nara Park Deer',subtitle:'กวางที่สวน Nara',vibe:'Nature',why:'กวางที่สวนสาธารณะนารา',tags:['กวาง'],map:'Nara Park Nara',image:localPhoto(5,1)},
-    {title:'Todai-ji',subtitle:'วัดพระใหญ่โทไดจิ',vibe:'Temple',why:'สถาปัตยกรรมของวัด Todai-ji',tags:['วัด'],map:'Todai-ji Nara',image:localPhoto(5,2)},
-    {title:'Kasuga Taisha',subtitle:'โคมไฟที่ศาลเจ้าคาสุงะ',vibe:'Shrine',why:'โคมไฟหินของศาลเจ้าคาสุงะ',tags:['ศาลเจ้า'],map:'Kasuga Taisha Nara',image:localPhoto(5,3)}
+    {title:'Byodo-in Phoenix Hall',subtitle:'วิหารฟีนิกซ์และสระน้ำในเมือง Uji',vibe:'Uji · Temple',why:'ภาพถ่ายจริงของวัด Byodo-in ที่เข้าชมในช่วงเช้า',tags:['08:55','Uji','วัด'],map:'Byodo-in Temple Uji Kyoto',image:localPhoto(5,4)},
+    {title:'Uji Bridge',subtitle:'สะพานและแม่น้ำ Uji',vibe:'Uji · Riverside',why:'ภาพถ่ายสะพาน Uji Bridge จริง ไม่ใช่สะพานใน Arashiyama',tags:['09:55','Uji','แม่น้ำ'],map:'Uji Bridge Kyoto',image:localPhoto(5,5)},
+    {title:'Nakamura Tokichi Honten',subtitle:'ร้านมัทฉะสาขาหลัก Uji',vibe:'Matcha · Uji',why:'ภาพถ่ายจริงของร้าน Nakamura Tokichi Honten ในเมือง Uji (ไม่ใช่ภาพเมนูร้านอื่น)',tags:['10:20','มัทฉะ','ร้านจริง'],map:'Nakamura Tokichi Honten Uji Kyoto',image:localPhoto(5,6)},
+    {title:'Nara Park Deer',subtitle:'กวางในสวน Nara ช่วงบ่าย',vibe:'Nara · Nature',why:'ภาพกวางจริงใน Nara Park',tags:['13:20','กวาง'],map:'Nara Park Nara Japan',image:localPhoto(5,1)},
+    {title:'Todai-ji',subtitle:'วิหารพระใหญ่ Todai-ji',vibe:'Nara · Temple',why:'ภาพถ่ายจริงของวัด Todai-ji',tags:['14:05','วัด'],map:'Todai-ji Great Buddha Hall Nara',image:localPhoto(5,2)},
+    {title:'Kasuga Taisha (Optional)',subtitle:'ศาลเจ้าและโคมไฟหิน',vibe:'Nara · Shrine',why:'ภาพถ่ายจริงของ Kasuga Taisha; แวะเฉพาะเมื่อยังมีเวลาและแรง',tags:['15:10','ศาลเจ้า','Optional'],map:'Kasuga Taisha Nara',image:localPhoto(5,3)}
   ],
-  6:[
+    6:[
     {title:'Limited Express Kounotori',subtitle:'รถไฟ JR ไป Kinosaki',vibe:'Rail journey',why:'ภาพขบวน Kounotori จริง ไม่ใช่ Kuroshio',tags:['รถไฟ'],map:'Osaka Station',image:localPhoto(6,4)},
     {title:'Kinosaki Onsen Canal',subtitle:'คลองและถนนเมืองออนเซ็น',vibe:'Kinosaki',why:'เมืองริมคลองที่ไปพักค้างคืน',tags:['เมืองออนเซ็น'],map:'Kinosaki Onsen Japan',image:localPhoto(6,1)},
     {title:'Nishimuraya Hotel Shogetsutei',subtitle:'ภาพถ่ายจริงของโรงแรมที่พัก',vibe:'Ryokan',why:'ภาพจากโรงแรม Nishimuraya Kinosaki Onsen เผยแพร่ภายใต้ CC BY-SA 2.0 พร้อมเครดิตผู้ถ่าย',tags:['เรียวกัง','ภาพจริง'],map:'Nishimuraya Hotel Shogetsutei Kinosaki',image:localPhoto(6,5)}
