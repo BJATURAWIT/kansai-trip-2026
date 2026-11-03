@@ -16,18 +16,28 @@ for(const x of sources){
   const stat=await fs.stat(filepath);
   if(stat.size>=9000){successes.push(filename);continue;}
  } catch {}
- try {
-  const ctrl=new AbortController();const timer=setTimeout(()=>ctrl.abort(),15000);
-  let res;
-  try{res=await fetch(x.url,{signal:ctrl.signal,headers:{'User-Agent':'KansaiTrip2026/1.0'}});}
-  finally{clearTimeout(timer);}
-  if(!res.ok)throw Error('HTTP '+res.status);
-  if(!res.headers.get('content-type')?.startsWith('image/'))throw Error('Unexpected media type');
-  const b=Buffer.from(await res.arrayBuffer());
-  if(b.length<8000||b.length>2500000||b[0]!==255||b[1]!==216)throw Error('Invalid JPEG data');
-  await fs.writeFile(filepath,b);successes.push(filename);
-  console.log('PHOTO OK',filename,b.length);
- } catch(e) {failures.push(filename+' '+e.message);console.error('PHOTO ERROR',filename,e.message);}
+ let saved=false,reason='No valid image';
+ // Commons may respond 429 on consecutive Vercel builds. Retry the exact same
+ // licensed photo through a cached image proxy only when the source fails.
+ const candidates=[x.url];
+ if(x.url.includes('commons.wikimedia.org/wiki/Special:FilePath/'))candidates.push('https://images.weserv.nl/?url='+encodeURIComponent(x.url)+'&output=jpg');
+ for(const candidate of candidates){
+  try{
+   const ctrl=new AbortController();const timer=setTimeout(()=>ctrl.abort(),18000);
+   let res;
+   try{res=await fetch(candidate,{signal:ctrl.signal,headers:{'User-Agent':'KansaiTrip2026/1.0'}});}
+   finally{clearTimeout(timer);}
+   if(!res.ok)throw Error('HTTP '+res.status);
+   if(!res.headers.get('content-type')?.startsWith('image/'))throw Error('Unexpected media type');
+   const b=Buffer.from(await res.arrayBuffer());
+   if(b.length<8000||b.length>2500000||b[0]!==255||b[1]!==216)throw Error('Invalid JPEG data');
+   await fs.writeFile(filepath,b);successes.push(filename);saved=true;
+   console.log('PHOTO OK',filename,b.length,candidate===x.url?'source':'verified-source-cache');
+   break;
+  }catch(e){reason=e.message;console.warn('PHOTO RETRY',filename,reason);}
+ }
+ if(!saved){failures.push(filename+' '+reason);console.error('PHOTO ERROR',filename,reason);}
+
 }
 await fs.writeFile(path.join(dir,'credits.json'),JSON.stringify(sources.map(x=>({file:x.file,license:x.license,creator:x.creator,source:x.source})),null,2));
 if(successes.length!==39||failures.length){
