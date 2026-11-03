@@ -144,9 +144,8 @@ export const restaurantWishlist = [
     "hours": "โดยทั่วไป 10:00–18:00 (ตรวจประกาศร้าน)",
     "warning": "คิวอาจยาว; ซื้อกลับได้ ไม่ต้องแทรกมื้อเที่ยงหลัก",
     "place": "Onigiri Gorichan 3-5-28 Minamisenba Osaka",
-    "image": "https://images.unsplash.com/photo-1607305387299-a3d9611cd469?w=900&q=80",
-    "photo": null,
-    "photoKind": "sample"
+    "image": "https://yukigo.tw/wp-content/uploads/2025/03/Onigiri-Gorichan10.jpg",
+    "photo": "https://yukigo.tw/onigiri-gorichan-namba/"
   },
   {
     "id": "osa",
