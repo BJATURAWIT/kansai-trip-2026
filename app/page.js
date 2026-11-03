@@ -88,12 +88,13 @@ function FoodDining({day,prefs}){
 
 function DayPlan({ day, prefs }) {
   const guide = resolvedGuide(day.day,prefs);
-  const gallery = galleryByDay[day.day] || [];
+  const day5Rainy = day.day===5 && prefs?.dayPlans?.[5]==='rainy';
+  const gallery = day5Rainy ? [] : (galleryByDay[day.day] || []).filter(spot => !(day.day===5 && prefs?.dayPlans?.[5]==='relaxed' && spot.title.includes('Kasuga')));
   const [showAll, setShowAll] = useState(false);
   const [expanded, setExpanded] = useState({});
   useEffect(() => { setExpanded({}); setShowAll(false); }, [day.day]);
   return <>
-    <section className="today-head"><div className="today-head-image"><img key={day.day} src={dayPhotos[day.day].src} alt={dayPhotos[day.day].alt} loading={day.day === 1 ? 'eager' : 'lazy'} decoding="async" style={{objectPosition: dayPhotos[day.day].position}} onError={event => { event.currentTarget.onerror = null; event.currentTarget.src = '/photos/placeholder.svg'; }}/><span className="photo-caption">{dayPhotos[day.day].caption}</span></div><div className="today-head-content">
+    <section className="today-head"><div className="today-head-image" style={day5Rainy?{background:'#24483f',minHeight:148}:undefined}>{day5Rainy?<span className="photo-caption">OSAKA · Rainy Indoor Plan (ไม่ใช้รูป Uji/Nara)</span>:<><img key={day.day} src={dayPhotos[day.day].src} alt={dayPhotos[day.day].alt} loading={day.day === 1 ? 'eager' : 'lazy'} decoding="async" style={{objectPosition: dayPhotos[day.day].position}} onError={event => { event.currentTarget.onerror = null; event.currentTarget.src = '/photos/placeholder.svg'; }}/><span className="photo-caption">{dayPhotos[day.day].caption}</span></>}</div><div className="today-head-content">
       <div className="today-badges"><span>DAY {String(day.day).padStart(2, '0')} · {day.dow} {day.date}</span><Tag color={day.type === 'confirmed' ? 'light' : 'soft'}>{day.type === 'confirmed' ? 'มีรายการจองแล้ว' : 'แผนยืดหยุ่น'}</Tag></div>
       <h2>{day.title}</h2><p>{day.subtitle}</p><span className="today-location"><MapPin size={14}/> {day.location}</span>
     </div></section>
@@ -127,7 +128,7 @@ function DayPlan({ day, prefs }) {
     </section>
 
 <FoodDining day={day.day} prefs={prefs}/>
-<section className="gallery-card"><div className="section-title"><div><span className="kicker">TODAY'S GALLERY</span><h3>วันนี้จะเจออะไรบ้าง</h3><p className="gallery-copy">รวมจุดไฮไลต์ จุดกระแส และมุมถ่ายรูปสวยของวันนั้น ๆ สำหรับเปิดดูจากมือถือระหว่างเที่ยว</p></div><Tag color="soft">{gallery.length} จุดแนะนำ</Tag></div>
+{day5Rainy ? <p className="accuracy-note"><ShieldCheck size={16}/>Rainy Plan วันนี้เที่ยวใน Osaka แทน Uji/Nara จึงซ่อน Gallery ของสถานที่ที่ไม่ได้ไป เพื่อไม่ให้รูปไม่ตรงกับแผน</p> : <section className="gallery-card"><div className="section-title"><div><span className="kicker">TODAY'S GALLERY</span><h3>วันนี้จะเจออะไรบ้าง</h3><p className="gallery-copy">รวมจุดไฮไลต์ จุดกระแส และมุมถ่ายรูปสวยของวันนั้น ๆ สำหรับเปิดดูจากมือถือระหว่างเที่ยว</p></div><Tag color="soft">{gallery.length} จุดแนะนำ</Tag></div>
   <div className="gallery-grid">{gallery.map((spot, index) => <article className="gallery-spot" key={`${day.day}-${index}`}>
     <div className="gallery-thumb">{spot.image ? <img src={spot.image} alt={`${spot.title} — ${spot.subtitle}`} loading="lazy" onError={event=>{const img=event.currentTarget;img.hidden=true;const fallback=img.nextElementSibling;if(fallback)fallback.hidden=false;}}/> : spot.photoStatus==='official-embed'&&spot.embedUrl ? <iframe src={spot.embedUrl} title={`Instagram official post — ${spot.title}`} loading="lazy" referrerPolicy="strict-origin-when-cross-origin" allow="encrypted-media" style={{border:0,width:'100%',height:'100%',minHeight:230,background:'#fff'}}/> : null}<div className="gallery-photo-unavailable" hidden={Boolean(spot.image||spot.photoStatus==='official-embed')}><span>รูปจริงไม่พร้อมแสดง</span>{spot.photoSource&&<a href={spot.photoSource} target="_blank" rel="noopener noreferrer">ดูภาพจากแหล่งต้นทาง ↗</a>}</div></div>
     <div className="gallery-body">
@@ -139,7 +140,7 @@ function DayPlan({ day, prefs }) {
       <LinkOut className="map-button" href={mapSearchUrl(spot.map)}><MapPin size={15}/> เปิดตำแหน่งใน Google Maps</LinkOut>
     </div>
   </article>)}</div>
-</section>
+</section>}
     <section className="stay-card"><div className="stay-icon"><BedDouble size={19}/></div><div><span className="kicker">TONIGHT'S STAY</span><h3>{day.stay}</h3></div>{day.day !== 8 && <a aria-label="นำทางไปโรงแรม" href={mapSearchUrl(day.day === 6 ? 'Nishimuraya Hotel Shogetsutei' : 'Centara Life Namba Hotel Osaka')} target="_blank" rel="noopener noreferrer"><MapPin size={18}/></a>}</section>
     <p className="accuracy-note"><ShieldCheck size={16}/> เวลารถไฟที่ไม่ได้จองและช่วงเดินทางเป็นแผน/ค่าประมาณ ตรวจเส้นทาง รถไฟรอบจริง และชานชาลาจาก Google Maps หรือ JR-WEST ก่อนออกเดินทาง</p>
   </>;
