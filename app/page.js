@@ -14,6 +14,7 @@ import { beginnerDayGuide } from '../data/beginnerGuide';
 import { dayPhotos, tripImageCredits } from '../data/dayPhotos';
 import { galleryByDay } from '../data/gallery';
 import TripTable from './components/TripTable';
+import RestaurantWishlist from './components/RestaurantWishlist';
 import {normalizePreferences,resolveDay,resolvedGuide,resolvedBeginner} from '../data/experience';
 import {restaurantGuide} from '../data/restaurantGuide';
 import {foodStopsForDay,foodVenues,foodName} from '../data/foodExperience';
@@ -180,12 +181,14 @@ function BookingsPanel() {
 }
 
 function HelpPanel() {
-  return <section className="content-pane"><Heading label="IN YOUR POCKET" title="ข้อมูลสำคัญระหว่างเที่ยว" caption="ลิงก์ฉุกเฉินและสิ่งที่ควรจำก่อนออกเดินทาง"/>
+  return <section className="content-pane"><Heading label="IN YOUR POCKET" title="ข้อมูลสำคัญระหว่างเที่ยว" caption="ข้อมูลสำคัญและร้านอาหารที่อยากไป พร้อมวันแนะนำตามเส้นทางจริง"/>
+    <a className="wishlist-jump" href="#restaurant-wishlist">🍽️ ดู 17 ร้านที่อยากไป พร้อมภาพและวันที่แนะนำ ↓</a>
     <div className="help-feature"><MapPin size={21}/><div><strong>ที่พักหลัก · Centara Life Namba Hotel Osaka</strong><p>3-4-21 Shikitsuhigashi, Naniwa, Osaka · ใกล้ Daikokucho / Imamiyaebisu</p><LinkOut className="subtle-link" href={mapSearchUrl('Centara Life Namba Hotel Osaka')}>นำทางไปโรงแรม</LinkOut></div></div>
     <div className="help-feature"><TrainFront size={21}/><div><strong>การเดินทาง Kinosaki</strong><p>22 พ.ย. {travelBookings.kounotori.outward.train} {travelBookings.kounotori.outward.depart}–{travelBookings.kounotori.outward.arrive} · Car {travelBookings.kounotori.outward.car} Seats {travelBookings.kounotori.outward.seats} · 23 พ.ย. {travelBookings.kounotori.return.train} {travelBookings.kounotori.return.depart}–{travelBookings.kounotori.return.arrive} · Car {travelBookings.kounotori.return.car} Seats {travelBookings.kounotori.return.seats} · รับพาส/ตั๋วก่อนขึ้นรถ</p><LinkOut className="subtle-link" href="https://www.nishimuraya.ne.jp/shogetsu/en/access/">วิธีรับส่ง Nishimuraya</LinkOut></div></div>
     <div className="help-feature"><Luggage size={21}/><div><strong>ก่อนค้าง Kinosaki 1 คืน</strong><p>ขออนุญาต Centara ฝากกระเป๋าใหญ่ข้ามคืน 22–23 พ.ย. แล้วถือกระเป๋าใบเล็กไปเรียวกัง</p></div></div>
     <div className="help-feature"><Plane size={21}/><div><strong>เที่ยวบินขากลับ 24 พ.ย.</strong><p>{flightNumberLabel(travelBookings.flights.inbound)} · KIX Terminal 1 วันที่ 24 พ.ย. {localClock(travelBookings.flights.inbound.departure)} (ญี่ปุ่น) → DMK Terminal 1 วันที่ 25 พ.ย. {localClock(travelBookings.flights.inbound.arrival)} (ไทย) · เป้าหมายถึง KIX ประมาณ 16:45</p></div></div>
     <div className="help-feature"><Ticket size={21}/><div><strong>USJ วันที่ 19 พ.ย.</strong><p>ตั๋วซื้อแล้ว · Nintendo {travelBookings.usj.nintendoEntry} และ Harry Potter {travelBookings.usj.harryPotterEntry} ตามข้อมูลที่แจ้ง • QR จริงเป็นหลัก</p></div></div>
+    <RestaurantWishlist/>
     <div className="quick-links">{resources.map(link => <LinkOut className="resource-link" key={link.name} href={link.url}><span><strong>{link.name}</strong><small>{link.desc}</small></span></LinkOut>)}<LinkOut className="resource-link" href="https://www.usj.co.jp/web/en/us/access/train"><span><strong>USJ Access</strong><small>เส้นทางรถไฟไป Universal City</small></span></LinkOut></div>
     <div className="info-card"><ShieldCheck size={20}/><p>แนะนำเก็บ Passport, QR, Booking Confirmation และประกันไว้ในโทรศัพท์แบบ Offline แยกจากเว็บไซต์นี้ เนื่องจากรหัส 6 หลักเป็นการป้องกันขั้นพื้นฐาน ไม่เหมาะกับเอกสารลับ</p></div>
   </section>;
