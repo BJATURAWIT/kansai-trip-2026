@@ -5,7 +5,7 @@ import {galleryByDay} from '../data/gallery.js';
 const photos=JSON.parse(fs.readFileSync(new URL('../data/photo-sources.json',import.meta.url),'utf8'));
 test('all 8 day galleries contain only distinct actual-photo assets with known sources',()=>{
  assert.equal(Object.keys(galleryByDay).length,8);
- assert.equal(photos.length,36);
+ assert.equal(photos.length,39);
  const names=new Set(),images=new Set();
  for(const src of photos){
   assert.ok(!names.has(src.file),'duplicate manifest file: '+src.file);
@@ -37,6 +37,8 @@ test('Day 4 and Day 8 landmarks and restaurant photos never use the same file',(
   assert.equal(cards.length,day===4?6:4);
   assert.equal(new Set(cards.map(x=>x.image||x.embedUrl)).size,cards.length);
  }
+ assert.equal(galleryByDay[5].length,6);
+ assert.deepEqual(galleryByDay[5].slice(0,3).map(x=>x.image),['/photos/day-5-4.jpg','/photos/day-5-5.jpg','/photos/day-5-6.jpg']);
  assert.match(galleryByDay[4].find(x=>x.title.includes('Kodaiji')).image,/day-4-9/);
  assert.match(galleryByDay[8].find(x=>x.title.includes('Yasaka')).image,/day-8-4/);
  assert.match(galleryByDay[8].find(x=>x.title.includes('Rikuro')).image,/day-8-5/);
