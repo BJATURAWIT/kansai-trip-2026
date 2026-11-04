@@ -127,9 +127,12 @@ export function resolvedSchedule(day,prefs){
    const late=[
     slot('15:45–16:15','Umeda Sky Building','ไปจุดชมวิวก่อนช่วงพระอาทิตย์ตก','Umeda Sky Building Osaka'),
     slot('16:20–17:20','Sunset Special Moment','ชมแสงเย็นและถ่ายภาพ','Umeda Sky Building Osaka'),
-    slot('18:15–20:00','Special Dinner','STARDUST · Confirmed booking (เวลาในแผนยังไม่ยืนยันจากใบจอง); XEX WEST เป็นสำรองฉุกเฉิน','Sky Lounge STARDUST Osaka')
+    slot('18:15–20:00','Special Dinner','STARDUST · Confirmed booking (เวลาในแผนยังไม่ยืนยันจากใบจอง); XEX WEST เป็นสำรองฉุกเฉิน','Sky Lounge STARDUST Osaka'),
+     slot('20:00–20:20','STARDUST → Midosuji Umeda','เดินจาก Umeda Sky Building ไปต้นถนน Midosuji ประมาณ 15–25 นาที; เวลาเลื่อนได้ตามมื้อเย็น','Midosuji Illumination Hanshin-mae Intersection Osaka'),
+     slot('20:20–20:55','Midosuji Illumination 2026 · Night Walk','ไฟประดับ Umeda → Yodoyabashi เปิดประมาณ 17:00–01:00; เข้าฟรี; เดินเลาะฟุตบาท ไม่จำเป็นต้องเดินทั้ง 4 กม.','Midosuji Illumination Hanshin-mae Intersection Osaka'),
+     slot('20:55–21:30','Yodoyabashi → Daikokucho → Centara','Yodoyabashi M17 → Daikokucho M21 (Metro Midosuji) ด้วย ICOCA ¥240/คน; เดินเข้าโรงแรม','Yodoyabashi Station (M17)')
    ];
-   base=[...base.filter(x=>!(['Umeda Sky Building','Sunset Special Moment','Special Dinner'].includes(x.title)||/^Grand Front Osaka$/i.test(x.title))),...late];
+   base=[...base.filter(x=>!(['Umeda Sky Building','Sunset Special Moment','Special Dinner','STARDUST → ถนน Midosuji (Umeda)','Midosuji Illumination 2026 · Night Walk','Yodoyabashi (M17) → Daikokucho (M21) → Centara'].includes(x.title)||/^Grand Front Osaka$/i.test(x.title))),...late];
  }
  const titles=base.map(x=>x.title.toLowerCase()).join(' | ');
  const meals=foodScheduleEvents(day,prefs).filter(x=>{
