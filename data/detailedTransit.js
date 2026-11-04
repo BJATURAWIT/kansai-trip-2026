@@ -48,10 +48,14 @@ const umedaSkyMetro=()=>leg('Shinsaibashi Station (M19)','Umeda Station (M16)','
  at('Umeda (M16)','ลง Umeda แล้วแตะ ICOCA ออก Metro ตามป้ายทางไป Grand Front Osaka / Umeda Sky Building')],{duration:'ประมาณ 10–15 นาทีบนรถ ไม่รวมเดิน'});
 const umedaSkyWalk=()=>walk('Umeda Station (M16)','Umeda Sky Building','เดินตามป้าย Grand Front Osaka / Umeda Sky Building ไปอาคาร Tower East; ตรวจทางเดินล่าสุดใน Google Maps และเผื่อเวลาข้ามถนน','ประมาณ 12–20 นาที');
 const shinsaibashiStationWalk=()=>walk('Shinsaibashi-suji Shopping Street','Shinsaibashi Station (M19)','เดินขึ้นเหนือผ่านทางเดินร้านค้าไปสถานี Osaka Metro Shinsaibashi Midosuji (M19)','ประมาณ 5–15 นาที');
-const skyReturn=()=>leg('Umeda Sky Building',DAI,'เดิน + Osaka Metro','ICOCA แตะเข้า Umeda / ออก Daikokucho',[
- at('Umeda Sky Building','เดินกลับ Osaka Metro Umeda (M16) ไม่ใช่ JR Osaka'),
- at('Umeda (M16)','ขึ้น Midosuji สีแดง มุ่งใต้ Nakamozu / Tennoji'),
- at('Daikokucho (M21)','ลง Daikokucho แตะออก แล้วเดินกลับโรงแรม')],{duration:'เผื่อ 30–45 นาที'});
+const midosujiAfterDinner=()=>[
+ walk('Sky Lounge STARDUST 39F','Midosuji Illumination Hanshin-mae Intersection Osaka','หลัง Dinner ลงจาก Umeda Sky Building แล้วเดินผ่านฝั่ง JR Osaka/Umeda ไปจุดเริ่มงานประดับไฟ Midosuji ใกล้ Hanshin-mae Intersection โดยใช้ทางเท้าปกติ; ใช้ Google Maps ตรวจทางข้ามถนน; Dinner จบช้าก็เลื่อนชมไฟได้','ประมาณ 15–25 นาที เดินฟรี'),
+ walk('Midosuji Illumination Hanshin-mae Intersection Osaka','Yodoyabashi Station (M17)','ชมไฟจริงตามแนวถนน Midosuji ช่วง Umeda → Yodoyabashi ระหว่างทางประมาณ 25–35 นาที (ไม่จำเป็นต้องเดินครบ 4 กม.); ถ้าเหนื่อย/ฝนหนักให้กลับจาก Umeda M16 ได้เลย','ประมาณ 25–35 นาที เดินฟรี'),
+ leg('Yodoyabashi Station (M17)',DAI,'Osaka Metro Midosuji Line','ICOCA ¥240/คน · ไม่ใช้ JR Kansai WIDE Pass',[
+   at('Yodoyabashi (M17)','ขึ้น Osaka Metro Midosuji Line สีแดง มุ่งใต้ Nakamozu / Tennoji'),
+   at('Daikokucho (M21)','ลง Daikokucho (M21) และแตะ ICOCA ออกประตู ตาม Google Maps กลับ Centara')],{duration:'ประมาณ 10–15 นาทีบนรถ ไม่รวมเดิน/รอ',note:'วันพุธ 18 พ.ย. ค่าโดยสาร Metro ขากลับ ¥240/คน เท่ากับแผนเดิมจาก Umeda; งานเปิดไฟราว 17:00–01:00 และเข้าชมฟรี'}),
+ daikokuHome()
+];
 const usjOut=()=>[
  daikokuWalk(),
  leg(DAI,'Osaka-Namba Station (Hanshin / Kintetsu)','Osaka Metro + เดินเชื่อมสถานี','ICOCA แตะเข้า Daikokucho / ออก Namba; เตรียมแตะเข้า Hanshin อีกครั้ง',[
@@ -110,7 +114,7 @@ const dayTwo=(mode)=>{
   walk('Namba Station (M20)','Tempura Makino Namba Sennichimae','เดินไป Namba 3-3-4 อาคาร Namba Nichidai ชั้น 1 ร้าน Tempura Makino; ตรวจทางออกจาก Google Maps','ประมาณ 3–7 นาที'),
   walk('Tempura Makino Namba Sennichimae','Dotonbori Glico Sign','หลังมื้อเที่ยงเดินขึ้นเหนือจาก Namba ผ่าน Dotonbori ไปป้าย Glico บริเวณสะพาน Ebisubashi','ประมาณ 10–15 นาที'),
   walk('Dotonbori Glico Sign','Shinsaibashi-suji Shopping Street','จาก Glico / Ebisubashi เดินต่อขึ้นเหนือบนถนน Shinsaibashi-suji; ไม่ต้องขึ้นรถไฟ','ประมาณ 5–15 นาที'),
-  shinsaibashiStationWalk(),umedaSkyMetro(),umedaSkyWalk(),sunset(),skyReturn(),daikokuHome()
+  shinsaibashiStationWalk(),umedaSkyMetro(),umedaSkyWalk(),sunset(),...midosujiAfterDinner()
  ];
  if(mode==='rainy')return [
   daikokuWalk(),
