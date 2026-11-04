@@ -10,7 +10,8 @@ export const galleryByDay = {
   2:[
     {title:'Osaka Castle',subtitle:'ปราสาทโอซาก้า',vibe:'Landmark',why:'เที่ยวปราสาทและสวนในช่วงเช้า',tags:['ปราสาท','เช้า'],map:'Osaka Castle Osaka',image:localPhoto(2,1)},
     {title:'Dotonbori / Glico Sign',subtitle:'ป้ายกูลิโกะหลังมื้อเที่ยง',vibe:'Namba',why:'เดินจากร้านอาหารไปจุดถ่ายรูป Ebisubashi',tags:['Glico','คลอง'],map:'Dotonbori Glico Sign Osaka',image:localPhoto(1,1)},
-    {title:'Umeda Sky Building',subtitle:'จุดชมวิวช่วงเย็น',vibe:'City view',why:'ชมทิวทัศน์เมืองโอซาก้าจาก Umeda Sky',tags:['วิวเมือง','ช่วงเย็น'],map:'Umeda Sky Building Osaka',image:localPhoto(2,3)}
+    {title:'Umeda Sky Building',subtitle:'จุดชมวิวช่วงเย็น',vibe:'City view',why:'ชมทิวทัศน์เมืองโอซาก้าจาก Umeda Sky',tags:['วิวเมือง','ช่วงเย็น'],map:'Umeda Sky Building Osaka',image:localPhoto(2,3)},
+    {title:'Midosuji Illumination — Night Walk',subtitle:'ไฟประดับถนน Midosuji ช่วง Umeda → Yodoyabashi หลัง STARDUST Dinner',vibe:'Night lights',why:'ภาพถ่ายจริงจากงาน Midosuji Illumination ปี 2023 เพื่อให้เห็นบรรยากาศ (ไม่ใช่ภาพงานปี 2026) · วันที่ 18 พ.ย. 2026 เปิดไฟ 17:00–01:00 เข้าชมฟรี',tags:['20:20','After Dinner','ฟรี'],map:'Midosuji Illumination Hanshin-mae Intersection Osaka',image:localPhoto(2,4)}
   ],
   3:[
     {title:'Universal Studios Japan Globe',subtitle:'ลูกโลกทางเข้าสวนสนุก',vibe:'USJ',why:'ถ่ายรูปตรงทางเข้าก่อนเที่ยวสวนสนุก',tags:['USJ'],map:'Universal Studios Japan Osaka',image:localPhoto(3,1)},
