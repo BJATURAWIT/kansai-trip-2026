@@ -11,7 +11,7 @@ export const beginnerDayGuide = {
  ['Nankai Namba → โรงแรม','ลง Nankai Namba เปิด Google Maps ไป Centara Life Namba; ถ้ามีกระเป๋าใหญ่แนะนำแท็กซี่ระยะสั้นจากสถานี ไม่ต้องลากกระเป๋าไกล','เส้นทางแนะนำ'],
  ['หลังเช็กอิน · มื้อค่ำประมาณ 21:00 (หากทัน)','ตัวเลือกแรก Toritoriko (とりとりこ) ร้านยากิโทริใกล้ Daikokucho · หากคิวเกิน 15 นาที/เข้าที่พักช้า มี Kura Sushi และ Tsurutontan เป็นร้านสำรอง','Walk-in ยังไม่ได้จอง · ตรวจเวลาเปิดและเส้นทางจากโรงแรม'],
 ],note:'หลังเครื่องถึง KIX 18:15 ค่อยเลือก Rapi:t Super Seat หลังผ่าน ตม. และรับกระเป๋า · ต้องเริ่มใช้ก่อน 18 พ.ย. 02:59 JST ตามอีเมล · QR อยู่ใน Ticket Wallet ไม่ใช่อีเมล'},
-2:{time:'09:00–20:00',label:'Osaka Castle · Tempura Makino Namba · Dotonbori · Umeda',steps:[
+2:{time:'09:00–21:30',label:'Osaka Castle · Namba · STARDUST Dinner · Midosuji Illumination',steps:[
  ['09:00–11:10 Osaka Castle','Daikokucho (M21) → Midosuji ถึง Hommachi (M18) → Chuo ไป Morinomiya (C19) แล้วเดินผ่าน Osaka Castle Park ไปตัวปราสาท','Metro / ICOCA'],
  ['11:10–11:55 Castle → Namba','เดินกลับ Morinomiya (N20) ขึ้น Nagahori Tsurumi-ryokuchi มุ่ง Taisho ลง Shinsaibashi (N15) เปลี่ยน Midosuji (M19) มุ่ง Nakamozu ลง Namba (M20); เดินไปร้าน 3-3-4','ICOCA · เปลี่ยนภายในไม่แตะออก'],
  ['12:00–13:00 Tempura Makino / Tendon Tenya','Makino เป็นร้านหลัก ถ้าคิวเกิน 15 นาที เดินไปร้าน Tenya Namba Sennichimae ไม่ต้องเปลี่ยนเส้นทางช่วงบ่าย','เดิน / งบหลัก ¥1,100–1,600 ต่อคน'],
@@ -19,7 +19,11 @@ export const beginnerDayGuide = {
  ['13:30–14:55 Shinsaibashi','เดินต่อขึ้นเหนือบน Shinsaibashi-suji Shopping Street ไปสถานี Shinsaibashi (M19)','เดินฟรี'],
  ['14:55–15:40 Umeda Sky','ขึ้น Midosuji ที่ Shinsaibashi (M19) มุ่ง Shin-Osaka ลง Umeda (M16) และเดินไป Umeda Sky Building อีกประมาณ 12–20 นาที','ICOCA + เดิน'],
  ['15:45 เป็นต้นไป','รักษาแผน Umeda Sky, Sunset และ STARDUST ที่ยืนยันการจองร้านแล้ว (เวลาจองจริงยังต้องตรวจหลักฐาน)','STARDUST Booked'],
-],note:'ช่วง 11:10–11:55 รวมเดินกลับจากตัวปราสาทและเปลี่ยน Metro จึงค่อนข้างแน่น ถ้าต้องการกินเที่ยงตรง 12:00 ให้เริ่มเดินออกจากตัวปราสาทก่อน 11:10 · ไม่มี Kuromon ในแผนวันนี้'},
+  ['18:15–20:00 Special Dinner · STARDUST','ร้านจองยืนยันแล้วที่ Umeda Sky 39F แต่เวลา 18:15–20:00 ยังเป็นเวลาในแผน โปรดตรวจใบจองจริง','Confirmed booking · Time tentative'],
+  ['20:00–20:20 เดินไป Midosuji Umeda','หลัง Dinner ลงจาก Umeda Sky แล้วเดินประมาณ 15–25 นาทีไปต้นถนน Midosuji บริเวณ Hanshin-mae Intersection; ถ้าจบ Dinner ช้าค่อยเริ่มชมไฟ','เดินฟรี'],
+  ['20:20–20:55 Midosuji Illumination','ชมไฟประดับต้นไม้ตามถนนจาก Umeda ไป Yodoyabashi ทางฟุตบาท เปิดไฟราว 17:00–01:00 ฟรี; หากเหนื่อยเดินชมสั้น ๆ ใกล้ Umeda ก็ได้','ฟรี · 3 พ.ย.–31 ธ.ค. 2026'],
+  ['20:55–21:30 กลับ Centara','จาก Yodoyabashi (M17) ขึ้น Osaka Metro Midosuji สีแดง มุ่งใต้ลง Daikokucho (M21) แล้วเดินกลับโรงแรม','ICOCA ¥240/คน'],
+],note:'ช่วง 11:10–11:55 รวมเดินกลับจากตัวปราสาทและเปลี่ยน Metro จึงค่อนข้างแน่น ถ้าต้องการกินเที่ยงตรง 12:00 ให้เริ่มเดินออกจากตัวปราสาทก่อน 11:10 · ไม่มี Kuromon ในแผนวันนี้ · เพิ่ม Midosuji Illumination ฟรีหลัง Dinner (วันจริงงาน 3 พ.ย.–31 ธ.ค. 2026 17:00–01:00) · เวลา STARDUST ยังเป็นเวลาในแผน'},
 3:{time:'07:15 ออกจากโรงแรม',label:'Universal Studios Japan',steps:[
  ['07:15 Centara → Osaka-Namba','เดิน/ขึ้น Metro ไปสถานี Osaka-Namba ให้ดูชื่อสถานีชัดเจนว่า Osaka-Namba สำหรับ Hanshin','ใช้ ICOCA'],
  ['Hanshin → Nishikujo','ขึ้น Hanshin Namba Line มุ่ง Nishikujo เช็กป้ายปลายทางขบวนก่อนขึ้น','เปลี่ยนที่ Nishikujo'],
