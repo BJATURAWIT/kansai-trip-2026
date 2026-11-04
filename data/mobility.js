@@ -18,7 +18,7 @@ export const travelGuide = [
   },
   {
     day: 2, kicker: 'เที่ยว Osaka Castle → Namba', leave: 'ออกจากโรงแรมให้ถึง Osaka Castle 09:00 น.', confirmed: false,
-    overview: 'Osaka Castle → Tempura Makino Namba → Dotonbori → Shinsaibashi → Umeda Sky Building',
+    overview: 'Osaka Castle → Tempura Makino Namba → Dotonbori → Shinsaibashi → Umeda Sky Building → STARDUST Dinner → Midosuji Illumination (Umeda → Yodoyabashi) → Centara',
     reminder: 'ใช้ ICOCA สำหรับ Osaka Metro · วันพุธ 18 พ.ย. · เที่ยงที่ Makino ถ้าคิวเกิน 15 นาทีเปลี่ยน Tenya · STARDUST จองร้านยืนยันแล้ว',
     legs: [
       {from:'Centara Life Namba Hotel Osaka',to:'Morinomiya Station, Osaka',mode:'Osaka Metro',line:'Daikokucho (M21) → Hommachi (M18/C16) → Morinomiya (C19)',how:'Midosuji ขึ้นเหนือ เปลี่ยน Chuo ที่ Hommachi แล้วลง Morinomiya; เดินผ่าน Osaka Castle Park',duration:'ประมาณ 20–25 นาทีบน Metro + เดินไปปราสาท',pay:'ICOCA',icon:'train'},
@@ -28,6 +28,9 @@ export const travelGuide = [
       {from:'Tempura Makino Namba Sennichimae',to:'Dotonbori Glico Sign',mode:'เดิน',line:'Makino → Dotonbori Glico',how:'เดินขึ้นเหนือผ่าน Dotonbori ไป Ebisubashi',duration:'10–15 นาที',pay:'ฟรี',icon:'walk'},
       {from:'Dotonbori Glico Sign',to:'Shinsaibashi-suji Shopping Street',mode:'เดิน',line:'Glico → Shinsaibashi',how:'เดินขึ้นเหนือบน Shinsaibashi-suji',duration:'5–15 นาที',pay:'ฟรี',icon:'walk'},
       {from:'Shinsaibashi Station (M19)',to:'Umeda Station (M16)',mode:'Osaka Metro',line:'Shinsaibashi (M19) → Umeda (M16)',how:'Midosuji Line มุ่ง Shin-Osaka ลง Umeda แล้วเดินไป Umeda Sky Building',duration:'10–15 นาทีบนรถ + เดิน 12–20 นาที',pay:'ICOCA',icon:'train'},
+      {from:'Sky Lounge STARDUST Osaka',to:'Midosuji Illumination Hanshin-mae Intersection Osaka',mode:'เดิน',line:'STARDUST → ถนน Midosuji โซน Umeda',how:'หลัง Dinner ออกจาก Umeda Sky Building เดินไป Hanshin-mae Intersection เพื่อชมไฟประดับช่วง 20:20 โดยประมาณ',duration:'ประมาณ 15–25 นาที',pay:'เดินฟรี',icon:'walk'},
+      {from:'Midosuji Illumination Hanshin-mae Intersection Osaka',to:'Yodoyabashi Station (M17)',mode:'เดิน',line:'Midosuji Illumination → Yodoyabashi',how:'เดินเลียบฟุตบาทตามถนน Midosuji โซน Umeda → Yodoyabashi; ชมไฟตามกำลัง ไม่ต้องเดินครบ 4 กม. เปิดราว 17:00–01:00',duration:'20:20–20:55 เป้าหมาย · เดิน 25–35 นาที',pay:'ชมฟรี',icon:'walk'},
+      {from:'Yodoyabashi Station (M17)',to:centara,mode:'Osaka Metro + เดิน',line:'Yodoyabashi M17 → Daikokucho M21 → Centara',how:'ขึ้น Midosuji มุ่ง Nakamozu / Tennoji ลง Daikokucho แล้วเดินกลับโรงแรม',duration:'20:55–21:30 เป้าหมาย',pay:'ICOCA ¥240/คน',icon:'train'},
     ],
   },
   {
@@ -107,6 +110,8 @@ export const travelGuide = [
 const MAP_PLACE_ALIASES = Object.freeze({
   'Shinsaibashi Station (M19)':'Shinsaibashi Station, Chuo Ward, Osaka, Japan',
   'Shinsaibashi Station':'Shinsaibashi Station, Chuo Ward, Osaka, Japan',
+  'Midosuji Illumination Hanshin-mae Intersection Osaka':'Hanshin-mae Intersection, Midosuji Avenue, Umeda, Kita-ku, Osaka, Japan',
+  'Yodoyabashi Station (M17)':'Yodoyabashi Station, Osaka Metro Midosuji Line, Chuo Ward, Osaka, Japan',
   'Umeda Sky Building':'Umeda Sky Building, 1 Chome-1-88 Oyodonaka, Kita Ward, Osaka, Japan',
   'Sky Lounge STARDUST 39F':'Sky Lounge Stardust, Umeda Sky Building 39F, Osaka, Japan',
   'Sky Lounge STARDUST Osaka':'Sky Lounge Stardust, Umeda Sky Building 39F, Osaka, Japan',
