@@ -30,7 +30,9 @@ export const transportByDay={
     mk('Namba → Tempura Makino / Tendon Tenya','walk','เดิน','เดินจาก Namba สู่ร้านหลักหรือสำรอง'),
     mk('Namba → Dotonbori → Shinsaibashi','walk','เดิน','ผ่าน Glico Sign แล้วเดินขึ้นเหนือบนถนน Shinsaibashi-suji'),
     mk('Shinsaibashi (M19) → Umeda (M16)','metro','ICOCA / Osaka Metro','ขึ้น Midosuji มุ่งเหนือ แล้วเดินไป Umeda Sky Building'),
-    mk('Umeda → Daikokucho','metro','ICOCA / Osaka Metro','Midosuji กลับ Daikokucho จ่ายตามระยะจริง'),
+    mk('STARDUST → Midosuji Hanshin-mae (Umeda)','walk','เดิน','หลังอาหารค่ำ เดินไปถนน Midosuji โซน Umeda ฟรี'),
+    mk('Midosuji Umeda → Yodoyabashi Illumination','walk','เดิน','ชมไฟถนน Midosuji ฟรี (เดินได้ตามกำลัง ไม่ต้องเดินครบ 4 กม.)'),
+    mk('Yodoyabashi → Daikokucho','metro','ICOCA / Osaka Metro','Midosuji Line จาก M17 → M21 · ค่าโดยสาร ¥240/คน'),
   ],
   3:[
     mk('Osaka-Namba → Nishikujo','other','ICOCA · Hanshin','รถไฟ Hanshin ไม่ใช่ JR'),
@@ -121,7 +123,7 @@ export const kyotoOptions={
 };
 export const importantStops={
   1:['Don Mueang International Airport','Kansai International Airport Terminal 1','Nankai Namba Station','Centara Life Namba Hotel Osaka'],
-  2:['Osaka Castle','Tempura Makino Namba Sennichimae','Dotonbori Glico Sign','Shinsaibashi','Umeda Sky Building'],
+  2:['Osaka Castle','Tempura Makino Namba Sennichimae','Dotonbori Glico Sign','Shinsaibashi','Umeda Sky Building','Sky Lounge STARDUST Osaka','Midosuji Illumination Hanshin-mae Intersection Osaka','Yodoyabashi Station (M17)'],
   3:['Universal Studios Japan','Hollywood Dream The Ride Universal Studios Japan','Universal Studios Japan JAWS','Super Nintendo World Osaka','Wizarding World Harry Potter Osaka'],
   4:['Osaka Station','Arashiyama Bamboo Grove Kyoto','Tenryu-ji Temple Kyoto','Togetsukyo Bridge Kyoto','Hanamikoji Street Kyoto','Yasaka Shrine Kyoto','Kodaiji Temple Kyoto'],
   5:['JR Osaka Station','JR Uji Station Kyoto','Byodo-in Temple Uji Kyoto','Uji Bridge Kyoto','Nakamura Tokichi Honten Uji Kyoto','JR Nara Station','Kamaiki Honten Nara','Nara Park Nara Japan','Todai-ji Great Buddha Hall Nara','Kasuga Taisha Nara','JR Tennoji Station'],

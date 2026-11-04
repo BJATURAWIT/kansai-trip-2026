@@ -20,9 +20,14 @@ const expected=[
  ['16:20–17:20','Sunset Special Moment'],
  ['18:15–20:00','Special Dinner']
 ];
-test('original Day 2 shows all nine requested time blocks, no Kuromon, and unchanged sunset/dinner',()=>{
+test('original Day 2 preserves first nine requested blocks and adds illumination after the dinner',()=>{
  const actual=resolvedSchedule(2,prefs('original'));
- assert.deepEqual(actual.map(x=>[x.time,x.title]),expected);
+ assert.deepEqual(actual.slice(0,9).map(x=>[x.time,x.title]),expected);
+ assert.deepEqual(actual.slice(9).map(x=>[x.time,x.title]),[
+  ['20:00–20:20','STARDUST → Midosuji Umeda'],
+  ['20:20–20:55','Midosuji Illumination 2026 · Night Walk'],
+  ['20:55–21:30','Yodoyabashi → Daikokucho → Centara']
+ ]);
  assert.ok(!JSON.stringify(actual).includes('Kuromon'));
  assert.ok(!JSON.stringify(galleryByDay[2]).includes('Kuromon'));
  assert.equal(travelBookings.restaurants.stardust.status,'confirmed');

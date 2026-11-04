@@ -34,8 +34,8 @@ export const itinerary = [
   },
   {
     day: 2, date: '18 NOV', dow: 'WED', location: 'OSAKA', title: 'A Day in Osaka', subtitle: 'สำรวจเมือง ของกิน และแสงนีออน', image: 'osaka', type: 'draft',
-    summary: 'Osaka Castle → Tempura Makino Namba → Dotonbori → Shinsaibashi → Umeda Sky Building', stay: 'Centara Life Namba · คืนที่ 2',
-    highlight: 'เดินเล่น / ของกิน', map: 'Dotonbori Osaka',
+    summary: 'Osaka Castle → Tempura Makino Namba → Dotonbori → Shinsaibashi → Umeda Sky Building → STARDUST Dinner → Midosuji Illumination', stay: 'Centara Life Namba · คืนที่ 2',
+    highlight: 'Sunset Dinner → Midosuji Illumination กลางคืน', map: 'Dotonbori Osaka',
     schedule: [
       { time: '09:00–11:10', title: 'Osaka Castle', detail: 'ชม Osaka Castle Park และตัวปราสาท; ออกเดินกลับ Morinomiya (N20) ก่อน 11:10 เพื่อให้ทันมื้อเที่ยง', map:'Osaka Castle Main Tower, Osaka, Japan' },
       { time: '11:10–11:55', title: 'Osaka Castle → Namba', detail: 'เดินกลับ Morinomiya (N20) → Nagahori Tsurumi-ryokuchi ไป Shinsaibashi (N15) → เปลี่ยน Midosuji (M19) ไป Namba (M20) → เดินไป Makino; เวลาเป็นเป้าหมาย อาจแน่นเมื่อมีคิวรถ', map:'Osaka Metro Namba Station Osaka' },
@@ -46,7 +46,10 @@ export const itinerary = [
       { time: '15:45–16:15', title: 'Umeda Sky Building', detail: 'เช็กคิว Sky Building และเตรียมขึ้นจุดชมวิว' },
       { time: '16:20–17:20', title: 'Sunset Special Moment', detail: 'ชมพระอาทิตย์ตกประมาณ 16:52 JST และถ่ายภาพ' },
       { time: '18:15–20:00', title: 'Special Dinner', detail: 'STARDUST 39F · Confirmed booking (เวลานัดจริงรอยืนยันจากอีเมล) · XEX WEST เป็นสำรองฉุกเฉิน · ไม่ทานเนื้อวัว' },
-    ], note: 'ร่างแผน · ปรับเปลี่ยนได้ตามสภาพอากาศและพลังงาน',
+      { time: '20:00–20:20', title: 'STARDUST → ถนน Midosuji (Umeda)', detail: 'หลังมื้อเย็นลงจาก Umeda Sky Building เดินไปโซน Hanshin-mae / Umeda บนถนน Midosuji ประมาณ 15–25 นาที · หาก Dinner จบช้าปรับเวลาได้', map: 'Midosuji Illumination Hanshin-mae Intersection Osaka' },
+      { time: '20:20–20:55', title: 'Midosuji Illumination 2026 · Night Walk', detail: 'ชมไฟต้นไม้ตามแนว Midosuji ช่วง Umeda → Yodoyabashi ประมาณ 25–35 นาที; งานจริง 3 พ.ย.–31 ธ.ค. 2026 เปิดไฟราว 17:00–01:00 เข้าชมฟรี; ถ้าเหนื่อยหรือฝนหนักเดินเฉพาะช่วง Umeda ก็ได้ · ภาพในเว็บเป็นปีที่ผ่านมา', map: 'Midosuji Illumination Hanshin-mae Intersection Osaka' },
+      { time: '20:55–21:30', title: 'Yodoyabashi (M17) → Daikokucho (M21) → Centara', detail: 'เดินเข้าประตู Osaka Metro Yodoyabashi (M17) ขึ้น Midosuji Line สีแดง มุ่งใต้ไป Nakamozu / Tennoji ลง Daikokucho (M21) แล้วเดินกลับ Centara; Metro ใช้ ICOCA ประมาณ ¥240/คน (ไม่ต้องเพิ่มเที่ยวโดยสารจากแผนเดิม)', map: 'Yodoyabashi Station (M17)' },
+    ], note: 'STARDUST ยืนยันการจองแล้ว แต่เวลา Dinner 18:15–20:00 ยังเป็นเวลาในแผน ไม่ใช่เวลายืนยัน · เพิ่ม Midosuji Illumination หลัง Dinner (ฟรี เปิด 17:00–01:00 ตลอด 3 พ.ย.–31 ธ.ค. 2026) · หากฝนหนักหรืออิ่มเหนื่อยมากให้เดินชมโซน Umeda สั้น ๆ หรือกลับโรงแรมเลย · ค่า Metro ขากลับจาก Yodoyabashi ¥240/คน ตามแผนเดิม',
   },
   {
     day: 3, date: '19 NOV', dow: 'THU', location: 'USJ', title: 'A Little Bit of Magic', subtitle: 'หนึ่งวันเต็มที่ Universal Studios Japan', image: 'osaka', type: 'confirmed',

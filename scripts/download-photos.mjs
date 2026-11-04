@@ -6,7 +6,7 @@ const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const dir=path.join(root,'public','photos');
 const sources=JSON.parse(await fs.readFile(path.join(root,'data','photo-sources.json'),'utf8'));
 await fs.mkdir(dir,{recursive:true});
-if(sources.length!==39)throw Error('Photo manifest must contain all 39 images');
+if(sources.length!==40)throw Error('Photo manifest must contain all 40 images');
 const failures=[];const successes=[];
 for(const x of sources){
  const filename=x.file;
@@ -40,8 +40,8 @@ for(const x of sources){
 
 }
 await fs.writeFile(path.join(dir,'credits.json'),JSON.stringify(sources.map(x=>({file:x.file,license:x.license,creator:x.creator,source:x.source})),null,2));
-if(successes.length!==39||failures.length){
+if(successes.length!==40||failures.length){
  console.error('Photo validation failed. Successful:',successes.length,'Missing:',failures.join('; '));
  process.exit(1);
 }
-console.log('Photo validation succeeded: 39/39 self-hosted JPEG images.');
+console.log('Photo validation succeeded: 40/40 self-hosted JPEG images.');
