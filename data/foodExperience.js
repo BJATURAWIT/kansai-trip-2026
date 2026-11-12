@@ -74,7 +74,7 @@ export function foodStopsForDay(day,prefs={}){
  switch(day){
  case 1:return [f('21:00','toritoriko','primary','late-dinner','ตัวเลือกแรกหลังเช็กอิน (เวลาเป็นเป้าหมาย ขึ้นกับ ตม./Rapi:t); อยู่ใกล้โรงแรม หากคิวเกิน 15 นาทีหรือเหนื่อยให้เลือก Backup'),f('21:00','kura','backup','late-dinner','Backup 1: Kura Sushi Namba Parks South หากต้องการซูชิหรือมื้อราคาประหยัดกว่า'),f('21:00','tsurutontan','backup','late-dinner','Backup 2: Tsurutontan Agetachi ใกล้ Daikokucho เปิดถึงดึกเมื่อเข้าที่พักช้า')];
  case 2:return [f('12:00','makino','primary','lunch','Osaka Castle → Morinomiya (N20) → Shinsaibashi (N15/M19) → Namba (M20); เดินไปร้าน หากรอเกิน 15 นาทีเปลี่ยน Tendon Tenya'),f('12:00','tenya','backup','lunch','ร้านสำรอง Namba Sennichimae ใกล้ Makino; เดินได้ ไม่ต้องเปลี่ยนแผนเที่ยว'),f(travelBookings.restaurants.stardust.reservationTimeLocal||travelBookings.restaurants.stardust.plannedDinnerStartLocal,'stardust','primary','dinner','Special Dinner · Confirmed booking; dinner time tentative pending restaurant confirmation'),f('18:15','xex','backup','dinner','Emergency backup only; STARDUST reservation already confirmed')];
- case 3:return [f('11:45',null,'primary','lunch','USJ Quick Service ภายในสวนสนุก; พักก่อน Super Nintendo World 13:50 · เลือกจากแอปสวนสนุกวันจริง')];
+ case 3:return [f('11:30',null,'primary','lunch','USJ Quick Service ภายในสวนสนุก; พัก 11:30–12:30 ก่อนเข้า Super Nintendo World 13:40 · เลือกจากแอปสวนสนุกวันจริง')];
  case 4:if(kyoto==='east')return [f('13:45','izuju','primary','lunch','Kyoto East-only alternative'),f('15:30','tsujiri','optional','dessert','Kyoto East-only alternative')];
   return [
    f('10:50','ozuru','primary','lunch','อุด้ง/เทมปุระ ถ้าคิวเกิน 15 นาทีใช้ร้านสำรอง'),
