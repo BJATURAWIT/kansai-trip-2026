@@ -50,8 +50,11 @@ test('timed USJ and Kounotori events remain unchanged',()=>{
  for(const mode of ['original','rainy','relaxed'])for(const kyoto of ['west','east']){
   const p=normalizePreferences({kyoto,dayPlans:{3:mode,6:mode,7:mode}});
   const usj=resolvedSchedule(3,p);
-  assert.ok(usj.some(s=>String(s.time)===travelBookings.usj.nintendoEntry&&/Nintendo/i.test(s.title)));
-  assert.ok(usj.some(s=>String(s.time)===travelBookings.usj.harryPotterEntry&&/Harry Potter/i.test(s.title)));
+  assert.ok(usj.some(s=>String(s.time)===travelBookings.usj.nintendoEntry&&/เข้า Super Nintendo World/i.test(s.title)));
+  assert.ok(usj.some(s=>String(s.time)===travelBookings.usj.marioKartExpress&&/Mario Kart/i.test(s.title)));
+  assert.ok(usj.some(s=>String(s.time)===travelBookings.usj.donkeyKongExpress&&/Donkey Kong/i.test(s.title)));
+  assert.ok(usj.some(s=>String(s.time)==='17:30–18:15'&&/Harry Potter and the Forbidden Journey/i.test(s.title)));
+  assert.match(travelBookings.usj.harryPotterEntry,/ไม่กำหนดเวลา/);
   const forward=resolvedSchedule(6,p).find(s=>/Kounotori 5/i.test(s.title));
   const backward=resolvedSchedule(7,p).find(s=>/Kounotori 22/i.test(s.title));
   assert.equal(forward?.time,travelBookings.kounotori.outward.depart);
