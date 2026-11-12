@@ -11,6 +11,17 @@ assert.equal(checklist.find(x=>x.id==='seat-go').done, true);
 assert.equal(checklist.find(x=>x.id==='seat-back').done, true);
 assert.equal(checklist.find(x=>x.id==='pass-pickup').done, false);
 assert.equal(checklist.find(x=>x.id==='usj-ticket').done, true);
+const usjDay=itinerary.find(x=>x.day===3);
+assert.equal(travelBookings.usj.nintendoEntry,'13:40–14:40');
+assert.equal(travelBookings.usj.marioKartExpress,'13:40–14:10');
+assert.equal(travelBookings.usj.donkeyKongExpress,'14:10–14:40');
+assert.match(travelBookings.usj.harryPotterEntry,/ไม่กำหนดเวลา/);
+for(const ride of ['Despicable Me: Minion Mayhem','The Flying Snoopy','JAWS','Mario Kart','Donkey Kong Mine Cart Madness','Yoshi','Flight of the Hippogriff','Harry Potter and the Forbidden Journey']){
+ assert.equal(usjDay.schedule.some(slot=>slot.title.includes(ride)),true,'Missing USJ ride: '+ride);
+}
+assert.equal(usjDay.schedule.find(x=>x.title.includes('Harry Potter and the Forbidden Journey')).time,'17:30–18:15');
+assert.equal(usjDay.schedule.find(x=>x.title.includes('Mario Kart')).time,travelBookings.usj.marioKartExpress);
+assert.equal(usjDay.schedule.find(x=>x.title.includes('Donkey Kong')).time,travelBookings.usj.donkeyKongExpress);
 assert.equal(trip.hotels.reduce((sum,x)=>sum+Number(x.date.match(/\d+ คืน/)[0].split(' ')[0]),0),7);
 const { defaultTickets,passEndDate,transportByDay } = await import('../data/travelTools.js');
 assert.equal(defaultTickets.passStatus,'purchased');
