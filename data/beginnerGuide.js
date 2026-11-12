@@ -24,11 +24,11 @@ export const beginnerDayGuide = {
   ['20:20–20:55 Midosuji Illumination','ชมไฟประดับต้นไม้ตามถนนจาก Umeda ไป Yodoyabashi ทางฟุตบาท เปิดไฟราว 17:00–01:00 ฟรี; หากเหนื่อยเดินชมสั้น ๆ ใกล้ Umeda ก็ได้','ฟรี · 3 พ.ย.–31 ธ.ค. 2026'],
   ['20:55–21:30 กลับ Centara','จาก Yodoyabashi (M17) ขึ้น Osaka Metro Midosuji สีแดง มุ่งใต้ลง Daikokucho (M21) แล้วเดินกลับโรงแรม','ICOCA ¥240/คน'],
 ],note:'ช่วง 11:10–11:55 รวมเดินกลับจากตัวปราสาทและเปลี่ยน Metro จึงค่อนข้างแน่น ถ้าต้องการกินเที่ยงตรง 12:00 ให้เริ่มเดินออกจากตัวปราสาทก่อน 11:10 · ไม่มี Kuromon ในแผนวันนี้ · เพิ่ม Midosuji Illumination ฟรีหลัง Dinner (วันจริงงาน 3 พ.ย.–31 ธ.ค. 2026 17:00–01:00) · เวลา STARDUST ยังเป็นเวลาในแผน'},
-3:{time:'07:15 ออกจากโรงแรม',label:'Universal Studios Japan',steps:[
- ['07:15 Centara → Osaka-Namba','เดิน/ขึ้น Metro ไปสถานี Osaka-Namba ให้ดูชื่อสถานีชัดเจนว่า Osaka-Namba สำหรับ Hanshin','ใช้ ICOCA'],
+3:{time:'07:00 ออกจากโรงแรม · ถึง USJ 07:45–08:00',label:'Universal Studios Japan · 8 เครื่องเล่น',steps:[
+ ['07:00 Centara → Osaka-Namba','เดิน/ขึ้น Metro ไปสถานี Osaka-Namba ให้ดูชื่อสถานีชัดเจนว่า Osaka-Namba สำหรับ Hanshin','ใช้ ICOCA'],
  ['Hanshin → Nishikujo','ขึ้น Hanshin Namba Line มุ่ง Nishikujo เช็กป้ายปลายทางขบวนก่อนขึ้น','เปลี่ยนที่ Nishikujo'],
  ['JR → Universal-City','ที่ Nishikujo เดินตามป้าย JR Yumesaki / Sakurajima Line ไป Universal-City แล้วเดินผ่าน CityWalk เข้าประตู USJ','ลง Universal-City ไม่ใช่ Sakurajima'],
- ['เวลาตั๋ว Express','เข้า Super Nintendo World ช่วง '+travelBookings.usj.nintendoEntry+' และ Harry Potter '+travelBookings.usj.harryPotterEntry+' ตามรายการที่แจ้งไว้ เปิด QR ที่ซื้อจริงเพื่อยืนยันเวลาเครื่องเล่น','ช่วงจองยืนยันจากข้อมูลที่แจ้ง'],
+ ['ช่วง Express ที่ต้องรักษา','เข้า Nintendo '+travelBookings.usj.nintendoEntry+' · Mario Kart '+travelBookings.usj.marioKartExpress+' · Donkey Kong '+travelBookings.usj.donkeyKongExpress+' · Harry Potter และ JAWS ไม่มีเวลาเข้าสำหรับ Express ที่ระบุบนบัตร (แผนเล่น Harry Potter 17:30)','เตรียม QR และยึดเวลาจริงบนบัตร'],
 ],note:'เวลาเปิดสวนสนุก/เวลารอ/ชานชาลาอาจเปลี่ยน ตรวจใน USJ App ตอนเช้า'},
 4:{time:'06:30–21:00',label:'Arashiyama → Gion → Kodaiji Night Illumination',steps:[
  ['06:30 Centara → Daikokucho M21','เดินไป Osaka Metro Daikokucho แล้วขึ้น Midosuji ไป Umeda M16','ICOCA / Metro จ่ายแยก'],
