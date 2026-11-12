@@ -34,9 +34,9 @@ export const travelGuide = [
     ],
   },
   {
-    day: 3, kicker: 'ไป Universal Studios Japan', leave: 'แนะนำออกก่อนเวลาเปิดสวนสนุก', confirmed: false,
+    day: 3, kicker: 'ไป Universal Studios Japan', leave: 'ออกจากโรงแรม 07:00 · เป้าหมายถึง USJ 07:45–08:00', confirmed: false,
     overview: 'Osaka-Namba → Nishikujo → Universal City → เดินเข้า USJ',
-    reminder: 'ซื้อตั๋ว Studio + Express แล้ว • เวลา Nintendo '+travelBookings.usj.nintendoEntry+' / Harry Potter '+travelBookings.usj.harryPotterEntry+' ตามที่แจ้ง • ให้ยึด QR เป็นหลัก',
+    reminder: 'ซื้อตั๋ว Studio + Express แล้ว • Nintendo '+travelBookings.usj.nintendoEntry+' • Mario Kart '+travelBookings.usj.marioKartExpress+' • Donkey Kong '+travelBookings.usj.donkeyKongExpress+' • Harry Potter Express ไม่ระบุเวลาบนบัตร (แผนช่วงเย็น) • ยึด QR เป็นหลัก',
     legs: [
       { from: centara, to: 'Osaka-Namba Station, Osaka', mode: 'เดิน / Metro', line: 'ไปสถานี Osaka-Namba', how: 'จากโรงแรมเดินไป Osaka-Namba หรือใช้ Osaka Metro ผ่าน Namba ตามความสะดวก', duration: 'เผื่อประมาณ 20–30 นาที', pay: 'ICOCA ถ้าขึ้นรถ', icon: 'walk' },
       { from: 'Osaka-Namba Station, Osaka', to: 'Nishikujo Station, Osaka', mode: 'Hanshin Railway', line: 'Hanshin Namba Line', how: 'ขึ้นขบวนฝั่ง Nishikujo / Amagasaki ตรวจป้ายปลายทาง', duration: 'ประมาณ 10–15 นาที', pay: 'ICOCA', icon: 'train' },

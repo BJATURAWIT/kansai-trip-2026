@@ -48,7 +48,14 @@ export const travelBookings = Object.freeze({
     remark:'Select boarding date, train and Super Seat for both people AFTER immigration and baggage claim. The purchase email is NOT a ticket; use live smartphone QR at designated gates.'
   },
   jrPass:{name:'JR-WEST Kansai WIDE Area Pass',durationDays:5,startDate:'2026-11-20',endDate:'2026-11-24',travelers:2,pricePerAdultYen:12000,totalPriceYen:24000,status:'purchased_pending_collection'},
-  usj:{date:'2026-11-19',travelers:2,studioPassPurchased:true,expressPassPurchased:true,nintendoEntry:'13:50',harryPotterEntry:'16:00'},
+  usj:{
+    date:'2026-11-19',travelers:2,studioPassPurchased:true,expressPassPurchased:true,
+    nintendoEntry:'13:40–14:40',
+    marioKartExpress:'13:40–14:10',
+    donkeyKongExpress:'14:10–14:40',
+    jawsEntry:'ไม่กำหนดเวลา (Choice A)',
+    harryPotterEntry:'ไม่กำหนดเวลา (Choice B)'
+  },
   kounotori:{
     outward:{id:'outward',date:'2026-11-22',status:'reserved',train:'Kounotori 5',from:'Osaka',to:'Kinosaki Onsen',depart:'10:12',arrive:'12:51',car:'4',seats:'9C / 9D',class:'Ordinary Reserved Seat',smoking:'Non-smoking'},
     return:{id:'return',date:'2026-11-23',status:'reserved',train:'Kounotori 22',from:'Kinosaki Onsen',to:'Osaka',depart:'15:30',arrive:'18:21',car:'7',seats:'8C / 8D',class:'Ordinary Reserved Seat',smoking:'Non-smoking'},
