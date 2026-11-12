@@ -34,7 +34,7 @@ test('canonical bookings power flights hotels pass USJ and JR train details',()=
  assert.equal(travelBookings.usj.donkeyKongExpress,'14:10–14:40');
  assert.match(travelBookings.usj.harryPotterEntry,/ไม่กำหนดเวลา/);
  assert.match(travelBookings.usj.jawsEntry,/ไม่กำหนดเวลา/);
- assert.equal(itinerary[2].schedule.find(s=>s.title.includes('เข้า Super Nintendo World'))?.time,travelBookings.usj.nintendoEntry);
+ assert.equal(itinerary[2].schedule.find(s=>s.title.startsWith('เข้า Super Nintendo World · สิทธิ์'))?.time,travelBookings.usj.nintendoEntry);
  assert.equal(itinerary[2].schedule.find(s=>s.title.includes('Mario Kart'))?.time,travelBookings.usj.marioKartExpress);
  assert.equal(itinerary[2].schedule.find(s=>s.title.includes('Donkey Kong'))?.time,travelBookings.usj.donkeyKongExpress);
  assert.equal(itinerary[2].schedule.find(s=>s.title.includes('Harry Potter and the Forbidden Journey'))?.time,'17:30–18:15');
