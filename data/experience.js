@@ -23,7 +23,7 @@ export function normalizePreferences(value){
 }
 const slot=(time,title,detail,map)=>({time,title,detail,map});
 const fixedTime=new Map([
- [3,[travelBookings.usj.nintendoEntry,travelBookings.usj.harryPotterEntry]],
+ [3,[travelBookings.usj.nintendoEntry,travelBookings.usj.marioKartExpress,travelBookings.usj.donkeyKongExpress]],
  [6,[travelBookings.kounotori.outward.depart,travelBookings.kounotori.outward.arrive]],
  [7,[travelBookings.kounotori.return.depart]],
  [8,[localClock(travelBookings.flights.inbound.departure)]]
@@ -48,20 +48,10 @@ const alternatives={
     ]
   },
   3:{
-    rainy:[
-      slot('ก่อนเปิด','เข้าสวน USJ และตรวจโชว์ในร่ม','เลือกชมโชว์/เครื่องเล่นในอาคาร และตรวจเวลารอผ่านแอป','Universal Studios Japan'),
-      slot('10:00','Minion Mayhem / indoor attractions','ตามคิวและสภาพอากาศจริง; ยังไม่ใช้ Express ผิดเวลา','Universal Studios Japan Minion Park'),
-      slot(travelBookings.usj.nintendoEntry,'Super Nintendo World (จองเวลาแล้ว)','ต้องรักษาเวลาเข้าโซนตาม Express Pass','Super Nintendo World Osaka'),
-      slot(travelBookings.usj.harryPotterEntry,'The Wizarding World of Harry Potter (จองเวลาแล้ว)','ต้องรักษาเวลาเข้าโซนตาม Express Pass','Wizarding World of Harry Potter Osaka'),
-      slot('เย็น','ของฝากในร้าน / พักตามสภาพฝน','ระวังพื้นลื่นและร่มในโซนเครื่องเล่น','Universal Studios Japan')
-    ],
-    relaxed:[
-      slot('ก่อนเปิด','USJ · เดินเข้าแบบไม่เร่ง','เช็กเวลาเปิดและคิวจริง','Universal Studios Japan'),
-      slot('10:30','เลือกเพียง 1–2 เครื่องเล่น','เน้นกิน/ถ่ายรูป/พักให้เต็มที่ก่อนเวลาเข้า Nintendo','Universal Studios Japan'),
-      slot('13:50','Super Nintendo World (จองเวลาแล้ว)','เข้าตาม Express Pass เหมือนเดิม','Super Nintendo World Osaka'),
-      slot('16:00','The Wizarding World of Harry Potter (จองเวลาแล้ว)','เข้าตาม Express Pass เหมือนเดิม','Wizarding World of Harry Potter Osaka'),
-      slot('เย็น','ชมร้านของฝากและกลับเมื่อพร้อม','ไม่เร่งเก็บทุกเครื่องเล่น','Universal Studios Japan')
-    ]
+    // All modes retain the actual 8-ride plan and hard Express windows.
+    // Weather/pace only changes advisory text, not purchased ticket slots.
+    rainy:itinerary[2].schedule.map(s=>({...s,detail:s.detail+(s.title.includes('JAWS')?' · วันฝนตกอาจมีน้ำกระเซ็นหรือเปียกมากขึ้น':' · ฝนตกให้ตรวจการเปิดเครื่องเล่น/คิวผ่าน USJ App')})),
+    relaxed:itinerary[2].schedule.map(s=>({...s,detail:s.detail+' · Relaxed: คิวปกติอาจเลื่อนเวลาได้ แต่ห้ามพลาด Mario Kart / Donkey Kong รอบ Express'})),
   },
   5:{
     rainy:[
@@ -137,6 +127,7 @@ export function resolvedSchedule(day,prefs){
  const titles=base.map(x=>x.title.toLowerCase()).join(' | ');
  const meals=foodScheduleEvents(day,prefs).filter(x=>{
   if(day===2&&(x.foodKind==='dinner'||x.foodKind==='lunch'))return false;
+   if(day===3&&x.foodKind==='lunch')return false; // Lunch already appears on USJ timeline
   if(day===4&&['lunch','dinner','coffee','snack'].includes(x.foodKind))return false;
    if(day===8&&['lunch','dessert'].includes(x.foodKind))return false;
    if(day===5&&['lunch','dinner','dessert','coffee','snack'].includes(x.foodKind))return false;
