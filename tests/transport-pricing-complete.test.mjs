@@ -16,7 +16,7 @@ test('all 9-day travel plans calculate transport; unknown JR tickets are shown a
 });
 test('25 Nov Nankai Airport Express must be paid; JR Pass ends 24 Nov',()=>{
  assert.equal(passEndDate(defaultTickets.passStart),'2026-11-24');
- for(const [airportTrain,expected] of Object.entries({express:2700,rapit:3740})){
+ for(const [airportTrain,expected] of Object.entries({express:2700,rapit:3580})){
   const p=normalizePreferences({airportTrain});
   const seg=resolvedSegments(9,p);
   assert.equal(seg.filter(x=>x.type==='nankai'||x.type==='jr').length,1);

@@ -17,7 +17,7 @@ const options={
  'Kyoto Station → Higashiyama':{yen:230,source:'https://www2.city.kyoto.lg.jp/kotsu/webguide/en/fare/fare_bus.html',operator:'Kyoto City Bus',note:'รถธรรมดาเขตคงที่; Taxi แยก'},
  'Kiyomizu-dera → Kyoto Station':{yen:230,source:'https://www2.city.kyoto.lg.jp/kotsu/webguide/en/fare/fare_bus.html',operator:'Kyoto City Bus',note:'รถธรรมดาเขตคงที่; Taxi แยก'},
  'Nankai Namba → Kansai Airport · Airport Express':{yen:970,source:'https://www.nankai.co.jp/traffic/kix/kix_dia.html',operator:'Nankai'},
- 'Nankai Namba → Kansai Airport · Rapi:t Regular Seat':{yen:1490,source:'https://www.nankai.co.jp/en_railway/ticket/rapit',operator:'Nankai',note:'ราคาอ้างอิง Regular ¥1,490 · อาจต่างตามช่องทางซื้อ; ตรวจ Nankai'},
+ 'Nankai Namba → Kansai Airport · Rapi:t Regular Seat':{yen:1410,source:'https://www.nankai.co.jp/en_railway/ticket/rapit',operator:'Nankai',note:'Rapi:t Digital Regular Seat ¥1,410 (ซื้อออนไลน์ตามผลิตภัณฑ์นี้) · อาจต่างตามช่องทางซื้อ; ตรวจ Nankai'},
 };
 export const verifiedSegmentPrices=Object.freeze(options);
 export const pricedSegment=segment=>{
