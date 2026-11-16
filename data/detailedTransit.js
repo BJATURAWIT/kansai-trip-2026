@@ -133,8 +133,8 @@ const dayTwo=(mode)=>{
 };
 const dayThree=()=>[
  ...usjOut(),
- walk('Universal Studios Japan Main Area','Super Nintendo World','เดินตามป้ายและแผนที่ภายใน USJ ให้ทันช่วง Express ที่จอง 13:50; ยึด QR จริง','ขึ้นกับคิวและทางเดินภายในสวน'),
- walk('Super Nintendo World','The Wizarding World of Harry Potter','เดินผ่านโซนในสวนตาม USJ App; รักษาเวลา Express Harry Potter 16:00','ขึ้นกับตำแหน่งและคนในสวน'),
+ walk('Universal Studios Japan Main Area','Super Nintendo World','เดินตามป้ายภายใน USJ ให้ทัน Nintendo Entry 13:40–14:40 · Mario Kart 13:40–14:10 · Donkey Kong 14:10–14:40; ยึด QR จริง','ขึ้นกับคิวและทางเดินภายในสวน'),
+ walk('Super Nintendo World','The Wizarding World of Harry Potter','เดินผ่านโซนในสวนตาม USJ App; Harry Potter Express ไม่มีเวลากำหนด · เล่นช่วงเย็นตามแผน','ขึ้นกับตำแหน่งและคนในสวน'),
  ...usjBack()
 ];
 const kyotoRainyRoute=()=>[
@@ -305,7 +305,7 @@ const daySeven=()=>[
  walk(HOME,'Namba Dining Area / Kura Sushi','ถ้ามีแรง ออกไปกินมื้อเย็นแถบ Namba; ใช้ Google Maps ตรวจสาขาและคิว ไม่ต้องเดินทางหากเหนื่อย','ตามร้านที่เลือก'),
  walk('Namba Dining Area',HOME,'เดินกลับ Centara เพื่อพักคืนสุดท้าย','ตามร้านที่เลือก')
 ];
-const dayEight=prefs=>{
+const dayNine=prefs=>{
  const choice=prefs?.airportTrain||'express';
  const common=[
   walk(HOME,'Namba Yasaka Shrine Osaka','หลังอาหารเช้าเช็กเอาต์ฝากกระเป๋า เดินไป Namba Yasaka ศาลเจ้าหัวสิงโตยักษ์','10–20 นาที'),
@@ -320,7 +320,7 @@ const dayEight=prefs=>{
    at('Namba (S16)','ลง Namba แตะออกและเดินไปร้านชีสเค้ก')],{duration:'ประมาณ 3–5 นาทีบนรถ ไม่รวมเดิน'}),
   walk('Osaka Metro Namba Station (S16)','Rikuro’s Cheesecake Namba Main Store Osaka','ซื้อชีสเค้กแบบ Takeaway ถ้าคิวเกิน 15 นาทีให้ข้าม','5–12 นาที'),
   walk('Rikuro’s Cheesecake Namba Main Store Osaka','Shirokitsune Namba CITY South Osaka','เลือกรับประทานมื้อกลางวันเบา ๆ ถ้ายังหิว','5–15 นาที'),
-  walk('Shirokitsune Namba CITY South Osaka',HOME,'กลับ Centara รับกระเป๋าให้เสร็จก่อน 14:30 และออก KIX 15:00','10–20 นาที')
+  walk('Shirokitsune Namba CITY South Osaka',HOME,'กลับ Centara รับกระเป๋าให้เสร็จก่อน 12:40 และออก Nankai Namba ประมาณ 13:00','10–20 นาที')
  ];
  if(choice==='jr')return [
  ...common,
@@ -328,9 +328,9 @@ const dayEight=prefs=>{
  leg(DAI,'JR Tennoji Station','Osaka Metro Midosuji + เดิน','Metro ใช้ ICOCA แยกจาก JR Pass',[
  at('Daikokucho (M21)','ขึ้น Midosuji สีแดงมุ่งใต้ Nakamozu / Tennoji'),
  at('Tennoji (M23)','ลงที่ Tennoji แล้วออก Metro เดินตามป้าย JR Tennoji')]),
- leg('JR Tennoji Station','Kansai-airport Station (JR)','JR HARUKA / Airport Rapid','JR Kansai WIDE Area Pass ครอบคลุม JR ที่อยู่ในเงื่อนไข; ตรวจเงื่อนไข Reserved Seat ของ HARUKA',[
- at('JR Tennoji','ใช้ JR Pass เข้าประตู JR ตรวจชานชาลาขบวน HARUKA หรือ Kansai Airport Rapid ที่ไป KIX จริง'),
- at('Kansai-airport (JR)','ลงสถานี JR Kansai-airport เดินตามป้าย Terminal 1 Departures')],{duration:'ตรวจขบวนและรอบจริง',note:'ใช้ตัวเลือก JR เฉพาะเมื่อพาสถูกรับและยังใช้ได้วันที่ 24 พ.ย.'}),
+ leg('JR Tennoji Station','Kansai-airport Station (JR)','JR HARUKA / Airport Rapid','JR Kansai WIDE Pass หมดวันที่ 24 พ.ย. · วันที่ 25 ต้องซื้อตั๋ว JR แยก',[
+ at('JR Tennoji','ซื้อตั๋ว JR แยกแล้วเข้าประตู JR ตรวจชานชาลาขบวน HARUKA หรือ Kansai Airport Rapid ที่ไป KIX จริง'),
+ at('Kansai-airport (JR)','ลงสถานี JR Kansai-airport เดินตามป้าย Terminal 1 Departures')],{duration:'ตรวจขบวนและรอบจริง',note:'วันที่ 25 พ.ย. JR Pass หมดอายุแล้ว · ต้องจ่ายค่ารถไฟเพิ่ม'}),
  ...airportEnd()
  ];
  return [
@@ -343,17 +343,41 @@ const dayEight=prefs=>{
  ...airportEnd()
  ];
 };
+const dayEight=()=>[
+ walk(HOME,DAI,'เดินไป Daikokucho (M21) เพื่อขึ้น Metro Midosuji ไป Umeda (M16)','5–12 นาที'),
+ leg(DAI,'JR Osaka Station','Osaka Metro Midosuji','ICOCA จ่ายแยกจาก JR Pass',[
+  at('Daikokucho (M21)','ขึ้น Metro Midosuji มุ่งเหนือไป Umeda (M16)'),
+  at('Umeda (M16)','เดินตามป้าย JR Osaka Station')],{duration:'20–30 นาทีรวมเดิน'}),
+ leg('JR Osaka Station','JR Inari Station (Kyoto)','JR Kyoto Line + JR Nara Line','Kansai WIDE Pass วันที่ 5 · JR ในพื้นที่รวมใน Pass',[
+  at('JR Osaka','ขึ้น JR Kyoto Line ไป Kyoto Station'),
+  at('JR Kyoto','เปลี่ยน JR Nara Line Local ไป Inari Station'),
+  at('JR Inari','ออกสถานี เดินสู่ Fushimi Inari')],{duration:'60–90 นาทีรวมรอรถ'}),
+ walk('JR Inari Station (Kyoto)','Fushimi Inari Taisha Kyoto','เดินชมศาลเจ้าและเสาโทริอิ Senbon Torii · ไม่ต้องขึ้นถึงยอดเขา','5–10 นาทีเดินจากสถานี'),
+ leg('JR Inari Station','JR Kyoto Station','JR Nara Line','Kansai WIDE Pass ใช้ได้วันที่ 24 พ.ย.',[
+  at('Inari (JR Nara Line)','ขึ้น JR กลับ Kyoto')],{duration:'ประมาณ 6–12 นาที'}),
+ leg('Kyoto Station','Gojozaka / Higashiyama Kyoto','Kyoto City Bus','รถบัสธรรมดาในเขตคงที่ ¥230/คน · JR Pass ไม่ครอบคลุม · Taxi จ่ายแยก',[
+  at('Kyoto Station Bus Terminal','เลือกบัสไป Gojozaka หรือ Kiyomizu-michi ดูป้ายสายรถและเส้นทางจริง'),
+  at('Gojozaka / Kiyomizu-michi','เดินไป Gion/Higashiyama · เผื่อรถติดช่วงใบไม้แดง')],{duration:'ตรวจรอบรถจริง/ถ้าคนแน่นเลือกแท็กซี่'}),
+ walk('Higashiyama Kyoto','Kiyomizu-dera Kyoto','เดิน Yasaka Pagoda → Ninenzaka → Sannenzaka แล้วเข้า Kiyomizu Night Viewing 17:30 · ค่าเข้าประมาณ ¥500/คน','บ่ายถึงค่ำตามแผน'),
+ leg('Gojozaka / Kiyomizu-michi','Kyoto Station','Kyoto City Bus','รถธรรมดาเขตคงที่ ¥230/คน · หากแน่น Taxi จ่ายแยก',[
+  at('Gojozaka / Kiyomizu-michi','ขึ้นบัสกลับ Kyoto Station ตามจอจริง เผื่อเวลาเดินลงเขาและการจราจร')],{duration:'30–60 นาทีรวมรอรถ'}),
+ leg('JR Kyoto Station','JR Osaka Station','JR Kyoto Line Special Rapid','Kansai WIDE Pass รวม JR จนสิ้น 24 พ.ย.',[
+  at('JR Kyoto','ตรวจขบวน Special Rapid ไป Osaka'),
+  at('JR Osaka','เปลี่ยนไป Metro Umeda')],{duration:'ประมาณ 30 นาทีบนรถ'}),
+ leg('Umeda Station (M16)',DAI,'Osaka Metro Midosuji','ICOCA จ่ายแยก',[
+  at('Umeda M16','ขึ้น Metro Midosuji มุ่งใต้ไป Daikokucho M21')],{duration:'ประมาณ 12–18 นาที'})
+];
 const airportEnd=()=>[
  walk('Kansai-airport Station',KIX,'ตามป้าย Terminal 1 / International Departures ไปเคาน์เตอร์เช็กอินสายการบิน', 'เดินในอาคารประมาณ 5–15 นาที'),
- leg(KIX,'Don Mueang Airport Terminal 1','เครื่องบิน','ตั๋วเครื่องบินจองแล้ว · ห้ามเดาหมายเลขเที่ยวบินขากลับ',[
- at('KIX Terminal 1 · 19:45 JST','เช็กอิน/โหลดกระเป๋า 20 กก.ต่อคนตามตั๋วจริง แล้วผ่าน Security / Immigration'),
- at('DMK Terminal 1 · 00:15 (25 พ.ย. ICT)','ถึงประเทศไทยวันที่ 25 พ.ย. หลังเที่ยงคืน (เวลาไทย)')],{duration:'ตารางบินจองแล้ว',note:'เที่ยวบิน '+flightNumberLabel(travelBookings.flights.inbound)+' · ตรวจบัตรโดยสารจริง'})
+ leg(KIX,'Suvarnabhumi Airport (BKK)','เครื่องบิน','Thai Airways TG673 · ยืนยันการจองแล้ว',[
+ at('KIX Terminal 1 · 17:25 JST','เช็กอิน Thai Airways · 2 PCS โหลด (จำนวนชิ้น ไม่ใช่ KG) แล้วผ่าน Security / Immigration'),
+ at('BKK Suvarnabhumi · 22:00 (25 พ.ย. ICT)','ถึงประเทศไทยวันที่ 25 พ.ย. 22:00 ตามเวลาไทย')],{duration:'ตารางบินจองแล้ว',note:'เที่ยวบิน '+flightNumberLabel(travelBookings.flights.inbound)+' · ตรวจบัตรโดยสารจริง'})
 ];
 export function detailedRouteGuide(day,prefs={}){
  const mode=prefs.dayPlans?.[day]||'original';
- const legs=day===1?dayOne():day===2?dayTwo(mode):day===3?dayThree():day===4?(prefs.kyoto==='east'?kyotoEast(mode):kyotoWest(mode)):day===5?dayFive(mode):day===6?daySix():day===7?daySeven():day===8?dayEight(prefs):[];
- return {day,legs,kicker:['','จากสนามบินเข้าที่พัก','เที่ยว Osaka Castle / Kuromon / Umeda','USJ ไป–กลับ','Kyoto West + Gion + Kodaiji Night Illumination','Nara ไป–กลับ','Osaka → Kinosaki Onsen','Kinosaki → Osaka','Namba → KIX'][day],
+ const legs=day===1?dayOne():day===2?dayTwo(mode):day===3?dayThree():day===4?(prefs.kyoto==='east'?kyotoEast(mode):kyotoWest(mode)):day===5?dayFive(mode):day===6?daySix():day===7?daySeven():day===8?dayEight():day===9?dayNine(prefs):[];
+ return {day,legs,kicker:['','จากสนามบินเข้าที่พัก','เที่ยว Osaka Castle / Kuromon / Umeda','USJ ไป–กลับ','Kyoto West + Gion + Kodaiji Night Illumination','Nara ไป–กลับ','Osaka → Kinosaki Onsen','Kinosaki → Osaka','Kyoto East / Kiyomizu Night','Namba → KIX'][day],
  overview:legs.map(x=>x.from+' → '+x.to).join(' · '),
- leave:day===1?'ถึง KIX 18:15 แล้วเลือก Rapi:t หลังรับกระเป๋า':day===3?'ออกก่อนเปิดสวน · ตรวจเวลา USJ จริง':day===6?'Kounotori 5 ออกจาก JR Osaka 10:12':day===7?'Kounotori 22 ออกจาก Kinosaki 15:30':day===8?'ออกจากโรงแรมราว 15:00 · เที่ยวบิน 19:45':'ดูเวลารายวันและเผื่อการเดิน/ต่อรถ',
+ leave:day===1?'ถึง KIX 15:45 แล้วเลือก Rapi:t หลังรับกระเป๋า':day===3?'ออกก่อนเปิดสวน · ตรวจเวลา USJ จริง':day===6?'Kounotori 5 ออกจาก JR Osaka 10:12':day===7?'Kounotori 22 ออกจาก Kinosaki 15:30':day===8?'ออก 07:45 · ใช้ JR Pass วันที่ 5':day===9?'ออก Nankai Namba ประมาณ 13:00 · TG673 17:25':'ดูเวลารายวันและเผื่อการเดิน/ต่อรถ',
  reminder:'ขั้นตอนเป็นแผนใช้เดินทาง ไม่ใช่การบอกชานชาลา/รอบรถแบบ Real-time · อ่านป้ายปลายทางขบวนจริง และใช้ Google Maps ตรวจเส้นทางวันเดินทาง'};
 }

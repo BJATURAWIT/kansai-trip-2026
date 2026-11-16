@@ -7,7 +7,7 @@ const centara = hotelAddress;
 
 export const travelGuide = [
   {
-    day: 1, kicker: 'สนามบิน → โรงแรม', leave: 'KIX ถึง 18:15 น. (JST) · ผ่าน ตม./รับกระเป๋าแล้วค่อยเดินไปสถานี Nankai', confirmed: false,
+    day: 1, kicker: 'สนามบิน → โรงแรม', leave: 'KIX ถึง 15:45 น. (JST) · ผ่าน ตม./รับกระเป๋าแล้วค่อยเดินไปสถานี Nankai', confirmed: false,
     overview: 'Rapi:t Super Seat (ซื้อแล้ว · รอเลือกขบวน/ที่นั่ง) → Nankai Namba → โรงแรม',
     reminder: 'Nankai Rapi:t Super Seat ชำระแล้ว ¥3,180 / 2 คน · รวมค่าโดยสารและค่ารถด่วน · ต้องเลือกขบวนและที่นั่งในมือถือหลังผ่าน ตม. ก่อนรถออกอย่างน้อย 5 นาที',
     legs: [
@@ -93,13 +93,24 @@ export const travelGuide = [
     ],
   },
   {
-    day: 8, kicker: 'กลับประเทศไทย', leave: 'เที่ยวบิน 19:45 น. · ตั้งเป้าถึง KIX T1 ประมาณ 16:45 น. และออกจากโรงแรมราว 15:00 น. (เวลาแนะนำ)', confirmed: false,
-    overview: 'Centara → Nankai Namba → KIX → '+flightNumberLabel(travelBookings.flights.inbound)+' '+localClock(travelBookings.flights.inbound.departure)+' → DMK '+localClock(travelBookings.flights.inbound.arrival)+' (25 พ.ย.)',
-    reminder: 'เที่ยวบิน '+flightNumberLabel(travelBookings.flights.inbound)+' '+localClock(travelBookings.flights.inbound.departure)+' น. (JST) • เป้าหมายถึงสนามบิน 16:45 น. • ถึงประเทศไทย '+localClock(travelBookings.flights.inbound.arrival)+' ของวันที่ 25 พ.ย. • เวลารถไฟเป็นแผน ไม่ใช่ตั๋วที่จองแล้ว',
+    day: 8, kicker: 'Kyoto East + Kiyomizu Night', leave: 'ออกโรงแรม 07:45 · JR Pass ใช้ได้วันสุดท้าย 24 พ.ย.', confirmed: false,
+    overview: 'Centara → JR Osaka → Kyoto → Inari → Fushimi Inari → Higashiyama → Kiyomizu-dera → JR Kyoto → Osaka',
+    reminder: 'Metro / Kyoto City Bus จ่าย ICOCA แยกจาก JR Pass · Kyoto City Bus ธรรมดาในเขตคงที่ ¥230/คน/เที่ยว; คืนที่ 24–25 รอโรงแรมยืนยัน',
+    legs: [
+      {from:centara,to:'JR Inari Station Kyoto',mode:'Osaka Metro + JR',line:'Daikokucho → Umeda (Metro) → JR Osaka → Kyoto → Inari',how:'Metro ใช้ ICOCA / JR ใช้ Kansai WIDE Pass วันที่ 5',duration:'ประมาณ 80–100 นาที',pay:'JR รวม Pass; Metro จ่ายแยก',icon:'train'},
+      {from:'Fushimi Inari Taisha Kyoto',to:'Yasaka Pagoda Kyoto',mode:'JR + Kyoto City Bus',line:'JR Inari → JR Kyoto → Gojozaka (Bus)',how:'JR รวม Pass / รถบัส ¥230/คนในเขตคงที่หรือ Taxi จ่ายเพิ่ม',duration:'ประมาณ 45–75 นาที',pay:'รถบัสจ่ายแยก',icon:'train'},
+      {from:'Yasaka Pagoda Kyoto',to:'Kiyomizu-dera Kyoto',mode:'เดิน',line:'Yasaka Pagoda → Ninenzaka → Sannenzaka',how:'เดินเที่ยวแล้วเข้า Kiyomizu-dera ตั้งแต่ 17:30 เปิดไฟถึง 21:30 รับถึง 21:00 · ค่าเข้าประมาณ ¥500/คน',duration:'ช่วงบ่าย',pay:'ค่าเข้าวัดจ่ายแยก',icon:'walk'},
+      {from:'Kiyomizu-dera Kyoto',to:centara,mode:'Kyoto City Bus + JR + Osaka Metro',line:'Kiyomizu → Kyoto Station → JR Osaka → Umeda → Daikokucho',how:'รถบัส/Metro จ่าย ICOCA · JR รวม Pass จนสิ้น 24 พ.ย.',duration:'เผื่อ 90–120 นาที',pay:'JR รวม Pass; รถบัส/Metro จ่ายแยก',icon:'train'}
+    ],
+  },
+  {
+    day: 9, kicker: 'กลับประเทศไทย', leave: 'เที่ยวบิน 17:25 น. · ตั้งเป้าถึง KIX T1 ประมาณ 14:00 น. และออกจาก Nankai Namba ประมาณ 13:00 น. (เวลาแนะนำ)', confirmed: false,
+    overview: 'Centara → Nankai Namba → KIX → '+flightNumberLabel(travelBookings.flights.inbound)+' '+localClock(travelBookings.flights.inbound.departure)+' → BKK '+localClock(travelBookings.flights.inbound.arrival)+' (25 พ.ย.)',
+    reminder: 'เที่ยวบิน '+flightNumberLabel(travelBookings.flights.inbound)+' '+localClock(travelBookings.flights.inbound.departure)+' น. (JST) • เป้าหมายถึงสนามบิน 14:00 น. • ถึงประเทศไทย '+localClock(travelBookings.flights.inbound.arrival)+' ของวันที่ 25 พ.ย. • เวลารถไฟเป็นแผน ไม่ใช่ตั๋วที่จองแล้ว',
     legs: [
       { from: centara, to: 'Nankai Namba Station, Osaka', mode: 'เดิน / แท็กซี่', line: 'Check-out → Nankai Namba', how: 'รับสัมภาระครบก่อนออก เดินไป Nankai Namba (ไม่ใช่ JR Namba) หรือเลือกแท็กซี่หากกระเป๋าหนัก', duration: 'เผื่อ 20–30 นาที', pay: 'เดินฟรี / แท็กซี่แยก', icon: 'walk' },
       { from: 'Nankai Namba Station, Osaka', to: 'Kansai International Airport (KIX)', mode: 'Nankai Railway', line: 'Airport Express / Rapi:t', how: 'ตามป้าย Nankai Railway (ไม่ใช่ JR Namba หรือ Osaka-Namba) แตะ ICOCA เพื่อใช้ Airport Express ไป Kansai-airport หรือซื้อตั๋ว Rapi:t แบบมีที่นั่ง ลงสุดสายและตามป้าย Terminal 1 Departures', duration: 'ประมาณ 40–50 นาที', pay: 'จ่ายแยก (Nankai ไม่รวม JR Pass)', icon: 'train' },
-      { from: 'Kansai International Airport (KIX)', to: 'Don Mueang International Airport, Bangkok', mode: 'เที่ยวบิน', line: flightNumberLabel(travelBookings.flights.inbound)+' · '+localClock(travelBookings.flights.inbound.departure)+' → '+localClock(travelBookings.flights.inbound.arrival)+' (25 พ.ย.)', how: 'เข้า KIX Terminal 1 Departures แล้วดูจอเที่ยวบิน รอยืนยันหมายเลขเที่ยวบิน หาหมายเลขเคาน์เตอร์ Thai AirAsia X โหลดกระเป๋าได้คนละ 20 กก. ผ่าน Security และ Immigration ตรวจ Gate และเวลา Boarding บนจออีกครั้ง ถึง DMK Terminal 1 เวลา 00:15 วันที่ 25 พ.ย.', duration: 'ยึดตามเอกสารสายการบิน', pay: 'จองแล้ว', icon: 'plane', fixed: true },
+      { from: 'Kansai International Airport (KIX)', to: 'Suvarnabhumi International Airport, Bangkok', mode: 'เที่ยวบิน', line: flightNumberLabel(travelBookings.flights.inbound)+' · KIX '+localClock(travelBookings.flights.inbound.departure)+' → BKK '+localClock(travelBookings.flights.inbound.arrival)+' (25 พ.ย.)', how: 'เข้า KIX Terminal 1 Departures แล้วดูจอเที่ยวบิน หาหมายเลขเคาน์เตอร์ Thai Airways และเงื่อนไขโหลด 2 PCS (จำนวนชิ้น ไม่ได้ระบุกิโลกรัม) ผ่าน Security และ Immigration ตรวจ Gate และเวลา Boarding บนจออีกครั้ง ถึง BKK Suvarnabhumi เวลา 22:00 วันที่ 25 พ.ย.', duration: 'ยึดตามเอกสารสายการบิน', pay: 'จองแล้ว', icon: 'plane', fixed: true },
     ],
   },
 ];
