@@ -63,7 +63,7 @@ export const travelBookings = Object.freeze({
 export const localDate = point=>point.local.slice(0,10);
 export const localClock = point=>point.local.slice(11,16);
 export const flightNumberLabel = flight=>flight.number||'รอยืนยันหมายเลขเที่ยวบิน';
-export const flightRouteLabel = flight=>flight.departure.airport+' '+flight.departure.terminal+' → '+flight.arrival.airport+' '+flight.arrival.terminal;
+export const flightRouteLabel = flight=>[flight.departure.airport,flight.departure.terminal].filter(Boolean).join(' ')+' → '+[flight.arrival.airport,flight.arrival.terminal].filter(Boolean).join(' ');
 export const flightTimeLabel = flight=>localClock(flight.departure)+' – '+localClock(flight.arrival)+(localDate(flight.arrival)!==localDate(flight.departure)?' (+1 วัน)':'');
 export function tripFlightList(){
   return [travelBookings.flights.outbound,travelBookings.flights.inbound].map(f=>({

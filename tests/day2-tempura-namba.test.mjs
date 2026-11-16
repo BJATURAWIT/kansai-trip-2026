@@ -49,7 +49,7 @@ test('Makino is primary and Tenya backup for every Day 2 mode without changing o
  assert.equal(foodVenues.makino.queueLimitMinutes,15);
  assert.ok(foodVenues.makino.diet.includes('น้ำซุป'));
  assert.ok(foodVenues.tenya.diet.includes('สารสกัด'));
- assert.ok(itinerary.length===8);
+ assert.ok(itinerary.length===9);
 });
 test('N20-N15-M19-M20 route, individual Osaka walk links and optional Tenya without mandatory stop',()=>{
  const route=detailedRouteGuide(2,prefs('original')).legs;

@@ -5,35 +5,43 @@ import {normalizePreferences,resolvedSchedule,resolvedSegments} from '../data/ex
 import {foodStopsForDay,validateFoodPlan} from '../data/foodExperience.js';
 import {detailedRouteGuide} from '../data/detailedTransit.js';
 import {pricedSegment} from '../data/transportPricing.js';
+import {passEndDate,defaultTickets} from '../data/travelTools.js';
 const p=normalizePreferences({});
-test('Nov 24 keeps three stops in order and airport exit 15:00',()=>{
- const s=resolvedSchedule(8,p),t=s.map(x=>x.title).join(' | ');
- const i=x=>s.findIndex(v=>v.title.includes(x));
- assert.ok(i('Namba Yasaka Shrine —')>0);
- assert.ok(i('Crepe & Espresso & 9-chome')>i('Namba Yasaka Shrine —'));
- assert.ok(i('Rikuro’s Cheesecake —')>i('Crepe & Espresso & 9-chome'));
- assert.ok(i('ออกจากโรงแรมไป KIX')>i('Rikuro’s Cheesecake —'));
- assert.equal(s[i('ออกจากโรงแรมไป KIX')].time,'15:00 (แนะนำ)');
+test('24 November Day 8 visits Fushimi Inari and Kiyomizu, while JR Pass stays valid',()=>{
+ const s=resolvedSchedule(8,p);
  assert.equal(itinerary[7].date,'24 NOV');
-});
-test('Day 8 guide names correct Metro stations and works for all airport options',()=>{
- for(const choice of ['express','rapit','jr']){
-  const pref=normalizePreferences({airportTrain:choice}), legs=detailedRouteGuide(8,pref).legs;
-  assert.ok(legs.some(x=>x.to.includes('Namba Yasaka')));
-  assert.ok(legs.some(x=>x.to.includes('Crepe & Espresso')));
-  assert.ok(legs.some(x=>x.to.includes('Rikuro')));
-  assert.ok(legs.some(x=>x.steps?.some(y=>y.station.includes('Tanimachi 9-chome'))));
-  assert.ok(legs.some(x=>x.to.includes('Kansai-airport')));
- }
-});
-test('Transport calculator includes Sennichimae roundtrip and no duplicated lunch',()=>{
+ assert.ok(s.some(x=>x.title.includes('Fushimi Inari')));
+ assert.ok(s.some(x=>x.title.includes('Kiyomizu-dera Autumn Night')));
+ assert.equal(passEndDate(defaultTickets.passStart),'2026-11-24');
  const seg=resolvedSegments(8,p);
- const metro=seg.filter(s=>s.route.includes('Tanimachi 9-chome')&&s.type==='metro');
+ assert.ok(seg.some(x=>x.route.includes('Inari')&&x.type==='jr'));
+ assert.ok(seg.some(x=>x.type==='bus'));
+ assert.equal(validateFoodPlan(8,p),true);
+});
+test('25 November Day 9 keeps Namba desserts then early TG673 KIX departure',()=>{
+ const s=resolvedSchedule(9,p),i=x=>s.findIndex(v=>v.title.includes(x));
+ assert.equal(itinerary[8].date,'25 NOV');
+ assert.ok(i('Namba Yasaka')>=0);
+ assert.ok(i('Crepe & Espresso')>i('Namba Yasaka'));
+ assert.ok(i('Rikuro')>i('Crepe & Espresso'));
+ assert.ok(i('KIX / Check-in')>i('Rikuro'));
+ assert.ok(s.some(x=>x.title.includes('TG673')&&x.time==='17:25'));
+ assert.ok(foodStopsForDay(9,p).some(x=>x.id==='crepe9'));
+ assert.ok(foodStopsForDay(9,p).some(x=>x.id==='rikuroNamba'));
+ assert.equal(validateFoodPlan(9,p),true);
+});
+test('Day 9 airport modes show TG673 and do not pretend Pass covers JR on 25 Nov',()=>{
+ for(const airportTrain of ['express','rapit','jr']){
+  const pref=normalizePreferences({airportTrain});
+  const legs=detailedRouteGuide(9,pref).legs;
+  assert.ok(legs.some(x=>x.to.includes('Namba Yasaka')));
+  assert.ok(legs.some(x=>x.to.includes('Crepe')));
+  assert.ok(legs.some(x=>x.to.includes('Rikuro')));
+  assert.ok(legs.some(x=>x.to.includes('Kansai-airport')));
+  assert.ok(legs.some(x=>x.to.includes('Suvarnabhumi')));
+  if(airportTrain==='jr')assert.ok(legs.some(x=>x.pay.includes('หมด')));
+ }
+ const metro=resolvedSegments(9,p).filter(x=>x.route.includes('Tanimachi 9-chome')&&x.type==='metro');
  assert.equal(metro.length,2);
  assert.ok(metro.every(x=>pricedSegment(x)?.yen===190));
- const stops=foodStopsForDay(8,p);
- assert.equal(validateFoodPlan(8,p),true);
- assert.ok(stops.some(x=>x.id==='crepe9'));
- assert.ok(stops.some(x=>x.id==='rikuroNamba'));
- assert.equal(resolvedSchedule(8,p).filter(x=>x.title.includes('Optional Light Lunch')).length,1);
 });

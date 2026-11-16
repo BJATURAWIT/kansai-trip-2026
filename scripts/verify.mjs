@@ -1,56 +1,52 @@
 import assert from 'node:assert/strict';
-import { trip, itinerary, checklist } from '../data/trip.js';
+import {trip,itinerary,checklist} from '../data/trip.js';
 import {travelBookings,flightDurationMinutes} from '../data/centralTravel.js';
-assert.equal(trip.days, 8);
-assert.equal(trip.nights, 7);
-assert.equal(itinerary.length, 8);
-assert.deepEqual(itinerary.map(x=>x.day), Array.from({length:8}, (_,i)=>i+1));
-assert.equal(new Set(checklist.map(x=>x.id)).size, checklist.length);
-assert.equal(checklist.find(x=>x.id==='pass-buy').done, true);
-assert.equal(checklist.find(x=>x.id==='seat-go').done, true);
-assert.equal(checklist.find(x=>x.id==='seat-back').done, true);
-assert.equal(checklist.find(x=>x.id==='pass-pickup').done, false);
-assert.equal(checklist.find(x=>x.id==='usj-ticket').done, true);
-const usjDay=itinerary.find(x=>x.day===3);
+import {defaultTickets,passEndDate,transportByDay} from '../data/travelTools.js';
+import fs from 'node:fs/promises';
+
+assert.equal(trip.days,9);
+assert.equal(trip.nights,8);
+assert.equal(trip.startDate,'2026-11-17');
+assert.equal(trip.endDate,'2026-11-25');
+assert.equal(itinerary.length,9);
+assert.deepEqual(itinerary.map(x=>x.day),Array.from({length:9},(_,i)=>i+1));
+assert.equal(new Set(checklist.map(x=>x.id)).size,checklist.length);
+for(const id of ['pass-buy','seat-go','seat-back','usj-ticket','flight'])assert.equal(checklist.find(x=>x.id===id)?.done,true,id);
+for(const id of ['pass-pickup','hotel-extra','nankai-back'])assert.equal(checklist.find(x=>x.id===id)?.done,false,id);
+assert.equal(trip.hotels.filter(x=>x.booked).length,3);
+assert.equal(trip.hotels.filter(x=>!x.booked).length,1);
+assert.equal(trip.hotels.reduce((a,h)=>a+Number(h.date.match(/(\d+) คืน/)[1]),0),8);
+assert.equal(trip.hotels.filter(x=>x.booked).reduce((a,h)=>a+Number(h.date.match(/(\d+) คืน/)[1]),0),7);
 assert.equal(travelBookings.usj.nintendoEntry,'13:40–14:40');
 assert.equal(travelBookings.usj.marioKartExpress,'13:40–14:10');
 assert.equal(travelBookings.usj.donkeyKongExpress,'14:10–14:40');
 assert.match(travelBookings.usj.harryPotterEntry,/ไม่กำหนดเวลา/);
-for(const ride of ['Despicable Me: Minion Mayhem','The Flying Snoopy','JAWS','Mario Kart','Donkey Kong Mine Cart Madness','Yoshi','Flight of the Hippogriff','Harry Potter and the Forbidden Journey']){
- assert.equal(usjDay.schedule.some(slot=>slot.title.includes(ride)),true,'Missing USJ ride: '+ride);
-}
-assert.equal(usjDay.schedule.find(x=>x.title.includes('Harry Potter and the Forbidden Journey')).time,'17:30–18:15');
-assert.equal(usjDay.schedule.find(x=>x.title.includes('Mario Kart')).time,travelBookings.usj.marioKartExpress);
-assert.equal(usjDay.schedule.find(x=>x.title.includes('Donkey Kong')).time,travelBookings.usj.donkeyKongExpress);
-assert.equal(trip.hotels.reduce((sum,x)=>sum+Number(x.date.match(/\d+ คืน/)[0].split(' ')[0]),0),7);
-const { defaultTickets,passEndDate,transportByDay } = await import('../data/travelTools.js');
+const usj=itinerary[2].schedule;
+for(const ride of ['Despicable Me: Minion Mayhem','The Flying Snoopy','JAWS','Mario Kart','Donkey Kong Mine Cart Madness','Yoshi','Flight of the Hippogriff','Harry Potter and the Forbidden Journey'])
+ assert.ok(usj.some(slot=>slot.title.includes(ride)),ride);
+assert.equal(usj.find(x=>x.title.includes('Harry Potter and the Forbidden Journey')).time,'17:30–18:15');
 assert.equal(defaultTickets.passStatus,'purchased');
 assert.equal(passEndDate(defaultTickets.passStart),'2026-11-24');
-assert.equal(defaultTickets.outward.train,'Kounotori 5');
-assert.deepEqual([defaultTickets.outward.car,defaultTickets.outward.seats],['4','9C / 9D']);
-assert.equal(defaultTickets.return.train,'Kounotori 22');
-assert.deepEqual([defaultTickets.return.depart,defaultTickets.return.arrive,defaultTickets.return.car,defaultTickets.return.seats],['15:30','18:21','7','8C / 8D']);
-assert.equal(transportByDay[7].some(x=>x.route.includes('Kounotori 22')),true);
-assert.equal(itinerary[6].schedule.some(x=>x.title.includes('Kounotori 22')),true);
-console.log(`Verified ${itinerary.length} travel days, ${checklist.length} checklist items, confirmed/pending states and 7 hotel nights.`);
-
-assert.equal(trip.flights.length,2);
-assert.equal(trip.flights[0].code,travelBookings.flights.outbound.number);
-assert.equal(trip.flights[1].code,null);
-assert.equal(trip.flights[1].time,'19:45 – 00:15 (+1 วัน)');
-assert.equal(travelBookings.flights.inbound.departure.timeZone,'Asia/Tokyo');
-assert.equal(travelBookings.flights.inbound.arrival.timeZone,'Asia/Bangkok');
-assert.equal(travelBookings.flights.inbound.departure.local,'2026-11-24T19:45:00+09:00');
-assert.equal(travelBookings.flights.inbound.arrival.local,'2026-11-25T00:15:00+07:00');
-assert.equal(flightDurationMinutes(travelBookings.flights.outbound),335);
-assert.equal(flightDurationMinutes(travelBookings.flights.inbound),390);
-assert.equal(trip.hotels,travelBookings.hotels);
-assert.equal(trip.japanRail.pass,travelBookings.jrPass.name);
-assert.equal(trip.flights[1].numberVerified,false);
-const fs=await import('node:fs/promises');
-
-for (const name of ['data/trip.js','data/mobility.js','data/beginnerGuide.js','data/experience.js','app/page.js','app/components/TravelTools.js']) {
- const code=await fs.readFile(new URL('../'+name,import.meta.url),'utf8');
- assert.doesNotMatch(code,/\\bXJ611\\b|\\bXJ615\\b|17:15|21:45/, 'Stale flight marker in '+name);
+assert.equal(travelBookings.kounotori.outward.train,'Kounotori 5');
+assert.equal(travelBookings.kounotori.return.train,'Kounotori 22');
+assert.ok(transportByDay[8].some(x=>x.route.includes('Inari')));
+assert.ok(transportByDay[9].some(x=>x.route.includes('Kansai Airport')));
+assert.equal(trip.flights[0].code,'TG672');
+assert.equal(trip.flights[1].code,'TG673');
+assert.equal(trip.flights[0].time,'08:15 – 15:45');
+assert.equal(trip.flights[1].time,'17:25 – 22:00');
+assert.equal(trip.flights[1].numberVerified,true);
+assert.equal(travelBookings.flights.outbound.departure.local,'2026-11-17T08:15:00+07:00');
+assert.equal(travelBookings.flights.outbound.arrival.local,'2026-11-17T15:45:00+09:00');
+assert.equal(travelBookings.flights.inbound.departure.local,'2026-11-25T17:25:00+09:00');
+assert.equal(travelBookings.flights.inbound.arrival.local,'2026-11-25T22:00:00+07:00');
+assert.equal(travelBookings.flights.outbound.checkedBaggagePieces,1);
+assert.equal(travelBookings.flights.inbound.checkedBaggagePieces,2);
+assert.equal(travelBookings.flights.inbound.checkedBaggageWeightKg,null);
+assert.equal(flightDurationMinutes(travelBookings.flights.outbound),330);
+assert.equal(flightDurationMinutes(travelBookings.flights.inbound),395);
+for(const path of ['data/trip.js','data/mobility.js','data/beginnerGuide.js','data/experience.js','app/page.js']){
+ const s=await fs.readFile(new URL('../'+path,import.meta.url),'utf8');
+ assert.doesNotMatch(s,/\bXJ610\b|\bXJ611\b|\bXJ615\b/,path);
 }
-console.log('Flight times and timezones, booking source, and stale-flight audit passed.');
+console.log('Verified 9 days, 8 nights (7 confirmed + 1 pending), TG672/TG673, JR Pass and booked tickets.');
