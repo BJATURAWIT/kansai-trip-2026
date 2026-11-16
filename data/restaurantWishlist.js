@@ -1,5 +1,5 @@
 // Restaurant wishlist added to the Info tab; separate from confirmed itinerary and bookings.
-// Visit days follow the current 17–24 Nov 2026 plan; hours are published guides, not live guarantees.
+// Visit days follow the current 17–25 Nov 2026 plan; hours are published guides, not live guarantees.
 // Photo credits remain linked to original pages. "sample" photos are category illustrations, not venue photos.
 export const restaurantWishlist = [
   {
@@ -11,8 +11,7 @@ export const restaurantWishlist = [
     "bestDay": 7,
     "days": [
       2,
-      7,
-      8
+      7
     ],
     "time": "23 พ.ย. หลังกลับโอซาก้า 19:15–20:30",
     "reason": "แถว Nankai Namba เหมาะกับมื้อเย็นหลังรถ Kounotori 22 ถึง Osaka 18:21; วันที่ 18 เป็นร้านสลับมื้อเที่ยงเท่านั้น",
@@ -31,11 +30,10 @@ export const restaurantWishlist = [
     "address": "2-4-7 Minamihorie, Nishi, Osaka",
     "bestDay": 2,
     "days": [
-      2,
-      8
+      2
     ],
     "time": "18 พ.ย. 13:40–14:10 (ต้องลดเวลาเดิน Shinsaibashi)",
-    "reason": "ร้านอยู่ Minamihorie ต้องออกจากเส้น Dotonbori → Shinsaibashi จึงเหมาะเฉพาะแวะเร็ว ๆ; วันที่ 24 ก็ทำได้ถ้าไม่ไปไกลก่อนสนามบิน",
+    "reason": "ร้านอยู่ Minamihorie ต้องออกจากเส้น Dotonbori → Shinsaibashi จึงเหมาะเฉพาะแวะเร็ว ๆ; ไม่แนะนำให้ย้ายไปวันที่ 24 เพราะอยู่ Kyoto",
     "menu": "สโคนเนยสด ขนมอบ กาแฟ",
     "hours": "11:00–19:00 โดยทั่วไป",
     "warning": "เป็นทางอ้อมจากแผนหลัก; ควรซื้อ Takeaway",
@@ -49,16 +47,15 @@ export const restaurantWishlist = [
     "category": "กาแฟ / มื้อเช้า",
     "area": "Fukushima / Umeda",
     "address": "6-12-19 Fukushima, Fukushima, Osaka",
-    "bestDay": 8,
+    "bestDay": 2,
     "days": [
-      2,
-      8
+      2
     ],
-    "time": "24 พ.ย. 08:30–09:30 (ต้องเดินทางไป Fukushima โดยเฉพาะ)",
-    "reason": "เปิดเช้า เหมาะช่วงว่างวันกลับหากยอมเดินทางขึ้นเหนือ; วันที่ 18 ต้องออกจากโรงแรมแต่เช้ามากจึงจะทันปราสาท",
+    "time": "18 พ.ย. เฉพาะกรณีปรับออกนอกเส้นทางเดิม (ไม่แนะนำในแผนหลัก)",
+    "reason": "เปิดเช้า เหมาะช่วงว่างวันเที่ยว Osakaหากยอมเดินทางขึ้นเหนือ; วันที่ 18 ต้องออกจากโรงแรมแต่เช้ามากจึงจะทันปราสาท",
     "menu": "Morning Plate, French Toast, Specialty Coffee",
     "hours": "อ.–อา. 08:00–17:30 / ปิดจันทร์",
-    "warning": "ไม่ใช่ทางผ่าน Namba → KIX; เผื่อเวลาเดินทางกลับ Namba",
+    "warning": "วันที่ 24 อยู่ Kyoto และวันที่ 25 ต้องไป KIX ก่อนบ่ายสอง จึงไม่ควรจัดร้านนี้ในสองวันดังกล่าว",
     "place": "PAUSE COFFEE 6-12-19 Fukushima Osaka",
     "image": "https://ximg.retty.me/crop/s400x400/q80/das/-/retty/img_repo/2l/01/25295798.jpg",
     "photo": "https://retty.me/area/PRE27/ARE618/SUB8903/100001541405/",
@@ -135,8 +132,7 @@ export const restaurantWishlist = [
     "address": "3-5-28 Minamisenba, Chuo, Osaka",
     "bestDay": 2,
     "days": [
-      2,
-      8
+      2
     ],
     "time": "18 พ.ย. 13:40–14:20 ระหว่างเดิน Shinsaibashi",
     "reason": "อยู่ตอนเหนือของย่าน Shinsaibashi จึงแวะซื้อข้าวปั้นช่วงเดินช้อปปิ้งได้",
@@ -153,16 +149,15 @@ export const restaurantWishlist = [
     "category": "กาแฟ / ขนม",
     "area": "Nakazakicho / Umeda",
     "address": "3-3-10 Nakazaki, Kita, Osaka",
-    "bestDay": 8,
+    "bestDay": 2,
     "days": [
-      2,
-      8
+      2
     ],
-    "time": "24 พ.ย. 10:00–11:00 (ถ้าตั้งใจเที่ยว Nakazakicho)",
-    "reason": "อยู่เหนือ Umeda ไม่ได้อยู่เส้นทางเดิน Namba; เหมาะให้เลือกเป็นคาเฟ่พิเศษวันกลับเท่านั้น",
+    "time": "18 พ.ย. เฉพาะกรณีปรับออกนอกเส้นทางเดิม (ไม่แนะนำในแผนหลัก)",
+    "reason": "อยู่เหนือ Umeda ไม่ได้อยู่เส้นทางเดิน Namba; เหมาะให้เลือกเป็นคาเฟ่พิเศษวันเที่ยว Osakaเท่านั้น",
     "menu": "Specialty Coffee, Matcha Cake / ขนม",
     "hours": "10:00–18:00",
-    "warning": "ต้องเดินทางไป Nakazakicho โดยเฉพาะ; ไม่ควรจัดคู่กับ PAUSE COFFEE ทั้งสองแห่งหากกลัวไม่ทันไฟลต์",
+    "warning": "วันที่ 24 อยู่ Kyoto และวันที่ 25 ต้องไป KIX ก่อนบ่ายสอง จึงไม่ควรจัดร้านนี้ในสองวันดังกล่าว",
     "place": "OSA COFFEE 3-3-10 Nakazaki Osaka",
     "image": "https://gourmetyossy-blog.com/wp-content/uploads/2021/05/0b7b4a09919ec45121e37f2215a2593e-2048x1365.jpg",
     "photo": "https://gourmetyossy-blog.com/2021/05/06/10042/"
@@ -176,8 +171,7 @@ export const restaurantWishlist = [
     "bestDay": 7,
     "days": [
       1,
-      7,
-      8
+      7
     ],
     "time": "23 พ.ย. 20:00 เป็นต้นไป หลังกลับโรงแรม",
     "reason": "ใกล้ Shinsekai จากโรงแรมย่าน Daikokucho เดินทางไม่ไกล; คืน 17 เป็นทางเลือกถ้ายังมีแรงหลังเช็กอิน",
@@ -198,10 +192,9 @@ export const restaurantWishlist = [
     "bestDay": 1,
     "days": [
       1,
-      7,
-      8
+      7
     ],
-    "time": "17 พ.ย. ประมาณ 21:30 หลังเช็กอิน (หากยังเปิด)",
+    "time": "17 พ.ย. ประมาณ 20:00–21:00 หลังเช็กอิน (ตรวจเวลาเปิดจริง)",
     "reason": "ใกล้ Nankai Namba และโรงแรม เหมาะมื้อดึกคืนแรกแบบไม่ต้องเดินไปไกล",
     "menu": "ราเมงทงคตสึ / ข้าวหน้าหมู",
     "hours": "เปิดราว 11:00; เวลาปิดมีข้อมูลต่างกัน ควรเช็กก่อน",
@@ -219,8 +212,7 @@ export const restaurantWishlist = [
     "bestDay": 7,
     "days": [
       2,
-      7,
-      8
+      7
     ],
     "time": "23 พ.ย. 19:15–20:30 หรือ 18 พ.ย. แทนมื้อเที่ยง",
     "reason": "ใกล้ Dotonbori / Namba เหมาะมื้อสบาย ๆ หลังกลับจาก Kinosaki; ไม่ต้องเบียดกับ STARDUST วันที่ 18",
@@ -260,8 +252,7 @@ export const restaurantWishlist = [
     "bestDay": 7,
     "days": [
       2,
-      7,
-      8
+      7
     ],
     "time": "23 พ.ย. 19:15–20:30 (มื้อเย็นทางเลือก)",
     "reason": "อยู่ชั้นใต้ดินใกล้ Hozenji/Dotonbori แวะหลังเดินกลับจากสถานี Namba ได้",
@@ -283,8 +274,7 @@ export const restaurantWishlist = [
     "bestDay": 7,
     "days": [
       2,
-      7,
-      8
+      7
     ],
     "time": "23 พ.ย. 19:15–20:15 (ถ้าคิวไม่ยาว)",
     "reason": "ใกล้ Dotonbori; วัน 18 เป็นมื้อทางเลือกแทน Makino เท่านั้น ไม่ควรกินก่อน STARDUST",
@@ -347,7 +337,7 @@ export const restaurantWishlist = [
       2,
       7
     ],
-    "time": "17 พ.ย. 21:30–22:30 หากยังมีแรง",
+    "time": "17 พ.ย. ประมาณ 20:00–21:00 หากยังมีแรง",
     "reason": "เปิดดึกใน Dotonbori เหมาะเป็นมื้อสำรองคืนแรก หรือหลังกลับจาก Kinosaki",
     "menu": "Kyushu Tonkotsu Ramen / Chashu / Tomato Ramen",
     "hours": "ประมาณ 10:00–02:00",

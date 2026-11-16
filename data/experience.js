@@ -16,9 +16,9 @@ export const isValidPreference=p=>p&&typeof p==='object';
 export function normalizePreferences(value){
  const p=isValidPreference(value)?value:{};
  const days={};
- for(let day=1;day<=8;day++){const v=p.dayPlans?.[day];days[day]=['original','rainy','relaxed'].includes(v)?v:'original'}
+ for(let day=1;day<=9;day++){const v=p.dayPlans?.[day];days[day]=['original','rainy','relaxed'].includes(v)?v:'original'}
  const metro={};
- for(let day=1;day<=8;day++)metro[day]=p.metroPassDays?.[day]===true;
+ for(let day=1;day<=9;day++)metro[day]=p.metroPassDays?.[day]===true;
  return {kyoto:p.kyoto==='east'?'east':'west',dayPlans:days,metroPassDays:metro,airportTrain:['express','rapit','jr'].includes(p.airportTrain)?p.airportTrain:'express'};
 }
 const slot=(time,title,detail,map)=>({time,title,detail,map});
@@ -26,7 +26,7 @@ const fixedTime=new Map([
  [3,[travelBookings.usj.nintendoEntry,travelBookings.usj.marioKartExpress,travelBookings.usj.donkeyKongExpress]],
  [6,[travelBookings.kounotori.outward.depart,travelBookings.kounotori.outward.arrive]],
  [7,[travelBookings.kounotori.return.depart]],
- [8,[localClock(travelBookings.flights.inbound.departure)]]
+ [9,[localClock(travelBookings.flights.inbound.departure)]]
 ]);
 const alternatives={
   2:{
@@ -129,7 +129,7 @@ export function resolvedSchedule(day,prefs){
   if(day===2&&(x.foodKind==='dinner'||x.foodKind==='lunch'))return false;
    if(day===3&&x.foodKind==='lunch')return false; // Lunch already appears on USJ timeline
   if(day===4&&['lunch','dinner','coffee','snack'].includes(x.foodKind))return false;
-   if(day===8&&['lunch','dessert'].includes(x.foodKind))return false;
+   if((day===8||day===9)&&['lunch','dinner','dessert','coffee'].includes(x.foodKind))return false;
    if(day===5&&['lunch','dinner','dessert','coffee','snack'].includes(x.foodKind))return false;
   if(day===4&&mode==='relaxed'&&x.foodKind==='snack')return false;
   return !titles.includes(x.title.toLowerCase());
@@ -157,7 +157,7 @@ export function resolveDay(day,prefs){
 }
 export function resolvedSegments(day,prefs){
  const base=transportByDay[day]||[];
- if(day===8){
+ if(day===9){
  const choice=prefs?.airportTrain||'express';
  const visits=[
   {route:'Centara → Namba Yasaka Shrine',type:'walk',card:'เดิน',note:'ฟรี'},
@@ -167,9 +167,19 @@ export function resolvedSegments(day,prefs){
   {route:'Crepe & Espresso & 9-chome → Tanimachi 9-chome',type:'walk',card:'เดิน',note:'ฟรี'},
   {route:'Tanimachi 9-chome (S18) → Namba (S16)',type:'metro',card:'ICOCA · Sennichimae',note:'¥190/คน'},
   {route:'Namba → Rikuro’s Cheesecake → Centara',type:'walk',card:'เดิน',note:'ฟรี'}];
- if(choice==='jr')return [...visits,{route:'Daikokucho → Tennoji',type:'metro',card:'ICOCA · Midosuji',note:'¥190/คน'},{route:'Tennoji → Kansai Airport',type:'jr',card:'Kansai WIDE Pass · JR',note:'พาสครอบคลุมเฉพาะ JR ตามเงื่อนไข'}];
+ if(choice==='jr')return [...visits,{route:'Daikokucho → Tennoji',type:'metro',card:'ICOCA · Midosuji',note:'จ่ายแยก'},{route:'Tennoji → Kansai Airport',type:'jr',card:'ตั๋ว JR แยก',note:'วันที่ 25 พ.ย. JR Pass หมดอายุแล้ว ต้องซื้อตั๋วแยก'}];
  return [...visits,{route:'Centara → Nankai Namba',card:'เดิน',type:'walk',note:'ฟรี'},choice==='rapit'?{route:'Nankai Namba → Kansai Airport · Rapi:t Regular Seat',type:'nankai',card:'Nankai Rapi:t Reserved Seat',note:'ขากลับต้องซื้อแยก'}:{route:'Nankai Namba → Kansai Airport · Airport Express',type:'nankai',card:'ICOCA · Airport Express',note:'จ่ายแยก'}];
  }
+ if(day===8)return [
+  {route:'Daikokucho → Umeda',type:'metro',card:'ICOCA / Osaka Metro',note:'จ่ายแยก'},
+  {route:'JR Osaka → Kyoto → Inari',type:'jr',card:'Kansai WIDE Pass · วันที่ 5',note:'ใช้ Pass 20–24 พ.ย.'},
+  {route:'JR Inari → Kyoto',type:'jr',card:'Kansai WIDE Pass',note:'รวมในพาส'},
+  {route:'Kyoto Station → Higashiyama',type:'bus',card:'Kyoto City Bus / Taxi',note:'รถบัสธรรมดาเขตคงที่ ¥230/คน · Taxi จ่ายแยก'},
+  {route:'Higashiyama → Kiyomizu-dera',type:'walk',card:'เดิน',note:'เข้าวัดประมาณ ¥500/คน'},
+  {route:'Kiyomizu-dera → Kyoto Station',type:'bus',card:'Kyoto City Bus / Taxi',note:'จ่ายแยก'},
+  {route:'JR Kyoto → Osaka',type:'jr',card:'Kansai WIDE Pass · วันที่ 5',note:'รวมในพาสถึง 24:00'},
+  {route:'Umeda → Daikokucho',type:'metro',card:'ICOCA / Osaka Metro',note:'จ่ายแยก'}
+ ];
  if(day!==4){
   if(day===5&&prefs?.dayPlans?.[5]==='rainy')return [
    {route:'Daikokucho → Namba',type:'metro',card:'ICOCA / Metro',note:'Metro ¥190/คน; หรือเดินฟรีได้'},
@@ -233,7 +243,7 @@ export function getJapanClock(date=new Date()){
   clock:obj.hour+':'+obj.minute,minutes:Number(obj.hour)*60+Number(obj.minute)};
 }
 export function tripPhase(date){
- return date<'2026-11-17'?'pre':date>'2026-11-24'?'post':'during';
+ return date<'2026-11-17'?'pre':date>'2026-11-25'?'post':'during';
 }
 export function dayForDate(date){
  const day=itinerary.find(d=>date==='2026-11-'+String(16+d.day).padStart(2,'0'));
@@ -244,8 +254,7 @@ export function nextScheduleEntry(day,prefs,minutes){
  const timed=resolvedSchedule(day,prefs).flatMap((slot,index)=>{
   const m=String(slot.time).match(/^(\d{1,2}):(\d{2})/);
   if(!m)return [];
-  // The inbound flight arrives on 25 Nov and must not appear as a
-  // 00:15 "next" event for the Japan-time calendar day of 24 Nov.
+  // Only show events occurring on this specific calendar day.
   if(slot.date&&slot.date!==date)return [];
   const t=Number(m[1])*60+Number(m[2]);
   const jst=t+(slot.timeZone==='Asia/Bangkok'?120:0);

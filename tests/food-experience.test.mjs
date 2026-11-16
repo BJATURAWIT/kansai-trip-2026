@@ -30,7 +30,7 @@ test('Kyoto West and East restaurants follow selected route and never overlap',(
 });
 
 test('all restaurant stops are on their plan routes and not on venue closing days',()=>{
- for(let day=1;day<=8;day++){
+ for(let day=1;day<=9;day++){
   for(const kyoto of ['west','east'])for(const mode of ['original','rainy','relaxed']){
    const p=prefs(kyoto,mode,day);
    assert.ok(validateFoodPlan(day,p),JSON.stringify({day,kyoto,mode}));
@@ -94,7 +94,7 @@ test('food items appear in original schedule and selected routes and dining data
  assert.ok(food.some(x=>x.title.includes('Izuju')));
  assert.ok(food.some(x=>x.title.includes('Tsujiri')));
  assert.ok(resolveDay(4,p).schedule.some(x=>x.title.includes('Izuju')));
- assert.equal(itinerary.length,8);
+ assert.equal(itinerary.length,9);
  assert.ok(checklist.some(x=>x.id==='flight'&&x.done));
 });
 

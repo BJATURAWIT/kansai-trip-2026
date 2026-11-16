@@ -72,10 +72,23 @@ export const transportByDay={
     mk('JR Osaka → Daikokucho → Centara','metro','ICOCA · Osaka Metro','รถไฟ Metro จ่ายแยก'),
   ],
   8:[
-    mk('Centara → Nankai Namba','walk','เดิน / แท็กซี่','เดินฟรี หรือแท็กซี่จ่ายแยก'),
-    mk('Nankai Namba → Kansai Airport','nankai','Airport Express (ICOCA) หรือ Rapi:t','เลือก Nankai = จ่ายแยกแม้ JR Pass ยังมีผล; Rapi:t ต้องใช้ Express ticket'),
-    mk('ทางเลือก: JR ไป KIX ผ่าน Tennoji','jr','Kansai WIDE Pass · JR HARUKA/Rapid','รวมในพาสถ้าออกเดินทางด้วย JR ภายในวันใช้งาน; เลือกตามความสะดวก'),
-  ],
+ mk('Daikokucho → Umeda','metro','ICOCA · Osaka Metro','Metro ไม่รวม JR Pass'),
+ mk('JR Osaka → Kyoto → Inari','jr','Kansai WIDE Pass · Day 5','JR ครอบคลุมถึงสิ้น 24 พ.ย.'),
+ mk('JR Inari → Kyoto','jr','Kansai WIDE Pass','รวม JR ตามเงื่อนไข'),
+ mk('Kyoto Station → Higashiyama','bus','ICOCA · Kyoto City Bus','รถธรรมดาเขตคงที่ ¥230/คน · Taxi จ่ายแยก'),
+ mk('Higashiyama → Kiyomizu-dera','walk','เดิน','ค่าชมวัดรอบค่ำประมาณ ¥500/คน'),
+ mk('Kiyomizu-dera → Kyoto Station','bus','ICOCA · Kyoto City Bus','รถธรรมดาเขตคงที่ ¥230/คน · Taxi จ่ายแยก'),
+ mk('JR Kyoto → Osaka','jr','Kansai WIDE Pass · Day 5','JR รวม Pass ถึง 24:00'),
+ mk('Umeda → Daikokucho','metro','ICOCA · Osaka Metro','Metro จ่ายแยก'),
+ ],
+ 9:[
+ mk('Centara → Namba Yasaka Shrine → Namba','walk','เดิน','ฟรี'),
+ mk('Namba (S16) → Tanimachi 9-chome (S18)','metro','ICOCA · Sennichimae','¥190/คน'),
+ mk('Tanimachi 9-chome (S18) → Namba (S16)','metro','ICOCA · Sennichimae','¥190/คน'),
+ mk('Namba → Rikuro → Centara','walk','เดิน','ฟรี'),
+ mk('Centara → Nankai Namba','walk','เดิน','ฟรี'),
+ mk('Nankai Namba → Kansai Airport · Airport Express','nankai','Airport Express · ICOCA','¥970/คน · วันที่ 25 JR Pass หมดแล้ว'),
+ ],
 };
 export function fareLabel(segment,day,tickets){
   if(segment.type==='walk')return {label:'เดินฟรี / แท็กซี่จ่ายแยก',status:'free'};
@@ -122,12 +135,13 @@ export const kyotoOptions={
  ],note:'Kyoto East เป็นทางเลือกแยก ไม่ผสมกับ West'}
 };
 export const importantStops={
-  1:['Don Mueang International Airport','Kansai International Airport Terminal 1','Nankai Namba Station','Centara Life Namba Hotel Osaka'],
+  1:['Suvarnabhumi Airport Bangkok','Kansai International Airport Terminal 1','Nankai Namba Station','Centara Life Namba Hotel Osaka'],
   2:['Osaka Castle','Tempura Makino Namba Sennichimae','Dotonbori Glico Sign','Shinsaibashi','Umeda Sky Building','Sky Lounge STARDUST Osaka','Midosuji Illumination Hanshin-mae Intersection Osaka','Yodoyabashi Station (M17)'],
   3:['Universal Studios Japan','Hollywood Dream The Ride Universal Studios Japan','Universal Studios Japan JAWS','Super Nintendo World Osaka','Wizarding World Harry Potter Osaka'],
   4:['Osaka Station','Arashiyama Bamboo Grove Kyoto','Tenryu-ji Temple Kyoto','Togetsukyo Bridge Kyoto','Hanamikoji Street Kyoto','Yasaka Shrine Kyoto','Kodaiji Temple Kyoto'],
   5:['JR Osaka Station','JR Uji Station Kyoto','Byodo-in Temple Uji Kyoto','Uji Bridge Kyoto','Nakamura Tokichi Honten Uji Kyoto','JR Nara Station','Kamaiki Honten Nara','Nara Park Nara Japan','Todai-ji Great Buddha Hall Nara','Kasuga Taisha Nara','JR Tennoji Station'],
   6:['Centara Life Namba Hotel Osaka','Osaka Station','Kinosaki Onsen Station','Nishimuraya Hotel Shogetsutei'],
   7:['Nishimuraya Hotel Shogetsutei','Kinosaki Onsen Station','Osaka Station','Centara Life Namba Hotel Osaka'],
-  8:['Centara Life Namba Hotel Osaka','Nankai Namba Station','Kansai International Airport Terminal 1']
+  8:['Centara Life Namba Hotel Osaka','JR Osaka Station','Fushimi Inari Taisha Kyoto','Yasaka Pagoda Kyoto','Sannenzaka Kyoto','Kiyomizu-dera Kyoto','Kyoto Station'],
+  9:['Centara Life Namba Hotel Osaka','Namba Yasaka Shrine Osaka','Crepe & Espresso & 9-chome Osaka','Rikuro’s Cheesecake Namba Main Store Osaka','Nankai Namba Station','Kansai International Airport Terminal 1']
 };

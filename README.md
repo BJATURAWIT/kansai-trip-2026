@@ -1,6 +1,6 @@
 # Kansai, With You — Japan 2026
 
-เว็บแผนเที่ยวโอซาก้า เกียวโต คิโนซากิ และ Checklist สำหรับทริป 17–24 พฤศจิกายน 2026 (2 คน)
+เว็บแผนเที่ยวโอซาก้า เกียวโต คิโนซากิ และ Checklist สำหรับทริป 17–25 พฤศจิกายน 2026 (2 คน)
 
 ## Tech stack
 - JavaScript / React / Next.js App Router (`app/`)
@@ -25,7 +25,7 @@ npm run dev
 6. ถ้าเพื่อนเปิดไม่ได้เพราะ Vercel Authentication ให้ตรวจ Settings → Deployment Protection และใช้ production URL (`*.vercel.app`) ของโปรเจกต์ ตรวจสิทธิ์การเผยแพร่ก่อนปิดการป้องกัน
 
 ## Edit trip data
-- `data/trip.js` — โรงแรม เที่ยวบิน แผน 8 วัน Checklist รายละเอียด เวลา และลิงก์
+- `data/trip.js` — โรงแรม เที่ยวบิน แผน 9 วัน Checklist รายละเอียด เวลา และลิงก์
 - `app/page.js` — UI และ interaction
 - `app/globals.css` — ธีม สี layout และ responsive
 - `app/layout.js` — metadata
@@ -46,6 +46,6 @@ npm run dev
 
 ## Travel data consistency (23 Oct 2026)
 
-`data/centralTravel.js` is the public-safe authoritative source for flights, hotels, USJ, JR Pass, and Kounotori reservations. The return flight number is **unverified**, so do not infer a code from an old itinerary. Verified-by-user departure KIX 24 Nov 2026 19:45 JST; arrival DMK 25 Nov 2026 00:15 ICT. Confirm the number from the original AirAsia e-ticket before adding it.
+`data/centralTravel.js` is the public-safe authoritative source for flights, hotels, USJ, JR Pass, and Kounotori reservations. TG672 (17 Nov BKK to KIX) and TG673 (25 Nov KIX to BKK) are confirmed by Thai Airways. 24–25 Nov extra hotel night is awaiting confirmation. Verified-by-user departure KIX 24 Nov 2026 19:45 JST; arrival DMK 25 Nov 2026 00:15 ICT. Confirm the number from the original AirAsia e-ticket before adding it.
 
 `npm run verify` audits booking facts, timezone logic, daily itinerary, and stale flight markers. The production `prebuild` runs these regression tests before the image/download and Next.js build stages.

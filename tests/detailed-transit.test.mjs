@@ -3,9 +3,9 @@ import assert from 'node:assert/strict';
 import {detailedRouteGuide} from '../data/detailedTransit.js';
 import {normalizePreferences,resolvedGuide} from '../data/experience.js';
 import {travelBookings} from '../data/centralTravel.js';
-const prefs=(kyoto='west',mode='original',airportTrain='express')=>normalizePreferences({kyoto,airportTrain,dayPlans:Object.fromEntries(Array.from({length:8},(_,i)=>[i+1,mode]))});
+const prefs=(kyoto='west',mode='original',airportTrain='express')=>normalizePreferences({kyoto,airportTrain,dayPlans:Object.fromEntries(Array.from({length:9},(_,i)=>[i+1,mode]))});
 test('every day and variant has complete ordered station-by-station transport instructions',()=>{
- for(let day=1;day<=8;day++)for(const kyoto of ['west','east'])for(const mode of ['original','rainy','relaxed']){
+ for(let day=1;day<=9;day++)for(const kyoto of ['west','east'])for(const mode of ['original','rainy','relaxed']){
   const p=prefs(kyoto,mode);
   const plan=detailedRouteGuide(day,p);
   assert.ok(plan.legs.length>=3,'Day '+day+' '+kyoto+' '+mode);
@@ -45,8 +45,8 @@ test('preserve booked train information and avoid misleading airport fares',()=>
  assert.equal(travelBookings.kounotori.outward.depart,'10:12');
  assert.equal(travelBookings.kounotori.return.depart,'15:30');
  for(const airportTrain of ['express','rapit','jr']){
-  const d8=detailedRouteGuide(8,prefs('west','original',airportTrain));
+  const d8=detailedRouteGuide(9,prefs('west','original',airportTrain));
   assert.ok(d8.legs.some(x=>x.to.includes('Kansai-airport')));
-  assert.ok(d8.legs.some(x=>x.to.includes('Don Mueang')));
+  assert.ok(d8.legs.some(x=>x.to.includes('Suvarnabhumi')));
  }
 });

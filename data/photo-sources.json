@@ -67,7 +67,7 @@
     "title": "Hogwarts"
   },
   {
-    "file": "day-4-1.jpg",
+    "file": "day-8-7.jpg",
     "url": "https://live.staticflickr.com/800/40949429141_e19ec7f12c_z.jpg",
     "license": "by",
     "creator": "Sai Adikarla",
@@ -75,7 +75,7 @@
     "title": "Torii Gates"
   },
   {
-    "file": "day-4-2.jpg",
+    "file": "day-8-8.jpg",
     "url": "https://live.staticflickr.com/368/32082222702_4d32cde240_z.jpg",
     "license": "by",
     "creator": "xmhuqijian@yahoo.cn",
@@ -305,5 +305,13 @@
     "license": "CC BY 2.0",
     "source": "https://commons.wikimedia.org/wiki/File:Midosuji_,_Osaka.jpg",
     "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Midosuji_%2C_Osaka.jpg?width=960"
+  },
+  {
+    "file": "day-8-9.jpg",
+    "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Yasaka_Pagode.jpg?width=500",
+    "license": "CC BY 4.0",
+    "creator": "Piet Parkiet",
+    "source": "https://commons.wikimedia.org/wiki/File:Yasaka_Pagode.jpg",
+    "title": "Yasaka Pagoda, Kyoto, February 2026"
   }
 ]

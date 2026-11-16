@@ -1,16 +1,16 @@
 import {travelBookings,flightNumberLabel,localClock} from './centralTravel.js';
 // Based on user-provided 'Osaka Final(1).xlsx' itinerary and transit detail tabs,
-// with user airline confirmation PDF superseding the older flight times in the workbook.
+// with Thai Airways confirmation itinerary dated 16 Nov 2026 as the flight source.
 // Timed sightseeing entries are planning windows, not reserved slots.
 export const beginnerDayGuide = {
-1:{time:'10:40 ไทย / 18:15 ญี่ปุ่น',label:'ลงเครื่องแล้วเข้าตัวเมือง',steps:[
- ['DMK Terminal 1','ถึงสนามบินประมาณ 07:40 ตามเวลาไทย (เผื่อ 3 ชั่วโมง) ไปเคาน์เตอร์ Thai AirAsia X เที่ยวบิน XJ610 โหลดกระเป๋าไม่เกิน 20 กก./คน แล้วผ่าน ตม.','เที่ยวบินยืนยัน'],
- ['KIX Terminal 1 · 18:15','ลงเครื่องตามป้าย Arrivals → Immigration → Baggage Claim → Customs เตรียมหนังสือเดินทางและเอกสารเข้าเมือง','เวลาจองยืนยัน'],
+1:{time:'08:15 ไทย / 15:45 ญี่ปุ่น',label:'ลงเครื่องแล้วเข้าตัวเมือง',steps:[
+ ['BKK สุวรรณภูมิ','แนะนำถึงสนามบินประมาณ 05:15 ตามเวลาไทย (เผื่อ 3 ชั่วโมง) ไปเคาน์เตอร์ Thai Airways เที่ยวบิน TG672 · ตามตั๋วโหลดได้ 1 PC (จำนวนชิ้น ไม่ได้ระบุน้ำหนัก KG)','ตั๋ว TG672 Confirmed'],
+ ['KIX Terminal 1 · 15:45','ลงเครื่องตามป้าย Arrivals → Immigration → Baggage Claim → Customs เตรียมหนังสือเดินทางและเอกสารเข้าเมือง','เวลาจองยืนยัน'],
  ['หลังผ่าน ตม. / รับกระเป๋า','เปิด https://nk-digital-ticket.nankai.co.jp/ → Purchased Ticket / Ticket Wallet → เลือกวันที่ 17 พ.ย. ขบวน Rapi:t และ Super Seat ทั้ง 2 คนขบวนเดียวกัน ไม่ต้องจ่ายเพิ่ม · ต้องเลือกก่อนรถออก 5 นาที','ตั๋ว Rapi:t Super Seat ซื้อแล้ว ¥3,180 / 2 คน · ยังไม่ได้เลือกที่นั่ง'],
  ['Kansai-airport Station → Nankai Namba','ออก T1 ตามป้าย Railway ไป Nankai (ไม่ใช่ JR) → เปิด Use the Seat/QR ตั๋วจริงในมือถือ สแกนประตูเฉพาะ Digital Ticket และขึ้นตู้/ที่นั่งที่จอง · อีเมลยืนยัน/ใบเสร็จใช้แทน QR ไม่ได้','รวมค่าโดยสารพื้นฐานและค่ารถด่วนแล้ว'],
  ['Nankai Namba → โรงแรม','ลง Nankai Namba เปิด Google Maps ไป Centara Life Namba; ถ้ามีกระเป๋าใหญ่แนะนำแท็กซี่ระยะสั้นจากสถานี ไม่ต้องลากกระเป๋าไกล','เส้นทางแนะนำ'],
- ['หลังเช็กอิน · มื้อค่ำประมาณ 21:00 (หากทัน)','ตัวเลือกแรก Toritoriko (とりとりこ) ร้านยากิโทริใกล้ Daikokucho · หากคิวเกิน 15 นาที/เข้าที่พักช้า มี Kura Sushi และ Tsurutontan เป็นร้านสำรอง','Walk-in ยังไม่ได้จอง · ตรวจเวลาเปิดและเส้นทางจากโรงแรม'],
-],note:'หลังเครื่องถึง KIX 18:15 ค่อยเลือก Rapi:t Super Seat หลังผ่าน ตม. และรับกระเป๋า · ต้องเริ่มใช้ก่อน 18 พ.ย. 02:59 JST ตามอีเมล · QR อยู่ใน Ticket Wallet ไม่ใช่อีเมล'},
+ ['หลังเช็กอิน · มื้อค่ำประมาณ 20:00 (หากทัน)','ตัวเลือกแรก Toritoriko (とりとりこ) ร้านยากิโทริใกล้ Daikokucho · หากคิวเกิน 15 นาที/เข้าที่พักช้า มี Kura Sushi และ Tsurutontan เป็นร้านสำรอง','Walk-in ยังไม่ได้จอง · ตรวจเวลาเปิดและเส้นทางจากโรงแรม'],
+],note:'หลังเครื่องถึง KIX 15:45 ค่อยเลือก Rapi:t Super Seat หลังผ่าน ตม. และรับกระเป๋า · ต้องเริ่มใช้ก่อน 18 พ.ย. 02:59 JST ตามอีเมล · QR อยู่ใน Ticket Wallet ไม่ใช่อีเมล'},
 2:{time:'09:00–21:30',label:'Osaka Castle · Namba · STARDUST Dinner · Midosuji Illumination',steps:[
  ['09:00–11:10 Osaka Castle','Daikokucho (M21) → Midosuji ถึง Hommachi (M18) → Chuo ไป Morinomiya (C19) แล้วเดินผ่าน Osaka Castle Park ไปตัวปราสาท','Metro / ICOCA'],
  ['11:10–11:55 Castle → Namba','เดินกลับ Morinomiya (N20) ขึ้น Nagahori Tsurumi-ryokuchi มุ่ง Taisho ลง Shinsaibashi (N15) เปลี่ยน Midosuji (M19) มุ่ง Nakamozu ลง Namba (M20); เดินไปร้าน 3-3-4','ICOCA · เปลี่ยนภายในไม่แตะออก'],
@@ -78,18 +78,21 @@ export const beginnerDayGuide = {
  ['Osaka Station → Centara','เดินตามป้าย Metro Umeda ขึ้น Midosuji ลง Daikokucho แล้วเดินเข้าโรงแรม คืนสุดท้าย','ICOCA / Metro'],
  ['ค่ำ Namba / Shinsaibashi','ช้อปปิงเก็บตกตามแรงและเวลา นอนพักก่อนวันกลับ','ตามสะดวก'],
 ],note:'23 พ.ย. เป็นวันหยุดญี่ปุ่น · ขากลับ Kounotori 22 จองที่นั่งแล้ว ควรเผื่อเวลาที่สถานี'},
-8:{time:'08:00–19:45 JST',label:'Namba Yasaka → Crepe & Espresso & 9-chome → Rikuro → KIX',steps:[
- ['08:00–09:00 Check-out Centara','อาหารเช้า เช็กเอาต์ ฝากกระเป๋ากับ Reception','ไม่ต้องลากกระเป๋าเที่ยว'],
- ['09:00–10:00 Namba Yasaka Shrine','เดินจาก Centara ไปศาลเจ้าหัวสิงโตยักษ์ ชมและถ่ายรูป','เดินฟรี · เข้าเยี่ยมฟรี'],
- ['10:00–10:50 Namba → Tanimachi 9-chome','Namba (S16) ขึ้น Sennichimae Line สีชมพู มุ่ง Minami-Tatsumi ลง Tanimachi 9-chome (S18) เดินไปคาเฟ่','ICOCA ¥190/คน'],
- ['11:00–11:45 Crepe & Espresso & 9-chome','สั่งเครป/กาแฟ ตรวจวันหยุดและคิวก่อนเดินทาง','ร้านเปิดราว 11:00'],
- ['11:45–12:25 Tanimachi 9-chome → Namba','ขึ้น Sennichimae Line จาก S18 มุ่ง Noda-Hanshin ลง Namba S16','ICOCA ¥190/คน'],
- ['12:25–13:00 Rikuro’s Cheesecake Namba','แวะซื้อชีสเค้กอบใหม่แบบ Takeaway ถ้าคิวยาวเกิน 15 นาทีให้ข้าม','ใกล้ Ebisubashi-suji'],
- ['13:00–13:40 อาหารกลางวันเบา ๆ','Shirokitsune Namba CITY หรือข้ามถ้าอิ่ม','Optional'],
- ['13:40–14:30 กลับ Centara รับกระเป๋า','ตรวจสัมภาระและตั๋วรถไฟสนามบิน','ห้ามออกช้าเกิน 15:00'],
- ['15:00 ไป KIX','เดินไป Nankai Namba ขึ้น Airport Express หรือ Rapi:t ขากลับแยกจากขาเข้า','Nankai จ่ายแยก'],
- ['16:45 ถึง KIX T1','เช็กอิน/โหลดกระเป๋าก่อนเที่ยวบิน 19:45','เผื่อเวลา 3 ชั่วโมง'],
- ['19:45 บินออก KIX Terminal 1','เที่ยวบินขากลับตามเอกสารการจอง หมายเลขเที่ยวบินยังรอยืนยัน','เวลา JST'],
- ['00:15 (25 พ.ย.) ถึง DMK Terminal 1','ถึงประเทศไทยหลังเที่ยงคืน วันที่ 25 พ.ย.','เวลาไทย ICT']
-],note:'ยึดข้อมูลเวลา AirAsia ล่าสุดจากผู้เดินทาง; หมายเลขเที่ยวบินขากลับยังต้องยืนยันเอกสารต้นฉบับ'},
+8:{time:'07:45–21:00 JST',label:'Kyoto East · Fushimi Inari → Higashiyama → Kiyomizu-dera Night',steps:[
+ ['07:45–09:15 Centara → JR Inari','Metro Daikokucho → Umeda ด้วย ICOCA แล้ว JR Osaka → Kyoto → Inari ด้วย Kansai WIDE Pass วันที่ 5','JR รวมในพาส · Metro จ่ายแยก'],
+ ['09:15–10:45 Fushimi Inari','ศาลเจ้าประตูโทริอิแดง ไม่ต้องเดินถึงยอดเขา','เข้าฟรี'],
+ ['10:45–11:45 Inari → Gion/Higashiyama','JR กลับ Kyoto ด้วย Pass จากนั้น Kyoto City Bus หรือแท็กซี่จ่ายแยกไปย่าน Higashiyama','เส้นทางประมาณการ'],
+ ['11:45–15:30 Lunch / Yasaka Pagoda / Ninenzaka / Sannenzaka','เดินตามเส้นทางย่านเกียวโตตะวันออก ไม่รีบ','อาหารและของหวานจ่ายแยก'],
+ ['17:30–18:45 Kiyomizu-dera Night Illumination','21–30 พ.ย. 2026 เริ่ม 17:30 ถึง 21:30 รับเข้าถึง 21:00 ไม่ต้องจอง · ประมาณ ¥500/คน','ยืนยันช่วงเปิดจากเว็บวัด'],
+ ['19:30–21:00 Kyoto → JR Osaka → Centara','กลับไป Kyoto Station ด้วยบัส/แท็กซี่จ่ายแยก ขึ้น JR กลับ Osaka ด้วย Pass แล้ว Metro เข้าโรงแรม','วันสุดท้ายของ Kansai WIDE Pass']
+],note:'คืนวันที่ 24–25 พ.ย. ที่ Centara ยังรอเอกสารยืนยัน · ช่วง 20–24 พ.ย. ใช้ JR Pass ได้ทั้ง 5 วัน · โปรดตรวจตารางรถไฟจริง'},
+9:{time:'08:00–17:25 JST',label:'Namba Yasaka → Crepe & Espresso → Rikuro → TG673 17:25',steps:[
+ ['08:00–08:45 Centara','Breakfast / Check-out / ฝากกระเป๋า; ตรวจว่าคืนเพิ่มได้รับการยืนยันแล้ว','โรงแรมคืนเพิ่มรอยืนยัน'],
+ ['09:00–09:50 Namba Yasaka','เดินจากโรงแรมไปศาลเจ้าหัวสิงโตยักษ์','เดินฟรี'],
+ ['09:50–11:00 Namba → Tanimachi 9-chome','Osaka Metro Sennichimae Namba (S16) → Tanimachi 9-chome (S18)','ICOCA จ่ายแยก'],
+ ['11:00–11:35 Crepe & Espresso & 9-chome','ถ้าคิวเกิน 15 นาทีให้ข้ามทันที','เวลาแนะนำ'],
+ ['11:35–12:40 Rikuro Namba → รับกระเป๋า','นั่ง Metro กลับ Namba ซื้อชีสเค้กถ้าคิวสั้นและรีบกลับโรงแรมรับกระเป๋า','ICOCA และเดิน'],
+ ['12:40–14:00 Nankai Namba → KIX','ใช้ Airport Express หรือ Rapi:t ขากลับต้องซื้อตั๋วแยก · วัน 25 JR Pass หมดแล้ว','เป้าหมายถึง KIX ประมาณ 14:00'],
+ ['17:25 TG673 KIX → 22:00 BKK','Thai Airways Economy (S) · Boeing 777-300ER · 2 PCS สัมภาระโหลด (ไม่ได้ระบุน้ำหนัก)','ตั๋วยืนยัน']
+],note:'เป้าหมายถึงสนามบินอย่างน้อย 3 ชั่วโมงก่อนเที่ยวบิน TG673 · ถ้าเที่ยวเช้าช้ากว่ากำหนดให้ข้ามร้านอาหาร'},
 };

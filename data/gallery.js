@@ -45,9 +45,14 @@ export const galleryByDay = {
     {title:'Namba Night Street',subtitle:'เดินชมโอซาก้าคืนสุดท้าย',vibe:'Osaka',why:'บรรยากาศแสงสีเมืองโอซาก้ายามค่ำ',tags:['กลางคืน'],map:'Namba Osaka',image:localPhoto(7,3)}
   ],
   8:[
+    {title:'Fushimi Inari · Senbon Torii',subtitle:'เสาโทริอิแดงจริงของ Fushimi Inari',vibe:'Kyoto East',why:'สถานที่จริงในเส้นทางเช้า 24 พ.ย. ภาพโดย Sai Adikarla',tags:['09:15','ศาลเจ้า'],map:'Fushimi Inari Taisha Kyoto',image:localPhoto(8,7)},
+    {title:'Yasaka Pagoda',subtitle:'เจดีย์ Yasaka no Tō ย่าน Higashiyama',vibe:'Old Kyoto',why:'ภาพสถานที่จริงปี 2026 CC BY 4.0 โดย Piet Parkiet',tags:['13:00','เจดีย์'],map:'Yasaka Pagoda Kyoto',image:localPhoto(8,9)},
+    {title:'Kiyomizu-dera Autumn',subtitle:'ใบไม้แดงที่วัดคิโยมิสึ',vibe:'Night Viewing',why:'ภาพวัดจริงจากปีก่อน ไม่ใช่ภาพงานวันที่ 24 พ.ย. 2026',tags:['17:30','วัด'],map:'Kiyomizu-dera Kyoto',image:localPhoto(8,8)}
+  ],
+  9:[
     {title:'Namba Yasaka Shrine',subtitle:'ศาลเจ้าหัวสิงโตยักษ์',vibe:'Osaka',why:'ภาพถ่ายหัวสิงโตจริงของศาลเจ้านัมบะยาซากะ',tags:['09:20','ศาลเจ้า'],map:'Namba Yasaka Shrine Osaka',image:localPhoto(8,4)},
     {title:'Crepe & Espresso & 9-chome',subtitle:'รูปเครปสตรอว์เบอร์รีจากภาพที่คุณส่งมา',vibe:'Dessert',why:'แสดงภาพจริงของ Crepe & Espresso ที่คุณอัปโหลดไว้ในเว็บไซต์โดยตรง ไม่ใช้ Instagram Embed',tags:['11:00','เครป'],map:'Crepe & Espresso & 9-chome Osaka',image:'/photos/day-8-crepe-user.webp',photoStatus:'user-provided',photoSource:'user-upload'},
-    {title:'Rikuro’s Cheesecake — Namba Main Store',subtitle:'หน้าร้าน Rikuro’s Namba',vibe:'Dessert',why:'รูปถ่ายจริงของหน้าร้าน Namba Main Store',tags:['12:25','ชีสเค้ก'],map:'Rikuro’s Cheesecake Namba Main Store Osaka',image:localPhoto(8,5)},
-    {title:'Nankai Namba Station',subtitle:'สถานีต้นทางไปสนามบิน KIX',vibe:'Transit',why:'ภาพชานชาลาของสถานี Nankai Namba จริง',tags:['15:00','สนามบิน'],map:'Nankai Namba Station Osaka',image:localPhoto(8,6)}
+    {title:'Rikuro’s Cheesecake — Namba Main Store',subtitle:'หน้าร้าน Rikuro’s Namba',vibe:'Dessert',why:'รูปถ่ายจริงของหน้าร้าน Namba Main Store',tags:['12:00','ชีสเค้ก'],map:'Rikuro’s Cheesecake Namba Main Store Osaka',image:localPhoto(8,5)},
+    {title:'Nankai Namba Station',subtitle:'สถานีต้นทางไปสนามบิน KIX',vibe:'Transit',why:'ภาพชานชาลาของสถานี Nankai Namba จริง',tags:['13:00','สนามบิน'],map:'Nankai Namba Station Osaka',image:localPhoto(8,6)}
   ],
 };

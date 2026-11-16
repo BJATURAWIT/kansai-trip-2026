@@ -14,8 +14,8 @@ test('problem screenshot Shinsaibashi M19 to Umeda Sky always points at Osaka Ja
  assert.match(url.searchParams.get('destination'),/Umeda Sky Building.*Osaka, Japan/);
  assert.doesNotMatch(url.searchParams.get('origin'),/\(M19\)/);
 });
-test('route endpoints in all eight days and alternate itineraries are geocoded with a country',()=>{
- for(let day=1;day<=8;day++)for(const kyoto of ['west','east'])for(const mode of ['original','rainy','relaxed']){
+test('route endpoints in all nine days and alternate itineraries are geocoded with a country',()=>{
+ for(let day=1;day<=9;day++)for(const kyoto of ['west','east'])for(const mode of ['original','rainy','relaxed']){
   for(const airportTrain of ['express','rapit','jr']){
    const p=normalizePreferences({kyoto,airportTrain,dayPlans:{[day]:mode}});
    for(const leg of detailedRouteGuide(day,p).legs){
@@ -32,7 +32,7 @@ test('route endpoints in all eight days and alternate itineraries are geocoded w
 test('Gallery, daily map pins and dining all resolve in Japan',()=>{
  for(const day of itinerary)assert.match(parsed(mapSearchUrl(day.map)).searchParams.get('query'),/Japan$/);
  for(const venue of Object.values(foodVenues))if(venue.map)assert.match(parsed(mapSearchUrl(venue.map)).searchParams.get('query'),/Japan$/);
- for(const kyoto of ['west','east'])for(let day=1;day<=8;day++){
+ for(const kyoto of ['west','east'])for(let day=1;day<=9;day++){
   const p=normalizePreferences({kyoto});
   for(const slot of resolvedSchedule(day,p))if(slot.map)assert.match(parsed(mapSearchUrl(slot.map)).searchParams.get('query'),/Japan$/);
  }
