@@ -60,7 +60,7 @@ export default function TripTable({ onOpenDay,prefs }) {
   return (
     <section className="content-pane trip-table-page">
       <div className="trip-table-page-heading">
-        <span className="kicker">YOUR ITINERARY · 17–24 NOV 2026</span>
+        <span className="kicker">YOUR ITINERARY · 17–25 NOV 2026</span>
         <h2><CalendarDays size={26}/> แผนเที่ยวแบบตาราง</h2>
         <p>ดูครบทุกวัน หรือเลือกดูเฉพาะวัน · เรียงเวลาจากแผนเที่ยวล่าสุด</p>
       </div>
