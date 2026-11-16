@@ -92,7 +92,7 @@ export function foodStopsForDay(day,prefs={}){
   case 6:return [f('13:30','inaba','optional','light-lunch','หลังรถถึง 12:51 เลือกอาหารเบาก่อนเดินทางไปเรียวกัง; Dinner Nishimuraya รวมแล้ว')];
  case 7:return [f('12:00','masyua','primary','lunch','อย่าช้ากว่า 14:00 ต้องทัน Kounotori 22 15:30'),f('12:00','inaba','backup','lunch','อยู่ใกล้สถานี เหมาะถ้าร้าน Masuya เต็ม'),f('19:45','kura','primary','dinner','หลังเช็กอิน Centara'),f('19:45','tsurutontan','backup','dinner','อุด้งใกล้โรงแรม เปิดดึก')];
  case 8:return [f('11:45','izuju','primary','lunch','ซูชิ Gion · ตรวจคิวและวันเปิด'),f('11:45','katsukuraKyoto','backup','lunch','หมูทอดใกล้ Kyoto-Kawaramachi'),f('15:30','tsujiri','optional','dessert','มัทฉะระหว่างเดิน Higashiyama ตามคิว'),f('19:00','gionKyomen','optional','dinner','เฉพาะมีเวลา ไม่ให้กระทบรถกลับ Osaka')];
- case 9:return [f('11:00','crepe9','optional','dessert','เครปหลังเปิด 11:00 ถ้าคิวเกิน 15 นาทีข้าม'),f('12:00','rikuroNamba','optional','dessert','ชีสเค้ก Takeaway'),f('12:10','shirokitsune','backup','lunch','เฉพาะเหลือเวลา'),f('12:10','kura','backup','lunch','เฉพาะเหลือเวลา')];
+ case 9:return [f('11:00','crepe9','optional','dessert','เครปหลังเปิด 11:00 ถ้าคิวเกิน 15 นาทีข้าม'),f('12:00','rikuroNamba','optional','dessert','ชีสเค้ก Takeaway'),f('12:00','shirokitsune','backup','lunch','เฉพาะเหลือเวลา'),f('12:00','kura','backup','lunch','เฉพาะเหลือเวลา')];
  default:return [];
  }
 }

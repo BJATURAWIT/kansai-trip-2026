@@ -354,18 +354,21 @@ const dayEight=()=>[
   at('JR Inari','ออกสถานี เดินสู่ Fushimi Inari')],{duration:'60–90 นาทีรวมรอรถ'}),
  walk('JR Inari Station (Kyoto)','Fushimi Inari Taisha Kyoto','เดินชมศาลเจ้าและเสาโทริอิ Senbon Torii · ไม่ต้องขึ้นถึงยอดเขา','5–10 นาทีเดินจากสถานี'),
  leg('JR Inari Station','JR Kyoto Station','JR Nara Line','Kansai WIDE Pass ใช้ได้วันที่ 24 พ.ย.',[
-  at('Inari (JR Nara Line)','ขึ้น JR กลับ Kyoto')],{duration:'ประมาณ 6–12 นาที'}),
+  at('Inari (JR Nara Line)','ขึ้น JR กลับ Kyoto'),
+  at('Kyoto Station','ลงขบวน JR Nara Line แล้วเดินไปจุดขึ้นรถบัส')],{duration:'ประมาณ 6–12 นาที'}),
  leg('Kyoto Station','Gojozaka / Higashiyama Kyoto','Kyoto City Bus','รถบัสธรรมดาในเขตคงที่ ¥230/คน · JR Pass ไม่ครอบคลุม · Taxi จ่ายแยก',[
   at('Kyoto Station Bus Terminal','เลือกบัสไป Gojozaka หรือ Kiyomizu-michi ดูป้ายสายรถและเส้นทางจริง'),
   at('Gojozaka / Kiyomizu-michi','เดินไป Gion/Higashiyama · เผื่อรถติดช่วงใบไม้แดง')],{duration:'ตรวจรอบรถจริง/ถ้าคนแน่นเลือกแท็กซี่'}),
  walk('Higashiyama Kyoto','Kiyomizu-dera Kyoto','เดิน Yasaka Pagoda → Ninenzaka → Sannenzaka แล้วเข้า Kiyomizu Night Viewing 17:30 · ค่าเข้าประมาณ ¥500/คน','บ่ายถึงค่ำตามแผน'),
  leg('Gojozaka / Kiyomizu-michi','Kyoto Station','Kyoto City Bus','รถธรรมดาเขตคงที่ ¥230/คน · หากแน่น Taxi จ่ายแยก',[
-  at('Gojozaka / Kiyomizu-michi','ขึ้นบัสกลับ Kyoto Station ตามจอจริง เผื่อเวลาเดินลงเขาและการจราจร')],{duration:'30–60 นาทีรวมรอรถ'}),
+  at('Gojozaka / Kiyomizu-michi','ขึ้นบัสกลับ Kyoto Station ตามจอจริง เผื่อเวลาเดินลงเขาและการจราจร'),
+  at('Kyoto Station','ลงรถบัสแล้วเดินไปสถานี JR Kyoto')],{duration:'30–60 นาทีรวมรอรถ'}),
  leg('JR Kyoto Station','JR Osaka Station','JR Kyoto Line Special Rapid','Kansai WIDE Pass รวม JR จนสิ้น 24 พ.ย.',[
   at('JR Kyoto','ตรวจขบวน Special Rapid ไป Osaka'),
   at('JR Osaka','เปลี่ยนไป Metro Umeda')],{duration:'ประมาณ 30 นาทีบนรถ'}),
  leg('Umeda Station (M16)',DAI,'Osaka Metro Midosuji','ICOCA จ่ายแยก',[
-  at('Umeda M16','ขึ้น Metro Midosuji มุ่งใต้ไป Daikokucho M21')],{duration:'ประมาณ 12–18 นาที'})
+  at('Umeda M16','ขึ้น Metro Midosuji มุ่งใต้ไป Daikokucho M21'),
+  at('Daikokucho M21','ลงแล้วเดินกลับ Centara Life Namba')],{duration:'ประมาณ 12–18 นาที'})
 ];
 const airportEnd=()=>[
  walk('Kansai-airport Station',KIX,'ตามป้าย Terminal 1 / International Departures ไปเคาน์เตอร์เช็กอินสายการบิน', 'เดินในอาคารประมาณ 5–15 นาที'),
