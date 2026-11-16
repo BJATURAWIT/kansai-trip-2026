@@ -14,8 +14,10 @@ const options={
  'Yodoyabashi → Fushimi-Inari':{yen:480,source:'https://ekitan.com/transit/fare/sf-6143/st-5921',operator:'Keihan'},
  'Fushimi-Inari → Kiyomizu-Gojo / Kyoto National Museum':{yen:240,source:'https://ekitan.com/transit/fare/sf-5921/st-5301',operator:'Keihan',note:'ราคาปลายทางสถานี Kiyomizu-Gojo; เดินต่อพิพิธภัณฑ์'},
  'Gion-Shijo / Kyoto → Yodoyabashi':{yen:490,source:'https://ekitan.com/rail-company/592/fare/sf-5378/st-6143',operator:'Keihan',note:'สถานีขึ้น Gion-Shijo เท่านั้น'},
+ 'Kyoto Station → Higashiyama':{yen:230,source:'https://www2.city.kyoto.lg.jp/kotsu/webguide/en/fare/fare_bus.html',operator:'Kyoto City Bus',note:'รถธรรมดาเขตคงที่; Taxi แยก'},
+ 'Kiyomizu-dera → Kyoto Station':{yen:230,source:'https://www2.city.kyoto.lg.jp/kotsu/webguide/en/fare/fare_bus.html',operator:'Kyoto City Bus',note:'รถธรรมดาเขตคงที่; Taxi แยก'},
  'Nankai Namba → Kansai Airport · Airport Express':{yen:970,source:'https://www.nankai.co.jp/traffic/kix/kix_dia.html',operator:'Nankai'},
- 'Nankai Namba → Kansai Airport · Rapi:t Regular Seat':{yen:1670,source:'https://www.nankai.co.jp/en_railway/traffic/express/rapit.html',operator:'Nankai',note:'ค่าโดยสาร ¥970 + ค่ารถด่วน Regular ¥700'},
+ 'Nankai Namba → Kansai Airport · Rapi:t Regular Seat':{yen:1490,source:'https://www.nankai.co.jp/en_railway/ticket/rapit',operator:'Nankai',note:'ราคาอ้างอิง Regular ¥1,490 · อาจต่างตามช่องทางซื้อ; ตรวจ Nankai'},
 };
 export const verifiedSegmentPrices=Object.freeze(options);
 export const pricedSegment=segment=>{

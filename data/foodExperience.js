@@ -1,5 +1,5 @@
 import {travelBookings} from './centralTravel.js';
-// Curated for the 17–24 November 2026 travel plan.
+// Curated for the 17–25 November 2026 travel plan.
 // Opening hours are published schedules, not guarantees for a future date.
 // 'verified' means a venue and its published information were checked, not a live reservation.
 const food=(name,area,type,menu,priceYen,priceNote,hours,closed,site,menuSource,from,review,reviewSource,more={})=>({
@@ -72,7 +72,7 @@ const f=(time,id,role,kind,note='')=>({time,id,role,kind,note});
 export function foodStopsForDay(day,prefs={}){
  const kyoto=prefs.kyoto==='east'?'east':'west',mode=prefs.dayPlans?.[day]||'original';
  switch(day){
- case 1:return [f('21:00','toritoriko','primary','late-dinner','ตัวเลือกแรกหลังเช็กอิน (เวลาเป็นเป้าหมาย ขึ้นกับ ตม./Rapi:t); อยู่ใกล้โรงแรม หากคิวเกิน 15 นาทีหรือเหนื่อยให้เลือก Backup'),f('21:00','kura','backup','late-dinner','Backup 1: Kura Sushi Namba Parks South หากต้องการซูชิหรือมื้อราคาประหยัดกว่า'),f('21:00','tsurutontan','backup','late-dinner','Backup 2: Tsurutontan Agetachi ใกล้ Daikokucho เปิดถึงดึกเมื่อเข้าที่พักช้า')];
+ case 1:return [f('20:00','toritoriko','primary','late-dinner','ตัวเลือกแรกหลังเช็กอิน (เวลาเป็นเป้าหมาย ขึ้นกับ ตม./Rapi:t); อยู่ใกล้โรงแรม หากคิวเกิน 15 นาทีหรือเหนื่อยให้เลือก Backup'),f('20:00','kura','backup','late-dinner','Backup 1: Kura Sushi Namba Parks South หากต้องการซูชิหรือมื้อราคาประหยัดกว่า'),f('20:00','tsurutontan','backup','late-dinner','Backup 2: Tsurutontan Agetachi ใกล้ Daikokucho เปิดถึงดึกเมื่อเข้าที่พักช้า')];
  case 2:return [f('12:00','makino','primary','lunch','Osaka Castle → Morinomiya (N20) → Shinsaibashi (N15/M19) → Namba (M20); เดินไปร้าน หากรอเกิน 15 นาทีเปลี่ยน Tendon Tenya'),f('12:00','tenya','backup','lunch','ร้านสำรอง Namba Sennichimae ใกล้ Makino; เดินได้ ไม่ต้องเปลี่ยนแผนเที่ยว'),f(travelBookings.restaurants.stardust.reservationTimeLocal||travelBookings.restaurants.stardust.plannedDinnerStartLocal,'stardust','primary','dinner','Special Dinner · Confirmed booking; dinner time tentative pending restaurant confirmation'),f('18:15','xex','backup','dinner','Emergency backup only; STARDUST reservation already confirmed')];
  case 3:return [f('11:30',null,'primary','lunch','USJ Quick Service ภายในสวนสนุก; พัก 11:30–12:30 ก่อนเข้า Super Nintendo World 13:40 · เลือกจากแอปสวนสนุกวันจริง')];
  case 4:if(kyoto==='east')return [f('13:45','izuju','primary','lunch','Kyoto East-only alternative'),f('15:30','tsujiri','optional','dessert','Kyoto East-only alternative')];
@@ -91,7 +91,8 @@ export function foodStopsForDay(day,prefs={}){
     f('19:00','tsurutontan','backup','dinner','สำรองอุด้งใกล้ Daikokucho')];
   case 6:return [f('13:30','inaba','optional','light-lunch','หลังรถถึง 12:51 เลือกอาหารเบาก่อนเดินทางไปเรียวกัง; Dinner Nishimuraya รวมแล้ว')];
  case 7:return [f('12:00','masyua','primary','lunch','อย่าช้ากว่า 14:00 ต้องทัน Kounotori 22 15:30'),f('12:00','inaba','backup','lunch','อยู่ใกล้สถานี เหมาะถ้าร้าน Masuya เต็ม'),f('19:45','kura','primary','dinner','หลังเช็กอิน Centara'),f('19:45','tsurutontan','backup','dinner','อุด้งใกล้โรงแรม เปิดดึก')];
- case 8:return [f('11:00','crepe9','optional','dessert','เครปหลังร้านเปิด 11:00'),f('12:25','rikuroNamba','optional','dessert','ซื้อชีสเค้ก Takeaway สาขา Namba'),f('13:00','shirokitsune','primary','lunch','มื้อกลางวันเบา ๆ ถ้ายังหิว'),f('13:00','kura','backup','lunch','สำรองใกล้ Namba')];
+ case 8:return [f('11:45','izuju','primary','lunch','ซูชิ Gion · ตรวจคิวและวันเปิด'),f('11:45','katsukuraKyoto','backup','lunch','หมูทอดใกล้ Kyoto-Kawaramachi'),f('15:30','tsujiri','optional','dessert','มัทฉะระหว่างเดิน Higashiyama ตามคิว'),f('19:00','gionKyomen','optional','dinner','เฉพาะมีเวลา ไม่ให้กระทบรถกลับ Osaka')];
+ case 9:return [f('11:00','crepe9','optional','dessert','เครปหลังเปิด 11:00 ถ้าคิวเกิน 15 นาทีข้าม'),f('12:00','rikuroNamba','optional','dessert','ชีสเค้ก Takeaway'),f('12:10','shirokitsune','backup','lunch','เฉพาะเหลือเวลา'),f('12:10','kura','backup','lunch','เฉพาะเหลือเวลา')];
  default:return [];
  }
 }

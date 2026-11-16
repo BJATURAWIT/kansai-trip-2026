@@ -71,6 +71,16 @@ export const dayPhotos = {
     position: 'center 53%',
   },
   8: {
+    src: '/photos/day-8-7.jpg',
+    source: '/photos/credits.json',
+    filename: 'day-08-fushimi-inari.jpg',
+    alt: 'เสาโทริอิแดงที่ Fushimi Inari Kyoto (ภาพสถานที่จริง)',
+    caption: 'Fushimi Inari · Kyoto East',
+    author: 'Sai Adikarla',
+    license: 'CC BY 2.0',
+    position: 'center 50%',
+  },
+  9: {
     src: '/photos/day-8-1.jpg',
     source: '/photos/credits.json',
     filename: 'day-08-kansai-airport.jpg',
