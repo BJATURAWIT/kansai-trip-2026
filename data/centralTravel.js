@@ -1,31 +1,29 @@
-/**
- * Canonical, public-safe booking data for Kansai Trip 2026.
- * Do not add airline booking IDs, passenger data, receipt IDs, payment info.
- * All timestamps use the LOCAL TIME ZONE OF THE STATED AIRPORT (ISO with offset).
- * Flight details last communicated by traveler on 2026-10-23:
- * 17 Nov DMK 10:40 -> KIX 18:15; 24 Nov KIX 19:45 -> DMK 00:15 25 Nov.
- * The RETURN FLIGHT NUMBER remains UNVERIFIED; do not infer a number.
+/** Public-safe booking source. Updated from passenger's Thai Airways itinerary on 16 Nov 2026.
+ * The PDF confirms flight dates/times, aircraft, booking status and baggage PIECE counts.
+ * Do not infer checked-baggage weight from "1 PC / 2 PCS"; do not expose PNR/passenger IDs.
+ * All airport timestamps use the local timezone shown in each endpoint.
  */
 export const travelBookings = Object.freeze({
-  trip: {startDate:'2026-11-17',endDate:'2026-11-24',travelers:2,days:8,nights:7},
+  trip: {startDate:'2026-11-17',endDate:'2026-11-25',travelers:2,days:9,nights:8},
   flights: {
     outbound: {
-      id:'outbound', number:'XJ610', numberEvidence:'previously confirmed booking',
-      departure:{airport:'DMK',terminal:'T1',local:'2026-11-17T10:40:00+07:00',timeZone:'Asia/Bangkok'},
-      arrival:{airport:'KIX',terminal:'T1',local:'2026-11-17T18:15:00+09:00',timeZone:'Asia/Tokyo'},
+      id:'outbound', number:'TG672', numberEvidence:'Thai Airways confirmed itinerary 16 Nov 2026',airline:'Thai Airways',aircraft:'Boeing 777-300ER',cabin:'Economy (W)',checkedBaggagePieces:1,checkedBaggageWeightKg:null,
+      departure:{airport:'BKK',terminal:'',local:'2026-11-17T08:15:00+07:00',timeZone:'Asia/Bangkok'},
+      arrival:{airport:'KIX',terminal:'T1',local:'2026-11-17T15:45:00+09:00',timeZone:'Asia/Tokyo'},
       status:'booked',
     },
     inbound: {
-      id:'inbound',number:null,numberEvidence:'original AirAsia document required',
-      departure:{airport:'KIX',terminal:'T1',local:'2026-11-24T19:45:00+09:00',timeZone:'Asia/Tokyo'},
-      arrival:{airport:'DMK',terminal:'T1',local:'2026-11-25T00:15:00+07:00',timeZone:'Asia/Bangkok'},
-      status:'booked; flight number unverified',
+      id:'inbound',number:'TG673',numberEvidence:'Thai Airways confirmed itinerary 16 Nov 2026',airline:'Thai Airways',aircraft:'Boeing 777-300ER',cabin:'Economy (S)',checkedBaggagePieces:2,checkedBaggageWeightKg:null,
+      departure:{airport:'KIX',terminal:'T1',local:'2026-11-25T17:25:00+09:00',timeZone:'Asia/Tokyo'},
+      arrival:{airport:'BKK',terminal:'',local:'2026-11-25T22:00:00+07:00',timeZone:'Asia/Bangkok'},
+      status:'confirmed',
     },
   },
   hotels:[
     {id:'centara1',name:'Centara Life Namba Hotel Osaka',date:'17–22 พ.ย. · 5 คืน',plan:'Room only',area:'Osaka / Namba',map:'Centara Life Namba Hotel Osaka',booked:true},
     {id:'nishimuraya',name:'Nishimuraya Hotel Shogetsutei',date:'22–23 พ.ย. · 1 คืน',plan:'Dinner + Breakfast',area:'Kinosaki Onsen',map:'Nishimuraya Hotel Shogetsutei',booked:true},
     {id:'centara2',name:'Centara Life Namba Hotel Osaka',date:'23–24 พ.ย. · 1 คืน',plan:'Breakfast included',area:'Osaka / Namba',map:'Centara Life Namba Hotel Osaka',booked:true},
+    {id:'centaraExtra',name:'Centara Life Namba Hotel Osaka',date:'24–25 พ.ย. · เพิ่ม 1 คืน (รอหลักฐานยืนยัน)',plan:'Breakfast offered · รอยืนยันจากโรงแรม',area:'Osaka / Namba',map:'Centara Life Namba Hotel Osaka',booked:false},
   ],
   // Only public-safe fields. Reservation email, confirmation IDs and private notes stay offline.
   restaurants:{
@@ -71,7 +69,7 @@ export function tripFlightList(){
   return [travelBookings.flights.outbound,travelBookings.flights.inbound].map(f=>({
     id:f.id,code:f.number,numberVerified:!!f.number,
     route:flightRouteLabel(f),
-    date:f.id==='outbound'?'17 พ.ย.':'24–25 พ.ย.',
+    date:f.id==='outbound'?'17 พ.ย.':'25 พ.ย.',
     time:flightTimeLabel(f),label:f.id==='outbound'?'ขาไป':'ขากลับ',
     departure:f.departure,arrival:f.arrival,
   }));
