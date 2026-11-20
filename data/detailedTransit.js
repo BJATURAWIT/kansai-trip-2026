@@ -1,4 +1,5 @@
 import {travelBookings,flightNumberLabel} from './centralTravel.js';
+import {addNavigationDetails} from './stationNavigation.js';
 
 // Human-readable routing instructions, not live train schedules.
 // Platforms, actual departures and possible service disruptions must be checked on travel day.
@@ -379,7 +380,7 @@ const airportEnd=()=>[
 export function detailedRouteGuide(day,prefs={}){
  const mode=prefs.dayPlans?.[day]||'original';
  const legs=day===1?dayOne():day===2?dayTwo(mode):day===3?dayThree():day===4?(prefs.kyoto==='east'?kyotoEast(mode):kyotoWest(mode)):day===5?dayFive(mode):day===6?daySix():day===7?daySeven():day===8?dayEight():day===9?dayNine(prefs):[];
- return {day,legs,kicker:['','จากสนามบินเข้าที่พัก','เที่ยว Osaka Castle / Kuromon / Umeda','USJ ไป–กลับ','Kyoto West + Gion + Kodaiji Night Illumination','Nara ไป–กลับ','Osaka → Kinosaki Onsen','Kinosaki → Osaka','Kyoto East / Kiyomizu Night','Namba → KIX'][day],
+ return {day,legs:legs.map(addNavigationDetails),kicker:['','จากสนามบินเข้าที่พัก','เที่ยว Osaka Castle / Kuromon / Umeda','USJ ไป–กลับ','Kyoto West + Gion + Kodaiji Night Illumination','Nara ไป–กลับ','Osaka → Kinosaki Onsen','Kinosaki → Osaka','Kyoto East / Kiyomizu Night','Namba → KIX'][day],
  overview:legs.map(x=>x.from+' → '+x.to).join(' · '),
  leave:day===1?'ถึง KIX 15:45 แล้วเลือก Rapi:t หลังรับกระเป๋า':day===3?'ออกก่อนเปิดสวน · ตรวจเวลา USJ จริง':day===6?'Kounotori 5 ออกจาก JR Osaka 10:12':day===7?'Kounotori 22 ออกจาก Kinosaki 15:30':day===8?'ออก 07:45 · ใช้ JR Pass วันที่ 5':day===9?'ออก Nankai Namba ประมาณ 13:00 · TG673 17:25':'ดูเวลารายวันและเผื่อการเดิน/ต่อรถ',
  reminder:'ขั้นตอนเป็นแผนใช้เดินทาง ไม่ใช่การบอกชานชาลา/รอบรถแบบ Real-time · อ่านป้ายปลายทางขบวนจริง และใช้ Google Maps ตรวจเส้นทางวันเดินทาง'};
