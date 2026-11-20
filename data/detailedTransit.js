@@ -1,4 +1,5 @@
 import {travelBookings,flightNumberLabel} from './centralTravel.js';
+import {addNavigationDetails} from './stationNavigation.js';
 
 // Human-readable routing instructions, not live train schedules.
 // Platforms, actual departures and possible service disruptions must be checked on travel day.
@@ -26,16 +27,16 @@ const daikokuWalk=()=>walk(HOME,DAI,'ออกจาก Centara เดินต�
 const daikokuHome=()=>walk(DAI,HOME,'ออกจากประตู Metro แล้วเดินกลับ Centara ตาม Google Maps','ประมาณ 5–10 นาที');
 const daikokuUmeda=()=>leg(DAI,'JR Osaka Station','Osaka Metro + เดิน','ICOCA แตะเข้า Daikokucho / ออก Umeda; JR Pass ไม่ครอบคลุม Metro',[
  at('Daikokucho (M21)','แตะ ICOCA เข้า Osaka Metro สาย Midosuji สีแดง เลือกรถมุ่งเหนือไป Minoh-kayano / Shin-Osaka (ผ่าน Namba)'),
- at('Umeda (M16)','ลงที่ Umeda (M16) แล้วแตะ ICOCA ออกประตู Metro'),
- at('JR Osaka Station','เดินตามป้าย JR Osaka (JR線); เป็นคนละสถานีกับ Osaka Metro Umeda ตรวจชานชาลาขบวน JR ที่จะขึ้นจากจอ')],{duration:'เผื่อ 25–40 นาทีรวมเดิน'});
+ at('Umeda (M16)','ลง Umeda (M16) แตะ ICOCA ออกประตู Metro แล้วตามป้าย JR Osaka (JR線); Exit 8 เป็นหนึ่งในทางเชื่อมไป JR Osaka โดยไม่ต้องเดินขึ้นไปริมถนน'),
+ at('JR Osaka Station','เลือกประตูตรวจตั๋ว JR ที่ใกล้ที่สุด เช่น Central Gate (中央口), South Gate หรือ Midosuji Gate; สอด Kansai WIDE Area Pass แบบกระดาษผ่านประตูอัตโนมัติ และหยิบบัตรคืนทุกครั้ง (Metro ใช้ ICOCA แยก) จากนั้นดูเลขชานชาลาของขบวนที่ต้องขึ้นจากจอ Departure Board')],{duration:'เผื่อ 25–40 นาทีรวมเดิน'});
 const osakaDaikoku=()=>leg('JR Osaka Station',DAI,'เดิน + Osaka Metro','แตะ ICOCA เข้า Umeda / ออก Daikokucho; ไม่ใช้ JR Pass กับ Metro',[
  at('JR Osaka Station','ออกจาก JR แล้วเดินตามป้าย Osaka Metro / Midosuji Line → Umeda (M16)'),
  at('Umeda (M16)','แตะ ICOCA เข้า Midosuji สีแดง เลือกขบวนมุ่งใต้ไป Nakamozu / Tennoji'),
  at('Daikokucho (M21)','ลง Daikokucho (M21) แตะออก แล้วเดินกลับโรงแรม')],{duration:'เผื่อ 25–40 นาทีรวมเดิน'});
 const kyotoJR=()=>leg(OSAKA,SAGA,'JR Kyoto Line + JR Sagano Line','JR Kansai WIDE Area Pass วันที่ 20–24 พ.ย. (ต้องรับพาสก่อนใช้)',[
- at('JR Osaka','ผ่านประตู JR ด้วยพาสที่รับแล้ว ขึ้น Special Rapid / Rapid ไป Kyoto ตรวจรถที่จอด Kyoto และชานชาลาจริง'),
- at('JR Kyoto','ลง Kyoto แล้วเปลี่ยนเป็น JR Sagano Line / San-in Line มุ่ง Sonobe / Kameoka (ดูป้าย Saga-Arashiyama) โดยไม่ออกจากประตู JR'),
- at('JR Saga-Arashiyama','ลง Saga-Arashiyama ตรวจป้ายทางออกหลัก เตรียมเดินไปป่าไผ่')],{duration:'ประมาณ 60–80 นาทีรวมเปลี่ยนขบวน'});
+ at('JR Osaka · JR Kyoto Line','ใช้ JR Pass ผ่านประตู JR แล้วหยิบบัตรคืน → มองหาป้าย JR Kyoto Line (京都線) ฝั่ง Shin-Osaka / Takatsuki / Kyoto; รถปกติอยู่แถวชานชาลา 7–10 แต่ตรวจจอ ณ เวลาจริง เลือก Special Rapid (新快速) หรือ Rapid (快速) ที่จอด Kyoto; อย่าขึ้น Limited Express Kounotori เพียงเพราะอยู่ใกล้กัน'),
+ at('JR Kyoto · เปลี่ยนสายภายใน JR','ลง Kyoto แล้วไม่ต้องผ่านประตูตรวจตั๋ว → เดินตามป้าย JR Sagano Line / San-in Line (嵯峨野線・山陰線) ชานชาลา 31–33 (ตรวจจออีกครั้ง) → ขึ้นขบวนมุ่ง Kameoka / Sonobe ที่ระบุว่าจอด Saga-Arashiyama (嵯峨嵐山)'),
+ at('JR Saga-Arashiyama · South Exit (南口)','ลง Saga-Arashiyama ขึ้นไปโถงสถานี → สอด JR Kansai WIDE Pass ผ่านประตูตรวจตั๋วเพื่อออก และหยิบบัตรคืน → มองหา South Exit (南口) → เดินตามป้าย Tenryu-ji / Arashiyama Bamboo Grove ประมาณ 10–15 นาที')],{duration:'ประมาณ 60–80 นาทีรวมเปลี่ยนขบวน'});
 const sagaOsaka=()=>leg(SAGA,OSAKA,'JR Sagano Line + JR Kyoto Line','JR Kansai WIDE Area Pass · ไม่ต้องจ่ายค่า JR ซ้ำ',[
  at('JR Saga-Arashiyama','ใช้พาสผ่านประตู JR ขึ้น Sagano Line มุ่ง Kyoto'),
  at('JR Kyoto','เปลี่ยนเป็น Special Rapid / Rapid สาย JR Kyoto Line ไป Osaka / Kobe (ยืนยันว่าขบวนจอด Osaka)'),
@@ -254,9 +255,9 @@ const dayFive=mode=>mode==='rainy'?[
  ]:[
   daikokuWalk(), daikokuUmeda(),
   leg(OSAKA,'JR Uji Station Kyoto','JR Kyoto Line + JR Nara Line','JR Kansai WIDE Area Pass · ครอบคลุม JR เท่านั้น',[
-    at('JR Osaka','ใช้ JR Pass เข้า JR Osaka จาก Metro Umeda; ขึ้น Special Rapid / Rapid สาย JR Kyoto Line มุ่ง Kyoto และตรวจขบวนที่จอด Kyoto'),
-    at('JR Kyoto','ลงและเปลี่ยนภายในประตู JR ไป Nara Line สีน้ำตาล มุ่ง Nara; หาขบวนที่จอด Uji'),
-    at('JR Uji','ลง Uji (ไม่ใช่ Keihan Uji); ออก South Exit ฝั่ง JR Station ไปถนน Byodoin Omotesando')],{duration:'เผื่อ 60–90 นาทีรวมรอและเปลี่ยนรถ ไม่ใช่รอบขบวนยืนยัน'}),
+    at('JR Osaka · Central / South / Midosuji Gate','เดินจาก Metro Umeda เข้าประตู JR ที่ใกล้ที่สุด สอด Kansai WIDE Pass และรับคืน → ดูจอชานชาลา JR Kyoto Line (โดยทั่วไปแถว 7–10) ขึ้น Special Rapid / Rapid ที่จอด Kyoto'),
+    at('JR Kyoto · Nara Line','เปลี่ยนภายในประตู JR ไม่ต้องแตะ/สอดบัตรอีก → ตามป้าย Nara Line (奈良線) ตรวจเลขชานชาลาและขบวนที่จอด Uji (宇治) บนจอ ไม่ขึ้นรถที่วิ่งผ่าน Uji'),
+    at('JR Uji · ทางออกไป Byodo-in','ลง JR Uji (ไม่ใช่ Keihan Uji) → สอด JR Pass ผ่านประตูตรวจตั๋วแล้วหยิบบัตรคืน → ไปฝั่งทางออกสู่ Byodoin Omotesando / Byodo-in ตามป้ายทางเดินและแผนที่')],{duration:'เผื่อ 60–90 นาทีรวมรอและเปลี่ยนรถ ไม่ใช่รอบขบวนยืนยัน'}),
   walk('JR Uji Station Kyoto','Byodo-in Temple Uji Kyoto','เดินตาม Byodoin Omotesando ไปวัด Byodo-in ราว 10–15 นาที สวนเปิด 08:45 ค่าเข้า ¥700/คน','10–15 นาที'),
   walk('Byodo-in Temple Uji Kyoto','Uji Bridge Kyoto','หลังชมวัด เดินกลับถนน Omotesando แล้วไปสะพาน Uji Bridge ริมแม่น้ำ','8–12 นาที'),
   walk('Uji Bridge Kyoto','Nakamura Tokichi Honten Uji Kyoto','เดินต่อไปสาขาหลัก Nakamura Tokichi Honten ที่ Uji Ichiban 10 ใกล้ JR Uji; เปิด 10:00 ไม่รับจองคาเฟ่','8–15 นาที'),
@@ -284,7 +285,7 @@ const dayFive=mode=>mode==='rainy'?[
 const daySix=()=>[
  daikokuWalk(),daikokuUmeda(),
  leg(OSAKA,KINO,'JR Limited Express Kounotori 5','JR Kansai WIDE Area Pass + Reserved Seat ที่จองแล้ว',[
- at('JR Osaka Station','ใช้ JR Pass และตั๋วที่นั่งที่รับแล้ว เข้าประตู JR ตรวจบอร์ดขบวน Kounotori 5 และชานชาลา'),
+ at('JR Osaka Station · เข้า JR','จาก Metro Umeda ใช้ Central Gate / South Gate / Midosuji Gate ที่สะดวก สอด JR Pass และหยิบบัตรคืน เตรียมตั๋ว Reserved Seat → ตรวจจอ Kounotori 5 เวลา 10:12 และเลขชานชาลาจริง (ห้ามใช้เลขชานชาลาของรถไป Kyoto แทน)'),
  at('Kounotori 5 · 10:12','ขึ้นตู้ 4 (Car 4) ที่นั่ง 9C และ 9D ชั้น Ordinary Reserved Seat; ห้ามเปลี่ยนขบวนโดยพลการ'),
  at('Kinosaki Onsen · 12:51','ลงรถและออกสถานี Kinosaki Onsen')],{duration:'2 ชม. 39 นาที',note:'กำหนดเวลาและที่นั่งยืนยันแล้ว'}),
  leg(KINO,RYOKAN,'รถรับส่ง','ใช้รถ Check-in Shuttle ตามเงื่อนไขโรงแรม · สอบถามเจ้าหน้าที่',[
@@ -379,7 +380,7 @@ const airportEnd=()=>[
 export function detailedRouteGuide(day,prefs={}){
  const mode=prefs.dayPlans?.[day]||'original';
  const legs=day===1?dayOne():day===2?dayTwo(mode):day===3?dayThree():day===4?(prefs.kyoto==='east'?kyotoEast(mode):kyotoWest(mode)):day===5?dayFive(mode):day===6?daySix():day===7?daySeven():day===8?dayEight():day===9?dayNine(prefs):[];
- return {day,legs,kicker:['','จากสนามบินเข้าที่พัก','เที่ยว Osaka Castle / Kuromon / Umeda','USJ ไป–กลับ','Kyoto West + Gion + Kodaiji Night Illumination','Nara ไป–กลับ','Osaka → Kinosaki Onsen','Kinosaki → Osaka','Kyoto East / Kiyomizu Night','Namba → KIX'][day],
+ return {day,legs:legs.map(addNavigationDetails),kicker:['','จากสนามบินเข้าที่พัก','เที่ยว Osaka Castle / Kuromon / Umeda','USJ ไป–กลับ','Kyoto West + Gion + Kodaiji Night Illumination','Nara ไป–กลับ','Osaka → Kinosaki Onsen','Kinosaki → Osaka','Kyoto East / Kiyomizu Night','Namba → KIX'][day],
  overview:legs.map(x=>x.from+' → '+x.to).join(' · '),
  leave:day===1?'ถึง KIX 15:45 แล้วเลือก Rapi:t หลังรับกระเป๋า':day===3?'ออกก่อนเปิดสวน · ตรวจเวลา USJ จริง':day===6?'Kounotori 5 ออกจาก JR Osaka 10:12':day===7?'Kounotori 22 ออกจาก Kinosaki 15:30':day===8?'ออก 07:45 · ใช้ JR Pass วันที่ 5':day===9?'ออก Nankai Namba ประมาณ 13:00 · TG673 17:25':'ดูเวลารายวันและเผื่อการเดิน/ต่อรถ',
  reminder:'ขั้นตอนเป็นแผนใช้เดินทาง ไม่ใช่การบอกชานชาลา/รอบรถแบบ Real-time · อ่านป้ายปลายทางขบวนจริง และใช้ Google Maps ตรวจเส้นทางวันเดินทาง'};

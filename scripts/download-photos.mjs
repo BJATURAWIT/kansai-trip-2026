@@ -20,7 +20,7 @@ for(const x of sources){
  // Commons may respond 429 on consecutive Vercel builds. Retry the exact same
  // licensed photo through a cached image proxy only when the source fails.
  const candidates=[x.url];
- if(x.url.includes('commons.wikimedia.org/wiki/Special:FilePath/'))candidates.push('https://images.weserv.nl/?url='+encodeURIComponent(x.url)+'&output=jpg');
+ if(x.url.includes('commons.wikimedia.org/wiki/Special:FilePath/')||x.url.startsWith('https://upload.wikimedia.org/'))candidates.push('https://images.weserv.nl/?url='+encodeURIComponent(x.url)+'&output=jpg');
  for(const candidate of candidates){
   try{
    const ctrl=new AbortController();const timer=setTimeout(()=>ctrl.abort(),18000);
