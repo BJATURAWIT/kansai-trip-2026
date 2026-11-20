@@ -200,3 +200,12 @@
 .wishlist-photo:focus-visible{outline:3px solid #2e8061;outline-offset:-3px}
 .wishlist-photo:hover img{transform:scale(1.025)}
 .wishlist-photo img{transition:transform .2s ease}
+
+/* Station navigation: all days and all itinerary variants */
+.station-guide-facts{margin:0 0 14px;padding:13px 14px;background:#edf5f0;border:1px solid #cfe5d7;border-radius:12px;color:#183c32}
+.station-guide-facts>strong{display:block;font-size:12px;margin-bottom:11px;line-height:1.6}
+.station-guide-facts dl{display:grid;grid-template-columns:minmax(96px,120px) 1fr;gap:8px 10px;margin:0;font-size:11px;line-height:1.75}
+.station-guide-facts dt{font-weight:800;color:#346c58}
+.station-guide-facts dd{margin:0;overflow-wrap:anywhere}
+.station-guide-caution{margin-top:11px!important;border-top:1px solid #cfe5d7;padding-top:9px;font-size:10px!important;color:#5d756b!important}
+@media(max-width:520px){.station-guide-facts dl{grid-template-columns:1fr;gap:2px}.station-guide-facts dt{margin-top:6px}.station-guide-facts dd{margin-bottom:3px}}
