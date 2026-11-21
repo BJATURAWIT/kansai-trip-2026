@@ -172,12 +172,11 @@ export function resolvedSegments(day,prefs){
  }
  if(day===8)return [
   {route:'Daikokucho → Umeda',type:'metro',card:'ICOCA / Osaka Metro',note:'จ่ายแยก'},
-  {route:'JR Osaka → Kyoto → Inari',type:'jr',card:'Kansai WIDE Pass · วันที่ 5',note:'ใช้ Pass 20–24 พ.ย.'},
-  {route:'JR Inari → Kyoto',type:'jr',card:'Kansai WIDE Pass',note:'รวมในพาส'},
-  {route:'Kyoto Station → Higashiyama',type:'bus',card:'Kyoto City Bus / Taxi',note:'รถบัสธรรมดาเขตคงที่ ¥230/คน · Taxi จ่ายแยก'},
-  {route:'Higashiyama → Kiyomizu-dera',type:'walk',card:'เดิน',note:'เข้าวัดประมาณ ¥500/คน'},
+  {route:'JR Osaka → Kyoto → Tofukuji',type:'jr',card:'Kansai WIDE Pass · วันที่ 5',note:'ใช้ Pass 20–24 พ.ย.'},
+  {route:'Keihan Tofukuji → Gion-Shijo',type:'keihan',card:'ICOCA / Keihan Railway',note:'จ่ายแยกจาก JR Pass'},
+  {route:'Gion → Yasaka Shrine → Ninenzaka → Kiyomizu-dera',type:'walk',card:'เดิน',note:'ค่าเข้าวัดแยก'},
   {route:'Kiyomizu-dera → Kyoto Station',type:'bus',card:'Kyoto City Bus / Taxi',note:'จ่ายแยก'},
-  {route:'JR Kyoto → Osaka',type:'jr',card:'Kansai WIDE Pass · วันที่ 5',note:'รวมในพาสถึง 24:00'},
+  {route:'JR Kyoto → Osaka',type:'jr',card:'Kansai WIDE Pass · วันที่ 5',note:'รวมในพาสถึงจบวันที่ 24 พ.ย.'},
   {route:'Umeda → Daikokucho',type:'metro',card:'ICOCA / Osaka Metro',note:'จ่ายแยก'}
  ];
  if(day!==4){
