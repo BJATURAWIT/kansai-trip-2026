@@ -345,31 +345,29 @@ const dayNine=prefs=>{
  ];
 };
 const dayEight=()=>[
- walk(HOME,DAI,'เดินไป Daikokucho (M21) เพื่อขึ้น Metro Midosuji ไป Umeda (M16)','5–12 นาที'),
+ walk(HOME,DAI,'เดินไป Daikokucho (M21) เพื่อขึ้น Metro Midosuji','5–12 นาที'),
  leg(DAI,'JR Osaka Station','Osaka Metro Midosuji','ICOCA จ่ายแยกจาก JR Pass',[
-  at('Daikokucho (M21)','ขึ้น Metro Midosuji มุ่งเหนือไป Umeda (M16)'),
-  at('Umeda (M16)','เดินตามป้าย JR Osaka Station')],{duration:'20–30 นาทีรวมเดิน'}),
- leg('JR Osaka Station','JR Inari Station (Kyoto)','JR Kyoto Line + JR Nara Line','Kansai WIDE Pass วันที่ 5 · JR ในพื้นที่รวมใน Pass',[
-  at('JR Osaka','ขึ้น JR Kyoto Line ไป Kyoto Station'),
-  at('JR Kyoto','เปลี่ยน JR Nara Line Local ไป Inari Station'),
-  at('JR Inari','ออกสถานี เดินสู่ Fushimi Inari')],{duration:'60–90 นาทีรวมรอรถ'}),
- walk('JR Inari Station (Kyoto)','Fushimi Inari Taisha Kyoto','เดินชมศาลเจ้าและเสาโทริอิ Senbon Torii · ไม่ต้องขึ้นถึงยอดเขา','5–10 นาทีเดินจากสถานี'),
- leg('JR Inari Station','JR Kyoto Station','JR Nara Line','Kansai WIDE Pass ใช้ได้วันที่ 24 พ.ย.',[
-  at('Inari (JR Nara Line)','ขึ้น JR กลับ Kyoto'),
-  at('Kyoto Station','ลงขบวน JR Nara Line แล้วเดินไปจุดขึ้นรถบัส')],{duration:'ประมาณ 6–12 นาที'}),
- leg('Kyoto Station','Gojozaka / Higashiyama Kyoto','Kyoto City Bus','รถบัสธรรมดาในเขตคงที่ ¥230/คน · JR Pass ไม่ครอบคลุม · Taxi จ่ายแยก',[
-  at('Kyoto Station Bus Terminal','เลือกบัสไป Gojozaka หรือ Kiyomizu-michi ดูป้ายสายรถและเส้นทางจริง'),
-  at('Gojozaka / Kiyomizu-michi','เดินไป Gion/Higashiyama · เผื่อรถติดช่วงใบไม้แดง')],{duration:'ตรวจรอบรถจริง/ถ้าคนแน่นเลือกแท็กซี่'}),
- walk('Higashiyama Kyoto','Kiyomizu-dera Kyoto','เดิน Yasaka Pagoda → Ninenzaka → Sannenzaka แล้วเข้า Kiyomizu Night Viewing 17:30 · ค่าเข้าประมาณ ¥500/คน','บ่ายถึงค่ำตามแผน'),
- leg('Gojozaka / Kiyomizu-michi','Kyoto Station','Kyoto City Bus','รถธรรมดาเขตคงที่ ¥230/คน · หากแน่น Taxi จ่ายแยก',[
-  at('Gojozaka / Kiyomizu-michi','ขึ้นบัสกลับ Kyoto Station ตามจอจริง เผื่อเวลาเดินลงเขาและการจราจร'),
-  at('Kyoto Station','ลงรถบัสแล้วเดินไปสถานี JR Kyoto')],{duration:'30–60 นาทีรวมรอรถ'}),
- leg('JR Kyoto Station','JR Osaka Station','JR Kyoto Line Special Rapid','Kansai WIDE Pass รวม JR จนสิ้น 24 พ.ย.',[
-  at('JR Kyoto','ตรวจขบวน Special Rapid ไป Osaka'),
-  at('JR Osaka','เปลี่ยนไป Metro Umeda')],{duration:'ประมาณ 30 นาทีบนรถ'}),
+  at('Daikokucho (M21)','ขึ้น Metro Midosuji ทิศ Shin-Osaka / Esaka / Minoh-kayano ลง Umeda (M16)'),
+  at('Umeda (M16)','ออกจาก Metro แล้วเดินตามป้าย JR Osaka Station; เข้าประตู JR ด้วย Kansai WIDE Pass')],{duration:'20–30 นาทีรวมเดิน'}),
+ leg('JR Osaka Station','JR Tofukuji Station (JR-D02)','JR Kyoto Line + JR Nara Line','Kansai WIDE Pass วันที่ 5 ครอบคลุมช่วง JR',[
+  at('JR Osaka','ขึ้น JR Kyoto Line Special Rapid มุ่ง Kyoto / Maibara / Tsuruga ตรวจจอขบวนและชานชลาจริง'),
+  at('JR Kyoto','เปลี่ยน JR Nara Line รถมุ่ง Nara ลง Tofukuji (JR-D02)'),
+  at('JR Tofukuji','ออกจากฝั่ง JR แล้วตามป้าย Keihan Railway; รถไฟ Keihan ต้องจ่าย ICOCA แยก')],{duration:'ประมาณ 45–65 นาทีรวมเปลี่ยนรถ'}),
+ leg('Keihan Tofukuji (KH36)','Gion-Shijo (KH39)','Keihan Main Line','ICOCA จ่ายแยกจาก Kansai WIDE Pass',[
+  at('Keihan Tofukuji (KH36)','แตะ ICOCA เข้า Keihan เลือกรถทิศ Demachiyanagi / Sanjo ที่จอด Gion-Shijo'),
+  at('Gion-Shijo (KH39)','ลงและแตะออก Exit 6 ไปย่าน Gion และ Hanamikoji')],{duration:'ประมาณ 10–20 นาทีรวมรอรถ'}),
+ walk('Gion-Shijo (KH39)','Hanamikoji Street','เดินชมย่าน Gion และบ้านไม้เก่า','ประมาณ 5–10 นาที'),
+ walk('Hanamikoji Street','Yasaka Shrine Kyoto','เดินไปศาลเจ้า Yasaka และเลือกอาหารกลางวันแถว Gion','ประมาณ 10–20 นาที'),
+ walk('Yasaka Shrine Kyoto','Kiyomizu-dera Kyoto','เดินผ่าน Yasaka Pagoda → Ninenzaka → Sannenzaka; แวะร้านขนมและคาเฟ่ก่อนชม Kiyomizu Night Viewing เวลา 17:30','บ่ายถึงค่ำตามแผน'),
+ leg('Gojozaka / Kiyomizu-michi','Kyoto Station','Kyoto City Bus','ICOCA จ่ายแยก; รถแน่นเลือกแท็กซี่',[
+  at('Kiyomizu-dera','เดินลงไปป้าย Gojozaka / Kiyomizu-michi และตรวจรถบัสที่มุ่ง Kyoto Station'),
+  at('Kyoto Station','ลงแล้วเดินไป JR Kyoto และเข้า JR Gate ด้วย Kansai WIDE Pass')],{duration:'30–60 นาทีรวมรอรถ'}),
+ leg('JR Kyoto Station','JR Osaka Station','JR Kyoto Line Special Rapid','Kansai WIDE Pass วันที่ 24 พ.ย. ใช้ได้',[
+  at('JR Kyoto','ตรวจป้าย Special Rapid ทิศ Osaka / Himeji'),
+  at('JR Osaka','เดินต่อไป Metro Umeda (M16)')],{duration:'ประมาณ 30 นาทีบนรถ'}),
  leg('Umeda Station (M16)',DAI,'Osaka Metro Midosuji','ICOCA จ่ายแยก',[
-  at('Umeda M16','ขึ้น Metro Midosuji มุ่งใต้ไป Daikokucho M21'),
-  at('Daikokucho M21','ลงแล้วเดินกลับ Centara Life Namba')],{duration:'ประมาณ 12–18 นาที'})
+  at('Umeda (M16)','ขึ้น Midosuji Line ทิศ Nakamozu ลง Daikokucho (M21)'),
+  at('Daikokucho (M21)','ออกแล้วเดินกลับ Centara Life Namba')],{duration:'ประมาณ 12–18 นาที'})
 ];
 const airportEnd=()=>[
  walk('Kansai-airport Station',KIX,'ตามป้าย Terminal 1 / International Departures ไปเคาน์เตอร์เช็กอินสายการบิน', 'เดินในอาคารประมาณ 5–15 นาที'),
@@ -382,6 +380,6 @@ export function detailedRouteGuide(day,prefs={}){
  const legs=day===1?dayOne():day===2?dayTwo(mode):day===3?dayThree():day===4?(prefs.kyoto==='east'?kyotoEast(mode):kyotoWest(mode)):day===5?dayFive(mode):day===6?daySix():day===7?daySeven():day===8?dayEight():day===9?dayNine(prefs):[];
  return {day,legs:legs.map(addNavigationDetails),kicker:['','จากสนามบินเข้าที่พัก','เที่ยว Osaka Castle / Kuromon / Umeda','USJ ไป–กลับ','Kyoto West + Gion + Kodaiji Night Illumination','Nara ไป–กลับ','Osaka → Kinosaki Onsen','Kinosaki → Osaka','Kyoto East / Kiyomizu Night','Namba → KIX'][day],
  overview:legs.map(x=>x.from+' → '+x.to).join(' · '),
- leave:day===1?'ถึง KIX 15:45 แล้วเลือก Rapi:t หลังรับกระเป๋า':day===3?'ออกก่อนเปิดสวน · ตรวจเวลา USJ จริง':day===6?'Kounotori 5 ออกจาก JR Osaka 10:12':day===7?'Kounotori 22 ออกจาก Kinosaki 15:30':day===8?'ออก 07:45 · ใช้ JR Pass วันที่ 5':day===9?'ออก Nankai Namba ประมาณ 13:00 · TG673 17:25':'ดูเวลารายวันและเผื่อการเดิน/ต่อรถ',
+ leave:day===1?'ถึง KIX 15:45 แล้วเลือก Rapi:t หลังรับกระเป๋า':day===3?'ออกก่อนเปิดสวน · ตรวจเวลา USJ จริง':day===6?'Kounotori 5 ออกจาก JR Osaka 10:12':day===7?'Kounotori 22 ออกจาก Kinosaki 15:30':day===8?'ออก 09:00 · ใช้ JR Pass วันที่ 5 + ICOCA สำหรับ Metro/Keihan':day===9?'ออก Nankai Namba ประมาณ 13:00 · TG673 17:25':'ดูเวลารายวันและเผื่อการเดิน/ต่อรถ',
  reminder:'ขั้นตอนเป็นแผนใช้เดินทาง ไม่ใช่การบอกชานชาลา/รอบรถแบบ Real-time · อ่านป้ายปลายทางขบวนจริง และใช้ Google Maps ตรวจเส้นทางวันเดินทาง'};
 }
