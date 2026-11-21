@@ -145,20 +145,19 @@ export const itinerary = [
   },
   {
 
-    day: 8, date: '24 NOV', dow: 'TUE', location: 'KYOTO', title: 'Fushimi Inari & Kiyomizu Night', subtitle: 'Kyoto East · เสาโทริอิ → ถนนเก่า → Kiyomizu-dera เปิดไฟ', image: 'kyoto', type: 'draft',
-    summary: 'Fushimi Inari → Higashiyama → Ninenzaka / Sannenzaka → Kiyomizu-dera Night Illumination → Osaka', stay: 'Centara Life Namba · คืนที่ 8 (รอโรงแรมยืนยันคืนเพิ่ม)',
-    highlight: 'JR Kansai WIDE Pass วันที่ 5 / วันสุดท้าย · Kiyomizu-dera 17:30', map: 'Fushimi Inari Taisha Kyoto',
+    day: 8, date: '24 NOV', dow: 'TUE', location: 'KYOTO', title: 'Gion, Higashiyama & Kiyomizu Night', subtitle: 'Kyoto East · Gion → ถนนเก่า → Kiyomizu-dera เปิดไฟ', image: 'kyoto', type: 'draft',
+    summary: 'Gion / Hanamikoji → Yasaka Shrine → Higashiyama → Ninenzaka / Sannenzaka → Kiyomizu-dera Night Illumination → Osaka', stay: 'Centara Life Namba · คืนที่ 8 (รอโรงแรมยืนยันคืนเพิ่ม)',
+    highlight: 'JR Kansai WIDE Pass วันที่ 5 / วันสุดท้าย · Kiyomizu-dera 17:30', map: 'Gion Shijo Kyoto',
     schedule: [
-      {time:'07:45–09:15',title:'Centara → JR Inari (Kyoto)',detail:'Daikokucho → Umeda ด้วย Metro (ICOCA) · JR Osaka → Kyoto → Inari ใช้ Kansai WIDE Pass วันที่ 5; ขบวน JR และเวลาเป็นประมาณการ',map:'Inari Station Kyoto'},
-      {time:'09:15–10:45',title:'Fushimi Inari Taisha · Senbon Torii',detail:'ชมทางเดินเสาโทริอิแดงและศาลเจ้าหลัก · ไม่จำเป็นต้องเดินขึ้นยอดเขา · ชมฟรี',map:'Fushimi Inari Taisha Kyoto'},
-      {time:'10:45–11:45',title:'JR Inari → Higashiyama / Gion',detail:'กลับ JR Kyoto ด้วย Pass แล้วต่อรถบัส/รถไฟเอกชนที่ต้องจ่ายแยก · ถ้ารถบัสแน่นเลือกแท็กซี่/Keihan และตรวจ Google Maps วันจริง',map:'Gion Shijo Kyoto'},
+      {time:'09:00–10:40',title:'Centara → Gion-Shijo (KH39)',detail:'เดินไป Daikokucho (M21) → Metro Midosuji มุ่ง Shin-Osaka ลง Umeda (M16) ใช้ ICOCA → เดินเข้า JR Osaka ขึ้น JR Kyoto Line Special Rapid มุ่ง Kyoto ลง JR Kyoto → เปลี่ยน JR Nara Line มุ่ง Nara ลง Tofukuji (JR-D02) ใช้ Kansai WIDE Pass ทั้งช่วง JR → เปลี่ยน Keihan Railway ขึ้นฝั่งมุ่ง Demachiyanagi ลง Gion-Shijo (KH39) ใช้ ICOCA; ออก Exit 6 ไปย่าน Gion · ตรวจชานชลาจริงก่อนขึ้น',map:'Gion Shijo Kyoto'},
+      {time:'10:40–11:45',title:'Hanamikoji → Yasaka Shrine',detail:'เดินชมถนนเก่า Hanamikoji แล้วไปศาลเจ้า Yasaka; ใช้เวลาเดินตามสบาย ไม่ต้องแวะ Fushimi Inari',map:'Yasaka Shrine Kyoto'},
       {time:'11:45–13:00',title:'Lunch — Gion / Higashiyama',detail:'Primary: Izuju ซูชิสไตล์เกียวโต (ตรวจวันเปิดและคิว) · Backup: Katsukura Shijo Teramachi หมูทอด · ตั้งงบตามเมนูจริง ไม่ทานเนื้อวัว',map:'Izuju Gion Kyoto'},
       {time:'13:00–15:30',title:'Yasaka Pagoda → Ninenzaka → Sannenzaka',detail:'เดินย่านเมืองเก่า ถ่ายภาพเจดีย์ Yasaka และแวะร้านขนมมัทฉะ · อาจมีคนหนาแน่นช่วงใบไม้แดง',map:'Yasaka Pagoda Kyoto'},
       {time:'15:30–17:15',title:'พักคาเฟ่ / เตรียมเข้าวัด Kiyomizu-dera',detail:'เดินขึ้นเนินจาก Sannenzaka เผื่อคิวและทางเดินชัน · ไม่ต้องเข้าวัดก่อน 17:30 หากต้องการชมช่วงเปิดไฟ',map:'Sannenzaka Kyoto'},
       {time:'17:30–18:45',title:'Kiyomizu-dera Autumn Night Illumination',detail:'งานจริง 21–30 พ.ย. 2026 เปิด 17:30–21:30 (รับเข้าถึง 21:00) ไม่ต้องจอง · ค่าเข้าผู้ใหญ่ประมาณ ¥500/คน · https://www.kiyomizudera.or.jp/en/news/2026/autumn2026.php',map:'Kiyomizu-dera Kyoto'},
       {time:'18:45–19:30',title:'เดินทางกลับ JR Kyoto / Dinner ตามเวลา',detail:'เดินลงมาจุดขึ้นรถบัสไป Kyoto Station หรือใช้แท็กซี่ · รถบัส/แท็กซี่ไม่รวม JR Pass · ซื้ออาหารง่าย ๆ หากยังไม่ทาน',map:'Kyoto Station'},
       {time:'19:30–21:00',title:'JR Kyoto → Osaka → Centara',detail:'ใช้ JR Kansai WIDE Pass (ใช้ได้จนจบ 24 พ.ย.) กลับ JR Osaka · Metro Umeda → Daikokucho ด้วย ICOCA',map:'Centara Life Namba Hotel Osaka'}
-    ],note:'24 พ.ย. เป็นวันสุดท้ายของ Kansai WIDE Pass 20–24 พ.ย. JR ครอบคลุมขบวนที่อยู่ในพื้นที่กำหนด; Metro / Kyoto City Bus / Keihan จ่ายแยก · Kiyomizu-dera Night Viewing เปิด 21–30 พ.ย. 2026 ตามประกาศทางการ · โรงแรมคืน 24–25 รอการยืนยัน แม้ได้เสนอราคาแล้ว',
+    ],note:'ยกเลิก Fushimi Inari จากแผนวันที่ 24; เริ่มเที่ยว Gion / Higashiyama สายขึ้น และคง Kiyomizu-dera ช่วงเปิดไฟ · 24 พ.ย. เป็นวันสุดท้ายของ Kansai WIDE Pass 20–24 พ.ย. JR ครอบคลุมขบวนที่อยู่ในพื้นที่กำหนด; Metro / Kyoto City Bus / Keihan จ่ายแยก · Kiyomizu-dera Night Viewing เปิด 21–30 พ.ย. 2026 ตามประกาศทางการ · โรงแรมคืน 24–25 รอการยืนยัน แม้ได้เสนอราคาแล้ว',
   },
   {
     day: 9, date: '25 NOV', dow: 'WED', location: 'DEPARTURE', title: 'Until Next Time, Japan', subtitle: 'Namba Yasaka + เครปก่อนกลับสุวรรณภูมิ', image: 'osaka', type: 'confirmed',
