@@ -7,14 +7,17 @@ import {detailedRouteGuide} from '../data/detailedTransit.js';
 import {pricedSegment} from '../data/transportPricing.js';
 import {passEndDate,defaultTickets} from '../data/travelTools.js';
 const p=normalizePreferences({});
-test('24 November Day 8 visits Fushimi Inari and Kiyomizu, while JR Pass stays valid',()=>{
+test('24 November Day 8 skips Fushimi Inari and visits Gion then Kiyomizu with JR Pass valid',()=>{
  const s=resolvedSchedule(8,p);
  assert.equal(itinerary[7].date,'24 NOV');
- assert.ok(s.some(x=>x.title.includes('Fushimi Inari')));
+ assert.ok(s.some(x=>x.title.includes('Hanamikoji')));
+ assert.ok(!s.some(x=>x.title.includes('Fushimi Inari')));
  assert.ok(s.some(x=>x.title.includes('Kiyomizu-dera Autumn Night')));
  assert.equal(passEndDate(defaultTickets.passStart),'2026-11-24');
  const seg=resolvedSegments(8,p);
- assert.ok(seg.some(x=>x.route.includes('Inari')&&x.type==='jr'));
+ assert.ok(seg.some(x=>x.route.includes('Tofukuji')&&x.type==='jr'));
+ assert.ok(seg.some(x=>x.route.includes('Gion-Shijo')&&x.type==='keihan'));
+ assert.ok(!seg.some(x=>x.route.includes('Inari')));
  assert.ok(seg.some(x=>x.type==='bus'));
  assert.equal(validateFoodPlan(8,p),true);
 });
