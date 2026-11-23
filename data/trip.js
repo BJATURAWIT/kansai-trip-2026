@@ -15,7 +15,7 @@ export const trip = {
 export const images = {
   hero: 'https://a-us.storyblok.com/f/1018357/1920x1277/d37c3f5205/3141175_m.jpg',
   osaka: 'https://a-us.storyblok.com/f/1018357/1920x1277/d37c3f5205/3141175_m.jpg',
-  kyoto: 'https://www.keihan.co.jp/uji-fushimi/assets/img/fushimi/img_spot03_01_a.jpg',
+  kyoto: '/photos/day-8-8.jpg',
   kinosaki: 'https://media.timeout.com/images/106065006/750/562/image.jpg',
 };
 
@@ -95,7 +95,7 @@ export const itinerary = [
       { time: '17:00–18:15', title: 'Kodaiji Night Illumination', detail: 'งาน Autumn Night Special Viewing 23 ต.ค.–13 ธ.ค. 2026 เปิดไฟ 17:00; รับเข้าถึง 21:30 ปิด 22:00; ค่าเข้าผู้ใหญ่ประมาณ ¥800/คน ไม่ใช่การจอง', map: 'Kodaiji Temple Kyoto' },
       { time: '18:15–19:30', title: 'Dinner — Gion / Kawaramachi', detail: 'Primary: Gion Kyomen (อุด้ง/โซบะ/ข้าวหน้าเทมปุระ) · Backup: Katsukura Shijo Teramachi หรือ Kyo Udon Ishin; งบเป้าหมาย ¥800–1,800/คน (บางเมนูเกินงบ)', map: 'Gion Kyomen Kyoto' },
       { time: '19:30–21:00', title: 'Gion-Shijo → Osaka / Centara', detail: 'เดินไป Keihan Gion-Shijo (KH39) → Limited Express ไป Yodoyabashi (KH01) → เปลี่ยน Osaka Metro Midosuji Yodoyabashi (M17) มุ่ง Nakamozu / Tennoji → ลง Daikokucho (M21) แล้วเดินกลับโรงแรม; Keihan และ Metro จ่าย ICOCA แยกจาก JR Pass', map: 'Centara Life Namba Hotel Osaka' },
-    ], note: 'Day 4 เป็นแผน Kyoto West + Gion/Kodaiji ช่วงค่ำ ไม่แวะ Fushimi Inari หรือ Kiyomizu-dera ในแผนหลัก · เวลาเป็นเป้าหมายไม่ใช่รถไฟจองจริง · ฝนหนักให้ดู Rainy Plan · ยืนยันเวลาจริงใกล้วันเดินทาง',
+    ], note: 'Day 4 เป็นแผน Kyoto West + Gion/Kodaiji ช่วงค่ำ เน้น Arashiyama และ Gion/Kodaiji ในแผนหลัก · เวลาเป็นเป้าหมายไม่ใช่รถไฟจองจริง · ฝนหนักให้ดู Rainy Plan · ยืนยันเวลาจริงใกล้วันเดินทาง',
   },
     {
     day: 5, date: '21 NOV', dow: 'SAT', location: 'UJI / NARA', title: 'Matcha Morning, Deer Afternoon', subtitle: 'Uji เช้า · Nara บ่าย · กลับ Osaka ก่อนวัน Kinosaki', image: 'kyoto', type: 'draft',
@@ -150,7 +150,7 @@ export const itinerary = [
     highlight: 'Kiyomizu-dera ชมวิว ~16:45 + ไฟค่ำ 17:30 · Umeda Sky ชมวิวโอซาก้ากลางคืน ~20:30', map: 'Gion Shijo Kyoto',
     schedule: [
       {time:'09:00–10:40',title:'Centara → Gion-Shijo (KH39)',detail:'เดินไป Daikokucho (M21) → Metro Midosuji มุ่ง Shin-Osaka ลง Umeda (M16) ใช้ ICOCA → เดินเข้า JR Osaka ขึ้น JR Kyoto Line Special Rapid มุ่ง Kyoto ลง JR Kyoto → เปลี่ยน JR Nara Line มุ่ง Nara ลง Tofukuji (JR-D02) ใช้ Kansai WIDE Pass ทั้งช่วง JR → เปลี่ยน Keihan Railway ขึ้นฝั่งมุ่ง Demachiyanagi ลง Gion-Shijo (KH39) ใช้ ICOCA; ออก Exit 6 ไปย่าน Gion · ตรวจชานชลาจริงก่อนขึ้น',map:'Gion Shijo Kyoto'},
-      {time:'10:40–11:45',title:'Hanamikoji → Yasaka Shrine',detail:'เดินชมถนนเก่า Hanamikoji แล้วไปศาลเจ้า Yasaka; ใช้เวลาเดินตามสบาย ไม่ต้องแวะ Fushimi Inari',map:'Yasaka Shrine Kyoto'},
+      {time:'10:40–11:45',title:'Hanamikoji → Yasaka Shrine',detail:'เดินชมถนนเก่า Hanamikoji แล้วไปศาลเจ้า Yasaka; ใช้เวลาเดินตามสบาย ก่อนเดินต่อไปย่าน Higashiyama',map:'Yasaka Shrine Kyoto'},
       {time:'11:45–13:00',title:'Lunch — Gion / Higashiyama',detail:'Primary: Izuju ซูชิสไตล์เกียวโต (ตรวจวันเปิดและคิว) · Backup: Katsukura Shijo Teramachi หมูทอด · ตั้งงบตามเมนูจริง ไม่ทานเนื้อวัว',map:'Izuju Gion Kyoto'},
       {time:'13:00–15:00',title:'Yasaka Pagoda → Ninenzaka → Sannenzaka',detail:'เดินย่านเมืองเก่า ถ่ายภาพเจดีย์ Yasaka และแวะร้านขนมมัทฉะ · หากอยากได้รูปวัดช่วงแสงเย็นควรเดินขึ้นวัดให้ทัน 15:45 · อาจมีคนหนาแน่น',map:'Yasaka Pagoda Kyoto'},
       {time:'15:00–15:45',title:'Sannenzaka → ทางเข้าวัด Kiyomizu-dera',detail:'เดินขึ้นเนินจาก Sannenzaka ไปวัดน้ำใส (ประมาณ 15–25 นาที) เผื่อคนแน่นและคิวซื้อตั๋ว · ไม่ควรแวะคาเฟ่นานหากต้องการถ่ายรูปช่วงแสงเย็น',map:'Kiyomizu-dera Kyoto'},
