@@ -45,7 +45,6 @@ export const galleryByDay = {
     {title:'Namba Night Street',subtitle:'เดินชมโอซาก้าคืนสุดท้าย',vibe:'Osaka',why:'บรรยากาศแสงสีเมืองโอซาก้ายามค่ำ',tags:['กลางคืน'],map:'Namba Osaka',image:localPhoto(7,3)}
   ],
   8:[
-    {title:'Fushimi Inari · Senbon Torii',subtitle:'เสาโทริอิแดงจริงของ Fushimi Inari',vibe:'Kyoto East',why:'สถานที่จริงในเส้นทางเช้า 24 พ.ย. ภาพโดย Sai Adikarla',tags:['09:15','ศาลเจ้า'],map:'Fushimi Inari Taisha Kyoto',image:localPhoto(8,7)},
     {title:'Yasaka Pagoda',subtitle:'เจดีย์ Yasaka no Tō ย่าน Higashiyama',vibe:'Old Kyoto',why:'ภาพสถานที่จริงปี 2026 CC BY 4.0 โดย Piet Parkiet',tags:['13:00','เจดีย์'],map:'Yasaka Pagoda Kyoto',image:localPhoto(8,9)},
     {title:'Kiyomizu-dera Autumn',subtitle:'ใบไม้แดงที่วัดคิโยมิสึ',vibe:'Night Viewing',why:'ภาพวัดจริงจากปีก่อน ไม่ใช่ภาพงานวันที่ 24 พ.ย. 2026',tags:['17:30','วัด'],map:'Kiyomizu-dera Kyoto',image:localPhoto(8,8)}
   ],
